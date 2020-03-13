@@ -1,0 +1,9 @@
+pandoc: 2.9.2
+pkgdown: 1.4.1.9000
+pkgdown_sha: 97dcfa237ea7c0ba73453402861c40665f6fb06e
+articles: []
+last_built: 2020-03-13T17:30Z
+urls:
+  reference: https://indrajeetpatil.github.io/tidyBF//reference
+  article: https://indrajeetpatil.github.io/tidyBF//articles
+

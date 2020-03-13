@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//index.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_contingency_tab.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_corr_test.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_expr.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_extractor.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_meta.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_oneway_anova.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bf_ttest.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/bugs_long.html</loc>
+  </url>
+  <url>
+    <loc>https://indrajeetpatil.github.io/tidyBF//reference/reexports.html</loc>
+  </url>
+</urlset>

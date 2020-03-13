@@ -1,0 +1,34 @@
+url: https://indrajeetpatil.github.io/tidyBF/
+
+template:
+  params:
+    bootswatch: simplex
+
+development:
+  mode: unreleased
+
+authors:
+  Indrajeet Patil:
+    href: https://sites.google.com/site/indrajeetspatilmorality/
+
+reference:
+  - title: Helper functions for Bayes Factor tests
+    desc: Functions to extract Bayes Factor for various tests
+    contents:
+      - matches("bf_")
+
+  - title: Reexported functions
+    desc:  Useful functions re-exported from other packages.
+    contents:
+      - "%>%"
+      - "%<>%"
+      - "%$%"
+      - "%||%"
+      - "%|%"
+      - tibble
+      - as_tibble
+
+  - title: Data
+    desc:  Datasets included in the package.
+    contents:
+      - bugs_long

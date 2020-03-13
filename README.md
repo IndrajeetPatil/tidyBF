@@ -4,8 +4,6 @@
 # tidyBF: Grouped statistical analysis in a tidy way
 
 [![CRAN\_Release\_Badge](http://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)
-[![CRAN
-Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads
 badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)

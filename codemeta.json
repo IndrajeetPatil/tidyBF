@@ -235,5 +235,6 @@
   "developmentStatus": [
     "http://www.repostatus.org/#active",
     "https://www.tidyverse.org/lifecycle/#retired"
-  ]
+  ],
+  "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md"
 }

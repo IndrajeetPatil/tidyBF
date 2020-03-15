@@ -236,5 +236,11 @@
     "http://www.repostatus.org/#active",
     "https://www.tidyverse.org/lifecycle/#retired"
   ],
-  "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md"
+  "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
+  "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
+  "keywords": [
+    "bayesian",
+    "bayesian-statistics",
+    "bayesfactor"
+  ]
 }

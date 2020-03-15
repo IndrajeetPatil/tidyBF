@@ -33,8 +33,6 @@ Suggests:
     spelling,
     testthat,
     WRS2
-VignetteBuilder: 
-    knitr
 Encoding: UTF-8
 Language: en-US
 LazyData: true

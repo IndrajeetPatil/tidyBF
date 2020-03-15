@@ -4,7 +4,7 @@
 \alias{bf_expr}
 \title{Prepare caption with expression for Bayes Factor results}
 \usage{
-bf_expr(bf.df, k = 2, output = "null", caption = NULL, ...)
+bf_expr(bf.df, k = 2L, output = "null", caption = NULL, ...)
 }
 \arguments{
 \item{bf.df}{A dataframe containing two columns \code{log_e_bf01} (for evidence in

@@ -41,7 +41,19 @@ testthat::test_that(
         k = 3,
         messages = TRUE,
         iter = 1000,
-        summarize = "integrate"
+        summarize = "integrate",
+        output = "subtitle"
+      ))
+
+    set.seed(123)
+    caption1 <-
+      suppressWarnings(bf_meta(
+        data = df1,
+        k = 3,
+        messages = FALSE,
+        iter = 1000,
+        summarize = "integrate",
+        output = "caption"
       ))
 
     testthat::expect_identical(
@@ -49,11 +61,11 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
+          "In favor of alternative: ",
           "log"["e"],
-          "(BF"["01"],
+          "(BF"["10"],
           ") = ",
-          "-3.341",
+          "3.341",
           ", ",
           italic("d")["mean"]^"posterior",
           " = ",
@@ -67,6 +79,30 @@ testthat::test_that(
         )
       ))
     )
+
+    testthat::expect_identical(
+      caption1,
+      ggplot2::expr(atop(
+        displaystyle(NULL),
+        expr = paste(
+          "In favor of null: ",
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          "-3.341",
+          ", ",
+          italic("d")["mean"] ^ "posterior",
+          " = ",
+          "0.518",
+          ", CI"["95%"],
+          " [",
+          "0.219",
+          ", ",
+          "0.766",
+          "]"
+        )
+      ))
+      )
 
     # checking message
     testthat::expect_error(

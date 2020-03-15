@@ -12,44 +12,48 @@ testthat::test_that(
 
     # creating a dataframe
     set.seed(123)
-    df <- suppressMessages(bf_extractor(
-      BayesFactor::anovaBF(
-        formula = brainwt ~ vore,
-        data = as.data.frame(dat),
-        progress = FALSE,
-        rscaleFixed = 0.99
-      )
-    ))
+    df <-
+      suppressMessages(bf_extractor(
+        BayesFactor::anovaBF(
+          formula = brainwt ~ vore,
+          data = as.data.frame(dat),
+          progress = FALSE,
+          rscaleFixed = 0.99
+        )
+      ))
 
     # extracting results from where this function is implemented
     set.seed(123)
-    df_results <- bf_oneway_anova(
-      data = dat,
-      x = vore,
-      y = brainwt,
-      bf.prior = 0.99,
-      output = "results"
-    )
+    df_results <-
+      bf_oneway_anova(
+        data = dat,
+        x = vore,
+        y = brainwt,
+        bf.prior = 0.99,
+        output = "results"
+      )
 
     # extracting caption - null
     set.seed(123)
-    results1 <- bf_oneway_anova(
-      data = dat,
-      x = vore,
-      y = brainwt,
-      bf.prior = 0.88,
-      output = "null"
-    )
+    results1 <-
+      bf_oneway_anova(
+        data = dat,
+        x = vore,
+        y = brainwt,
+        bf.prior = 0.88,
+        output = "null"
+      )
 
     # extracting caption - alternative
     set.seed(123)
-    results2 <- bf_oneway_anova(
-      data = dat,
-      x = vore,
-      y = brainwt,
-      bf.prior = 0.88,
-      output = "alternative"
-    )
+    results2 <-
+      bf_oneway_anova(
+        data = dat,
+        x = vore,
+        y = brainwt,
+        bf.prior = 0.88,
+        output = "alternative"
+      )
 
     # check bayes factor values
     testthat::expect_equal(df$bf10, 0.1177186, tolerance = 0.001)
@@ -113,51 +117,55 @@ testthat::test_that(
 
     # creating a dataframe
     set.seed(123)
-    df <- suppressMessages(bf_extractor(
-      BayesFactor::anovaBF(
-        formula = Taste ~ Wine + Taster,
-        data = as.data.frame(dat),
-        progress = FALSE,
-        whichRandom = "Taster",
-        rscaleFixed = 0.99,
-        rscaleRandom = 1
-      )
-    ))
+    df <-
+      suppressMessages(bf_extractor(
+        BayesFactor::anovaBF(
+          formula = Taste ~ Wine + Taster,
+          data = as.data.frame(dat),
+          progress = FALSE,
+          whichRandom = "Taster",
+          rscaleFixed = 0.99,
+          rscaleRandom = 1
+        )
+      ))
 
     # extracting results from where this function is implemented
     set.seed(123)
-    df_results <- bf_oneway_anova(
-      data = dat,
-      x = Wine,
-      y = "Taste",
-      paired = TRUE,
-      bf.prior = 0.99,
-      output = "results"
-    )
+    df_results <-
+      bf_oneway_anova(
+        data = dat,
+        x = Wine,
+        y = "Taste",
+        paired = TRUE,
+        bf.prior = 0.99,
+        output = "results"
+      )
 
     # extracting caption - null
     set.seed(123)
-    results1 <- bf_oneway_anova(
-      data = dat,
-      x = "Wine",
-      y = Taste,
-      k = 4,
-      paired = TRUE,
-      bf.prior = 0.88,
-      output = "null"
-    )
+    results1 <-
+      bf_oneway_anova(
+        data = dat,
+        x = "Wine",
+        y = Taste,
+        k = 4,
+        paired = TRUE,
+        bf.prior = 0.88,
+        output = "null"
+      )
 
     # extracting caption - alternative
     set.seed(123)
-    results2 <- bf_oneway_anova(
-      data = dat,
-      x = Wine,
-      y = Taste,
-      k = 4,
-      paired = TRUE,
-      bf.prior = 0.88,
-      output = "alternative"
-    )
+    results2 <-
+      bf_oneway_anova(
+        data = dat,
+        x = Wine,
+        y = Taste,
+        k = 4,
+        paired = TRUE,
+        bf.prior = 0.88,
+        output = "alternative"
+      )
 
     # check bayes factor values
     testthat::expect_equal(df$bf10, 6.364917, tolerance = 0.001)

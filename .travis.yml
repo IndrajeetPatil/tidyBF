@@ -33,14 +33,14 @@ r_binary_packages:
   - gss
   - haven
   - minqa
-  - mvtnorm
-  - nloptr
   - SparseM
   - httpuv
   - markdown
   - pander
-  - lme4
   - git2r
+  - BayesFactor
+  - broom.mixed
+  - broom
 
 r_packages:
   - rlang
@@ -48,8 +48,6 @@ r_packages:
   - purrr
   - tidyr
   - dplyr
-  - broom.mixed
-  - broom
 
 r_github_packages:
   - jimhester/lintr

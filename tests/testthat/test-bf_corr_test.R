@@ -8,26 +8,26 @@ testthat::test_that(
     # extracting results from where this function is implemented
     set.seed(123)
     df <-
-      bf_contingency_tab(
-        data = mtcars,
-        x = wt,
-        y = mpg,
+      bf_corr_test(
+        data = iris,
+        y = Sepal.Length,
+        x = Sepal.Width,
         output = "results"
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 14137.82, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 9.556609, tolerance = 0.001)
+    testthat::expect_equal(df$bf10, 0.3445379, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10, -1.065551, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, 4.150382, tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10, -0.462763, tolerance = 0.001)
     testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
 
     set.seed(123)
     subtitle1 <-
-      bf_contingency_tab(
-        data = mtcars,
-        x = wt,
-        y = mpg,
+      bf_corr_test(
+        data = iris,
+        y = Sepal.Length,
+        x = Sepal.Width,
         output = "subtitle"
       )
 
@@ -40,13 +40,11 @@ testthat::test_that(
           "log"["e"],
           "(BF"["10"],
           ") = ",
-          "9.56",
-          ", sampling = ",
-          "independent multinomial",
+          "-1.07",
           ", ",
-          italic("a"),
+          italic("r")["Cauchy"]^"JZS",
           " = ",
-          "1.00"
+          "0.71"
         )
       ))
     )

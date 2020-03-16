@@ -10,7 +10,7 @@ bf_oneway_anova(
   y,
   bf.prior = 0.707,
   caption = NULL,
-  output = "null",
+  output = "results",
   paired = FALSE,
   k = 2,
   ...

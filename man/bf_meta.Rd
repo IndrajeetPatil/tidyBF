@@ -9,7 +9,7 @@ bf_meta(
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   k = 2,
-  output = "null",
+  output = "results",
   caption = NULL,
   messages = TRUE,
   ...

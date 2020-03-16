@@ -22,7 +22,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--03--13-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--03--16-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -56,8 +56,8 @@ install.packages(pkgs = "remotes")
 
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  quick = TRUE
-) # skips docs, demos, and vignettes
+  quick = TRUE # skips docs, demos, and vignettes
+)
 ```
 
 If time is not a constraint-
@@ -65,12 +65,71 @@ If time is not a constraint-
 ``` r
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  dependencies = TRUE, # installs packages which tidyBF depends on
+  dependencies = TRUE, # installs packages which `tidyBF` depends on
   upgrade_dependencies = TRUE # updates any out of date dependencies
 )
 ```
 
-## Code of Conduct
+# Benefits
+
+Below are few concrete examples of where `tidyBF` wrapper might provide
+a more friendly way to access output from or write functions around
+`BayesFactor`.
+
+1.  `BayesFactor` is inconsistent with its formula interface. `tidyBF`
+    avoids this.
+
+<!-- end list -->
+
+``` r
+# setup
+set.seed(123)
+library(BayesFactor)
+#> Loading required package: coda
+#> Loading required package: Matrix
+#> ************
+#> Welcome to BayesFactor 0.9.12-4.2. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).
+#> 
+#> Type BFManual() to open the manual.
+#> ************
+data(sleep)
+
+# independent t-test: accepts formula interface
+ttestBF(formula = wt ~ am, data = mtcars)
+#> Bayes factor analysis
+#> --------------
+#> [1] Alt., r=0.707 : 1383.367 ±0%
+#> 
+#> Against denominator:
+#>   Null, mu1-mu2 = 0 
+#> ---
+#> Bayes factor type: BFindepSample, JZS
+
+# paired t-test: doesn't accept formula interface
+ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
+#> Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.
+
+library(tidyBF)
+#> Registered S3 method overwritten by 'broom.mixed':
+#>   method      from 
+#>   tidy.gamlss broom
+
+# independent t-test
+bf_ttest(data = mtcars, x = am, y = wt)
+#> # A tibble: 1 x 8
+#>    bf10     error    bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#>   <dbl>     <dbl>   <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
+#> 1 1383.   3.41e-9 7.23e-4       7.23      -7.23        3.14       -3.14    0.707
+
+# paired t-test
+bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
+#> # A tibble: 1 x 8
+#>    bf10      error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#>   <dbl>      <dbl>  <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
+#> 1  17.3    1.68e-7 0.0579       2.85      -2.85        1.24       -1.24    0.707
+```
+
+# Code of Conduct
 
 Please note that the `tidyBF` project is released with a [Contributor
 Code of

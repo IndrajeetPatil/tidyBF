@@ -128,7 +128,7 @@
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
+  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='no'>...</span>
 )
@@ -143,7 +143,7 @@
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
+  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='no'>...</span>
 )</pre>
@@ -248,9 +248,13 @@ Richard Morey:
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>,
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"cols"</span>
-)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("In favor of null: ", "log"["e"], 
-#&gt;     "(BF"["01"], ") = ", "-2.72", ", sampling = ", "independent multinomial", 
-#&gt;     ", ", italic("a"), " = ", "1.00"))</div><div class='input'>
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 10</span><span>
+#&gt;    bf10 error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  15.1     0 0.066</span><span style='text-decoration: underline;'>0</span><span>       2.72      -</span><span style='color: #BB0000;'>2.72</span><span>        1.18       -</span><span style='color: #BB0000;'>1.18</span><span>
+#&gt;   sampling.plan           fixed.margin prior.concentration
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> independent multinomial cols                           1</div><div class='input'>
 <span class='co'># to get caption (in favor of alternative)</span>
 <span class='fu'>bf_contingency_tab</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
@@ -269,18 +273,24 @@ Richard Morey:
   <span class='kw'>sampling.plan</span> <span class='kw'>=</span> <span class='st'>"jointMulti"</span>,
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("In favor of null: ", "log"["e"], 
-#&gt;     "(BF"["01"], ") = ", "-3.33", ", sampling = ", "joint multinomial", 
-#&gt;     ", ", italic("a"), " = ", "1.00"))</div><div class='input'>
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 10</span><span>
+#&gt;    bf10 error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  28.1     0 0.035</span><span style='text-decoration: underline;'>6</span><span>       3.33      -</span><span style='color: #BB0000;'>3.33</span><span>        1.45       -</span><span style='color: #BB0000;'>1.45</span><span>
+#&gt;   sampling.plan     fixed.margin prior.concentration
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> joint multinomial rows                           1</div><div class='input'>
 <span class='co'># ------------------ goodness of fit tests --------------------------------</span>
 
 <span class='fu'>bf_contingency_tab</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>10</span>
-)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("In favor of null: ", "log"["e"], 
-#&gt;     "(BF"["01"], ") = ", "0.30", ", ", italic("a"), " = ", "10.00"))</div><div class='input'># }
-</div></pre>
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    bf10  bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 prior.concentration
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.743  1.35     -</span><span style='color: #BB0000;'>0.297</span><span>      0.297      -</span><span style='color: #BB0000;'>0.129</span><span>       0.129                  10</div><div class='input'># }
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

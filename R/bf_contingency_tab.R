@@ -93,7 +93,7 @@ bf_contingency_tab <- function(data,
                                fixed.margin = "rows",
                                prior.concentration = 1,
                                caption = NULL,
-                               output = "null",
+                               output = "results",
                                k = 2,
                                ...) {
 

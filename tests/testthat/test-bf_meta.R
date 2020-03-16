@@ -91,7 +91,7 @@ testthat::test_that(
           ") = ",
           "-3.341",
           ", ",
-          italic("d")["mean"] ^ "posterior",
+          italic("d")["mean"]^"posterior",
           " = ",
           "0.518",
           ", CI"["95%"],
@@ -102,7 +102,7 @@ testthat::test_that(
           "]"
         )
       ))
-      )
+    )
 
     # checking message
     testthat::expect_error(

@@ -64,7 +64,7 @@ bf_meta <- function(data,
                     d = prior("norm", c(mean = 0, sd = 0.3)),
                     tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                     k = 2,
-                    output = "null",
+                    output = "results",
                     caption = NULL,
                     messages = TRUE,
                     ...) {
@@ -111,7 +111,7 @@ bf_meta <- function(data,
   }
 
   # prepare the Bayes factor message
-  bf_text <-
+  bf_message <-
     substitute(
       atop(displaystyle(top.text),
         expr = paste(
@@ -143,8 +143,12 @@ bf_meta <- function(data,
       )
     )
 
-  # return the caption
-  return(bf_text)
+  # return the text results or the dataframe with results
+  return(switch(
+    EXPR = output,
+    "results" = bf.df,
+    bf_message
+  ))
 }
 
 

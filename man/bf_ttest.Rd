@@ -14,7 +14,7 @@ bf_ttest(
   paired = FALSE,
   bf.prior = 0.707,
   caption = NULL,
-  output = "null",
+  output = "results",
   k = 2,
   ...
 )
@@ -27,7 +27,7 @@ bf_one_sample_ttest(
   paired = FALSE,
   bf.prior = 0.707,
   caption = NULL,
-  output = "null",
+  output = "results",
   k = 2,
   ...
 )
@@ -40,7 +40,7 @@ bf_two_sample_ttest(
   paired = FALSE,
   bf.prior = 0.707,
   caption = NULL,
-  output = "null",
+  output = "results",
   k = 2,
   ...
 )

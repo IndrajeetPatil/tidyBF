@@ -7,6 +7,7 @@ output: github_document
 ```{r, echo = FALSE, warning = FALSE, messsage = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  error = TRUE,
   dpi = 200,
   out.width = "100%",
   comment = "#>",
@@ -58,8 +59,8 @@ install.packages(pkgs = "remotes")
 
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  quick = TRUE
-) # skips docs, demos, and vignettes
+  quick = TRUE # skips docs, demos, and vignettes
+)
 ```
 
 If time is not a constraint-
@@ -67,11 +68,40 @@ If time is not a constraint-
 ```{r installation3, eval = FALSE, warning = FALSE, messsage = FALSE}
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  dependencies = TRUE, # installs packages which tidyBF depends on
+  dependencies = TRUE, # installs packages which `tidyBF` depends on
   upgrade_dependencies = TRUE # updates any out of date dependencies
 )
 ```
 
-## Code of Conduct
+# Benefits
+
+Below are few concrete examples of where `tidyBF` wrapper might provide a more
+friendly way to access output from or write functions around `BayesFactor`.
+
+1.  `BayesFactor` is inconsistent with its formula interface. `tidyBF` avoids
+    this.
+
+```{r r_formula}
+# setup
+set.seed(123)
+library(BayesFactor)
+data(sleep)
+
+# independent t-test: accepts formula interface
+ttestBF(formula = wt ~ am, data = mtcars)
+
+# paired t-test: doesn't accept formula interface
+ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
+
+library(tidyBF)
+
+# independent t-test
+bf_ttest(data = mtcars, x = am, y = wt)
+
+# paired t-test
+bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
+```
+
+# Code of Conduct
 
 Please note that the `tidyBF` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

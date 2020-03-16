@@ -71,7 +71,7 @@ bf_ttest <- function(data,
                      paired = FALSE,
                      bf.prior = 0.707,
                      caption = NULL,
-                     output = "null",
+                     output = "results",
                      k = 2,
                      ...) {
 
@@ -138,7 +138,7 @@ bf_ttest <- function(data,
 
   # extracting the Bayes factors
   bf.df <-
-    bf_extractor(bf.object = bf_object) %>%
+    bf_extractor(bf_object) %>%
     dplyr::mutate(.data = ., bf.prior = bf.prior)
 
   # ============================ return ==================================

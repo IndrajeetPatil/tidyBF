@@ -10,7 +10,7 @@ bf_corr_test(
   y,
   bf.prior = 0.707,
   caption = NULL,
-  output = "null",
+  output = "results",
   k = 2,
   ...
 )
@@ -65,8 +65,7 @@ bf_corr_test(
   data = anscombe,
   x = x1,
   y = y4,
-  bf.prior = 0.8,
-  output = "results"
+  bf.prior = 0.8
 )
 }
 }

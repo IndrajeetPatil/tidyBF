@@ -53,7 +53,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/IndrajeetPatil/tidyBF">
+  <a href="https://github.com/IndrajeetPatil/tidyBF/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -112,49 +112,45 @@
 </ol>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># setup</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BayesFactor)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; Loading required package: coda</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; Loading required package: Matrix</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; ************</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Welcome to BayesFactor 0.9.12-4.2. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; Type BFManual() to open the manual.</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; ************</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(sleep)</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co"># independent t-test: accepts formula interface</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> wt <span class="op">~</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)</span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; Bayes factor analysis</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; --------------</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; [1] Alt., r=0.707 : 1383.367 ±0%</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; </span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; Against denominator:</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt;   Null, mu1-mu2 = 0 </span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; ---</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; Bayes factor type: BFindepSample, JZS</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co"># paired t-test: doesn't accept formula interface</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> extra <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> sleep, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyBF)</span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; Registered S3 method overwritten by 'broom.mixed':</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt;   method      from </span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;   tidy.gamlss broom</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co"># independent t-test</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> mtcars, <span class="dt">x =</span> am, <span class="dt">y =</span> wt)</span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;    bf10     error    bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; 1 1383.   3.41e-9 7.23e-4       7.23      -7.23        3.14       -3.14    0.707</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co"># paired t-test</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> sleep, <span class="dt">x =</span> group, <span class="dt">y =</span> extra, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt;    bf10      error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt;   &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt; 1  17.3    1.68e-7 0.0579       2.85      -2.85        1.24       -1.24    0.707</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># with `BayesFactor` ----------------------------------------</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BayesFactor))</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(sleep)</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># independent t-test: accepts formula interface</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> wt <span class="op">~</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Bayes factor analysis</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; --------------</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; [1] Alt., r=0.707 : 1383.367 ±0%</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; Against denominator:</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;   Null, mu1-mu2 = 0 </span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; ---</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; Bayes factor type: BFindepSample, JZS</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co"># paired t-test: doesn't accept formula interface</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> extra <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> sleep, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># with `tidyBF` ----------------------------------------</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyBF)</span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; Registered S3 method overwritten by 'broom.mixed':</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt;   method      from </span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt;   tidy.gamlss broom</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a></span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co"># independent t-test</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> mtcars, <span class="dt">x =</span> am, <span class="dt">y =</span> wt)</span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;    bf10     error    bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; 1 1383.   3.41e-9 7.23e-4       7.23      -7.23        3.14       -3.14    0.707</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co"># paired t-test</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> sleep, <span class="dt">x =</span> group, <span class="dt">y =</span> extra, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;    bf10      error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; 1  17.3    1.68e-7 0.0579       2.85      -2.85        1.24       -1.24    0.707</span></span></code></pre></div>
 </div>
 <div id="code-of-conduct" class="section level1">
 <h1 class="hasAnchor">
@@ -168,7 +164,7 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/IndrajeetPatil/tidyBF">https://​github.com/​IndrajeetPatil/​tidyBF</a>
+<li>Browse source code at <br><a href="https://github.com/IndrajeetPatil/tidyBF/">https://​github.com/​IndrajeetPatil/​tidyBF/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/IndrajeetPatil/tidyBF/issues">https://​github.com/​IndrajeetPatil/​tidyBF/​issues</a>
 </li>
@@ -209,7 +205,7 @@
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></li>
 <li><a href="https://zenodo.org/badge/latestdoi/126624251"><img src="https://zenodo.org/badge/126624251.svg" alt="DOI"></a></li>
 <li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active - The project has reached a stable, usable state and is being actively developed."></a></li>
-<li><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--03--16-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--03--17-yellowgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg" alt="minimal R version"></a></li>
 <li><a href="https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master"><img src="https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg" alt="Coverage Status"></a></li>
 <li><a href="https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master"><img src="https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master" alt="Coverage Status"></a></li>

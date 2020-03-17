@@ -22,7 +22,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--03--16-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--03--17-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -84,14 +84,9 @@ a more friendly way to access output from or write functions around
 ``` r
 # setup
 set.seed(123)
-library(BayesFactor)
-#> Loading required package: coda
-#> Loading required package: Matrix
-#> ************
-#> Welcome to BayesFactor 0.9.12-4.2. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).
-#> 
-#> Type BFManual() to open the manual.
-#> ************
+
+# with `BayesFactor` ----------------------------------------
+suppressPackageStartupMessages(library(BayesFactor))
 data(sleep)
 
 # independent t-test: accepts formula interface
@@ -109,6 +104,7 @@ ttestBF(formula = wt ~ am, data = mtcars)
 ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
 #> Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.
 
+# with `tidyBF` ----------------------------------------
 library(tidyBF)
 #> Registered S3 method overwritten by 'broom.mixed':
 #>   method      from 

@@ -79,12 +79,14 @@ Below are few concrete examples of where `tidyBF` wrapper might provide a more
 friendly way to access output from or write functions around `BayesFactor`.
 
 1.  `BayesFactor` is inconsistent with its formula interface. `tidyBF` avoids
-    this.
+    this as it doesn't provide the formula interface for any of the functions.
 
 ```{r r_formula}
 # setup
 set.seed(123)
-library(BayesFactor)
+
+# with `BayesFactor` ----------------------------------------
+suppressPackageStartupMessages(library(BayesFactor))
 data(sleep)
 
 # independent t-test: accepts formula interface
@@ -93,6 +95,7 @@ ttestBF(formula = wt ~ am, data = mtcars)
 # paired t-test: doesn't accept formula interface
 ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
 
+# with `tidyBF` ----------------------------------------
 library(tidyBF)
 
 # independent t-test
@@ -104,4 +107,5 @@ bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
 
 # Code of Conduct
 
-Please note that the `tidyBF` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the `tidyBF` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). 
+By contributing to this project, you agree to abide by its terms.

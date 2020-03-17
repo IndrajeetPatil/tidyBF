@@ -17,19 +17,10 @@
 #'
 #' @examples
 #' \donttest{
+#' # setup
+#' set.seed(123)
 #'
 #' # between-subjects -------------------------------------------------------
-#'
-#' # to get caption (default)
-#' bf_oneway_anova(
-#'   data = iris,
-#'   x = Species,
-#'   y = Sepal.Length,
-#'   bf.prior = 0.8,
-#'   paired = FALSE
-#' )
-#'
-#' # to get results dataframe
 #' bf_oneway_anova(
 #'   data = iris,
 #'   x = Species,

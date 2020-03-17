@@ -91,7 +91,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/IndrajeetPatil/tidyBF">
+  <a href="https://github.com/IndrajeetPatil/tidyBF/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -231,7 +231,7 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyBF</span>)
 
-<span class='co'># to get caption (default)</span>
+<span class='co'># to get dataframe</span>
 <span class='fu'>bf_ttest</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
@@ -242,43 +242,17 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
 #&gt;    bf10    error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='text-decoration: underline;'>1</span><span>579. 7.88</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-10</span><span> 0.000</span><span style='text-decoration: underline;'>633</span><span>       7.36      -</span><span style='color: #BB0000;'>7.36</span><span>        3.20       -</span><span style='color: #BB0000;'>3.20</span><span>     0.88</div><div class='input'>
-<span class='co'># to see results</span>
-<span class='fu'>bf_ttest</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>wt</span>,
-  <span class='kw'>paired</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>
-)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 8</span><span>
-#&gt;    bf10         error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='text-decoration: underline;'>1</span><span>383. 0.000</span><span style='text-decoration: underline;'>000</span><span>003</span><span style='text-decoration: underline;'>41</span><span> 0.000</span><span style='text-decoration: underline;'>723</span><span>       7.23      -</span><span style='color: #BB0000;'>7.23</span><span>        3.14       -</span><span style='color: #BB0000;'>3.14</span><span>
-#&gt;   bf.prior
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    0.707</div><div class='input'>
 <span class='co'># ------------------- one-samples test -----------------------------------</span>
 
-<span class='co'># to get caption (default)</span>
+<span class='co'># to get dataframe</span>
 <span class='fu'>bf_ttest</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>,
-  <span class='kw'>test.value</span> <span class='kw'>=</span> <span class='fl'>5.85</span>,
-  <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"caption"</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>
-)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("In favor of null: ", "log"["e"], 
-#&gt;     "(BF"["01"], ") = ", "2.51", ", ", italic("r")["Cauchy"]^"JZS", 
-#&gt;     " = ", "0.80"))</div><div class='input'>
-<span class='co'># to get results dataframe</span>
-<span class='fu'>bf_ttest</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>,
-  <span class='kw'>test.value</span> <span class='kw'>=</span> <span class='fl'>5.85</span>,
-  <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>
+  <span class='kw'>test.value</span> <span class='kw'>=</span> <span class='fl'>5.85</span>
 )</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 8</span><span>
 #&gt;     bf10     error  bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.081</span><span style='text-decoration: underline;'>0</span><span> 0.000</span><span style='text-decoration: underline;'>012</span><span>8  12.3      -</span><span style='color: #BB0000;'>2.51</span><span>       2.51       -</span><span style='color: #BB0000;'>1.09</span><span>        1.09      0.8</div></span></pre>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.091</span><span style='text-decoration: underline;'>4</span><span> 0.000</span><span style='text-decoration: underline;'>011</span><span>8  10.9      -</span><span style='color: #BB0000;'>2.39</span><span>       2.39       -</span><span style='color: #BB0000;'>1.04</span><span>        1.04    0.707</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

@@ -24,7 +24,7 @@
 #' set.seed(123)
 #' library(tidyBF)
 #'
-#' # to get caption (default)
+#' # to get dataframe
 #' bf_ttest(
 #'   data = mtcars,
 #'   x = am,
@@ -33,33 +33,13 @@
 #'   bf.prior = 0.880
 #' )
 #'
-#' # to see results
-#' bf_ttest(
-#'   data = mtcars,
-#'   x = am,
-#'   y = wt,
-#'   paired = FALSE,
-#'   output = "results"
-#' )
-#'
 #' # ------------------- one-samples test -----------------------------------
 #'
-#' # to get caption (default)
+#' # to get dataframe
 #' bf_ttest(
 #'   data = iris,
 #'   x = Sepal.Length,
-#'   test.value = 5.85,
-#'   bf.prior = 0.8,
-#'   output = "caption", k = 2
-#' )
-#'
-#' # to get results dataframe
-#' bf_ttest(
-#'   data = iris,
-#'   x = Sepal.Length,
-#'   test.value = 5.85,
-#'   bf.prior = 0.8,
-#'   output = "results"
+#'   test.value = 5.85
 #' )
 #' @export
 

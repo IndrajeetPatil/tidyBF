@@ -19,7 +19,6 @@
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
-#' \donttest{
 #' # for reproducibility
 #' set.seed(123)
 #'
@@ -38,7 +37,6 @@
 #'   y = y4,
 #'   bf.prior = 0.8
 #' )
-#' }
 #' @export
 
 # function body

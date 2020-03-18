@@ -91,13 +91,11 @@ Richard Morey:
 \url{https://gist.github.com/richarddmorey/a4cd3a2051f373db917550d67131dba4}.
 }
 \examples{
-
-\donttest{
-# ------------------ association tests --------------------------------
-
 # for reproducibility
 set.seed(123)
 library(tidyBF)
+
+# ------------------ association tests --------------------------------
 
 # to get caption (in favor of null)
 bf_contingency_tab(
@@ -105,15 +103,6 @@ bf_contingency_tab(
   x = am,
   y = cyl,
   fixed.margin = "cols"
-)
-
-# to get caption (in favor of alternative)
-bf_contingency_tab(
-  data = mtcars,
-  x = am,
-  y = cyl,
-  fixed.margin = "rows",
-  output = "alternative"
 )
 
 # to see results
@@ -133,7 +122,6 @@ bf_contingency_tab(
   x = am,
   prior.concentration = 10
 )
-}
 }
 \seealso{
 \code{\link{bf_corr_test}}, \code{\link{bf_oneway_anova}},

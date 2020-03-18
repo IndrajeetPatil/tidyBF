@@ -1,2 +1,2 @@
-# CODEOWNERS for ggstatsplot
+# CODEOWNERS for tidyBF
 .github/CODEOWNERS @IndrajeetPatil

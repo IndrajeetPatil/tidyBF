@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "tidyBF",
-  "description": "Provides helper functions that make it easy to run\n    'BayesFactor' package tests on a data which is in a tidy format.",
+  "description": "Provides helper functions that make it easy to run\n    'BayesFactor' package tests on a data which is in a tidy format.\n    Additionally, it provides a more consistent syntax and by default\n    returns a dataframe with rich details. These functions can also return\n    expressions containing results from Bayes Factor tests that can then\n    be displayed on custom plots.",
   "name": "tidyBF: Tidy Wrapper for 'BayesFactor' Package",
   "codeRepository": "https://github.com/IndrajeetPatil/tidyBF",
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",

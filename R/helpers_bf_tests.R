@@ -9,14 +9,20 @@
 #' @importFrom dplyr rename select mutate
 #'
 #' @examples
-#' # getting only Bayes Factors
-#' bf_extractor(
+#' set.seed(123)
+#'
+#' # creating a `BayesFactor` object
+#' bf_obj <-
 #'   BayesFactor::anovaBF(
 #'     formula = Sepal.Length ~ Species,
 #'     data = iris,
 #'     progress = FALSE
 #'   )
-#' )
+#'
+#' # extracting Bayes Factors in a dataframe
+#' # *important*: don't enter `1/bf_obj` to extract results for null hypothesis;
+#' # doing so will return wrong results
+#' bf_extractor(bf_obj)
 #' @export
 
 # function body

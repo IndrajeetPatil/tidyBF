@@ -11,6 +11,10 @@ Authors@R:
 Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
 Description: Provides helper functions that make it easy to run
     'BayesFactor' package tests on a data which is in a tidy format.
+    Additionally, it provides a more consistent syntax and by default
+    returns a dataframe with rich details. These functions can also return
+    expressions containing results from Bayes Factor tests that can then
+    be displayed on custom plots.
 License: GPL-3 | file LICENSE
 URL: https://indrajeetpatil.github.io/tidyBF/,
     https://github.com/IndrajeetPatil/tidyBF

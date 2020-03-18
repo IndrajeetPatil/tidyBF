@@ -15,9 +15,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidyBF: Grouped statistical analysis in a tidy way
+# `tidyBF`: Grouped statistical analysis in a tidy way
 
-[![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
 [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
@@ -32,11 +31,15 @@ knitr::opts_chunk$set(
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage Status](https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg)](https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)
-[![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF)
 
 # Overview
 
-`tidyBF` package is a tidy wrapper around `BayesFactor` package.
+`tidyBF` package is a tidy wrapper around `BayesFactor` package that always
+expects the data to be in the tidy format and return a tibble containing Bayes
+Factor values. Additionally, it provides a more consistent syntax and by
+default returns a dataframe with rich details. These functions can also return
+expressions containing results from Bayes Factor tests that can then be
+displayed on custom plots.
 
 # Installation
 
@@ -78,10 +81,12 @@ remotes::install_github(
 Below are few concrete examples of where `tidyBF` wrapper might provide a more
 friendly way to access output from or write functions around `BayesFactor`.
 
-1.  `BayesFactor` is inconsistent with its formula interface. `tidyBF` avoids
-    this as it doesn't provide the formula interface for any of the functions.
+## Syntax consistency
 
-```{r r_formula}
+`BayesFactor` is inconsistent with its formula interface. `tidyBF` avoids this
+as it doesn't provide the formula interface for any of the functions.
+
+```{r formula}
 # setup
 set.seed(123)
 
@@ -104,6 +109,51 @@ bf_ttest(data = mtcars, x = am, y = wt)
 # paired t-test
 bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
 ```
+
+## Expressions for plots
+
+Although all functions default to returning a dataframe, you can also use it
+to extract expressions that can be displayed in plots.
+
+```{r expr_plot}
+# setup
+set.seed(123)
+library(ggplot2)
+
+# two-sample t-test results in an expression
+stats_exp <- bf_ttest(mtcars, am, wt, output = "alternative")
+
+# using the expression to display details in a plot
+ggplot(mtcars, aes(as.factor(am), wt)) +
+  geom_boxplot() +
+  labs(subtitle = stats_exp)
+```
+
+## Dataframe with all the details
+
+`BayesFactor` can return the Bayes Factor value corresponding to either
+evidence in favor of the null hypothesis over the alternative hypothesis
+(`BF01`) or in favor of the alternative over the null (`BF10`), depending on how this
+object is called. `tidyBF` on the other hand return both of these values and
+their logarithms.
+
+```{r all_together}
+# `BayesFactor` object
+bf <- BayesFactor::correlationBF(y = iris$Sepal.Length, x = iris$Petal.Length)
+
+# alternative
+bf
+
+# null
+1 / bf
+
+# `tidyBF` output
+bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
+```
+
+Note that the log-transformed values are helpful because in case of strong
+effects, the raw Bayes Factor values can be pretty large, but the
+log-transformed values continue to remain easy to work with.
 
 # Code of Conduct
 

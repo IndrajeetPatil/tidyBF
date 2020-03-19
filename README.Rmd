@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `tidyBF`: Grouped statistical analysis in a tidy way
+# `tidyBF`: Tidy Wrapper for 'BayesFactor' Package
 
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)

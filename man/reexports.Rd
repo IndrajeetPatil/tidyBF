@@ -14,6 +14,7 @@
 \alias{\%|\%}
 \alias{tibble}
 \alias{as_tibble}
+\alias{prior}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -22,6 +23,8 @@ below to see their documentation.
 
 \describe{
   \item{ipmisc}{\code{\link[ipmisc]{\%$\%}}, \code{\link[ipmisc]{\%<-\%}}, \code{\link[ipmisc]{\%<>\%}}, \code{\link[ipmisc]{\%>\%}}, \code{\link[ipmisc]{long_to_wide_converter}}, \code{\link[ipmisc]{signif_column}}, \code{\link[ipmisc]{specify_decimal_p}}}
+
+  \item{metaBMA}{\code{\link[metaBMA]{prior}}}
 
   \item{rlang}{\code{\link[rlang]{\%|\%}}, \code{\link[rlang]{\%||\%}}}
 

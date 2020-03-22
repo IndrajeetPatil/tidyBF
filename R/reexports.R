@@ -31,7 +31,6 @@ ipmisc::`%$%`
 #' @importFrom ipmisc "%<-%"
 ipmisc::`%<-%`
 
-
 #' @export
 #' @importFrom rlang "%||%"
 rlang::`%||%`
@@ -47,3 +46,9 @@ tibble::tibble
 #' @export
 #' @importFrom tibble as_tibble
 tibble::as_tibble
+
+# ----------------------- metaBMA -------------------------------------
+
+#' @export
+#' @importFrom metaBMA prior
+metaBMA::prior

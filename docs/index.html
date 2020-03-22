@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tidy Wrapper for BayesFactor Package • tidyBF</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
@@ -23,7 +24,7 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -89,22 +90,22 @@
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
 <p>To get the latest, stable <code>CRAN</code> release:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="dt">pkgs =</span> <span class="st">"tidyBF"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="kw">pkgs</span> <span class="kw">=</span> <span class="st">"tidyBF"</span>)</pre></div>
 <p>You can get the <strong>development</strong> version of the package from <code>GitHub</code>. To see what new changes (and bug fixes) have been made to the package since the last release on <code>CRAN</code>, you can check the detailed log of changes here: <a href="https://indrajeetpatil.github.io/tidyBF/news/index.html" class="uri">https://indrajeetpatil.github.io/tidyBF/news/index.html</a></p>
 <p>If you are in hurry and want to reduce the time of installation, prefer-</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># needed package to download from GitHub repo</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="dt">pkgs =</span> <span class="st">"remotes"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">repo =</span> <span class="st">"IndrajeetPatil/tidyBF"</span>, <span class="co"># package path on GitHub</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="dt">quick =</span> <span class="ot">TRUE</span> <span class="co"># skips docs, demos, and vignettes</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"># needed package to download from GitHub repo
+install.packages(pkgs = "remotes")
+
+remotes::install_github(
+  repo = "IndrajeetPatil/tidyBF", # package path on GitHub
+  quick = TRUE # skips docs, demos, and vignettes
+)</pre></div>
 <p>If time is not a constraint-</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">repo =</span> <span class="st">"IndrajeetPatil/tidyBF"</span>, <span class="co"># package path on GitHub</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">dependencies =</span> <span class="ot">TRUE</span>, <span class="co"># installs packages which `tidyBF` depends on</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">upgrade_dependencies =</span> <span class="ot">TRUE</span> <span class="co"># updates any out of date dependencies</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r">remotes::install_github(
+  repo = "IndrajeetPatil/tidyBF", # package path on GitHub
+  dependencies = TRUE, # installs packages which `tidyBF` depends on
+  upgrade_dependencies = TRUE # updates any out of date dependencies
+)</pre></div>
 </div>
 <div id="benefits" class="section level1">
 <h1 class="hasAnchor">
@@ -114,100 +115,91 @@
 <h2 class="hasAnchor">
 <a href="#syntax-consistency" class="anchor"></a>Syntax consistency</h2>
 <p><code>BayesFactor</code> is inconsistent with its formula interface. <code>tidyBF</code> avoids this as it doesn’t provide the formula interface for any of the functions.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># setup</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># with `BayesFactor` ----------------------------------------</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BayesFactor))</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(sleep)</span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># independent t-test: accepts formula interface</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> wt <span class="op">~</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Bayes factor analysis</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; --------------</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; [1] Alt., r=0.707 : 1383.367 ±0%</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; </span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; Against denominator:</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;   Null, mu1-mu2 = 0 </span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; ---</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; Bayes factor type: BFindepSample, JZS</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co"># paired t-test: doesn't accept formula interface</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="kw">ttestBF</span>(<span class="dt">formula =</span> extra <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> sleep, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># with `tidyBF` ----------------------------------------</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyBF)</span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; Registered S3 method overwritten by 'broom.mixed':</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt;   method      from </span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt;   tidy.gamlss broom</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co"># independent t-test</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> mtcars, <span class="dt">x =</span> am, <span class="dt">y =</span> wt)</span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;    bf10     error    bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; 1 1383.   3.41e-9 7.23e-4       7.23      -7.23        3.14       -3.14    0.707</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co"># paired t-test</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="dt">data =</span> sleep, <span class="dt">x =</span> group, <span class="dt">y =</span> extra, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;    bf10      error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;   &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; 1  17.3    1.68e-7 0.0579       2.85      -2.85        1.24       -1.24    0.707</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"># setup
+set.seed(123)
+
+# with `BayesFactor` ----------------------------------------
+suppressPackageStartupMessages(library(BayesFactor))
+data(sleep)
+
+# independent t-test: accepts formula interface
+ttestBF(formula = wt ~ am, data = mtcars)
+#&gt; Bayes factor analysis
+#&gt; --------------
+#&gt; [1] Alt., r=0.707 : 1383.367 ±0%
+#&gt; 
+#&gt; Against denominator:
+#&gt;   Null, mu1-mu2 = 0 
+#&gt; ---
+#&gt; Bayes factor type: BFindepSample, JZS
+
+# paired t-test: doesn't accept formula interface
+ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
+#&gt; Error in ttestBF(formula = extra ~ group, data = sleep, paired = TRUE): Cannot use 'paired' with formula.
+
+# with `tidyBF` ----------------------------------------
+library(tidyBF)
+#&gt; Registered S3 method overwritten by 'broom.mixed':
+#&gt;   method      from 
+#&gt;   tidy.gamlss broom
+
+# independent t-test
+bf_ttest(data = mtcars, x = am, y = wt)
+#&gt; # A tibble: 1 x 8
+#&gt;    bf10     error    bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#&gt;   <dbl><dbl><dbl><dbl><dbl><dbl><dbl><dbl>
+#&gt; 1 1383.   3.41e-9 7.23e-4       7.23      -7.23        3.14       -3.14    0.707
+
+# paired t-test
+bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
+#&gt; # A tibble: 1 x 8
+#&gt;    bf10      error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#&gt;   <dbl><dbl><dbl><dbl><dbl><dbl><dbl><dbl>
+#&gt; 1  17.3    1.68e-7 0.0579       2.85      -2.85        1.24       -1.24    0.707</dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></pre></div>
 </div>
 <div id="expressions-for-plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#expressions-for-plots" class="anchor"></a>Expressions for plots</h2>
 <p>Although all functions default to returning a dataframe, you can also use it to extract expressions that can be displayed in plots.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># setup</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">123</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># two-sample t-test results in an expression</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>stats_exp &lt;-<span class="st"> </span><span class="kw"><a href="reference/bf_ttest.html">bf_ttest</a></span>(mtcars, am, wt, <span class="dt">output =</span> <span class="st">"alternative"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># using the expression to display details in a plot</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(am), wt)) <span class="op">+</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> stats_exp)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="r"># setup
+set.seed(123)
+library(ggplot2)
+
+# two-sample t-test results in an expression
+stats_exp </pre></div>
 <p><img src="reference/figures/README-expr_plot-1.png" width="100%"></p>
 </div>
 <div id="dataframe-with-all-the-details" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataframe-with-all-the-details" class="anchor"></a>Dataframe with all the details</h2>
 <p><code>BayesFactor</code> can return the Bayes Factor value corresponding to either evidence in favor of the null hypothesis over the alternative hypothesis (<code>BF01</code>) or in favor of the alternative over the null (<code>BF10</code>), depending on how this object is called. <code>tidyBF</code> on the other hand return both of these values and their logarithms.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># `BayesFactor` object</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>bf &lt;-<span class="st"> </span>BayesFactor<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html">correlationBF</a></span>(<span class="dt">y =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">x =</span> iris<span class="op">$</span>Petal.Length)</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># alternative</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>bf</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; Bayes factor analysis</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; --------------</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; [1] Alt., r=0.333 : 2.136483e+43 ±0%</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; Against denominator:</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;   Null, rho = 0 </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; ---</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co"># null</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>bf</span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; Bayes factor analysis</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; --------------</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; [1] Null, rho = 0 : 4.680589e-44 ±0%</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; </span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; Against denominator:</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt;   Alternative, r = 0.333333333333333, rho =/= 0 </span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; ---</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="co"># `tidyBF` output</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="kw"><a href="reference/bf_corr_test.html">bf_corr_test</a></span>(iris, Sepal.Length, Petal.Length, <span class="dt">bf.prior =</span> <span class="fl">0.333</span>)</span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt;      bf10 error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; 1 2.13e43     0 4.70e-44       99.8      -99.8        43.3       -43.3    0.333</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="r"># `BayesFactor` object
+bf  Bayes factor analysis
+#&gt; --------------
+#&gt; [1] Alt., r=0.333 : 2.136483e+43 ±0%
+#&gt; 
+#&gt; Against denominator:
+#&gt;   Null, rho = 0 
+#&gt; ---
+#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*
+
+# null
+1 / bf
+#&gt; Bayes factor analysis
+#&gt; --------------
+#&gt; [1] Null, rho = 0 : 4.680589e-44 ±0%
+#&gt; 
+#&gt; Against denominator:
+#&gt;   Alternative, r = 0.333333333333333, rho =/= 0 
+#&gt; ---
+#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*
+
+# `tidyBF` output
+bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
+#&gt; # A tibble: 1 x 8
+#&gt;      bf10 error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#&gt;     <dbl><dbl><dbl><dbl><dbl><dbl><dbl><dbl>
+#&gt; 1 2.13e43     0 4.70e-44       99.8      -99.8        43.3       -43.3    0.333</dbl></dbl></dbl></dbl></dbl></dbl></dbl></dbl></pre></div>
 <p>Note that the log-transformed values are helpful because in case of strong effects, the raw Bayes Factor values can be pretty large, but the log-transformed values continue to remain easy to work with.</p>
 </div>
 </div>
@@ -223,6 +215,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tidyBF">https://​cloud.r-project.org/​package=tidyBF</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/IndrajeetPatil/tidyBF/">https://​github.com/​IndrajeetPatil/​tidyBF/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/IndrajeetPatil/tidyBF/issues">https://​github.com/​IndrajeetPatil/​tidyBF/​issues</a>

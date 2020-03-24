@@ -121,10 +121,10 @@ set.seed(123)
 library(ggplot2)
 
 # two-sample t-test results in an expression
-stats_exp <- bf_ttest(mtcars, am, wt, output = "alternative")
+stats_exp <- bf_ttest(ToothGrowth, supp, len, output = "alternative")
 
 # using the expression to display details in a plot
-ggplot(mtcars, aes(as.factor(am), wt)) +
+ggplot(ToothGrowth, aes(supp, len)) +
   geom_boxplot() +
   labs(subtitle = stats_exp)
 ```

@@ -1,9 +1,7 @@
-#' @title Bayes factor message for random-effects meta-analysis
+#' @title Bayes factor for random-effects meta-analysis
 #' @name bf_meta
 #'
 #' @importFrom metaBMA meta_random prior
-#'
-#' @inherit metaBMA::meta_random return Description
 #'
 #' @param data A dataframe. It **must** contain columns named `estimate` (effect
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
@@ -63,7 +61,7 @@
 bf_meta <- function(data,
                     d = prior("norm", c(mean = 0, sd = 0.3)),
                     tau = prior("invgamma", c(shape = 1, scale = 0.15)),
-                    k = 2,
+                    k = 2L,
                     output = "results",
                     caption = NULL,
                     messages = TRUE,
@@ -91,12 +89,12 @@ bf_meta <- function(data,
 
   # creating a dataframe with posterior estimates
   df_estimates <-
-    tibble::as_tibble(meta_res$estimates, rownames = "term") %>%
+    as_tibble(meta_res$estimates, rownames = "term") %>%
     dplyr::filter(.data = ., term == "d")
 
   # dataframe with bayes factors
   bf.df <-
-    dplyr::tibble(bf10 = meta_res$BF["random_H1", "random_H0"]) %>%
+    tibble(bf10 = meta_res$BF["random_H1", "random_H0"]) %>%
     bf_formatter(.)
 
   # changing aspects of the caption based on what output is needed

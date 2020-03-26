@@ -5,7 +5,7 @@
 #' @param ... Currently ignored.
 #'
 #' @importFrom BayesFactor extractBF
-#' @importFrom tibble as_tibble enframe
+#' @importFrom tibble enframe
 #' @importFrom dplyr rename select mutate
 #'
 #' @examples
@@ -32,7 +32,7 @@ bf_extractor <- function(bf.object, ...) {
     logbf = FALSE,
     onlybf = FALSE
   ) %>%
-    tibble::as_tibble(.) %>%
+    as_tibble(.) %>%
     dplyr::select(.data = ., -time, -code) %>%
     dplyr::rename(.data = ., bf10 = bf) %>%
     bf_formatter(.)

@@ -2,13 +2,13 @@
 % Please edit documentation in R/bf_meta.R
 \name{bf_meta}
 \alias{bf_meta}
-\title{Bayes factor message for random-effects meta-analysis}
+\title{Bayes factor for random-effects meta-analysis}
 \usage{
 bf_meta(
   data,
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
-  k = 2,
+  k = 2L,
   output = "results",
   caption = NULL,
   messages = TRUE,
@@ -77,7 +77,7 @@ study in random-effects meta-analysis.}
   }}
 }
 \description{
-Bayes factor message for random-effects meta-analysis
+Bayes factor for random-effects meta-analysis
 }
 \examples{
 

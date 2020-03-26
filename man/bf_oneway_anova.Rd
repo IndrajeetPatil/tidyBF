@@ -2,7 +2,7 @@
 % Please edit documentation in R/bf_oneway_anova.R
 \name{bf_oneway_anova}
 \alias{bf_oneway_anova}
-\title{Bayesian one-way analysis of variance.}
+\title{Bayesian one-way analysis of variance}
 \usage{
 bf_oneway_anova(
   data,
@@ -45,7 +45,7 @@ expression with evidence in favor of the alternative hypothesis, or
 \item{...}{Additional arguments.}
 }
 \description{
-Bayesian one-way analysis of variance.
+Bayesian one-way analysis of variance
 }
 \examples{
 \donttest{
@@ -57,8 +57,7 @@ bf_oneway_anova(
   data = iris,
   x = Species,
   y = Sepal.Length,
-  bf.prior = 0.8,
-  output = "results"
+  bf.prior = 0.8
 )
 
 # within-subjects -------------------------------------------------------

@@ -95,8 +95,8 @@ bf_contingency_tab <- function(data,
   # creating a dataframe
   data %<>%
     dplyr::select(.data = ., {{ x }}, {{ y }}, {{ counts }}) %>%
-    tidyr::drop_na(data = .) %>%
-    tibble::as_tibble(x = .)
+    tidyr::drop_na(.) %>%
+    as_tibble(.)
 
   # untable the dataframe based on the count for each observation
   if (!rlang::quo_is_null(rlang::enquo(counts))) {
@@ -199,7 +199,7 @@ bf_contingency_tab <- function(data,
 
     # computing Bayes Factor and formatting the results
     bf.df <-
-      dplyr::tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
+      tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
       bf_formatter(.) %>%
       dplyr::mutate(.data = ., prior.concentration = prior.concentration)
   }

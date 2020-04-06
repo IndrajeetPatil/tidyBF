@@ -39,7 +39,6 @@ testthat::test_that(
       suppressWarnings(bf_meta(
         data = df1,
         k = 3,
-        messages = TRUE,
         iter = 1000,
         summarize = "integrate",
         output = "subtitle"
@@ -50,7 +49,6 @@ testthat::test_that(
       suppressWarnings(bf_meta(
         data = df1,
         k = 3,
-        messages = FALSE,
         iter = 1000,
         summarize = "integrate",
         output = "caption"
@@ -109,7 +107,6 @@ testthat::test_that(
       bf_meta(
         data = dplyr::select(df1, -estimate),
         k = 3,
-        messages = TRUE,
         iter = 1000,
         summarize = "integrate"
       )

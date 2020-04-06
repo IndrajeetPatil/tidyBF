@@ -175,8 +175,7 @@ Bayes Factor caption/message).</p></td>
     </tr>
     <tr>
       <th>messages</th>
-      <td><p>Decides whether messages references, notes, and warnings are
-to be displayed (Default: <code>TRUE</code>).</p></td>
+      <td><p>Deprecated. Retained only for backward compatibility.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -260,20 +259,7 @@ study in random-effects meta-analysis.</p></dd>
   <span class='co'># customizing analysis with additional arguments</span>
   <span class='kw'>control</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>max_treedepth</span> <span class='kw'>=</span> <span class='fl'>15</span>)
 )</div><div class='output co'>#&gt; <span class='warning'>Warning: There were 4 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; ### Bayesian Random-Effects Meta-Analysis ### 
-#&gt;    Prior on d:      'norm' (mean=0, sd=0.3) with support on the interval [-Inf,Inf]. 
-#&gt;    Prior on tau:    'invgamma' (shape=1, scale=0.15) with support on the interval [0,Inf]. 
-#&gt; 
-#&gt; # Bayes factors:
-#&gt;            (denominator)
-#&gt; (numerator) random_H0 random_H1
-#&gt;   random_H0       1.0    0.0354
-#&gt;   random_H1      28.2    1.0000
-#&gt; 
-#&gt; # Posterior summary statistics of random-effects model:
-#&gt;      mean    sd  2.5%   50% 97.5% hpd95_lower hpd95_upper n_eff  Rhat
-#&gt; d   0.528 0.130 0.224 0.541 0.743       0.253       0.766 775.0 1.002
-#&gt; tau 0.286 0.125 0.136 0.256 0.618       0.112       0.541 759.7 1.001</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
 #&gt;    bf10   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  28.2 0.035</span><span style='text-decoration: underline;'>4</span><span>       3.34      -</span><span style='color: #BB0000;'>3.34</span><span>        1.45       -</span><span style='color: #BB0000;'>1.45</span><span></div><div class='input'># }
@@ -294,7 +280,7 @@ study in random-effects meta-analysis.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
 </div>
 
       </footer>

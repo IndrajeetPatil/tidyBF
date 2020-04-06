@@ -60,54 +60,59 @@ testthat::test_that(
 
     # extracting results from where this function is implemented
     set.seed(123)
-    df <- suppressMessages(bf_extractor(
-      BayesFactor::contingencyTableBF(
-        x = table(mtcars$am, mtcars$cyl),
-        sampleType = "jointMulti",
-        fixedMargin = "rows"
-      )
-    ))
+    df <-
+      suppressMessages(bf_extractor(
+        BayesFactor::contingencyTableBF(
+          x = table(mtcars$am, mtcars$cyl),
+          sampleType = "jointMulti",
+          fixedMargin = "rows"
+        )
+      ))
 
     # extracting results from where this function is implemented
     set.seed(123)
-    df_results <- bf_contingency_tab(
-      data = mtcars,
-      x = am,
-      y = cyl,
-      sampling.plan = "jointMulti",
-      fixed.margin = "rows",
-      output = "results"
-    )
+    df_results <-
+      bf_contingency_tab(
+        data = mtcars,
+        x = am,
+        y = cyl,
+        sampling.plan = "jointMulti",
+        fixed.margin = "rows",
+        output = "results"
+      )
 
     # caption
-    caption_text <- bf_contingency_tab(
-      data = mtcars,
-      x = am,
-      y = "cyl",
-      sampling.plan = "jointMulti",
-      fixed.margin = "rows",
-      output = "alternative"
-    )
+    caption_text <-
+      bf_contingency_tab(
+        data = mtcars,
+        x = am,
+        y = "cyl",
+        sampling.plan = "jointMulti",
+        fixed.margin = "rows",
+        output = "alternative"
+      )
 
     # with counts
-    caption_text2 <- bf_contingency_tab(
-      data = as.data.frame(Titanic),
-      x = "Survived",
-      y = Sex,
-      counts = "Freq",
-      sampling.plan = "jointMulti",
-      fixed.margin = "rows",
-      output = "alternative"
-    )
+    caption_text2 <-
+      bf_contingency_tab(
+        data = as.data.frame(Titanic),
+        x = "Survived",
+        y = Sex,
+        counts = "Freq",
+        sampling.plan = "jointMulti",
+        fixed.margin = "rows",
+        output = "alternative"
+      )
 
     # with counts
-    caption_text3 <- bf_contingency_tab(
-      data = as.data.frame(Titanic),
-      x = Survived,
-      y = Sex,
-      counts = "Freq",
-      output = "H0"
-    )
+    caption_text3 <-
+      bf_contingency_tab(
+        data = as.data.frame(Titanic),
+        x = Survived,
+        y = Sex,
+        counts = "Freq",
+        output = "H0"
+      )
 
     # check bayes factor values
     testthat::expect_equal(df$bf10, 28.07349, tolerance = 0.001)
@@ -121,22 +126,25 @@ testthat::test_that(
     testthat::expect_equal(df$log_e_bf01, df_results$log_e_bf01, tolerance = 0.001)
 
     # caption text
-    testthat::expect_identical(caption_text, ggplot2::expr(atop(
-      displaystyle(NULL),
-      expr = paste(
-        "In favor of alternative: ",
-        "log"["e"],
-        "(BF"["10"],
-        ") = ",
-        "3.33",
-        ", sampling = ",
-        "joint multinomial",
-        ", ",
-        italic("a"),
-        " = ",
-        "1.00"
-      )
-    )))
+    testthat::expect_identical(
+      caption_text,
+      ggplot2::expr(atop(
+        displaystyle(NULL),
+        expr = paste(
+          "In favor of alternative: ",
+          "log"["e"],
+          "(BF"["10"],
+          ") = ",
+          "3.33",
+          ", sampling = ",
+          "joint multinomial",
+          ", ",
+          italic("a"),
+          " = ",
+          "1.00"
+        )
+      ))
+    )
 
     testthat::expect_identical(
       caption_text2,

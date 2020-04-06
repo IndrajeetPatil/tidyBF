@@ -7,8 +7,7 @@
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
 #'   two columns will be used for `yi`  and `sei` arguments in `metafor::rma`
 #'   (for parametric analysis) or `metaplus::metaplus` (for robust analysis).
-#' @param messages Decides whether messages references, notes, and warnings are
-#'   to be displayed (Default: `TRUE`).
+#' @param messages Deprecated. Retained only for backward compatibility.
 #' @inheritParams bf_expr
 #' @inheritParams metaBMA::meta_random
 #' @inheritDotParams metaBMA::meta_random -y -SE
@@ -81,9 +80,6 @@ bf_meta <- function(data,
       tau = tau,
       ...
     )
-
-  # print results from meta-analysis
-  if (isTRUE(messages)) print(meta_res)
 
   #----------------------- preparing caption -------------------------------
 

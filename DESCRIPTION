@@ -23,7 +23,6 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     BayesFactor,
-    broomExtra,
     dplyr,
     ipmisc,
     metaBMA,

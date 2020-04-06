@@ -41,8 +41,7 @@ expression with evidence in favor of the alternative hypothesis, or
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}
 
-\item{messages}{Decides whether messages references, notes, and warnings are
-to be displayed (Default: \code{TRUE}).}
+\item{messages}{Deprecated. Retained only for backward compatibility.}
 
 \item{...}{
   Arguments passed on to \code{\link[metaBMA:meta_random]{metaBMA::meta_random}}

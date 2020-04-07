@@ -51,7 +51,7 @@ Bayesian correlation test.
 # for reproducibility
 set.seed(123)
 
-# to get caption (default)
+# to see results
 bf_corr_test(
   data = anscombe,
   x = x1,
@@ -59,12 +59,13 @@ bf_corr_test(
   bf.prior = 1
 )
 
-# to see results
+# to get caption
 bf_corr_test(
   data = anscombe,
   x = x1,
   y = y4,
-  bf.prior = 0.8
+  bf.prior = 0.8,
+  output = "null"
 )
 }
 \seealso{

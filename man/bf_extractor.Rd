@@ -14,6 +14,10 @@ bf_extractor(bf.object, ...)
 \description{
 Extract Bayes Factors from \code{BayesFactor} model object.
 }
+\note{
+\emph{Important}: don't enter \code{1/bf_obj} to extract results for null
+hypothesis; # doing so will return wrong results.
+}
 \examples{
 set.seed(123)
 
@@ -26,7 +30,5 @@ bf_obj <-
   )
 
 # extracting Bayes Factors in a dataframe
-# *important*: don't enter `1/bf_obj` to extract results for null hypothesis;
-# doing so will return wrong results
 bf_extractor(bf_obj)
 }

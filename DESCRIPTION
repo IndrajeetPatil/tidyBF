@@ -27,7 +27,6 @@ Imports:
     ipmisc,
     metaBMA,
     rlang,
-    tibble,
     tidyr
 Suggests: 
     ggplot2,

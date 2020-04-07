@@ -44,16 +44,13 @@ bf.df <-
 
 # creating caption (for null)
 bf_expr(
-  bf.df = bf.df,
+  bf.df,
   output = "null",
   k = 3,
   caption = "Note: Iris dataset"
 )
 
 # creating caption (for alternative)
-bf_expr(
-  bf.df = bf.df,
-  output = "alternative"
-)
+bf_expr(bf.df, output = "alternative")
 }
 }

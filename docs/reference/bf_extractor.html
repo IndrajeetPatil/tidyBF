@@ -145,6 +145,10 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p><em>Important</em>: don't enter <code>1/bf_obj</code> to extract results for null
+hypothesis; # doing so will return wrong results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
@@ -158,8 +162,6 @@
   )
 
 <span class='co'># extracting Bayes Factors in a dataframe</span>
-<span class='co'># *important*: don't enter `1/bf_obj` to extract results for null hypothesis;</span>
-<span class='co'># doing so will return wrong results</span>
 <span class='fu'>bf_extractor</span>(<span class='no'>bf_obj</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;      bf10        error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

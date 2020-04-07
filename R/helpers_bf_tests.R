@@ -5,8 +5,10 @@
 #' @param ... Currently ignored.
 #'
 #' @importFrom BayesFactor extractBF
-#' @importFrom tibble enframe
 #' @importFrom dplyr rename select mutate
+#'
+#' @note *Important*: don't enter `1/bf_obj` to extract results for null
+#'   hypothesis; # doing so will return wrong results.
 #'
 #' @examples
 #' set.seed(123)
@@ -20,8 +22,6 @@
 #'   )
 #'
 #' # extracting Bayes Factors in a dataframe
-#' # *important*: don't enter `1/bf_obj` to extract results for null hypothesis;
-#' # doing so will return wrong results
 #' bf_extractor(bf_obj)
 #' @export
 
@@ -72,17 +72,14 @@ bf_extractor <- function(bf.object, ...) {
 #'
 #' # creating caption (for null)
 #' bf_expr(
-#'   bf.df = bf.df,
+#'   bf.df,
 #'   output = "null",
 #'   k = 3,
 #'   caption = "Note: Iris dataset"
 #' )
 #'
 #' # creating caption (for alternative)
-#' bf_expr(
-#'   bf.df = bf.df,
-#'   output = "alternative"
-#' )
+#' bf_expr(bf.df, output = "alternative")
 #' }
 #' @export
 

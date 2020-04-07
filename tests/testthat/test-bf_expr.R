@@ -8,10 +8,15 @@ testthat::test_that(
 
     # bayes factor results
     set.seed(123)
-    bf_results <- tibble::tribble(
-      ~log_e_bf01, ~bf.prior,
-      1.1, 0.88
-    )
+    bf_results <-
+      structure(
+        list(log_e_bf01 = 1.1, bf.prior = 0.88),
+        row.names = c(
+          NA,
+          -1L
+        ),
+        class = c("tbl_df", "tbl", "data.frame")
+      )
 
     # expected
     using1 <- bf_expr(

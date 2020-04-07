@@ -10,7 +10,7 @@ options(tibble.width = Inf)
 knitr::opts_chunk$set(
   collapse = TRUE,
   error = TRUE,
-  dpi = 200,
+  dpi = 300,
   out.width = "100%",
   comment = "#>",
   fig.path = "man/figures/README-"
@@ -34,21 +34,21 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg)](https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)
 
-# Overview
+# Overview <img src="man/figures/logo.png" align="right" width="240" />
 
-`tidyBF` package is a tidy wrapper around `BayesFactor` package that always
+`tidyBF` package is a tidy wrapper around the `BayesFactor` package that always
 expects the data to be in the tidy format and return a tibble containing Bayes
 Factor values. Additionally, it provides a more consistent syntax and by
 default returns a dataframe with rich details. These functions can also return
 expressions containing results from Bayes Factor tests that can then be
-displayed on custom plots.
+displayed in custom plots.
 
 # Installation
 
 To get the latest, stable `CRAN` release:
 
 ```{r installation1, eval = FALSE, warning = FALSE, messsage = FALSE}
-install.packages(pkgs = "tidyBF")
+install.packages("tidyBF")
 ```
 
 You can get the **development** version of the package from `GitHub`. To see
@@ -60,7 +60,7 @@ If you are in hurry and want to reduce the time of installation, prefer-
 
 ```{r installation2, eval = FALSE, warning = FALSE, messsage = FALSE}
 # needed package to download from GitHub repo
-install.packages(pkgs = "remotes")
+install.packages("remotes")
 
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
@@ -153,6 +153,11 @@ bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
 Note that the log-transformed values are helpful because in case of strong
 effects, the raw Bayes Factor values can be pretty large, but the
 log-transformed values continue to remain easy to work with.
+
+# Acknowledgments
+
+The hexsticker was generously designed by Sarah Otterstetter (Max Planck
+Institute for Human Development, Berlin). 
 
 # Code of Conduct
 

@@ -144,21 +144,3 @@ bf_meta <- function(data,
     bf_message
   ))
 }
-
-
-#' @noRd
-
-meta_data_check <- function(data) {
-  # check if the two columns needed are present
-  if (sum(c("estimate", "std.error") %in% names(data)) != 2) {
-    # inform the user that skipping labels for the same reason
-    stop(message(cat(
-      ipmisc::red("Error"),
-      ipmisc::blue(": The dataframe must contain the following two columns:\n"),
-      ipmisc::blue("`estimate` and `std.error`."),
-      sep = ""
-    )),
-    call. = FALSE
-    )
-  }
-}

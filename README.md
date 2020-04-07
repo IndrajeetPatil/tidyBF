@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--04--06-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--04--07-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -29,21 +29,21 @@ Status](https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg
 [![Coverage
 Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)
 
-# Overview
+# Overview <img src="man/figures/logo.png" align="right" width="240" />
 
-`tidyBF` package is a tidy wrapper around `BayesFactor` package that
+`tidyBF` package is a tidy wrapper around the `BayesFactor` package that
 always expects the data to be in the tidy format and return a tibble
 containing Bayes Factor values. Additionally, it provides a more
 consistent syntax and by default returns a dataframe with rich details.
 These functions can also return expressions containing results from
-Bayes Factor tests that can then be displayed on custom plots.
+Bayes Factor tests that can then be displayed in custom plots.
 
 # Installation
 
 To get the latest, stable `CRAN` release:
 
 ``` r
-install.packages(pkgs = "tidyBF")
+install.packages("tidyBF")
 ```
 
 You can get the **development** version of the package from `GitHub`. To
@@ -55,7 +55,7 @@ If you are in hurry and want to reduce the time of installation, prefer-
 
 ``` r
 # needed package to download from GitHub repo
-install.packages(pkgs = "remotes")
+install.packages("remotes")
 
 remotes::install_github(
   repo = "IndrajeetPatil/tidyBF", # package path on GitHub
@@ -198,6 +198,11 @@ bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
 Note that the log-transformed values are helpful because in case of
 strong effects, the raw Bayes Factor values can be pretty large, but the
 log-transformed values continue to remain easy to work with.
+
+# Acknowledgments
+
+The hexsticker was generously designed by Sarah Otterstetter (Max Planck
+Institute for Human Development, Berlin).
 
 # Code of Conduct
 

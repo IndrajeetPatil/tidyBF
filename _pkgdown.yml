@@ -12,10 +12,15 @@ authors:
     href: https://sites.google.com/site/indrajeetspatilmorality/
 
 reference:
-  - title: Helper functions for Bayes Factor tests
+  - title: Bayes Factor tests
     desc: Functions to extract Bayes Factor for various tests
     contents:
       - matches("bf_")
+
+  - title: Miscellaneous helper functions
+    desc: Minor data wrangling or cleaning helpers
+    contents:
+      - meta_data_check
 
   - title: Reexported functions
     desc:  Useful functions re-exported from other packages.

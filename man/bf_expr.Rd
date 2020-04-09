@@ -4,7 +4,14 @@
 \alias{bf_expr}
 \title{Prepare caption with expression for Bayes Factor results}
 \usage{
-bf_expr(bf.df, k = 2L, output = "null", caption = NULL, ...)
+bf_expr(
+  bf.df,
+  k = 2L,
+  output = "null",
+  hypothesis.text = TRUE,
+  caption = NULL,
+  ...
+)
 }
 \arguments{
 \item{bf.df}{A dataframe containing two columns \code{log_e_bf01} (for evidence in
@@ -20,19 +27,25 @@ or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
 
+\item{hypothesis.text}{Logical that decides whether the expression containing
+result should have text to describe the hypothesis test being described.
+For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
+\code{"In favor of alternative: "}.}
+
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}
 
 \item{...}{Additional arguments (ignored).}
 }
 \description{
-Convenience function to write a caption message with bayes
-factors in favor of the null hypothesis.
+Convenience function to create an expression with Bayes
+Factor results.
 }
 \examples{
 \donttest{
 # for reproducibility
 set.seed(123)
+library(tidyBF)
 
 # dataframe containing results
 bf.df <-

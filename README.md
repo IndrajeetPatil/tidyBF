@@ -3,7 +3,7 @@
 
 # `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads
 badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
 [![Weekly downloads
@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--04--07-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--04--09-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -152,6 +152,21 @@ ggplot(ToothGrowth, aes(supp, len)) +
 ```
 
 <img src="man/figures/README-expr_plot-1.png" width="100%" />
+
+Here is another example:
+
+``` r
+# setup
+set.seed(123)
+library(ggplot2)
+
+# using the expression to display details in a plot
+ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
+  geom_point() +
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null", hypothesis.text = FALSE))
+```
+
+<img src="man/figures/README-expr_plot2-1.png" width="100%" />
 
 ## Dataframe with all the details
 

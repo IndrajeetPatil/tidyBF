@@ -11,7 +11,7 @@
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0.9000",
+  "version": "0.2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",

@@ -6,3 +6,6 @@
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
+
+  - Gets rid of `NOTE` produced in daily CRAN checks.
+  - Minor internal refactoring.

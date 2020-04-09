@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 # `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
 [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
 [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
@@ -128,13 +128,26 @@ ggplot(ToothGrowth, aes(supp, len)) +
   labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "alternative"))
 ```
 
+Here is another example:
+
+```{r expr_plot2}
+# setup
+set.seed(123)
+library(ggplot2)
+
+# using the expression to display details in a plot
+ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
+  geom_point() +
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null", hypothesis.text = FALSE))
+```
+
 ## Dataframe with all the details
 
-`BayesFactor` can return the Bayes Factor value corresponding to either
-evidence in favor of the null hypothesis over the alternative hypothesis
-(`BF01`) or in favor of the alternative over the null (`BF10`), depending on how this
-object is called. `tidyBF` on the other hand return both of these values and
-their logarithms.
+`BayesFactor` can return the Bayes Factor value corresponding to either evidence
+in favor of the null hypothesis over the alternative hypothesis (`BF01`) or in
+favor of the alternative over the null (`BF10`), depending on how this object is
+called. `tidyBF` on the other hand return both of these values and their
+logarithms.
 
 ```{r all_together}
 # `BayesFactor` object

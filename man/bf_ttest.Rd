@@ -15,6 +15,7 @@ bf_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
+  hypothesis.text = TRUE,
   k = 2,
   ...
 )
@@ -28,6 +29,7 @@ bf_one_sample_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
+  hypothesis.text = TRUE,
   k = 2,
   ...
 )
@@ -41,6 +43,7 @@ bf_two_sample_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
+  hypothesis.text = TRUE,
   k = 2,
   ...
 )
@@ -72,6 +75,11 @@ which will return expression with evidence in favor of the null hypothesis,
 or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
+
+\item{hypothesis.text}{Logical that decides whether the expression containing
+result should have text to describe the hypothesis test being described.
+For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
+\code{"In favor of alternative: "}.}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2}).}

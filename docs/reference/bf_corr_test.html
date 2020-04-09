@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.0</span>
       </span>
     </div>
 
@@ -137,6 +137,7 @@
   <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
+  <span class='kw'>hypothesis.text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='no'>...</span>
 )</pre>
@@ -178,6 +179,13 @@ which will return expression with evidence in favor of the null hypothesis,
 or <code>"alternative"</code> (or <code>"title"</code> or <code>"H1"</code> or <code>"h1"</code>), which will return
 expression with evidence in favor of the alternative hypothesis, or
 <code>"results"</code>, which will return a dataframe with results all the details).</p></td>
+    </tr>
+    <tr>
+      <th>hypothesis.text</th>
+      <td><p>Logical that decides whether the expression containing
+result should have text to describe the hypothesis test being described.
+For <code>output = "null"</code>, this is <code>"In favor of null: "</code>, otherwise
+<code>"In favor of alternative: "</code>.</p></td>
     </tr>
     <tr>
       <th>k</th>
@@ -234,7 +242,7 @@ expression with evidence in favor of the alternative hypothesis, or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

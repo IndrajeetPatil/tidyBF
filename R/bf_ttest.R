@@ -52,6 +52,7 @@ bf_ttest <- function(data,
                      bf.prior = 0.707,
                      caption = NULL,
                      output = "results",
+                     hypothesis.text = TRUE,
                      k = 2,
                      ...) {
 
@@ -129,6 +130,7 @@ bf_ttest <- function(data,
       bf_expr(
         bf.df = bf.df,
         output = output,
+        hypothesis.text = hypothesis.text,
         k = k,
         caption = caption
       )

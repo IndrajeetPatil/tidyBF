@@ -28,7 +28,8 @@
       "@id": "https://orcid.org/0000-0003-1995-6531"
     }
   ],
-  "contributor": [
+  "contributor": {},
+  "copyrightHolder": [
     {
       "@type": "Person",
       "givenName": "Indrajeet",
@@ -37,7 +38,6 @@
       "@id": "https://orcid.org/0000-0003-1995-6531"
     }
   ],
-  "copyrightHolder": {},
   "funder": {},
   "maintainer": [
     {
@@ -115,7 +115,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 3.5.0"
+      "version": ">= 3.6.0"
     },
     {
       "@type": "SoftwareApplication",

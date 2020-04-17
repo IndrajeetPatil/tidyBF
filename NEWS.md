@@ -1,5 +1,10 @@
 # tidyBF 0.2.0.9000
 
+MAJOR CHANGES
+
+  - Keeping up with the rest of the packages in `ggstatsplot`-verse, the minimum
+    R version is bumped to `3.6.0`.
+
 # tidyBF 0.2.0
 
 MAJOR CHANGES

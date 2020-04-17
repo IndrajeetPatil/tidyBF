@@ -5,7 +5,7 @@ Version: 0.2.0.9000
 Authors@R: 
     person(given = "Indrajeet",
            family = "Patil",
-           role = c("aut", "cre", "ctb"),
+           role = c("aut", "cre", "cph"),
            email = "patilindrajeet.science@gmail.com",
            comment = c(ORCID = "0000-0003-1995-6531"))
 Maintainer: Indrajeet Patil <patilindrajeet.science@gmail.com>
@@ -20,7 +20,7 @@ URL: https://indrajeetpatil.github.io/tidyBF/,
     https://github.com/IndrajeetPatil/tidyBF
 BugReports: https://github.com/IndrajeetPatil/tidyBF/issues
 Depends: 
-    R (>= 3.5.0)
+    R (>= 3.6.0)
 Imports: 
     BayesFactor,
     dplyr,

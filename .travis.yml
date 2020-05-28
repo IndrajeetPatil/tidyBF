@@ -1,11 +1,17 @@
-# documentation at https://docs.travis-ci.com/user/languages/r
-
 language: r
 r:
   - release
-#  - devel
+  - devel
 latex: true
 warnings_are_errors: TRUE
+
+addons:
+  apt:
+    packages:
+      - libudunits2-dev
+      - libgdal-dev
+      - libproj-dev
+      - libmpfr-dev
 
 env:
   global:
@@ -16,42 +22,37 @@ cache:
   - packages
   - ccache
 
-env:
-  global:
-    - R_MAX_NUM_DLLS=999
-    - _R_CHECK_FORCE_SUGGESTS_=FALSE
-
-r_binary_packages:
-  - stringi
-  - magrittr
-  - curl
-  - jsonlite
-  - Rcpp
-  - RcppEigen
-  - openssl
-  - utf8
-  - gss
-  - haven
-  - minqa
-  - SparseM
-  - httpuv
-  - markdown
-  - pander
-  - git2r
-  - BayesFactor
-  - broom.mixed
-  - broom
+repos:
+  CRAN: https://cloud.r-project.org
+  ropensci: http://packages.ropensci.org
 
 r_packages:
-  - rlang
-  - bindrcpp
-  - purrr
-  - tidyr
-  - dplyr
+  - Rcpp
+  - RcppEigen
+  - mvtnorm
+  - rstan
+  - StanHeaders
+  - LaplacesDemon
+  - logspline
+  - testthat
+  - devtools
+  - remotes
+  - knitr
+  - rmarkdown
+  - coda
+  - rstantools
+  - bridgesampling
+  - BH
+  - metaBMA
 
 r_github_packages:
   - jimhester/lintr
   - r-lib/covr
+
+before_install:
+  - mkdir -p ~/.R
+  - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
+  - echo "CXX14=g++ -std=c++1y -fext-numeric-literals -fPIC" >> ~/.R/Makevars
 
 notifications:
   email:

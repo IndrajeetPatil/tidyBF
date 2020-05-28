@@ -135,7 +135,7 @@ testthat::test_that(
     subtitle <-
       bf_ttest(
         data = iris,
-        x = Petal.Length,
+        x = "Petal.Length",
         y = NULL,
         test.value = 5.5,
         bf.prior = 0.99,

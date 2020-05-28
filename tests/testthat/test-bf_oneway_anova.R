@@ -27,7 +27,7 @@ testthat::test_that(
     df_results <-
       bf_oneway_anova(
         data = dat,
-        x = vore,
+        x = "vore",
         y = brainwt,
         bf.prior = 0.99,
         output = "results"
@@ -39,7 +39,7 @@ testthat::test_that(
       bf_oneway_anova(
         data = dat,
         x = vore,
-        y = brainwt,
+        y = "brainwt",
         bf.prior = 0.88,
         output = "null"
       )

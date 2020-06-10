@@ -5,6 +5,11 @@ MAJOR CHANGES
   - Keeping up with the rest of the packages in `ggstatsplot`-verse, the minimum
     R version is bumped to `3.6.0`.
 
+MINOR CHANGES
+
+  - `bf_contingency_tab` function no longer includes sampling plan information
+    in the expression.
+
 # tidyBF 0.2.0
 
 MAJOR CHANGES

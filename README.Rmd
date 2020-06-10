@@ -137,8 +137,8 @@ library(ggplot2)
 
 # using the expression to display details in a plot
 ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
-  geom_point() +
-  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null", hypothesis.text = FALSE))
+  geom_point() + geom_smooth(method = "lm") +
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null"))
 ```
 
 ## Dataframe with all the details

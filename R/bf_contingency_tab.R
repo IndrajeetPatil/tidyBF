@@ -82,7 +82,7 @@ bf_contingency_tab <- function(data,
                                prior.concentration = 1,
                                caption = NULL,
                                output = "results",
-                               k = 2,
+                               k = 2L,
                                ...) {
 
   # ensure the variables work quoted or unquoted
@@ -217,66 +217,31 @@ bf_contingency_tab <- function(data,
     bf.subscript <- "10"
   }
 
-  # prepare the Bayes Factor message for contingency table
-  if (!rlang::quo_is_null(rlang::enquo(y))) {
-    bf_message <-
-      substitute(
-        atop(
-          displaystyle(top.text),
-          expr = paste(
-            hypothesis.text,
-            "log"["e"],
-            "(BF"[bf.subscript],
-            ") = ",
-            bf,
-            ", sampling = ",
-            sampling.plan,
-            ", ",
-            italic("a"),
-            " = ",
-            a
-          )
-        ),
-        env = list(
-          hypothesis.text = hypothesis.text,
-          top.text = caption,
-          bf.subscript = bf.subscript,
-          bf = specify_decimal_p(x = bf.value, k = k),
-          sampling.plan = sampling_plan_text,
-          a = specify_decimal_p(x = bf.df$prior.concentration[[1]], k = k)
+  # final expression
+  bf_message <-
+    substitute(
+      atop(
+        displaystyle(top.text),
+        expr = paste(
+          hypothesis.text,
+          "log"["e"],
+          "(BF"[bf.subscript],
+          ") = ",
+          bf,
+          ", ",
+          italic("a"),
+          " = ",
+          a
         )
+      ),
+      env = list(
+        hypothesis.text = hypothesis.text,
+        top.text = caption,
+        bf.subscript = bf.subscript,
+        bf = specify_decimal_p(x = bf.value, k = k),
+        a = specify_decimal_p(x = bf.df$prior.concentration[[1]], k = k)
       )
-  }
-
-  # prepare the Bayes Factor message for goodness of fit
-  if (rlang::quo_is_null(rlang::enquo(y))) {
-    bf_message <-
-      substitute(
-        atop(
-          displaystyle(top.text),
-          expr = paste(
-            hypothesis.text,
-            "log"["e"],
-            "(BF"[bf.subscript],
-            ") = ",
-            bf,
-            ", ",
-            italic("a"),
-            " = ",
-            a
-          )
-        ),
-        env = list(
-          hypothesis.text = hypothesis.text,
-          top.text = caption,
-          bf.subscript = bf.subscript,
-          bf = specify_decimal_p(x = bf.value, k = k),
-          a = specify_decimal_p(x = bf.df$prior.concentration[[1]], k = k)
-        )
-      )
-  }
-
-  # ============================ return ==================================
+    )
 
   # return the text results or the dataframe with results
   return(switch(

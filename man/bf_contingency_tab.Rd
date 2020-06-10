@@ -16,7 +16,7 @@ bf_contingency_tab(
   prior.concentration = 1,
   caption = NULL,
   output = "results",
-  k = 2,
+  k = 2L,
   ...
 )
 
@@ -31,7 +31,7 @@ bf_onesample_proptest(
   prior.concentration = 1,
   caption = NULL,
   output = "results",
-  k = 2,
+  k = 2L,
   ...
 )
 }

@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--04--09-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--10-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -110,9 +110,6 @@ ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
 
 # with `tidyBF` ----------------------------------------
 library(tidyBF)
-#> Registered S3 method overwritten by 'broom.mixed':
-#>   method      from 
-#>   tidy.gamlss broom
 
 # independent t-test
 bf_ttest(data = mtcars, x = am, y = wt)
@@ -162,8 +159,9 @@ library(ggplot2)
 
 # using the expression to display details in a plot
 ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
-  geom_point() +
-  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null", hypothesis.text = FALSE))
+  geom_point() + geom_smooth(method = "lm") +
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null"))
+#> `geom_smooth()` using formula 'y ~ x'
 ```
 
 <img src="man/figures/README-expr_plot2-1.png" width="100%" />

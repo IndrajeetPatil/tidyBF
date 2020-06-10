@@ -15,10 +15,9 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-02-28 r77874)",
+  "runtimePlatform": "R Under development (unstable) (2020-06-03 r78637)",
   "author": [
     {
       "@type": "Person",
@@ -190,16 +189,8 @@
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     }
   ],
-  "contIntegration": [
-    "https://travis-ci.org/IndrajeetPatil/tidyBF",
-    "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF",
-    "https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master",
-    "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master"
-  ],
-  "developmentStatus": [
-    "http://www.repostatus.org/#active",
-    "https://www.tidyverse.org/lifecycle/#retired"
-  ],
+  "contIntegration": ["https://travis-ci.org/IndrajeetPatil/tidyBF", "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF", "https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master", "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master"],
+  "developmentStatus": "http://www.repostatus.org/#active",
   "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
   "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
   "keywords": [
@@ -212,5 +203,6 @@
     "@type": "Organization",
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
-  }
+  },
+  "fileSize": "1000.363KB"
 }

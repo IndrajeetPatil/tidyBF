@@ -26,7 +26,7 @@ testthat::test_that(
     set.seed(123)
     df_results <-
       bf_oneway_anova(
-        data = dat,
+        data = ggplot2::msleep,
         x = "vore",
         y = brainwt,
         bf.prior = 0.99,
@@ -37,7 +37,7 @@ testthat::test_that(
     set.seed(123)
     results1 <-
       bf_oneway_anova(
-        data = dat,
+        data = ggplot2::msleep,
         x = vore,
         y = "brainwt",
         bf.prior = 0.88,
@@ -48,7 +48,7 @@ testthat::test_that(
     set.seed(123)
     results2 <-
       bf_oneway_anova(
-        data = dat,
+        data = ggplot2::msleep,
         x = vore,
         y = brainwt,
         bf.prior = 0.88,
@@ -241,6 +241,35 @@ testthat::test_that(
           italic("r")["Cauchy"]^"JZS",
           " = ",
           "0.8800"
+        )
+      ))
+    )
+
+    # data with NA
+    set.seed(123)
+    df_results_na <-
+      bf_oneway_anova(
+        data = bugs_long,
+        x = condition,
+        y = "desire",
+        paired = TRUE,
+        output = "caption"
+      )
+
+    testthat::expect_identical(
+      df_results_na,
+      ggplot2::expr(atop(
+        displaystyle(NULL),
+        expr = paste(
+          "In favor of null: ",
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          "-21.04",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.71"
         )
       ))
     )

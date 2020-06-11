@@ -16,7 +16,7 @@ bf_ttest(
   caption = NULL,
   output = "results",
   hypothesis.text = TRUE,
-  k = 2,
+  k = 2L,
   ...
 )
 
@@ -30,7 +30,7 @@ bf_one_sample_ttest(
   caption = NULL,
   output = "results",
   hypothesis.text = TRUE,
-  k = 2,
+  k = 2L,
   ...
 )
 
@@ -44,7 +44,7 @@ bf_two_sample_ttest(
   caption = NULL,
   output = "results",
   hypothesis.text = TRUE,
-  k = 2,
+  k = 2L,
   ...
 )
 }

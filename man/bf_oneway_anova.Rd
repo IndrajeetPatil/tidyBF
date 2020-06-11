@@ -13,7 +13,7 @@ bf_oneway_anova(
   output = "results",
   hypothesis.text = TRUE,
   paired = FALSE,
-  k = 2,
+  k = 2L,
   ...
 )
 }

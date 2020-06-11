@@ -12,6 +12,7 @@
 \alias{\%<-\%}
 \alias{\%||\%}
 \alias{\%|\%}
+\alias{:=}
 \alias{tibble}
 \alias{as_tibble}
 \alias{prior}
@@ -26,6 +27,6 @@ below to see their documentation.
 
   \item{metaBMA}{\code{\link[metaBMA]{prior}}}
 
-  \item{rlang}{\code{\link[rlang]{\%|\%}}, \code{\link[rlang]{\%||\%}}}
+  \item{rlang}{\code{\link[rlang]{\%|\%}}, \code{\link[rlang]{\%||\%}}, \code{\link[rlang]{:=}}}
 }}
 

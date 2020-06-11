@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--10-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--11-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -113,23 +113,17 @@ library(tidyBF)
 
 # independent t-test
 bf_ttest(data = mtcars, x = am, y = wt)
-#> # A tibble: 1 x 8
-#>    bf10         error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>   <dbl>         <dbl>    <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#> 1 1383. 0.00000000341 0.000723       7.23      -7.23        3.14       -3.14
-#>   bf.prior
-#>      <dbl>
-#> 1    0.707
+#> # A tibble: 1 x 7
+#>    bf10     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#>   <dbl>    <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
+#> 1 1383. 0.000723       7.23      -7.23        3.14       -3.14    0.707
 
 # paired t-test
 bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
-#> # A tibble: 1 x 8
-#>    bf10       error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>   <dbl>       <dbl>  <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#> 1  17.3 0.000000168 0.0579       2.85      -2.85        1.24       -1.24
-#>   bf.prior
-#>      <dbl>
-#> 1    0.707
+#> # A tibble: 1 x 7
+#>    bf10   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#>   <dbl>  <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
+#> 1  17.3 0.0579       2.85      -2.85        1.24       -1.24    0.707
 ```
 
 ## Expressions for plots
@@ -202,10 +196,10 @@ bf
 
 # `tidyBF` output
 bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
-#> # A tibble: 1 x 8
-#>      bf10 error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
-#>     <dbl> <dbl>    <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
-#> 1 2.13e43     0 4.70e-44       99.8      -99.8        43.3       -43.3    0.333
+#> # A tibble: 1 x 7
+#>      bf10     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
+#>     <dbl>    <dbl>      <dbl>      <dbl>       <dbl>       <dbl>    <dbl>
+#> 1 2.13e43 4.70e-44       99.8      -99.8        43.3       -43.3    0.333
 ```
 
 Note that the log-transformed values are helpful because in case of

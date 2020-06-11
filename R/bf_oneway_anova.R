@@ -49,7 +49,7 @@ bf_oneway_anova <- function(data,
                             output = "results",
                             hypothesis.text = TRUE,
                             paired = FALSE,
-                            k = 2,
+                            k = 2L,
                             ...) {
 
   # make sure both quoted and unquoted arguments are allowed
@@ -57,22 +57,21 @@ bf_oneway_anova <- function(data,
 
   # ============================ data preparation ==========================
 
-  # creating a dataframe
+  # have a proper cleanup with NA removal
   data %<>%
-    dplyr::select(.data = ., {{ x }}, {{ y }}) %>%
-    dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }}))) %>%
-    as_tibble(.)
+    long_to_wide_converter(
+      data = .,
+      x = {{ x }},
+      y = {{ y }},
+      paired = paired,
+      spread = FALSE
+    )
 
   # ========================= within-subjects design ==========================
 
   if (isTRUE(paired)) {
     # remove NAs
-    data %<>%
-      dplyr::group_by(.data = ., {{ x }}) %>%
-      dplyr::mutate(.data = ., rowid = dplyr::row_number()) %>%
-      dplyr::ungroup(.) %>%
-      dplyr::anti_join(x = ., y = dplyr::filter(., is.na({{ y }})), by = "rowid") %>%
-      dplyr::mutate(.data = ., rowid = as.factor(rowid))
+    data %<>% dplyr::mutate(.data = ., rowid = as.factor(rowid))
 
     # extracting results from Bayesian test (`y ~ x + id`) and creating a dataframe
     bf.df <-
@@ -93,9 +92,6 @@ bf_oneway_anova <- function(data,
   # ========================= between-subjects design =========================
 
   if (isFALSE(paired)) {
-    # remove NAs
-    data %<>% tidyr::drop_na(.)
-
     # extracting results from Bayesian test and creating a dataframe
     bf.df <-
       bf_extractor(

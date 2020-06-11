@@ -132,14 +132,10 @@ bf_contingency_tab <- function(data,
     bf.df <-
       bf_extractor(
         BayesFactor::contingencyTableBF(
-          x = table(
-            data %>% dplyr::pull({{ x }}),
-            data %>% dplyr::pull({{ y }})
-          ),
+          x = table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
           sampleType = sampling.plan,
           fixedMargin = fixed.margin,
-          priorConcentration = prior.concentration,
-          ...
+          priorConcentration = prior.concentration
         )
       ) %>%
       dplyr::mutate(

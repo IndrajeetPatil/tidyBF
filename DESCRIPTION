@@ -24,7 +24,7 @@ Depends:
 Imports: 
     BayesFactor,
     dplyr,
-    ipmisc,
+    ipmisc (>= 3.0.0.9000),
     metaBMA,
     rlang,
     tidyr
@@ -34,6 +34,8 @@ Suggests:
     rmarkdown,
     spelling,
     testthat
+Remotes:
+    IndrajeetPatil/ipmisc
 Encoding: UTF-8
 Language: en-US
 LazyData: true

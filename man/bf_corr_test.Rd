@@ -12,7 +12,7 @@ bf_corr_test(
   caption = NULL,
   output = "results",
   hypothesis.text = TRUE,
-  k = 2,
+  k = 2L,
   ...
 )
 }

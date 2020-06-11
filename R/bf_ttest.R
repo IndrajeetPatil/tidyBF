@@ -11,7 +11,8 @@
 #' @inheritParams BayesFactor::ttestBF
 #'
 #' @importFrom BayesFactor ttestBF
-#' @importFrom rlang !! quo_is_null new_formula ensym enquo
+#' @importFrom rlang quo_is_null new_formula ensym enquo is_null
+#' @importFrom stats na.omit
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_oneway_anova}}
@@ -53,7 +54,7 @@ bf_ttest <- function(data,
                      caption = NULL,
                      output = "results",
                      hypothesis.text = TRUE,
-                     k = 2,
+                     k = 2L,
                      ...) {
 
   # make sure both quoted and unquoted arguments are allowed
@@ -63,34 +64,34 @@ bf_ttest <- function(data,
   # -------------------------- two-sample tests ------------------------------
 
   if (!rlang::quo_is_null(rlang::enquo(y))) {
-    # dropping unused factor levels from `x` variable
-    data %<>% dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }})))
+    # have a proper cleanup with NA removal
+    data %<>%
+      long_to_wide_converter(
+        data = .,
+        x = {{ x }},
+        y = {{ y }},
+        paired = paired,
+        spread = paired
+      )
 
     # within-subjects design
     if (isTRUE(paired)) {
-      # the data needs to be in wide format
-      data_wide <- long_to_wide_converter(data = data, x = {{ x }}, y = {{ y }})
-
       # change names for convenience
-      colnames(data_wide) <- c("rowid", "col1", "col2")
+      colnames(data) <- c("rowid", "col1", "col2")
 
       # extracting results from Bayesian test and creating a dataframe
       bf_object <-
         BayesFactor::ttestBF(
-          x = data_wide$col1,
-          y = data_wide$col2,
+          x = data$col1,
+          y = data$col2,
           rscale = bf.prior,
           paired = TRUE,
-          progress = FALSE,
-          ...
+          progress = FALSE
         )
     }
 
     # between-subjects design
     if (isFALSE(paired)) {
-      # removing NAs
-      data %<>% dplyr::filter(.data = ., !is.na({{ x }}), !is.na({{ y }}))
-
       # extracting results from Bayesian test and creating a dataframe
       bf_object <-
         BayesFactor::ttestBF(
@@ -98,8 +99,7 @@ bf_ttest <- function(data,
           data = as.data.frame(data),
           rscale = bf.prior,
           paired = FALSE,
-          progress = FALSE,
-          ...
+          progress = FALSE
         )
     }
   }
@@ -109,18 +109,14 @@ bf_ttest <- function(data,
   if (rlang::quo_is_null(rlang::enquo(y))) {
     bf_object <-
       BayesFactor::ttestBF(
-        x = data %>% dplyr::pull({{ x }}),
+        x = stats::na.omit(data %>% dplyr::pull({{ x }})),
         rscale = bf.prior,
-        mu = test.value,
-        nullInterval = NULL,
-        ...
+        mu = test.value
       )
   }
 
   # extracting the Bayes factors
-  bf.df <-
-    bf_extractor(bf_object) %>%
-    dplyr::mutate(.data = ., bf.prior = bf.prior)
+  bf.df <- dplyr::mutate(.data = bf_extractor(bf_object), bf.prior = bf.prior)
 
   # ============================ return ==================================
 

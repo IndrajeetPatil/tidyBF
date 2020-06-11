@@ -48,7 +48,7 @@ bf_corr_test <- function(data,
                          caption = NULL,
                          output = "results",
                          hypothesis.text = TRUE,
-                         k = 2,
+                         k = 2L,
                          ...) {
 
   # extracting results from Bayesian test and creating a dataframe
@@ -57,7 +57,6 @@ bf_corr_test <- function(data,
       BayesFactor::correlationBF(
         x = data %>% dplyr::pull({{ x }}),
         y = data %>% dplyr::pull({{ y }}),
-        nullInterval = NULL,
         rscale = bf.prior,
         ...
       )

@@ -16,7 +16,7 @@ Extract Bayes Factors from \code{BayesFactor} model object.
 }
 \note{
 \emph{Important}: don't enter \code{1/bf_obj} to extract results for null
-hypothesis; # doing so will return wrong results.
+hypothesis; doing so will return wrong results.
 }
 \examples{
 set.seed(123)

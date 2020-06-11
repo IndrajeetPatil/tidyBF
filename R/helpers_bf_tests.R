@@ -5,10 +5,10 @@
 #' @param ... Currently ignored.
 #'
 #' @importFrom BayesFactor extractBF
-#' @importFrom dplyr rename select mutate
+#' @importFrom dplyr select mutate
 #'
 #' @note *Important*: don't enter `1/bf_obj` to extract results for null
-#'   hypothesis; # doing so will return wrong results.
+#'   hypothesis; doing so will return wrong results.
 #'
 #' @examples
 #' set.seed(123)
@@ -27,14 +27,9 @@
 
 # function body
 bf_extractor <- function(bf.object, ...) {
-  BayesFactor::extractBF(
-    x = bf.object,
-    logbf = FALSE,
-    onlybf = FALSE
-  ) %>%
+  BayesFactor::extractBF(bf.object) %>%
     as_tibble(.) %>%
-    dplyr::select(.data = ., -time, -code) %>%
-    dplyr::rename(.data = ., bf10 = bf) %>%
+    dplyr::select(.data = ., bf10 = bf, -time, -code) %>%
     bf_formatter(.)
 }
 

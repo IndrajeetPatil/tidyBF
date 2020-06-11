@@ -2,6 +2,8 @@
 #' @name bf_oneway_anova
 #'
 #' @importFrom BayesFactor anovaBF
+#' @importFrom dplyr anti_join mutate
+#' @importFrom rlang :=
 #'
 #' @param data A dataframe (or a tibble) from which variables specified are to
 #'   be taken. A matrix or tables will **not** be accepted.
@@ -59,17 +61,16 @@ bf_oneway_anova <- function(data,
   data %<>%
     dplyr::select(.data = ., {{ x }}, {{ y }}) %>%
     dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }}))) %>%
-    as_tibble(.)
+    as_tibble(.)  %>%
+    dplyr::group_by(.data = ., {{ x }}) %>%
+    dplyr::mutate(.data = ., rowid = dplyr::row_number()) %>%
+    dplyr::ungroup(.) %>%
+    dplyr::anti_join(x = ., y = dplyr::filter(., is.na({{ y }})), by = "rowid") %>%
+    dplyr::mutate(.data = ., rowid = as.factor(rowid))
 
   # ========================= within-subjects design ==========================
 
   if (isTRUE(paired)) {
-    # converting to long format and then getting it back in wide so that the
-    # rowid variable can be used as the block variable
-    data %<>%
-      df_cleanup_paired(data = ., x = {{ x }}, y = {{ y }}) %>%
-      dplyr::mutate(.data = ., rowid = as.factor(rowid))
-
     # extracting results from Bayesian test (`y ~ x + id`) and creating a dataframe
     bf.df <-
       bf_extractor(BayesFactor::anovaBF(
@@ -89,9 +90,6 @@ bf_oneway_anova <- function(data,
   # ========================= between-subjects design =========================
 
   if (isFALSE(paired)) {
-    # remove NAs listwise for between-subjects design
-    data %<>% tidyr::drop_na(.)
-
     # extracting results from Bayesian test and creating a dataframe
     bf.df <-
       bf_extractor(

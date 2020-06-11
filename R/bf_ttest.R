@@ -155,18 +155,3 @@ bf_one_sample_ttest <- bf_ttest
 #' @export
 
 bf_two_sample_ttest <- bf_ttest
-
-#' @noRd
-#'
-#' @importFrom rlang :=
-#'
-#' @keywords internal
-
-df_cleanup_paired <- function(data, x, y) {
-  data %<>%
-    long_to_wide_converter(data = ., x = {{ x }}, y = {{ y }}) %>%
-    tidyr::gather(data = ., key, value, -rowid) %>%
-    dplyr::arrange(.data = ., rowid) %>%
-    dplyr::rename(.data = ., {{ x }} := key, {{ y }} := value) %>%
-    dplyr::mutate(.data = ., {{ x }} := factor({{ x }}))
-}

@@ -23,10 +23,10 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ipmisc}{\code{\link[ipmisc]{\%$\%}}, \code{\link[ipmisc]{\%<-\%}}, \code{\link[ipmisc]{\%<>\%}}, \code{\link[ipmisc:reexports]{\%>\%}}, \code{\link[ipmisc:reexports]{as_tibble}}, \code{\link[ipmisc:reexports]{long_to_wide_converter}}, \code{\link[ipmisc:reexports]{signif_column}}, \code{\link[ipmisc:reexports]{specify_decimal_p}}, \code{\link[ipmisc:reexports]{tibble}}}
+  \item{ipmisc}{\code{\link[ipmisc:reexports]{\%$\%}}, \code{\link[ipmisc:reexports]{\%<-\%}}, \code{\link[ipmisc:reexports]{\%<>\%}}, \code{\link[ipmisc:reexports]{\%>\%}}, \code{\link[ipmisc:reexports]{as_tibble}}, \code{\link[ipmisc]{long_to_wide_converter}}, \code{\link[ipmisc]{signif_column}}, \code{\link[ipmisc]{specify_decimal_p}}, \code{\link[ipmisc:reexports]{tibble}}}
 
   \item{metaBMA}{\code{\link[metaBMA]{prior}}}
 
-  \item{rlang}{\code{\link[rlang:op-null-default]{\%|\%}}, \code{\link[rlang:op-na-default]{\%||\%}}, \code{\link[rlang:nse-force]{:=}}}
+  \item{rlang}{\code{\link[rlang:op-na-default]{\%|\%}}, \code{\link[rlang:op-null-default]{\%||\%}}, \code{\link[rlang:nse-force]{:=}}}
 }}
 

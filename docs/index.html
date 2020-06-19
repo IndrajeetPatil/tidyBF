@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.1</span>
       </span>
     </div>
 
@@ -150,23 +150,17 @@
 
 <span class="co"># independent t-test</span>
 <span class="fu"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">mtcars</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">am</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">wt</span>)
-<span class="co">#&gt; # A tibble: 1 x 8</span>
-<span class="co">#&gt;    bf10         error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01</span>
-<span class="co">#&gt;   &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1383. 0.00000000341 0.000723       7.23      -7.23        3.14       -3.14</span>
-<span class="co">#&gt;   bf.prior</span>
-<span class="co">#&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1    0.707</span>
+<span class="co">#&gt; # A tibble: 1 x 7</span>
+<span class="co">#&gt;    bf10     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span>
+<span class="co">#&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 1383. 0.000723       7.23      -7.23        3.14       -3.14    0.707</span>
 
 <span class="co"># paired t-test</span>
 <span class="fu"><a href="reference/bf_ttest.html">bf_ttest</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">sleep</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">group</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">extra</span>, <span class="kw">paired</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; # A tibble: 1 x 8</span>
-<span class="co">#&gt;    bf10       error   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01</span>
-<span class="co">#&gt;   &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  17.3 0.000000168 0.0579       2.85      -2.85        1.24       -1.24</span>
-<span class="co">#&gt;   bf.prior</span>
-<span class="co">#&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1    0.707</span></pre></div>
+<span class="co">#&gt; # A tibble: 1 x 7</span>
+<span class="co">#&gt;    bf10   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span>
+<span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  17.3 0.0579       2.85      -2.85        1.24       -1.24    0.707</span></pre></div>
 </div>
 <div id="expressions-for-plots" class="section level2">
 <h2 class="hasAnchor">
@@ -224,10 +218,10 @@
 
 <span class="co"># `tidyBF` output</span>
 <span class="fu"><a href="reference/bf_corr_test.html">bf_corr_test</a></span>(<span class="no">iris</span>, <span class="no">Sepal.Length</span>, <span class="no">Petal.Length</span>, <span class="kw">bf.prior</span> <span class="kw">=</span> <span class="fl">0.333</span>)
-<span class="co">#&gt; # A tibble: 1 x 8</span>
-<span class="co">#&gt;      bf10 error     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span>
-<span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2.13e43     0 4.70e-44       99.8      -99.8        43.3       -43.3    0.333</span></pre></div>
+<span class="co">#&gt; # A tibble: 1 x 7</span>
+<span class="co">#&gt;      bf10     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior</span>
+<span class="co">#&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 2.13e43 4.70e-44       99.8      -99.8        43.3       -43.3    0.333</span></pre></div>
 <p>Note that the log-transformed values are helpful because in case of strong effects, the raw Bayes Factor values can be pretty large, but the log-transformed values continue to remain easy to work with.</p>
 </div>
 </div>
@@ -305,7 +299,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

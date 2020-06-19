@@ -1,4 +1,4 @@
-# tidyBF 0.2.0.9000
+# tidyBF 0.2.1
 
 MAJOR CHANGES
 
@@ -9,6 +9,8 @@ MINOR CHANGES
 
   - `bf_contingency_tab` function no longer includes sampling plan information
     in the expression.
+    
+  - Internal refactoring to improve data wrangling using `ipmisc`.
 
 # tidyBF 0.2.0
 

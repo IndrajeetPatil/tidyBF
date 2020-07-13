@@ -1,7 +1,7 @@
 Type: Package
 Package: tidyBF
 Title: Tidy Wrapper for 'BayesFactor' Package
-Version: 0.2.1
+Version: 0.2.1.9000
 Authors@R: 
     person(given = "Indrajeet",
            family = "Patil",
@@ -37,5 +37,6 @@ Suggests:
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0.9000
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
+    "collate", "pkgapi::api_roclet"))
+RoxygenNote: 7.1.1

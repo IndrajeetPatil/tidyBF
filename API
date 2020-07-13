@@ -1,0 +1,31 @@
+# API for tidyBF package
+
+## Exported functions
+
+bf_contingency_tab(data, x, y = NULL, counts = NULL, ratio = NULL, sampling.plan = "indepMulti", fixed.margin = "rows", prior.concentration = 1, caption = NULL, output = "results", k = 2L, ...)
+bf_corr_test(data, x, y, bf.prior = 0.707, caption = NULL, output = "results", hypothesis.text = TRUE, k = 2L, ...)
+bf_expr(bf.df, k = 2L, output = "null", hypothesis.text = TRUE, caption = NULL, ...)
+bf_extractor(bf.object, ...)
+bf_meta(data, d = prior("norm", c(mean = 0, sd = 0.3)), tau = prior("invgamma", c(shape = 1, scale = 0.15)), k = 2L, output = "results", caption = NULL, messages = TRUE, ...)
+bf_one_sample_ttest(data, x, y = NULL, test.value = 0, paired = FALSE, bf.prior = 0.707, caption = NULL, output = "results", hypothesis.text = TRUE, k = 2L, ...)
+bf_onesample_proptest(data, x, y = NULL, counts = NULL, ratio = NULL, sampling.plan = "indepMulti", fixed.margin = "rows", prior.concentration = 1, caption = NULL, output = "results", k = 2L, ...)
+bf_oneway_anova(data, x, y, bf.prior = 0.707, caption = NULL, output = "results", hypothesis.text = TRUE, paired = FALSE, k = 2L, ...)
+bf_ttest(data, x, y = NULL, test.value = 0, paired = FALSE, bf.prior = 0.707, caption = NULL, output = "results", hypothesis.text = TRUE, k = 2L, ...)
+bf_two_sample_ttest(data, x, y = NULL, test.value = 0, paired = FALSE, bf.prior = 0.707, caption = NULL, output = "results", hypothesis.text = TRUE, k = 2L, ...)
+meta_data_check(data)
+
+## Reexported objects
+
+::%$%
+zeallot::%<-%
+::%<>%
+::%>%
+rlang::%|%
+rlang::%||%
+rlang:::=
+tibble::as_tibble
+ipmisc::long_to_wide_converter
+metaBMA::prior
+ipmisc::signif_column
+ipmisc::specify_decimal_p
+tibble::tibble

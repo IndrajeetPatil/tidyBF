@@ -11,13 +11,13 @@
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.1",
+  "version": "0.2.1.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-06-03 r78637)",
+  "runtimePlatform": "R Under development (unstable) (2020-06-27 r78747)",
   "author": [
     {
       "@type": "Person",
@@ -205,5 +205,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "999.684KB"
+  "fileSize": "1001.486KB"
 }

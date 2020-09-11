@@ -118,16 +118,6 @@ bf_contingency_tab <- function(data,
     # dropping unused levels
     data %<>% dplyr::mutate(.data = ., {{ y }} := droplevels(as.factor({{ y }})))
 
-    # detailed text of sample plan
-    sampling_plan_text <-
-      switch(
-        EXPR = sampling.plan,
-        "jointMulti" = "joint multinomial",
-        "poisson" = "poisson",
-        "indepMulti" = "independent multinomial",
-        "hypergeom" = "hypergeometric"
-      )
-
     # extracting results from Bayesian test and creating a dataframe
     bf.df <-
       bf_extractor(
@@ -140,7 +130,7 @@ bf_contingency_tab <- function(data,
       ) %>%
       dplyr::mutate(
         .data = .,
-        sampling.plan = sampling_plan_text,
+        sampling.plan = sampling.plan,
         fixed.margin = fixed.margin,
         prior.concentration = prior.concentration
       )
@@ -204,11 +194,9 @@ bf_contingency_tab <- function(data,
 
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
-    hypothesis.text <- "In favor of null: "
     bf.value <- bf.df$log_e_bf01[[1]]
     bf.subscript <- "01"
   } else {
-    hypothesis.text <- "In favor of alternative: "
     bf.value <- -bf.df$log_e_bf01[[1]]
     bf.subscript <- "10"
   }
@@ -219,7 +207,6 @@ bf_contingency_tab <- function(data,
       atop(
         displaystyle(top.text),
         expr = paste(
-          hypothesis.text,
           "log"["e"],
           "(BF"[bf.subscript],
           ") = ",
@@ -231,7 +218,6 @@ bf_contingency_tab <- function(data,
         )
       ),
       env = list(
-        hypothesis.text = hypothesis.text,
         top.text = caption,
         bf.subscript = bf.subscript,
         bf = specify_decimal_p(x = bf.value, k = k),

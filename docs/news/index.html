@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.3.0</span>
       </span>
     </div>
 
@@ -124,10 +124,20 @@
       <small>Source: <a href='https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="tidybf-0219000" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.1.9000">
-<a href="#tidybf-0219000" class="anchor"></a>tidyBF 0.2.1.9000<small> Unreleased </small>
+    <div id="tidybf-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#tidybf-030" class="anchor"></a>tidyBF 0.3.0<small> Unreleased </small>
 </h1>
+<p>BREAKING CHANGES</p>
+<ul>
+<li>
+<code>bf_expr</code> now expects not a dataframe, but rather the <code>BayesFactor</code> object.</li>
+</ul>
+<p>MAJOR CHANGES</p>
+<ul>
+<li><p><code>bf_extractor</code> now internally uses <code><a href="https://rdrr.io/pkg/parameters/man/model_parameters.html">parameters::model_parameters</a></code> to extract as many details from the <code>BayesFactor</code> as possible. So the returned dataframe will contain additional details now.</p></li>
+<li><p>The redundant text related to whether the results in favor of the null or the alternative hypothesis has now been removed, since this information is already present in <code>BF</code> subscripts (<code>01</code>: null, <code>10</code>: alternative).</p></li>
+</ul>
 </div>
     <div id="tidybf-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">

@@ -59,13 +59,12 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
           "3.341",
           ", ",
-          italic("d")["mean"]^"posterior",
+          widehat(italic("d"))["mean"]^"posterior",
           " = ",
           "0.518",
           ", CI"["95%"],
@@ -83,13 +82,12 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
           "log"["e"],
           "(BF"["01"],
           ") = ",
           "-3.341",
           ", ",
-          italic("d")["mean"]^"posterior",
+          widehat(italic("d"))["mean"]^"posterior",
           " = ",
           "0.518",
           ", CI"["95%"],

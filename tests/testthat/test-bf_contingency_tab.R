@@ -36,7 +36,6 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
@@ -131,7 +130,6 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
@@ -149,7 +147,6 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
@@ -166,7 +163,6 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
           "log"["e"],
           "(BF"["01"],
           ") = ",

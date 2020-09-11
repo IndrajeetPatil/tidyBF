@@ -1,4 +1,5 @@
 #' @title Bayes Factor for *t*-test
+#'
 #' @details If `y` is `NULL`, a one-sample *t*-test will be carried out,
 #'   otherwise a two-sample *t*-test will be carried out.
 #'
@@ -6,9 +7,9 @@
 #'   two-sample *t*-test or a numeric variable if it's a one-sample *t*-test.
 #' @inheritParams bf_corr_test
 #' @inheritParams bf_expr
+#' @inheritParams bf_oneway_anova
 #' @param test.value A number specifying the value of the null hypothesis
 #'   (Default: `0`).
-#' @inheritParams BayesFactor::ttestBF
 #'
 #' @importFrom BayesFactor ttestBF
 #' @importFrom rlang quo_is_null new_formula ensym enquo is_null
@@ -53,7 +54,6 @@ bf_ttest <- function(data,
                      bf.prior = 0.707,
                      caption = NULL,
                      output = "results",
-                     hypothesis.text = TRUE,
                      k = 2L,
                      ...) {
 
@@ -115,27 +115,24 @@ bf_ttest <- function(data,
       )
   }
 
-  # extracting the Bayes factors
-  bf.df <- dplyr::mutate(.data = bf_extractor(bf_object), bf.prior = bf.prior)
-
   # ============================ return ==================================
 
   # prepare the Bayes factor message
   if (output != "results") {
     bf_message <-
       bf_expr(
-        bf.df = bf.df,
+        bf.object = bf_object,
         output = output,
-        hypothesis.text = hypothesis.text,
         k = k,
-        caption = caption
+        caption = caption,
+        ...
       )
   }
 
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = bf.df,
+    "results" = bf_extractor(bf_object),
     bf_message
   ))
 }

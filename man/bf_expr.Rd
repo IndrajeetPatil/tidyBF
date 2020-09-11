@@ -5,21 +5,33 @@
 \title{Prepare caption with expression for Bayes Factor results}
 \usage{
 bf_expr(
-  bf.df,
+  bf.object,
   k = 2L,
+  conf.level = 0.95,
+  conf.method = "hdi",
+  centrality = "median",
   output = "null",
-  hypothesis.text = TRUE,
   caption = NULL,
+  anova.design = FALSE,
   ...
 )
 }
 \arguments{
-\item{bf.df}{A dataframe containing two columns \code{log_e_bf01} (for evidence in
-favor of null hypothesis) and \code{bf.prior}. If dataframe contains more than
-two rows, only the first row will be used.}
+\item{bf.object}{An object from \code{BayesFactor} package.}
 
 \item{k}{Number of digits after decimal point (should be an integer)
-(Default: \code{k = 2}).}
+(Default: \code{k = 2L}).}
+
+\item{conf.level}{Value or vector of probability of the CI (between 0 and 1)
+to be estimated. Default to \code{0.95} (95\%).}
+
+\item{conf.method}{The type of index used for Credible Interval. Can be
+\code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see
+\code{\link[bayestestR:eti]{bayestestR::eti()}}) or \code{"si"} (see \code{\link[bayestestR:si]{bayestestR::si()}}).}
+
+\item{centrality}{The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: \code{"median"},
+\code{"mean"}, \code{"MAP"} or \code{"all"}.}
 
 \item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
 which will return expression with evidence in favor of the null hypothesis,
@@ -27,15 +39,15 @@ or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
 
-\item{hypothesis.text}{Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
-\code{"In favor of alternative: "}.}
-
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}
 
-\item{...}{Additional arguments (ignored).}
+\item{anova.design}{Whether the object is from \code{BayesFactor::anovaBF}
+(default: \code{FALSE}). The expression is different for anova designs because
+not all details are available.}
+
+\item{...}{Additional arguments passed to
+\code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
 Convenience function to create an expression with Bayes
@@ -47,23 +59,15 @@ Factor results.
 set.seed(123)
 library(tidyBF)
 
-# dataframe containing results
-bf.df <-
-  bf_extractor(BayesFactor::correlationBF(
-    x = iris$Sepal.Length,
-    y = iris$Petal.Length
-  )) \%>\%
-  dplyr::mutate(.data = ., bf.prior = 0.707)
-
 # creating caption (for null)
 bf_expr(
-  bf.df,
+  BayesFactor::correlationBF(
+    x = iris$Sepal.Length,
+    y = iris$Petal.Length
+  ),
   output = "null",
   k = 3,
   caption = "Note: Iris dataset"
 )
-
-# creating caption (for alternative)
-bf_expr(bf.df, output = "alternative")
 }
 }

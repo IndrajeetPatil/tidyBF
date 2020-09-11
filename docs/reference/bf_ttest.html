@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.3.0</span>
       </span>
     </div>
 
@@ -139,7 +139,6 @@
   <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
-  <span class='kw'>hypothesis.text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
   <span class='no'>...</span>
 )
@@ -153,7 +152,6 @@
   <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
-  <span class='kw'>hypothesis.text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
   <span class='no'>...</span>
 )
@@ -167,7 +165,6 @@
   <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
-  <span class='kw'>hypothesis.text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
   <span class='no'>...</span>
 )</pre>
@@ -177,8 +174,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>for use with <code>formula</code>, a data frame containing all the
-data</p></td>
+      <td><p>A dataframe (or a tibble) from which variables specified are to
+be taken. A matrix or tables will <strong>not</strong> be accepted.</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -198,7 +195,8 @@ be plotted on the <code>y</code>-axis. Can be entered either as a character stri
     </tr>
     <tr>
       <th>paired</th>
-      <td><p>if <code>TRUE</code>, observations are paired</p></td>
+      <td><p>Decides whether the design is repeated measures or not
+(Default: <code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>bf.prior</th>
@@ -219,20 +217,14 @@ expression with evidence in favor of the alternative hypothesis, or
 <code>"results"</code>, which will return a dataframe with results all the details).</p></td>
     </tr>
     <tr>
-      <th>hypothesis.text</th>
-      <td><p>Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For <code>output = "null"</code>, this is <code>"In favor of null: "</code>, otherwise
-<code>"In favor of alternative: "</code>.</p></td>
-    </tr>
-    <tr>
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
-(Default: <code>k = 2</code>).</p></td>
+(Default: <code>k = 2L</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments (ignored).</p></td>
+      <td><p>Additional arguments passed to
+<code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.BFBayesFactor.html'>parameters::model_parameters.BFBayesFactor()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -260,10 +252,16 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>wt</span>,
   <span class='kw'>paired</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.880</span>
-)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 7</span><span>
-#&gt;    bf10     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='text-decoration: underline;'>1</span><span>579. 0.000</span><span style='text-decoration: underline;'>633</span><span>       7.36      -</span><span style='color: #BB0000;'>7.36</span><span>        3.20       -</span><span style='color: #BB0000;'>3.20</span><span>     0.88</div><div class='input'>
+)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 17</span><span>
+#&gt;   </span><span style='font-weight: bold;'>term</span><span>       </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Difference     1.27    0.846      1.71     1               0
+#&gt;   </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span> </span><span style='font-weight: bold;'>effects</span><span> </span><span style='font-weight: bold;'>component</span><span>    </span><span style='font-weight: bold;'>bf10</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> cauchy                          0        0.88 fixed   conditional </span><span style='text-decoration: underline;'>1</span><span>579.
+#&gt;       </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span> </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span>
+#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.000</span><span style='text-decoration: underline;'>633</span><span>       7.36      -</span><span style='color: #BB0000;'>7.36</span><span>        3.20       -</span><span style='color: #BB0000;'>3.20</span><span></div><div class='input'>
 <span class='co'># ------------------- one-samples test -----------------------------------</span>
 
 <span class='co'># to get dataframe</span>
@@ -271,10 +269,16 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>,
   <span class='kw'>test.value</span> <span class='kw'>=</span> <span class='fl'>5.85</span>
-)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
-#&gt;     bf10  bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 bf.prior
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 0.091</span><span style='text-decoration: underline;'>4</span><span>  10.9      -</span><span style='color: #BB0000;'>2.39</span><span>       2.39       -</span><span style='color: #BB0000;'>1.04</span><span>        1.04    0.707</div></span></pre>
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 17</span><span>
+#&gt;   </span><span style='font-weight: bold;'>term</span><span>       </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Difference    0.692    0.572     0.834     1               0
+#&gt;   </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span> </span><span style='font-weight: bold;'>effects</span><span> </span><span style='font-weight: bold;'>component</span><span>     </span><span style='font-weight: bold;'>bf10</span><span>  </span><span style='font-weight: bold;'>bf01</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> cauchy                          0       0.707 fixed   conditional 0.091</span><span style='text-decoration: underline;'>4</span><span>  10.9
+#&gt;   </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span> </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span>
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      -</span><span style='color: #BB0000;'>2.39</span><span>       2.39       -</span><span style='color: #BB0000;'>1.04</span><span>        1.04</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

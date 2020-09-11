@@ -11,13 +11,13 @@
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.1.9000",
+  "version": "0.3.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-06-27 r78747)",
+  "runtimePlatform": "R Under development (unstable) (2020-09-04 r79137)",
   "author": [
     {
       "@type": "Person",
@@ -118,6 +118,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "broomExtra",
+      "name": "broomExtra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=broomExtra"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "BayesFactor",
       "name": "BayesFactor",
       "provider": {
@@ -144,7 +156,6 @@
       "@type": "SoftwareApplication",
       "identifier": "ipmisc",
       "name": "ipmisc",
-      "version": ">= 3.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -191,7 +202,7 @@
     }
   ],
   "contIntegration": ["https://travis-ci.org/IndrajeetPatil/tidyBF", "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF", "https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master", "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master"],
-  "developmentStatus": "http://www.repostatus.org/#active",
+  "developmentStatus": "https://www.repostatus.org/#active",
   "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
   "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
   "keywords": [
@@ -205,5 +216,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1001.486KB"
+  "fileSize": "1675.778KB"
 }

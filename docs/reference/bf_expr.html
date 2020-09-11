@@ -83,7 +83,7 @@ Factor results." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.3.0</span>
       </span>
     </div>
 
@@ -133,11 +133,14 @@ Factor results.</p>
     </div>
 
     <pre class="usage"><span class='fu'>bf_expr</span>(
-  <span class='no'>bf.df</span>,
+  <span class='no'>bf.object</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
+  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>conf.method</span> <span class='kw'>=</span> <span class='st'>"hdi"</span>,
+  <span class='kw'>centrality</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
-  <span class='kw'>hypothesis.text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>anova.design</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='no'>...</span>
 )</pre>
 
@@ -145,15 +148,30 @@ Factor results.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>bf.df</th>
-      <td><p>A dataframe containing two columns <code>log_e_bf01</code> (for evidence in
-favor of null hypothesis) and <code>bf.prior</code>. If dataframe contains more than
-two rows, only the first row will be used.</p></td>
+      <th>bf.object</th>
+      <td><p>An object from <code>BayesFactor</code> package.</p></td>
     </tr>
     <tr>
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
-(Default: <code>k = 2</code>).</p></td>
+(Default: <code>k = 2L</code>).</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>Value or vector of probability of the CI (between 0 and 1)
+to be estimated. Default to <code>0.95</code> (95%).</p></td>
+    </tr>
+    <tr>
+      <th>conf.method</th>
+      <td><p>The type of index used for Credible Interval. Can be
+<code>"hdi"</code> (default, see <code><a href='https://rdrr.io/pkg/bayestestR/man/hdi.html'>bayestestR::hdi()</a></code>), <code>"eti"</code> (see
+<code><a href='https://rdrr.io/pkg/bayestestR/man/eti.html'>bayestestR::eti()</a></code>) or <code>"si"</code> (see <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>bayestestR::si()</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>centrality</th>
+      <td><p>The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: <code>"median"</code>,
+<code>"mean"</code>, <code>"MAP"</code> or <code>"all"</code>.</p></td>
     </tr>
     <tr>
       <th>output</th>
@@ -164,20 +182,20 @@ expression with evidence in favor of the alternative hypothesis, or
 <code>"results"</code>, which will return a dataframe with results all the details).</p></td>
     </tr>
     <tr>
-      <th>hypothesis.text</th>
-      <td><p>Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For <code>output = "null"</code>, this is <code>"In favor of null: "</code>, otherwise
-<code>"In favor of alternative: "</code>.</p></td>
-    </tr>
-    <tr>
       <th>caption</th>
       <td><p>Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).</p></td>
     </tr>
     <tr>
+      <th>anova.design</th>
+      <td><p>Whether the object is from <code><a href='https://rdrr.io/pkg/BayesFactor/man/anovaBF.html'>BayesFactor::anovaBF</a></code>
+(default: <code>FALSE</code>). The expression is different for anova designs because
+not all details are available.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Additional arguments (ignored).</p></td>
+      <td><p>Additional arguments passed to
+<code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.BFBayesFactor.html'>parameters::model_parameters.BFBayesFactor()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -188,27 +206,19 @@ Bayes Factor caption/message).</p></td>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyBF</span>)
 
-<span class='co'># dataframe containing results</span>
-<span class='no'>bf.df</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='bf_extractor.html'>bf_extractor</a></span>(<span class='kw pkg'>BayesFactor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BayesFactor/man/correlationBF.html'>correlationBF</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Sepal.Length</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Petal.Length</span>
-  )) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>.</span>, <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>)
-
 <span class='co'># creating caption (for null)</span>
 <span class='fu'>bf_expr</span>(
-  <span class='no'>bf.df</span>,
+  <span class='kw pkg'>BayesFactor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BayesFactor/man/correlationBF.html'>correlationBF</a></span>(
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Sepal.Length</span>,
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Petal.Length</span>
+  ),
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Note: Iris dataset"</span>
-)</div><div class='output co'>#&gt; atop(displaystyle("Note: Iris dataset"), expr = paste("In favor of null: ", 
-#&gt;     "log"["e"], "(BF"["01"], ") = ", "-99.770", ", ", italic("r")["Cauchy"]^"JZS", 
-#&gt;     " = ", "0.707"))</div><div class='input'>
-<span class='co'># creating caption (for alternative)</span>
-<span class='fu'>bf_expr</span>(<span class='no'>bf.df</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"alternative"</span>)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("In favor of alternative: ", 
-#&gt;     "log"["e"], "(BF"["10"], ") = ", "99.77", ", ", italic("r")["Cauchy"]^"JZS", 
-#&gt;     " = ", "0.71"))</div><div class='input'># }
+)</div><div class='output co'>#&gt; atop(displaystyle("Note: Iris dataset"), expr = paste("log"["e"], 
+#&gt;     "(BF"["01"], ") = ", "-99.770", ", ", widehat(italic(rho))["median"]^"posterior", 
+#&gt;     " = ", "0.863", ", CI"["95%"]^"HDI", " [", "0.818", ", ", 
+#&gt;     "0.900", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.333"))</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

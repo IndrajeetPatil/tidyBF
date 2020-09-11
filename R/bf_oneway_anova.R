@@ -7,18 +7,19 @@
 #'
 #' @param data A dataframe (or a tibble) from which variables specified are to
 #'   be taken. A matrix or tables will **not** be accepted.
+#' @param paired Decides whether the design is repeated measures or not
+#'   (Default: `FALSE`).
 #' @param x The grouping variable from the dataframe `data`.
 #' @param y The response (a.k.a. outcome or dependent) variable from the
 #'   dataframe `data`.
 #' @inheritParams bf_ttest
 #' @inheritParams bf_corr_test
-#' @param ... Additional arguments.
+#' @inheritParams bf_expr
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
-#' \donttest{
 #' # setup
 #' set.seed(123)
 #'
@@ -37,7 +38,15 @@
 #'   y = desire,
 #'   paired = TRUE
 #' )
-#' }
+#'
+#' # expression -------------------------------------------------------
+#' bf_oneway_anova(
+#'   data = bugs_long,
+#'   x = condition,
+#'   y = desire,
+#'   paired = TRUE,
+#'   output = "null"
+#' )
 #' @export
 
 # function body
@@ -47,11 +56,9 @@ bf_oneway_anova <- function(data,
                             bf.prior = 0.707,
                             caption = NULL,
                             output = "results",
-                            hypothesis.text = TRUE,
                             paired = FALSE,
                             k = 2L,
                             ...) {
-
   # make sure both quoted and unquoted arguments are allowed
   c(x, y) %<-% c(rlang::ensym(x), rlang::ensym(y))
 
@@ -74,8 +81,8 @@ bf_oneway_anova <- function(data,
     data %<>% dplyr::mutate(.data = ., rowid = as.factor(rowid))
 
     # extracting results from Bayesian test (`y ~ x + id`) and creating a dataframe
-    bf.df <-
-      bf_extractor(BayesFactor::anovaBF(
+    bf_object <-
+      BayesFactor::anovaBF(
         formula = rlang::new_formula(
           {{ rlang::enexpr(y) }}, rlang::expr(!!rlang::enexpr(x) + rowid)
         ),
@@ -83,27 +90,21 @@ bf_oneway_anova <- function(data,
         whichRandom = "rowid",
         rscaleFixed = bf.prior,
         progress = FALSE,
-        rscaleRandom = 1,
-        ...
-      )) %>%
-      dplyr::mutate(.data = ., bf.prior = bf.prior)
+        rscaleRandom = 1
+      )
   }
 
   # ========================= between-subjects design =========================
 
   if (isFALSE(paired)) {
     # extracting results from Bayesian test and creating a dataframe
-    bf.df <-
-      bf_extractor(
-        BayesFactor::anovaBF(
-          formula = rlang::new_formula({{ y }}, {{ x }}),
-          data = as.data.frame(data),
-          rscaleFixed = bf.prior,
-          progress = FALSE,
-          ...
-        )
-      ) %>%
-      dplyr::mutate(.data = ., bf.prior = bf.prior)
+    bf_object <-
+      BayesFactor::anovaBF(
+        formula = rlang::new_formula({{ y }}, {{ x }}),
+        data = as.data.frame(data),
+        rscaleFixed = bf.prior,
+        progress = FALSE
+      )
   }
 
   # ============================ return ==================================
@@ -112,18 +113,19 @@ bf_oneway_anova <- function(data,
   if (output != "results") {
     bf_message <-
       bf_expr(
-        bf.df = bf.df,
+        bf.object = bf_object,
         output = output,
-        hypothesis.text = hypothesis.text,
         k = k,
-        caption = caption
+        caption = caption,
+        anova.design = TRUE,
+        ...
       )
   }
 
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = bf.df,
+    "results" = bf_extractor(bf_object),
     bf_message
   ))
 }

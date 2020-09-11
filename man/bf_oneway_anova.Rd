@@ -11,7 +11,6 @@ bf_oneway_anova(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
-  hypothesis.text = TRUE,
   paired = FALSE,
   k = 2L,
   ...
@@ -38,23 +37,19 @@ or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
 
-\item{hypothesis.text}{Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
-\code{"In favor of alternative: "}.}
-
-\item{paired}{if \code{TRUE}, observations are paired}
+\item{paired}{Decides whether the design is repeated measures or not
+(Default: \code{FALSE}).}
 
 \item{k}{Number of digits after decimal point (should be an integer)
-(Default: \code{k = 2}).}
+(Default: \code{k = 2L}).}
 
-\item{...}{Additional arguments.}
+\item{...}{Additional arguments passed to
+\code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
 Bayesian one-way analysis of variance
 }
 \examples{
-\donttest{
 # setup
 set.seed(123)
 
@@ -73,7 +68,15 @@ bf_oneway_anova(
   y = desire,
   paired = TRUE
 )
-}
+
+# expression -------------------------------------------------------
+bf_oneway_anova(
+  data = bugs_long,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  output = "null"
+)
 }
 \seealso{
 \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},

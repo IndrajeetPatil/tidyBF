@@ -95,11 +95,9 @@ bf_meta <- function(data,
 
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
-    hypothesis.text <- "In favor of null: "
     bf.value <- bf.df$log_e_bf01[[1]]
     bf.subscript <- "01"
   } else {
-    hypothesis.text <- "In favor of alternative: "
     bf.value <- bf.df$log_e_bf10[[1]]
     bf.subscript <- "10"
   }
@@ -109,13 +107,12 @@ bf_meta <- function(data,
     substitute(
       atop(displaystyle(top.text),
         expr = paste(
-          hypothesis.text,
           "log"["e"],
           "(BF"[bf.subscript],
           ") = ",
           bf,
           ", ",
-          italic("d")["mean"]^"posterior",
+          widehat(italic("d"))["mean"]^"posterior",
           " = ",
           d.pmean,
           ", CI"["95%"],
@@ -127,7 +124,6 @@ bf_meta <- function(data,
         )
       ),
       env = list(
-        hypothesis.text = hypothesis.text,
         top.text = caption,
         bf.subscript = bf.subscript,
         bf = specify_decimal_p(x = bf.value, k = k),

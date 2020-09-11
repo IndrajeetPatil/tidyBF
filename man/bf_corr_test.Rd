@@ -11,14 +11,13 @@ bf_corr_test(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
-  hypothesis.text = TRUE,
   k = 2L,
   ...
 )
 }
 \arguments{
-\item{data}{for use with \code{formula}, a data frame containing all the
-data}
+\item{data}{A dataframe (or a tibble) from which variables specified are to
+be taken. A matrix or tables will \strong{not} be accepted.}
 
 \item{x}{The column in \code{data} containing the explanatory variable to be
 plotted on the \code{x}-axis. Can be entered either as a character string (e.g.,
@@ -40,15 +39,11 @@ or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
 
-\item{hypothesis.text}{Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
-\code{"In favor of alternative: "}.}
-
 \item{k}{Number of digits after decimal point (should be an integer)
-(Default: \code{k = 2}).}
+(Default: \code{k = 2L}).}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional arguments passed to
+\code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
 Bayesian correlation test.

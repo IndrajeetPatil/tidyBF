@@ -47,38 +47,35 @@ bf_corr_test <- function(data,
                          bf.prior = 0.707,
                          caption = NULL,
                          output = "results",
-                         hypothesis.text = TRUE,
                          k = 2L,
                          ...) {
 
   # extracting results from Bayesian test and creating a dataframe
-  bf.df <-
-    bf_extractor(
-      BayesFactor::correlationBF(
-        x = data %>% dplyr::pull({{ x }}),
-        y = data %>% dplyr::pull({{ y }}),
-        rscale = bf.prior,
-        ...
-      )
-    ) %>% # adding prior width column
-    dplyr::mutate(.data = ., bf.prior = bf.prior)
+  bf_object <-
+    BayesFactor::correlationBF(
+      x = data %>% dplyr::pull({{ x }}),
+      y = data %>% dplyr::pull({{ y }}),
+      rscale = bf.prior,
+      ...
+    )
 
   # prepare the Bayes Factor message
   if (output != "results") {
     bf_message <-
       bf_expr(
-        bf.df = bf.df,
+        bf.object = bf_object,
         output = output,
-        hypothesis.text = hypothesis.text,
         k = k,
-        caption = caption
+        caption = caption,
+        ...
       )
   }
 
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = bf.df,
-    bf_message
+    "results" = bf_extractor(bf_object),
+    bf_message,
+    ...
   ))
 }

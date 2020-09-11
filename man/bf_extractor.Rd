@@ -9,7 +9,8 @@ bf_extractor(bf.object, ...)
 \arguments{
 \item{bf.object}{An object from \code{BayesFactor} package.}
 
-\item{...}{Currently ignored.}
+\item{...}{Additional arguments passed to
+\code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
 Extract Bayes Factors from \code{BayesFactor} model object.

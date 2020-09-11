@@ -36,13 +36,24 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
           "-1.07",
           ", ",
-          italic("r")["Cauchy"]^"JZS",
+          widehat(italic(rho))["median"]^
+            "posterior",
+          " = ",
+          "-0.12",
+          ", CI"["95%"]^"HDI",
+          " [",
+          "-0.28",
+          ", ",
+          "0.04",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^
+            "JZS",
           " = ",
           "0.71"
         )
@@ -80,7 +91,9 @@ testthat::test_that(
         y = brainwt,
         x = sleep_rem,
         output = "subtitle",
-        bf.prior = 0.8
+        bf.prior = 0.8,
+        centrality = "mean",
+        conf.level = 0.99
       )
 
     testthat::expect_identical(
@@ -88,13 +101,24 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
           "-0.49",
           ", ",
-          italic("r")["Cauchy"]^"JZS",
+          widehat(italic(rho))["mean"]^
+            "posterior",
+          " = ",
+          "-0.21",
+          ", CI"["99%"]^"HDI",
+          " [",
+          "-0.54",
+          ", ",
+          "0.15",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^
+            "JZS",
           " = ",
           "0.80"
         )

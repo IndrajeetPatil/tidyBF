@@ -15,7 +15,6 @@ bf_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
-  hypothesis.text = TRUE,
   k = 2L,
   ...
 )
@@ -29,7 +28,6 @@ bf_one_sample_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
-  hypothesis.text = TRUE,
   k = 2L,
   ...
 )
@@ -43,14 +41,13 @@ bf_two_sample_ttest(
   bf.prior = 0.707,
   caption = NULL,
   output = "results",
-  hypothesis.text = TRUE,
   k = 2L,
   ...
 )
 }
 \arguments{
-\item{data}{for use with \code{formula}, a data frame containing all the
-data}
+\item{data}{A dataframe (or a tibble) from which variables specified are to
+be taken. A matrix or tables will \strong{not} be accepted.}
 
 \item{x}{Either the grouping variable from the dataframe \code{data} if it's a
 two-sample \emph{t}-test or a numeric variable if it's a one-sample \emph{t}-test.}
@@ -62,7 +59,8 @@ be plotted on the \code{y}-axis. Can be entered either as a character string
 \item{test.value}{A number specifying the value of the null hypothesis
 (Default: \code{0}).}
 
-\item{paired}{if \code{TRUE}, observations are paired}
+\item{paired}{Decides whether the design is repeated measures or not
+(Default: \code{FALSE}).}
 
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
@@ -76,15 +74,11 @@ or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which
 expression with evidence in favor of the alternative hypothesis, or
 \code{"results"}, which will return a dataframe with results all the details).}
 
-\item{hypothesis.text}{Logical that decides whether the expression containing
-result should have text to describe the hypothesis test being described.
-For \code{output = "null"}, this is \code{"In favor of null: "}, otherwise
-\code{"In favor of alternative: "}.}
-
 \item{k}{Number of digits after decimal point (should be an integer)
-(Default: \code{k = 2}).}
+(Default: \code{k = 2L}).}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional arguments passed to
+\code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
 Bayes Factor for \emph{t}-test

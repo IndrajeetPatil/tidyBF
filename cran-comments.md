@@ -7,6 +7,6 @@
 
 0 errors | 0 warnings | 0 note
 
-  - Gets rid of `NOTE` produced in daily CRAN checks.
-  
-  - Makes package compatible with new release of `ipmisc`.
+  - Expect breakages in `statsExpressions` and `pairwiseComparisons` packages. I
+    maintain both of these packages and will quickly submit newers versions of
+    these packages as soon as `tidyBF` is accepted.

@@ -1,4 +1,18 @@
-# tidyBF 0.2.1.9000
+# tidyBF 0.3.0
+
+BREAKING CHANGES
+    
+  - `bf_expr` now expects not a dataframe, but rather the `BayesFactor` object.
+
+MAJOR CHANGES
+
+  - `bf_extractor` now internally uses `parameters::model_parameters` to extract
+    as many details from the `BayesFactor` as possible. So the returned
+    dataframe will contain additional details now.
+    
+  - The redundant text related to whether the results in favor of the null or
+    the alternative hypothesis has now been removed, since this information is
+    already present in `BF` subscripts (`01`: null, `10`: alternative).
 
 # tidyBF 0.2.1
 

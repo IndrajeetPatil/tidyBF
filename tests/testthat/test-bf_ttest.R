@@ -139,7 +139,9 @@ testthat::test_that(
         y = NULL,
         test.value = 5.5,
         bf.prior = 0.99,
-        output = "subtitle"
+        output = "subtitle",
+        centrality = "mean",
+        conf.level = 0.90
       )
 
     testthat::expect_identical(
@@ -148,11 +150,21 @@ testthat::test_that(
         atop(
           displaystyle(NULL),
           expr = paste(
-            "In favor of alternative: ",
             "log"["e"],
             "(BF"["10"],
             ") = ",
             "47.84",
+            ", ",
+            widehat(italic(d))["mean"]^
+              "posterior",
+            " = ",
+            "3.15",
+            ", CI"["90%"]^"HDI",
+            " [",
+            "2.53",
+            ", ",
+            "3.75",
+            "]",
             ", ",
             italic("r")["Cauchy"]^"JZS",
             " = ",
@@ -171,7 +183,8 @@ testthat::test_that(
         y = NULL,
         test.value = 0.25,
         bf.prior = 0.9,
-        output = "subtitle"
+        output = "subtitle",
+        conf.method = "eti"
       )
 
     testthat::expect_identical(
@@ -179,13 +192,24 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
           "-2.13",
           ", ",
-          italic("r")["Cauchy"]^"JZS",
+          widehat(italic(d))["median"]^
+            "posterior",
+          " = ",
+          "0.95",
+          ", CI"["95%"]^"ETI",
+          " [",
+          "0.67",
+          ", ",
+          "1.42",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^
+            "JZS",
           " = ",
           "0.90"
         )

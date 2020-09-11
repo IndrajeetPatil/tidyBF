@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) 
 [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![DOI](https://zenodo.org/badge/126624251.svg)](https://zenodo.org/badge/latestdoi/126624251)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage Status](https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg)](https://codecov.io/github/IndrajeetPatil/tidyBF?branch=master)
@@ -117,6 +117,8 @@ bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
 Although all functions default to returning a dataframe, you can also use it
 to extract expressions that can be displayed in plots.
 
+### t-test
+
 ```{r expr_plot}
 # setup
 set.seed(123)
@@ -128,17 +130,107 @@ ggplot(ToothGrowth, aes(supp, len)) +
   labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "alternative"))
 ```
 
-Here is another example:
+### anova
 
 ```{r expr_plot2}
 # setup
 set.seed(123)
 library(ggplot2)
+library(ggforce)
+library(tidyBF)
+
+# plot with subtitle
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_violin() +
+  geom_sina() +
+  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "h0"))
+```
+
+### correlation test
+
+```{r expr_plot3}
+# setup
+set.seed(123)
+library(ggplot2)
+library(tidyBF)
 
 # using the expression to display details in a plot
 ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
-  geom_point() + geom_smooth(method = "lm") +
+  geom_point() +
+  geom_smooth(method = "lm") +
   labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null"))
+```
+
+### contingency tabs analysis
+
+```{r expr_plot4}
+# setup
+set.seed(123)
+library(ggplot2)
+library(tidyBF)
+
+# basic pie chart
+ggplot(as.data.frame(table(mpg$class)), aes(x = "", y = Freq, fill = factor(Var1))) +
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank()) +
+  # cleaning up the chart and adding results from one-sample proportion test
+  coord_polar(theta = "y", start = 0) +
+  labs(
+    fill = "Class",
+    x = NULL,
+    y = NULL,
+    title = "Pie Chart of class (type of car)",
+    subtitle = bf_contingency_tab(as.data.frame(table(mpg$class)), Var1, counts = Freq, output = "h1")$expr
+  )
+```
+
+### meta-analysis
+
+```{r expr_plot5, fig.height=14, fig.width=12}
+# setup
+set.seed(123)
+library(metaviz)
+library(ggplot2)
+
+# meta-analysis forest plot with results random-effects meta-analysis
+viz_forest(
+  x = mozart[, c("d", "se")],
+  study_labels = mozart[, "study_name"],
+  xlab = "Cohen's d",
+  variant = "thick",
+  type = "cumulative"
+) + # use `statsExpressions` to create expression containing results
+  labs(
+    title = "Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect",
+    subtitle = bf_meta(dplyr::rename(mozart, estimate = d, std.error = se), output = "h1")$expr
+  ) +
+  theme(text = element_text(size = 12))
+```
+
+## Convenient way to extract detailed output from `BayesFactor` objects
+
+The package provides `bf_extractor` function to conveniently extract important
+details from these objects:
+
+```{r bf_extr}
+# setup
+set.seed(123)
+library(tidyBF)
+library(BayesFactor)
+data(puzzles)
+
+# model
+result <-
+  anovaBF(
+    RT ~ shape * color + ID,
+    data = puzzles,
+    whichRandom = "ID",
+    whichModels = "top",
+    progress = FALSE
+  )
+
+# extract details
+bf_extractor(result)
 ```
 
 ## Dataframe with all the details

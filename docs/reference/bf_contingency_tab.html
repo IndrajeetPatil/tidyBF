@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.3.0</span>
       </span>
     </div>
 
@@ -165,8 +165,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>for use with <code>formula</code>, a data frame containing all the
-data</p></td>
+      <td><p>A dataframe (or a tibble) from which variables specified are to
+be taken. A matrix or tables will <strong>not</strong> be accepted.</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -227,7 +227,7 @@ expression with evidence in favor of the alternative hypothesis, or
     <tr>
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
-(Default: <code>k = 2</code>).</p></td>
+(Default: <code>k = 2L</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -258,13 +258,13 @@ Richard Morey:
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>,
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"cols"</span>
-)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 9</span><span>
-#&gt;    bf10   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  15.1 0.066</span><span style='text-decoration: underline;'>0</span><span>       2.72      -</span><span style='color: #BB0000;'>2.72</span><span>        1.18       -</span><span style='color: #BB0000;'>1.18</span><span>
-#&gt;   sampling.plan           fixed.margin prior.concentration
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> independent multinomial cols                           1</div><div class='input'>
+)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 12</span><span>
+#&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>error</span><span> </span><span style='font-weight: bold;'>time</span><span>                     </span><span style='font-weight: bold;'>code</span><span>          </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  15.1     0 Fri Sep 11 15:08:49 2020 89c293c7cc4 0.066</span><span style='text-decoration: underline;'>0</span><span>       2.72      -</span><span style='color: #BB0000;'>2.72</span><span>
+#&gt;   </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span> </span><span style='font-weight: bold;'>sampling.plan</span><span> </span><span style='font-weight: bold;'>fixed.margin</span><span> </span><span style='font-weight: bold;'>prior.concentration</span><span>
+#&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>        1.18       -</span><span style='color: #BB0000;'>1.18</span><span> indepMulti    cols                           1</div><div class='input'>
 <span class='co'># to see results</span>
 <span class='fu'>bf_contingency_tab</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
@@ -273,13 +273,13 @@ Richard Morey:
   <span class='kw'>sampling.plan</span> <span class='kw'>=</span> <span class='st'>"jointMulti"</span>,
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 9</span><span>
-#&gt;    bf10   bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 sampling.plan    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #555555;'>1</span><span>  28.1 0.035</span><span style='text-decoration: underline;'>6</span><span>       3.33      -</span><span style='color: #BB0000;'>3.33</span><span>        1.45       -</span><span style='color: #BB0000;'>1.45</span><span> joint multinomial
-#&gt;   fixed.margin prior.concentration
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> rows                           1</div><div class='input'>
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 12</span><span>
+#&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>error</span><span> </span><span style='font-weight: bold;'>time</span><span>                     </span><span style='font-weight: bold;'>code</span><span>          </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  28.1     0 Fri Sep 11 15:08:49 2020 89c618c2af8 0.035</span><span style='text-decoration: underline;'>6</span><span>       3.33      -</span><span style='color: #BB0000;'>3.33</span><span>
+#&gt;   </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span> </span><span style='font-weight: bold;'>sampling.plan</span><span> </span><span style='font-weight: bold;'>fixed.margin</span><span> </span><span style='font-weight: bold;'>prior.concentration</span><span>
+#&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>        1.45       -</span><span style='color: #BB0000;'>1.45</span><span> jointMulti    rows                           1</div><div class='input'>
 <span class='co'># ------------------ goodness of fit tests --------------------------------</span>
 
 <span class='fu'>bf_contingency_tab</span>(
@@ -287,7 +287,7 @@ Richard Morey:
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>am</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>10</span>
 )</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
-#&gt;    bf10  bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01 prior.concentration
+#&gt;    </span><span style='font-weight: bold;'>bf10</span><span>  </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span> </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span> </span><span style='font-weight: bold;'>prior.concentration</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 0.743  1.35     -</span><span style='color: #BB0000;'>0.297</span><span>      0.297      -</span><span style='color: #BB0000;'>0.129</span><span>       0.129                  10</div></span></pre>
   </div>

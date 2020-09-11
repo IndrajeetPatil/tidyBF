@@ -15,10 +15,10 @@ testthat::test_that(
     ))
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 8.990505, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 2.196169, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, 0.9537841, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$bf10[[1]], 8.990505, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], 2.196169, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], -df$log_e_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], 0.9537841, tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], -df$log_10_bf01, tolerance = 0.001)
   }
 )

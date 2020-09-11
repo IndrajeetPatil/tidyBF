@@ -56,31 +56,25 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 0.1177186, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -2.139458, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -0.9291548, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$bf10[[1]], 0.1177186, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], -df$log_e_bf01[[1]], tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], -0.9291548, tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], -df$log_10_bf01[[1]], tolerance = 0.001)
 
     # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf01, df_results$log_e_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf01[[1]], df_results$log_e_bf01[[1]], tolerance = 0.001)
 
     # call for null and alternative
     testthat::expect_identical(
       results1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
+      ggplot2::expr(atop(displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "1.92",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.88"
+          "1.92"
         )
       ))
     )
@@ -90,15 +84,10 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
-          "-1.92",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.88"
+          "-1.92"
         )
       ))
     )
@@ -198,15 +187,15 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 6.364917, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 1.850801, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, 0.8037927, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$bf10[[1]], 6.364917, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], -df$log_e_bf01[[1]], tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], 0.8037927, tolerance = 0.001)
+    testthat::expect_equal(df$log_10_bf10[[1]], -df$log_10_bf01[[1]], tolerance = 0.001)
 
     # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf01, df_results$log_e_bf01, tolerance = 0.001)
+    testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf01[[1]], df_results$log_e_bf01[[1]], tolerance = 0.001)
 
     # call for null and alternative
     testthat::expect_identical(
@@ -214,15 +203,10 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-1.9580",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.8800"
+          "-1.9580"
         )
       ))
     )
@@ -232,15 +216,10 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of alternative: ",
           "log"["e"],
           "(BF"["10"],
           ") = ",
-          "1.9580",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.8800"
+          "1.9580"
         )
       ))
     )
@@ -261,15 +240,10 @@ testthat::test_that(
       ggplot2::expr(atop(
         displaystyle(NULL),
         expr = paste(
-          "In favor of null: ",
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-21.04",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.71"
+          "-21.04"
         )
       ))
     )

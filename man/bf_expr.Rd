@@ -12,6 +12,7 @@ bf_expr(
   centrality = "median",
   output = "null",
   caption = NULL,
+  anova.design = FALSE,
   ...
 )
 }
@@ -40,6 +41,10 @@ expression with evidence in favor of the alternative hypothesis, or
 
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}
+
+\item{anova.design}{Whether the object is from \code{BayesFactor::anovaBF}
+(default: \code{FALSE}). The expression is different for anova designs because
+not all details are available.}
 
 \item{...}{Additional arguments passed to
 \code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}

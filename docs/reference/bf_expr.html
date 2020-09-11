@@ -140,6 +140,7 @@ Factor results.</p>
   <span class='kw'>centrality</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>,
   <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>anova.design</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='no'>...</span>
 )</pre>
 
@@ -184,6 +185,12 @@ expression with evidence in favor of the alternative hypothesis, or
       <th>caption</th>
       <td><p>Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).</p></td>
+    </tr>
+    <tr>
+      <th>anova.design</th>
+      <td><p>Whether the object is from <code><a href='https://rdrr.io/pkg/BayesFactor/man/anovaBF.html'>BayesFactor::anovaBF</a></code>
+(default: <code>FALSE</code>). The expression is different for anova designs because
+not all details are available.</p></td>
     </tr>
     <tr>
       <th>...</th>

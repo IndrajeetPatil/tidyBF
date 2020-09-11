@@ -50,7 +50,6 @@ expression with evidence in favor of the alternative hypothesis, or
 Bayesian one-way analysis of variance
 }
 \examples{
-\donttest{
 # setup
 set.seed(123)
 
@@ -69,7 +68,15 @@ bf_oneway_anova(
   y = desire,
   paired = TRUE
 )
-}
+
+# expression -------------------------------------------------------
+bf_oneway_anova(
+  data = bugs_long,
+  x = condition,
+  y = desire,
+  paired = TRUE,
+  output = "null"
+)
 }
 \seealso{
 \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},

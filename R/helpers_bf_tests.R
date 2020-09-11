@@ -69,6 +69,9 @@ bf_formatter <- function(data) {
 #'   or `"alternative"` (or `"title"` or `"H1"` or `"h1"`), which will return
 #'   expression with evidence in favor of the alternative hypothesis, or
 #'   `"results"`, which will return a dataframe with results all the details).
+#' @param anova.design Whether the object is from `BayesFactor::anovaBF`
+#'   (default: `FALSE`). The expression is different for anova designs because
+#'   not all details are available.
 #' @inheritParams bf_extractor
 #'
 #' @importFrom broomExtra tidy_parameters
@@ -100,6 +103,7 @@ bf_expr <- function(bf.object,
                     centrality = "median",
                     output = "null",
                     caption = NULL,
+                    anova.design = FALSE,
                     ...) {
   # extract a dataframe with BF and posterior estimates (if available)
   bf.df <-
@@ -121,13 +125,30 @@ bf_expr <- function(bf.object,
     bf.subscript <- "10"
   }
 
+  # for anova designs
+  if (isTRUE(anova.design)) {
+    # prepare the Bayes Factor message
+    bf_message <-
+      substitute(
+      atop(displaystyle(top.text),
+        expr = paste("log"["e"], "(BF"[bf.subscript], ") = ", bf)
+      ),
+      env = list(
+        top.text = caption,
+        bf.subscript = bf.subscript,
+        bf = specify_decimal_p(x = bf.value, k = k)
+      )
+    )
+  }
+
   # for non-anova tests
-  if (NROW(bf.df) == 1L) {
-    # is it a t-test or a correlation test
+  if (isFALSE(anova.design)) {
+    # t-test or correlation
     estimate.type <- ifelse(bf.df$term[[1]] == "Difference", quote(d), quote(rho))
 
     # prepare the Bayes Factor message
-    substitute(
+    bf_message <-
+      substitute(
       atop(displaystyle(top.text),
         expr = paste(
           "log"["e"],
@@ -164,19 +185,10 @@ bf_expr <- function(bf.object,
         bf_prior = specify_decimal_p(x = bf.df$prior.scale[[1]], k = k)
       )
     )
-  } else {
-    # prepare the Bayes Factor message
-    substitute(
-      atop(displaystyle(top.text),
-        expr = paste("log"["e"], "(BF"[bf.subscript], ") = ", bf)
-      ),
-      env = list(
-        top.text = caption,
-        bf.subscript = bf.subscript,
-        bf = specify_decimal_p(x = bf.value, k = k)
-      )
-    )
   }
+
+  # return the final expression
+  return(bf_message)
 }
 
 #' @name meta_data_check

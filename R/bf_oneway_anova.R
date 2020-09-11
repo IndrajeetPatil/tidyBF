@@ -20,7 +20,6 @@
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
-#' \donttest{
 #' # setup
 #' set.seed(123)
 #'
@@ -39,7 +38,15 @@
 #'   y = desire,
 #'   paired = TRUE
 #' )
-#' }
+#'
+#' # expression -------------------------------------------------------
+#' bf_oneway_anova(
+#'   data = bugs_long,
+#'   x = condition,
+#'   y = desire,
+#'   paired = TRUE,
+#'   output = "null"
+#' )
 #' @export
 
 # function body
@@ -52,7 +59,6 @@ bf_oneway_anova <- function(data,
                             paired = FALSE,
                             k = 2L,
                             ...) {
-
   # make sure both quoted and unquoted arguments are allowed
   c(x, y) %<-% c(rlang::ensym(x), rlang::ensym(y))
 
@@ -111,6 +117,7 @@ bf_oneway_anova <- function(data,
         output = output,
         k = k,
         caption = caption,
+        anova.design = TRUE,
         ...
       )
   }

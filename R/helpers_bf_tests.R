@@ -7,6 +7,8 @@
 #'
 #' @importFrom BayesFactor extractBF
 #' @importFrom dplyr select mutate
+#' @importFrom ipmisc easystats_to_tidy_names
+#' @importFrom parameters model_parameters
 #'
 #' @note *Important*: don't enter `1/bf_obj` to extract results for null
 #'   hypothesis; doing so will return wrong results.
@@ -28,7 +30,12 @@
 
 # function body
 bf_extractor <- function(bf.object, ...) {
-  broomExtra::tidy_parameters(bf.object, ...) %>%
+  # extract needed info
+  df <- tryCatch(parameters::model_parameters(bf.object, ...), error = function(e) NULL)
+  if (rlang::is_null(df)) df <- as_tibble(bf.object)
+
+  # cleanup
+  ipmisc::easystats_to_tidy_names(df) %>%
     dplyr::rename(.data = ., bf10 = bf) %>%
     bf_formatter(.)
 }
@@ -73,8 +80,6 @@ bf_formatter <- function(data) {
 #'   (default: `FALSE`). The expression is different for anova designs because
 #'   not all details are available.
 #' @inheritParams bf_extractor
-#'
-#' @importFrom broomExtra tidy_parameters
 #'
 #' @examples
 #' \donttest{
@@ -127,18 +132,40 @@ bf_expr <- function(bf.object,
 
   # for anova designs
   if (isTRUE(anova.design)) {
+    # priors dataframe
+    prior.df <-
+      bayestestR::describe_prior(bf.object) %>%
+      ipmisc::easystats_to_tidy_names(.)
+
     # prepare the Bayes Factor message
     bf_message <-
       substitute(
-      atop(displaystyle(top.text),
-        expr = paste("log"["e"], "(BF"[bf.subscript], ") = ", bf)
-      ),
-      env = list(
-        top.text = caption,
-        bf.subscript = bf.subscript,
-        bf = specify_decimal_p(x = bf.value, k = k)
+        atop(displaystyle(top.text),
+          expr = paste(
+            "log"["e"],
+            "(BF"[bf.subscript],
+            ") = ",
+            bf
+            # ,
+            # ", ",
+            # italic("r")["Cauchy"]^"fixed",
+            # " = ",
+            # bf_prior_fixed,
+            # ", ",
+            # italic("r")["Cauchy"]^"random",
+            # " = ",
+            # bf_prior_random
+          )
+        ),
+        env = list(
+          top.text = caption,
+          bf.subscript = bf.subscript,
+          bf = specify_decimal_p(x = bf.value, k = k)
+          # ,
+          # bf_prior_fixed = specify_decimal_p(x = prior.df$prior.scale[[1]], k = k),
+          # bf_prior_random = specify_decimal_p(x = prior.df$prior.scale[[2]], k = k)
+        )
       )
-    )
   }
 
   # for non-anova tests
@@ -149,42 +176,42 @@ bf_expr <- function(bf.object,
     # prepare the Bayes Factor message
     bf_message <-
       substitute(
-      atop(displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"[bf.subscript],
-          ") = ",
-          bf,
-          ", ",
-          widehat(italic(estimate.type))[centrality]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^conf.method,
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          bf_prior
+        atop(displaystyle(top.text),
+          expr = paste(
+            "log"["e"],
+            "(BF"[bf.subscript],
+            ") = ",
+            bf,
+            ", ",
+            widehat(italic(estimate.type))[centrality]^"posterior",
+            " = ",
+            estimate,
+            ", CI"[conf.level]^conf.method,
+            " [",
+            estimate.LB,
+            ", ",
+            estimate.UB,
+            "]",
+            ", ",
+            italic("r")["Cauchy"]^"JZS",
+            " = ",
+            bf_prior
+          )
+        ),
+        env = list(
+          top.text = caption,
+          bf.subscript = bf.subscript,
+          estimate.type = estimate.type,
+          centrality = centrality,
+          conf.level = paste0(conf.level * 100, "%"),
+          conf.method = toupper(conf.method),
+          bf = specify_decimal_p(x = bf.value, k = k),
+          estimate = specify_decimal_p(x = bf.df$estimate[[1]], k = k),
+          estimate.LB = specify_decimal_p(x = bf.df$conf.low[[1]], k = k),
+          estimate.UB = specify_decimal_p(x = bf.df$conf.high[[1]], k = k),
+          bf_prior = specify_decimal_p(x = bf.df$prior.scale[[1]], k = k)
         )
-      ),
-      env = list(
-        top.text = caption,
-        bf.subscript = bf.subscript,
-        estimate.type = estimate.type,
-        centrality = centrality,
-        conf.level = paste0(conf.level * 100, "%"),
-        conf.method = toupper(conf.method),
-        bf = specify_decimal_p(x = bf.value, k = k),
-        estimate = specify_decimal_p(x = bf.df$estimate[[1]], k = k),
-        estimate.LB = specify_decimal_p(x = bf.df$conf.low[[1]], k = k),
-        estimate.UB = specify_decimal_p(x = bf.df$conf.high[[1]], k = k),
-        bf_prior = specify_decimal_p(x = bf.df$prior.scale[[1]], k = k)
       )
-    )
   }
 
   # return the final expression

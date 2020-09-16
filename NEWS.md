@@ -1,3 +1,7 @@
+# tidyBF 0.3.0.9000
+
+  - Replaces the heavier `broomExtra` dependency with `parameters`.
+
 # tidyBF 0.3.0
 
 BREAKING CHANGES

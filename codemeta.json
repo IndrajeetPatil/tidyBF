@@ -11,13 +11,13 @@
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.3.0",
+  "version": "0.3.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-09-04 r79137)",
+  "runtimePlatform": "R Under development (unstable) (2020-09-11 r79188)",
   "author": [
     {
       "@type": "Person",
@@ -118,18 +118,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "broomExtra",
-      "name": "broomExtra",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=broomExtra"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "BayesFactor",
       "name": "BayesFactor",
       "provider": {
@@ -156,6 +144,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ipmisc",
       "name": "ipmisc",
+      "version": ">= 3.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -175,6 +164,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=metaBMA"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "parameters",
+      "name": "parameters",
+      "version": ">= 0.8.5",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=parameters"
     },
     {
       "@type": "SoftwareApplication",
@@ -216,5 +218,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1675.778KB"
+  "fileSize": "1676.95KB"
 }

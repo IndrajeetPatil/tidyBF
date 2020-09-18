@@ -133,9 +133,9 @@ bf_expr <- function(bf.object,
   # for anova designs
   if (isTRUE(anova.design)) {
     # priors dataframe
-    prior.df <-
-      bayestestR::describe_prior(bf.object) %>%
-      ipmisc::easystats_to_tidy_names(.)
+    # prior.df <-
+    #   bayestestR::describe_prior(bf.object) %>%
+    #   ipmisc::easystats_to_tidy_names(.)
 
     # prepare the Bayes Factor message
     bf_message <-

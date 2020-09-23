@@ -2,25 +2,9 @@
 % Please edit documentation in R/bf_contingency_tab.R
 \name{bf_contingency_tab}
 \alias{bf_contingency_tab}
-\alias{bf_onesample_proptest}
 \title{Bayesian contingency table analysis}
 \usage{
 bf_contingency_tab(
-  data,
-  x,
-  y = NULL,
-  counts = NULL,
-  ratio = NULL,
-  sampling.plan = "indepMulti",
-  fixed.margin = "rows",
-  prior.concentration = 1,
-  caption = NULL,
-  output = "results",
-  k = 2L,
-  ...
-)
-
-bf_onesample_proptest(
   data,
   x,
   y = NULL,

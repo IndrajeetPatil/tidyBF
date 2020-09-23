@@ -1,5 +1,12 @@
 # tidyBF 0.3.0.9000
 
+BREAKING CHANGES
+
+  - Removes the unnecessary aliases for certain tests: `bf_one_sample_ttest`,
+    `bf_two_sample_ttest`, and `bf_onesample_proptest`.
+
+MAJOR CHANGES
+
   - Replaces the heavier `broomExtra` dependency with `parameters`.
 
 # tidyBF 0.3.0

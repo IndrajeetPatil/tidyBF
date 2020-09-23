@@ -2,37 +2,9 @@
 % Please edit documentation in R/bf_ttest.R
 \name{bf_ttest}
 \alias{bf_ttest}
-\alias{bf_one_sample_ttest}
-\alias{bf_two_sample_ttest}
 \title{Bayes Factor for \emph{t}-test}
 \usage{
 bf_ttest(
-  data,
-  x,
-  y = NULL,
-  test.value = 0,
-  paired = FALSE,
-  bf.prior = 0.707,
-  caption = NULL,
-  output = "results",
-  k = 2L,
-  ...
-)
-
-bf_one_sample_ttest(
-  data,
-  x,
-  y = NULL,
-  test.value = 0,
-  paired = FALSE,
-  bf.prior = 0.707,
-  caption = NULL,
-  output = "results",
-  k = 2L,
-  ...
-)
-
-bf_two_sample_ttest(
   data,
   x,
   y = NULL,

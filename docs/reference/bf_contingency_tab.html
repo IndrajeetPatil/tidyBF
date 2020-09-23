@@ -143,21 +143,6 @@
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
   <span class='no'>...</span>
-)
-
-<span class='fu'>bf_onesample_proptest</span>(
-  <span class='no'>data</span>,
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>counts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sampling.plan</span> <span class='kw'>=</span> <span class='st'>"indepMulti"</span>,
-  <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
-  <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
-  <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -261,7 +246,7 @@ Richard Morey:
 )</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 12</span><span>
 #&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>error</span><span> </span><span style='font-weight: bold;'>time</span><span>                     </span><span style='font-weight: bold;'>code</span><span>           </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  15.1     0 Wed Sep 16 14:51:54 2020 13102c142dd1 0.066</span><span style='text-decoration: underline;'>0</span><span>       2.72      -</span><span style='color: #BB0000;'>2.72</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  15.1     0 Wed Sep 23 10:47:38 2020 58583d745e64 0.066</span><span style='text-decoration: underline;'>0</span><span>       2.72      -</span><span style='color: #BB0000;'>2.72</span><span>
 #&gt;   </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span> </span><span style='font-weight: bold;'>sampling.plan</span><span> </span><span style='font-weight: bold;'>fixed.margin</span><span> </span><span style='font-weight: bold;'>prior.concentration</span><span>
 #&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>        1.18       -</span><span style='color: #BB0000;'>1.18</span><span> indepMulti    cols                           1</div><div class='input'>
@@ -276,7 +261,7 @@ Richard Morey:
 )</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 12</span><span>
 #&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>error</span><span> </span><span style='font-weight: bold;'>time</span><span>                     </span><span style='font-weight: bold;'>code</span><span>           </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf01</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  28.1     0 Wed Sep 16 14:51:54 2020 13103cdc2197 0.035</span><span style='text-decoration: underline;'>6</span><span>       3.33      -</span><span style='color: #BB0000;'>3.33</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  28.1     0 Wed Sep 23 10:47:38 2020 585828323a7b 0.035</span><span style='text-decoration: underline;'>6</span><span>       3.33      -</span><span style='color: #BB0000;'>3.33</span><span>
 #&gt;   </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span> </span><span style='font-weight: bold;'>sampling.plan</span><span> </span><span style='font-weight: bold;'>fixed.margin</span><span> </span><span style='font-weight: bold;'>prior.concentration</span><span>
 #&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>        1.45       -</span><span style='color: #BB0000;'>1.45</span><span> jointMulti    rows                           1</div><div class='input'>

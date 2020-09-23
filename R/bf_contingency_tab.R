@@ -1,5 +1,6 @@
 #' @title Bayesian contingency table analysis
 #' @name bf_contingency_tab
+#' @rdname bf_contingency_tab
 #'
 #' @inheritParams BayesFactor::contingencyTableBF
 #' @param x The variable to use as the **rows** in the contingency table.
@@ -232,10 +233,3 @@ bf_contingency_tab <- function(data,
     bf_message
   ))
 }
-
-
-#' @rdname bf_contingency_tab
-#' @aliases bf_contingency_tab
-#' @export
-
-bf_onesample_proptest <- bf_contingency_tab

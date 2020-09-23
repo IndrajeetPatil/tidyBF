@@ -184,6 +184,6 @@ testthat::test_that(
   code = {
     df <- data.frame(x = c("a"))
 
-    testthat::expect_null(bf_onesample_proptest(df, x))
+    testthat::expect_null(bf_contingency_tab(df, x))
   }
 )

@@ -1,4 +1,5 @@
 #' @title Bayes Factor for *t*-test
+#' @rdname bf_ttest
 #'
 #' @details If `y` is `NULL`, a one-sample *t*-test will be carried out,
 #'   otherwise a two-sample *t*-test will be carried out.
@@ -136,15 +137,3 @@ bf_ttest <- function(data,
     bf_message
   ))
 }
-
-#' @rdname bf_ttest
-#' @aliases bf_ttest
-#' @export
-
-bf_one_sample_ttest <- bf_ttest
-
-#' @rdname bf_ttest
-#' @aliases bf_ttest
-#' @export
-
-bf_two_sample_ttest <- bf_ttest

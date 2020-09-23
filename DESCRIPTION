@@ -24,9 +24,9 @@ Depends:
 Imports: 
     BayesFactor,
     dplyr,
-    ipmisc (>= 3.2.0),
+    ipmisc,
     metaBMA,
-    parameters (>= 0.8.5),
+    parameters,
     rlang,
     tidyr
 Suggests: 

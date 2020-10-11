@@ -130,16 +130,16 @@
     <p>Bayesian correlation test.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bf_corr_test</span>(
-  <span class='no'>data</span>,
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.707</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"results"</span>,
-  <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>bf_corr_test</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>0.707</span>,
+  caption <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output <span class='op'>=</span> <span class='st'>"results"</span>,
+  k <span class='op'>=</span> <span class='fl'>2L</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,7 +187,7 @@ expression with evidence in favor of the alternative hypothesis, or
     <tr>
       <th>...</th>
       <td><p>Additional arguments passed to
-<code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.BFBayesFactor.html'>parameters::model_parameters.BFBayesFactor()</a></code>.</p></td>
+<code><a href='https://easystats.github.io/parameters/reference/model_parameters.BFBayesFactor.html'>parameters::model_parameters.BFBayesFactor()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -198,35 +198,37 @@ expression with evidence in favor of the alternative hypothesis, or
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># for reproducibility</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
 
 <span class='co'># to see results</span>
-<span class='fu'>bf_corr_test</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>anscombe</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x1</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y4</span>,
-  <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 17</span><span>
+<span class='fu'>bf_corr_test</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>anscombe</span>,
+  x <span class='op'>=</span> <span class='va'>x1</span>,
+  y <span class='op'>=</span> <span class='va'>y4</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 17</span><span>
 #&gt;   </span><span style='font-weight: bold;'>term</span><span>  </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span> </span><span style='font-weight: bold;'>prior.distribution</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'>1</span><span> rho     -</span><span style='color: #BB0000;'>0.259</span><span>   -</span><span style='color: #BB0000;'>0.670</span><span>     0.189 0.812           0.218 cauchy            
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> rho     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>259</span><span>   -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>649</span><span>     </span><span style='color: #949494;'>0.</span><span>172 </span><span style='color: #949494;'>0.</span><span>804           </span><span style='color: #949494;'>0.</span><span>213 cauchy            
 #&gt;   </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span> </span><span style='font-weight: bold;'>effects</span><span> </span><span style='font-weight: bold;'>component</span><span>    </span><span style='font-weight: bold;'>bf10</span><span>  </span><span style='font-weight: bold;'>bf01</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
-#&gt;            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>              0           1 fixed   conditional 0.550  1.82     -</span><span style='color: #BB0000;'>0.597</span><span>
+#&gt;            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>              </span><span style='color: #949494;'>0</span><span>           1 fixed   conditional </span><span style='color: #949494;'>0.</span><span>550  1.82     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>597</span><span>
 #&gt;   </span><span style='font-weight: bold;'>log_e_bf01</span><span> </span><span style='font-weight: bold;'>log_10_bf10</span><span> </span><span style='font-weight: bold;'>log_10_bf01</span><span>
-#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>      0.597      -</span><span style='color: #BB0000;'>0.259</span><span>       0.259</div><div class='input'>
+#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      </span><span style='color: #949494;'>0.</span><span>597      -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>259</span><span>       </span><span style='color: #949494;'>0.</span><span>259</div><div class='input'>
 <span class='co'># to get caption</span>
-<span class='fu'>bf_corr_test</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>anscombe</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x1</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y4</span>,
-  <span class='kw'>bf.prior</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"null"</span>
-)</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("log"["e"], "(BF"["01"], 
+<span class='fu'>bf_corr_test</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>anscombe</span>,
+  x <span class='op'>=</span> <span class='va'>x1</span>,
+  y <span class='op'>=</span> <span class='va'>y4</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>0.8</span>,
+  output <span class='op'>=</span> <span class='st'>"null"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; atop(displaystyle(NULL), expr = paste("log"["e"], "(BF"["01"], 
 #&gt;     ") = ", "0.50", ", ", widehat(italic(rho))["median"]^"posterior", 
-#&gt;     " = ", "-0.24", ", CI"["95%"]^"HDI", " [", "-0.70", ", ", 
-#&gt;     "0.29", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.80"))</div></span></pre>
+#&gt;     " = ", "-0.24", ", CI"["95%"]^"HDI", " [", "-0.74", ", ", 
+#&gt;     "0.26", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.80"))</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -242,7 +244,7 @@ expression with evidence in favor of the alternative hypothesis, or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

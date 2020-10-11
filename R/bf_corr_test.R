@@ -55,27 +55,13 @@ bf_corr_test <- function(data,
     BayesFactor::correlationBF(
       x = data %>% dplyr::pull({{ x }}),
       y = data %>% dplyr::pull({{ y }}),
-      rscale = bf.prior,
-      ...
+      rscale = bf.prior
     )
 
-  # prepare the Bayes Factor message
-  if (output != "results") {
-    bf_message <-
-      bf_expr(
-        bf.object = bf_object,
-        output = output,
-        k = k,
-        caption = caption,
-        ...
-      )
-  }
-
   # return the text results or the dataframe with results
-  return(switch(
+  switch(
     EXPR = output,
     "results" = bf_extractor(bf_object),
-    bf_message,
-    ...
-  ))
+    bf_expr(bf_object, k = k, output = output, caption = caption, ...)
+  )
 }

@@ -109,23 +109,10 @@ bf_oneway_anova <- function(data,
 
   # ============================ return ==================================
 
-  # prepare the Bayes Factor message
-  if (output != "results") {
-    bf_message <-
-      bf_expr(
-        bf.object = bf_object,
-        output = output,
-        k = k,
-        caption = caption,
-        anova.design = TRUE,
-        ...
-      )
-  }
-
   # return the text results or the dataframe with results
-  return(switch(
+  switch(
     EXPR = output,
     "results" = bf_extractor(bf_object),
-    bf_message
-  ))
+    bf_expr(bf_object, k = k, output = output, caption = caption, anova.design = TRUE, ...)
+  )
 }

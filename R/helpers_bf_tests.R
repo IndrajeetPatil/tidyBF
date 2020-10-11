@@ -31,7 +31,9 @@
 # function body
 bf_extractor <- function(bf.object, ...) {
   # extract needed info
-  df <- tryCatch(parameters::model_parameters(bf.object, ...), error = function(e) NULL)
+  df <- tryCatch(suppressMessages(parameters::model_parameters(bf.object, ...)),
+    error = function(e) NULL
+  )
   if (rlang::is_null(df)) df <- as_tibble(bf.object)
 
   # cleanup

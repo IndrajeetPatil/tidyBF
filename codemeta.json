@@ -17,7 +17,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-09-11 r79188)",
+  "runtimePlatform": "R Under development (unstable) (2020-10-07 r79310)",
   "author": [
     {
       "@type": "Person",
@@ -142,6 +142,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "insight",
+      "name": "insight",
+      "version": ">= 0.9.6.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://github.com/easystats/insight"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "ipmisc",
       "name": "ipmisc",
       "provider": {
@@ -216,5 +229,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1679.91KB"
+  "fileSize": "1655.411KB"
 }

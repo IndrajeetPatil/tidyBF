@@ -54,7 +54,6 @@ Convenience function to create an expression with Bayes
 Factor results.
 }
 \examples{
-\donttest{
 # for reproducibility
 set.seed(123)
 library(tidyBF)
@@ -69,5 +68,4 @@ bf_expr(
   k = 3,
   caption = "Note: Iris dataset"
 )
-}
 }

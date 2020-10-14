@@ -62,6 +62,17 @@ bf_ttest <- function(data,
   x <- rlang::ensym(x)
   y <- if (!rlang::quo_is_null(rlang::enquo(y))) rlang::ensym(y)
 
+  # -------------------------- one-sample tests ------------------------------
+
+  if (rlang::quo_is_null(rlang::enquo(y))) {
+    bf_object <-
+      BayesFactor::ttestBF(
+        x = stats::na.omit(data %>% dplyr::pull({{ x }})),
+        rscale = bf.prior,
+        mu = test.value
+      )
+  }
+
   # -------------------------- two-sample tests ------------------------------
 
   if (!rlang::quo_is_null(rlang::enquo(y))) {
@@ -77,14 +88,11 @@ bf_ttest <- function(data,
 
     # within-subjects design
     if (isTRUE(paired)) {
-      # change names for convenience
-      colnames(data) <- c("rowid", "col1", "col2")
-
       # extracting results from Bayesian test and creating a dataframe
       bf_object <-
         BayesFactor::ttestBF(
-          x = data$col1,
-          y = data$col2,
+          x = data[[2]],
+          y = data[[3]],
           rscale = bf.prior,
           paired = TRUE,
           progress = FALSE
@@ -105,18 +113,7 @@ bf_ttest <- function(data,
     }
   }
 
-  # -------------------------- one-sample tests ------------------------------
-
-  if (rlang::quo_is_null(rlang::enquo(y))) {
-    bf_object <-
-      BayesFactor::ttestBF(
-        x = stats::na.omit(data %>% dplyr::pull({{ x }})),
-        rscale = bf.prior,
-        mu = test.value
-      )
-  }
-
-  # ============================ return ==================================
+  # -------------------------- return --------------------------
 
   # return the text results or the dataframe with results
   switch(

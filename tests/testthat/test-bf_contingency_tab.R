@@ -17,9 +17,6 @@ testthat::test_that(
     # check bayes factor values
     testthat::expect_equal(df$bf10, 0.2465787, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10, -1.400074, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -0.6080444, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
 
     # caption
     set.seed(123)
@@ -41,7 +38,7 @@ testthat::test_that(
           ") = ",
           "-0.55",
           ", ",
-          italic("a"),
+          italic("a")["Gunel-Dickey"],
           " = ",
           "10.00"
         )
@@ -114,15 +111,13 @@ testthat::test_that(
       )
 
     # check bayes factor values
+    testthat::expect_is(df, "tbl_df")
     testthat::expect_equal(df$bf10, 28.07349, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10, 3.334826, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -df$log_e_bf01, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, 1.448296, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10, -df$log_10_bf01, tolerance = 0.001)
 
     # checking if two usages of the function are producing the same results
     testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf01, df_results$log_e_bf01, tolerance = 0.001)
+
 
     # caption text
     testthat::expect_identical(
@@ -135,7 +130,7 @@ testthat::test_that(
           ") = ",
           "3.33",
           ", ",
-          italic("a"),
+          italic("a")["Gunel-Dickey"],
           " = ",
           "1.00"
         )
@@ -152,7 +147,7 @@ testthat::test_that(
           ") = ",
           "214.25",
           ", ",
-          italic("a"),
+          italic("a")["Gunel-Dickey"],
           " = ",
           "1.00"
         )
@@ -168,7 +163,7 @@ testthat::test_that(
           ") = ",
           "-213.98",
           ", ",
-          italic("a"),
+          italic("a")["Gunel-Dickey"],
           " = ",
           "1.00"
         )

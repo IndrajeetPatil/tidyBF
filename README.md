@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 `tidyBF`: Tidy Wrapper for `BayesFactor` Package
@@ -21,7 +22,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--09--16-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--14-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -118,23 +119,29 @@ library(tidyBF)
 
 # independent t-test
 bf_ttest(data = mtcars, x = am, y = wt)
-#> # A tibble: 1 x 17
-#>   term       estimate conf.low conf.high    pd rope.percentage prior.distribution prior.location prior.scale effects component    bf10
-#>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>                       <dbl>       <dbl> <chr>   <chr>       <dbl>
-#> 1 Difference     1.26    0.820      1.70     1               0 cauchy                          0       0.707 fixed   conditional 1383.
-#>       bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>      <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#> 1 0.000723       7.23      -7.23        3.14       -3.14
+#> # A tibble: 1 x 13
+#>   term       estimate conf.low conf.high    pd rope.percentage
+#>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
+#> 1 Difference    -1.26    -1.70    -0.820     1               0
+#>   prior.distribution prior.location prior.scale effect component    bf10
+#>   <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
+#> 1 cauchy                          0       0.707 fixed  conditional 1383.
+#>   log_e_bf10
+#>        <dbl>
+#> 1       7.23
 
 # paired t-test
 bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
-#> # A tibble: 1 x 17
-#>   term       estimate conf.low conf.high    pd rope.percentage prior.distribution prior.location prior.scale effects component    bf10
-#>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>                       <dbl>       <dbl> <chr>   <chr>       <dbl>
-#> 1 Difference     1.71    0.579      3.41     1               0 cauchy                          0       0.707 fixed   conditional  17.3
-#>     bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>    <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#> 1 0.0579       2.85      -2.85        1.24       -1.24
+#> # A tibble: 1 x 13
+#>   term       estimate conf.low conf.high    pd rope.percentage
+#>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
+#> 1 Difference     1.40    0.697      2.10 0.996               0
+#>   prior.distribution prior.location prior.scale effect component    bf10
+#>   <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
+#> 1 cauchy                          0       0.707 fixed  conditional  17.3
+#>   log_e_bf10
+#>        <dbl>
+#> 1       2.85
 ```
 
 Expressions for plots
@@ -269,39 +276,43 @@ result <-
 
 # extract details
 bf_extractor(result)
-#> Multiple `BFBayesFactor` models detected - posteriors are extracted from the first numerator model.
-#> See help("get_parameters", package = "insight").
-#> Multiple `BFBayesFactor` models detected - posteriors are extracted from the first numerator model.
-#> See help("get_parameters", package = "insight").
-#> Multiple `BFBayesFactor` models detected - posteriors are extracted from the first numerator model.
-#> See help("get_parameters", package = "insight").
-#> Multiple `BFBayesFactor` models detected - posteriors are extracted from the first numerator model.
-#> See help("get_parameters", package = "insight").
-#> # A tibble: 21 x 17
-#>    term                estimate conf.low conf.high    pd rope.percentage prior.distribution prior.location prior.scale effects
-#>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>                       <dbl>       <dbl> <chr>  
-#>  1 mu                    45.0    43.9      46.1    1              0      <NA>                           NA          NA fixed  
-#>  2 shape-round            0.438   0.131     0.741  0.986          0      <NA>                           NA          NA fixed  
-#>  3 shape-square          -0.438  -0.741    -0.131  0.986          0      <NA>                           NA          NA fixed  
-#>  4 color-color           -0.426  -0.711    -0.0995 0.983          0      <NA>                           NA          NA fixed  
-#>  5 color-monochromatic    0.426   0.0995    0.711  0.983          0      <NA>                           NA          NA fixed  
-#>  6 ID-1                   2.49    1.04      3.98   0.996          0      <NA>                           NA          NA random 
-#>  7 ID-2                   0.449  -1.02      1.78   0.698          0.0885 <NA>                           NA          NA random 
-#>  8 ID-3                   0.907  -0.501     2.32   0.84           0.0649 <NA>                           NA          NA random 
-#>  9 ID-4                   0.420  -0.959     1.98   0.691          0.0862 <NA>                           NA          NA random 
-#> 10 ID-5                   3.14    1.83      4.66   1.00           0      <NA>                           NA          NA random 
-#>    component    bf10  bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>    <chr>       <dbl> <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#>  1 extra       2.65  0.378      0.974     -0.974       0.423      -0.423
-#>  2 conditional 0.233 4.28      -1.45       1.45       -0.632       0.632
-#>  3 conditional 0.239 4.18      -1.43       1.43       -0.621       0.621
-#>  4 conditional 2.65  0.378      0.974     -0.974       0.423      -0.423
-#>  5 conditional 0.233 4.28      -1.45       1.45       -0.632       0.632
-#>  6 conditional 0.239 4.18      -1.43       1.43       -0.621       0.621
-#>  7 conditional 2.65  0.378      0.974     -0.974       0.423      -0.423
-#>  8 conditional 0.233 4.28      -1.45       1.45       -0.632       0.632
-#>  9 conditional 0.239 4.18      -1.43       1.43       -0.621       0.621
-#> 10 conditional 2.65  0.378      0.974     -0.974       0.423      -0.423
+#> # A tibble: 21 x 13
+#>    term                estimate conf.low conf.high    pd rope.percentage
+#>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl>
+#>  1 mu                    45.0    43.9      46.1    1               0    
+#>  2 shape-round            0.429   0.131     0.741  0.992           0.141
+#>  3 shape-square          -0.429  -0.741    -0.131  0.992           0.141
+#>  4 color-color           -0.426  -0.711    -0.0995 0.990           0.162
+#>  5 color-monochromatic    0.426   0.0995    0.711  0.990           0.162
+#>  6 ID-1                   2.47    1.04      3.98   0.995           0    
+#>  7 ID-2                   0.439  -1.02      1.78   0.698           0.231
+#>  8 ID-3                   0.907  -0.501     2.32   0.848           0.156
+#>  9 ID-4                   0.466  -0.959     1.98   0.704           0.218
+#> 10 ID-5                   3.17    1.83      4.66   0.999           0    
+#>    prior.distribution prior.location prior.scale effect component    bf10
+#>    <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
+#>  1 <NA>                           NA          NA fixed  extra       2.65 
+#>  2 <NA>                           NA          NA fixed  conditional 0.233
+#>  3 <NA>                           NA          NA fixed  conditional 0.239
+#>  4 <NA>                           NA          NA fixed  conditional 2.65 
+#>  5 <NA>                           NA          NA fixed  conditional 0.233
+#>  6 <NA>                           NA          NA random conditional 0.239
+#>  7 <NA>                           NA          NA random conditional 2.65 
+#>  8 <NA>                           NA          NA random conditional 0.233
+#>  9 <NA>                           NA          NA random conditional 0.239
+#> 10 <NA>                           NA          NA random conditional 2.65 
+#>    log_e_bf10
+#>         <dbl>
+#>  1      0.974
+#>  2     -1.45 
+#>  3     -1.43 
+#>  4      0.974
+#>  5     -1.45 
+#>  6     -1.43 
+#>  7      0.974
+#>  8     -1.45 
+#>  9     -1.43 
+#> 10      0.974
 #> # ... with 11 more rows
 ```
 
@@ -342,13 +353,13 @@ bf
 
 # `tidyBF` output
 bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
-#> # A tibble: 1 x 17
-#>   term  estimate conf.low conf.high    pd rope.percentage prior.distribution prior.location prior.scale effects component      bf10
-#>   <chr>    <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>                       <dbl>       <dbl> <chr>   <chr>         <dbl>
-#> 1 rho      0.863    0.828     0.892     1               0 cauchy                          0       0.333 fixed   conditional 2.13e43
-#>       bf01 log_e_bf10 log_e_bf01 log_10_bf10 log_10_bf01
-#>      <dbl>      <dbl>      <dbl>       <dbl>       <dbl>
-#> 1 4.70e-44       99.8      -99.8        43.3       -43.3
+#> # A tibble: 1 x 13
+#>   term  estimate conf.low conf.high    pd rope.percentage prior.distribution
+#>   <chr>    <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>             
+#> 1 rho      0.863    0.828     0.897     1               0 cauchy            
+#>   prior.location prior.scale effect component      bf10 log_e_bf10
+#>            <dbl>       <dbl> <chr>  <chr>         <dbl>      <dbl>
+#> 1              0       0.333 fixed  conditional 2.13e43       99.8
 ```
 
 Note that the log-transformed values are helpful because in case of

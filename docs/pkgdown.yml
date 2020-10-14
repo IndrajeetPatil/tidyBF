@@ -2,7 +2,7 @@ pandoc: '2.11'
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2020-10-14T08:30Z
+last_built: 2020-10-14T21:22Z
 urls:
   reference: https://indrajeetpatil.github.io/tidyBF//reference
   article: https://indrajeetpatil.github.io/tidyBF//articles

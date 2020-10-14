@@ -10,7 +10,7 @@ bf_corr_test(
   y,
   bf.prior = 0.707,
   caption = NULL,
-  output = "results",
+  output = "dataframe",
   k = 2L,
   ...
 )
@@ -37,7 +37,7 @@ Bayes Factor caption/message).}
 which will return expression with evidence in favor of the null hypothesis,
 or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
 expression with evidence in favor of the alternative hypothesis, or
-\code{"results"}, which will return a dataframe with results all the details).}
+\code{"dataframe"}, which will return a dataframe with results all the details).}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}

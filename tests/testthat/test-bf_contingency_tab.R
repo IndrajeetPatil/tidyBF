@@ -11,7 +11,7 @@ testthat::test_that(
       bf_contingency_tab(
         data = mtcars,
         x = am,
-        output = "results"
+        output = "dataframe"
       )
 
     # check bayes factor values
@@ -74,7 +74,7 @@ testthat::test_that(
         y = cyl,
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
-        output = "results"
+        output = "dataframe"
       )
 
     # caption

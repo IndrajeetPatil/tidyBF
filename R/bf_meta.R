@@ -7,7 +7,6 @@
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
 #'   two columns will be used for `yi`  and `sei` arguments in `metafor::rma`
 #'   (for parametric analysis) or `metaplus::metaplus` (for robust analysis).
-#' @param messages Deprecated. Retained only for backward compatibility.
 #' @inheritParams bf_expr
 #' @inheritParams metaBMA::meta_random
 #' @inheritDotParams metaBMA::meta_random -y -SE
@@ -48,7 +47,6 @@
 #'   data = df,
 #'   k = 3,
 #'   iter = 1500,
-#'   messages = TRUE,
 #'   # customizing analysis with additional arguments
 #'   control = list(max_treedepth = 15)
 #' )
@@ -61,9 +59,8 @@ bf_meta <- function(data,
                     d = prior("norm", c(mean = 0, sd = 0.3)),
                     tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                     k = 2L,
-                    output = "results",
+                    output = "dataframe",
                     caption = NULL,
-                    messages = TRUE,
                     ...) {
 
   # check the data contains needed column
@@ -72,7 +69,7 @@ bf_meta <- function(data,
   #----------------------- meta-analysis -------------------------------
 
   # extracting results from random-effects meta-analysis
-  meta_res <-
+  mod <-
     metaBMA::meta_random(
       y = data$estimate,
       SE = data$std.error,
@@ -84,12 +81,9 @@ bf_meta <- function(data,
   #----------------------- preparing caption -------------------------------
 
   # creating a dataframe with posterior estimates
-  df_estimates <-
-    as_tibble(meta_res$estimates, rownames = "term") %>%
-    dplyr::filter(.data = ., term == "d")
-
-  # dataframe with bayes factors
-  df <- tibble(bf10 = meta_res$BF["random_H1", "random_H0"])
+  df <-
+    as_tibble(mod$estimates, rownames = "term") %>%
+    dplyr::mutate(.data = ., bf10 = mod$BF["random_H1", "random_H0"])
 
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
@@ -127,16 +121,16 @@ bf_meta <- function(data,
         top.text = caption,
         bf.sub = bf.sub,
         bf = specify_decimal_p(x = bf.value, k = k),
-        d.pmean = specify_decimal_p(x = df_estimates$mean[[1]], k = k),
-        d.pmean.LB = specify_decimal_p(x = df_estimates$hpd95_lower[[1]], k = k),
-        d.pmean.UB = specify_decimal_p(x = df_estimates$hpd95_upper[[1]], k = k)
+        d.pmean = specify_decimal_p(x = df$mean[[1]], k = k),
+        d.pmean.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
+        d.pmean.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k)
       )
     )
 
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = df,
+    "dataframe" = df,
     bf_message
   ))
 }

@@ -9,9 +9,8 @@ bf_meta(
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   k = 2L,
-  output = "results",
+  output = "dataframe",
   caption = NULL,
-  messages = TRUE,
   ...
 )
 }
@@ -36,12 +35,10 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
 which will return expression with evidence in favor of the null hypothesis,
 or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
 expression with evidence in favor of the alternative hypothesis, or
-\code{"results"}, which will return a dataframe with results all the details).}
+\code{"dataframe"}, which will return a dataframe with results all the details).}
 
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}
-
-\item{messages}{Deprecated. Retained only for backward compatibility.}
 
 \item{...}{
   Arguments passed on to \code{\link[metaBMA:meta_random]{metaBMA::meta_random}}
@@ -114,7 +111,6 @@ bf_meta(
   data = df,
   k = 3,
   iter = 1500,
-  messages = TRUE,
   # customizing analysis with additional arguments
   control = list(max_treedepth = 15)
 )

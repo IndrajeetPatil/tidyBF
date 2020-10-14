@@ -9,6 +9,9 @@ BREAKING CHANGES
     hypothesis (`BF10`) and its `log` value to avoid cluttered dataframe since
     all the other columns were essentially mathematical transformations of it
     and not really relevant.
+    
+  - The `output` argument's default value has been changed from too generic
+    `"results"` to `"dataframe"`.
 
 MAJOR CHANGES
 

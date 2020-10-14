@@ -23,8 +23,7 @@ testthat::test_that(
         x = supp,
         y = "len",
         paired = FALSE,
-        bf.prior = 0.99,
-        output = "results"
+        bf.prior = 0.99
       )
 
     # check bayes factor values
@@ -69,8 +68,7 @@ testthat::test_that(
         x = "condition",
         y = desire,
         paired = TRUE,
-        bf.prior = 0.8,
-        output = "results"
+        bf.prior = 0.8
       )
 
     # check bayes factor values
@@ -108,8 +106,7 @@ testthat::test_that(
         x = Petal.Length,
         y = NULL,
         test.value = 5.5,
-        bf.prior = 0.99,
-        output = "results"
+        bf.prior = 0.99
       )
 
     # check Bayes factor values

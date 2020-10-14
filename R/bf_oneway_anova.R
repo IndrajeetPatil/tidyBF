@@ -55,7 +55,7 @@ bf_oneway_anova <- function(data,
                             y,
                             bf.prior = 0.707,
                             caption = NULL,
-                            output = "results",
+                            output = "dataframe",
                             paired = FALSE,
                             k = 2L,
                             ...) {
@@ -112,7 +112,7 @@ bf_oneway_anova <- function(data,
   # return the text results or the dataframe with results
   switch(
     EXPR = output,
-    "results" = bf_extractor(bf_object),
+    "dataframe" = bf_extractor(bf_object),
     bf_expr(bf_object, k = k, output = output, caption = caption, anova.design = TRUE, ...)
   )
 }

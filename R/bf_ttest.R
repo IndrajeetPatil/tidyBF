@@ -54,7 +54,7 @@ bf_ttest <- function(data,
                      paired = FALSE,
                      bf.prior = 0.707,
                      caption = NULL,
-                     output = "results",
+                     output = "dataframe",
                      k = 2L,
                      ...) {
 
@@ -118,7 +118,7 @@ bf_ttest <- function(data,
   # return the text results or the dataframe with results
   switch(
     EXPR = output,
-    "results" = bf_extractor(bf_object),
+    "dataframe" = bf_extractor(bf_object),
     bf_expr(bf_object, k = k, output = output, caption = caption, ...)
   )
 }

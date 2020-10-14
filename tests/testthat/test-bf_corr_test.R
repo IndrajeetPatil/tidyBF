@@ -11,8 +11,7 @@ testthat::test_that(
       bf_corr_test(
         data = iris,
         y = Sepal.Length,
-        x = "Sepal.Width",
-        output = "results"
+        x = "Sepal.Width"
       )
 
     # check bayes factor values
@@ -70,8 +69,7 @@ testthat::test_that(
       bf_corr_test(
         data = ggplot2::msleep,
         y = names(ggplot2::msleep)[10],
-        x = "sleep_rem",
-        output = "results"
+        x = "sleep_rem"
       )
 
     # check bayes factor values

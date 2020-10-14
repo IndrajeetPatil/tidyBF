@@ -135,9 +135,8 @@
   d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"norm"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span><span class='op'>)</span>,
   tau <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"invgamma"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>0.15</span><span class='op'>)</span><span class='op'>)</span>,
   k <span class='op'>=</span> <span class='fl'>2L</span>,
-  output <span class='op'>=</span> <span class='st'>"results"</span>,
+  output <span class='op'>=</span> <span class='st'>"dataframe"</span>,
   caption <span class='op'>=</span> <span class='cn'>NULL</span>,
-  messages <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -174,16 +173,12 @@ probability density function is defined via <code><a href='https://rdrr.io/pkg/m
 which will return expression with evidence in favor of the null hypothesis,
 or <code>"alternative"</code> (or <code>"title"</code> or <code>"H1"</code> or <code>"h1"</code>), which will return
 expression with evidence in favor of the alternative hypothesis, or
-<code>"results"</code>, which will return a dataframe with results all the details).</p></td>
+<code>"dataframe"</code>, which will return a dataframe with results all the details).</p></td>
     </tr>
     <tr>
       <th>caption</th>
       <td><p>Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).</p></td>
-    </tr>
-    <tr>
-      <th>messages</th>
-      <td><p>Deprecated. Retained only for backward compatibility.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -264,16 +259,20 @@ study in random-effects meta-analysis.</p></dd>
   data <span class='op'>=</span> <span class='va'>df</span>,
   k <span class='op'>=</span> <span class='fl'>3</span>,
   iter <span class='op'>=</span> <span class='fl'>1500</span>,
-  messages <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='co'># customizing analysis with additional arguments</span>
   control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>max_treedepth <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: There were 2 divergent transitions after warmup. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-#&gt; <span class='warning'>to find out why this is a problem and how to eliminate them.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 1</span><span>
+#&gt; <span class='warning'>to find out why this is a problem and how to eliminate them.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 11</span><span>
+#&gt;   </span><span style='font-weight: bold;'>term</span><span>   </span><span style='font-weight: bold;'>mean</span><span>    </span><span style='font-weight: bold;'>sd</span><span> </span><span style='font-weight: bold;'>`2.5%`</span><span> </span><span style='font-weight: bold;'>`50%`</span><span> </span><span style='font-weight: bold;'>`97.5%`</span><span> </span><span style='font-weight: bold;'>hpd95_lower</span><span> </span><span style='font-weight: bold;'>hpd95_upper</span><span> </span><span style='font-weight: bold;'>n_eff</span><span>  </span><span style='font-weight: bold;'>Rhat</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> d     </span><span style='color: #555555;'>0.</span><span>535 </span><span style='color: #555555;'>0.</span><span>119  </span><span style='color: #555555;'>0.</span><span>273 </span><span style='color: #555555;'>0.</span><span>544   </span><span style='color: #555555;'>0.</span><span>751       </span><span style='color: #555555;'>0.</span><span>287       </span><span style='color: #555555;'>0.</span><span>762  682.  1.00
+#&gt; </span><span style='color: #555555;'>2</span><span> tau   </span><span style='color: #555555;'>0.</span><span>277 </span><span style='color: #555555;'>0.</span><span>118  </span><span style='color: #555555;'>0.</span><span>133 </span><span style='color: #555555;'>0.</span><span>249   </span><span style='color: #555555;'>0.</span><span>602       </span><span style='color: #555555;'>0.</span><span>119       </span><span style='color: #555555;'>0.</span><span>518  431.  1.00
 #&gt;    </span><span style='font-weight: bold;'>bf10</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  28.2</div><div class='input'><span class='co'># }</span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  28.2
+#&gt; </span><span style='color: #555555;'>2</span><span>  28.2</div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>

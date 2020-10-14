@@ -66,7 +66,7 @@ bf_extractor <- function(bf.object, ...) {
 #'   which will return expression with evidence in favor of the null hypothesis,
 #'   or `"alternative"` (or `"title"` or `"H1"` or `"h1"`), which will return
 #'   expression with evidence in favor of the alternative hypothesis, or
-#'   `"results"`, which will return a dataframe with results all the details).
+#'   `"dataframe"`, which will return a dataframe with results all the details).
 #' @param anova.design Whether the object is from `BayesFactor::anovaBF`
 #'   (default: `FALSE`). The expression is different for anova designs because
 #'   not all details are available.

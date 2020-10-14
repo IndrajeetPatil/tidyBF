@@ -37,7 +37,7 @@ Character (vector) or list with one or more of these options: \code{"median"},
 which will return expression with evidence in favor of the null hypothesis,
 or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
 expression with evidence in favor of the alternative hypothesis, or
-\code{"results"}, which will return a dataframe with results all the details).}
+\code{"dataframe"}, which will return a dataframe with results all the details).}
 
 \item{caption}{Text to display as caption (will be displayed on top of the
 Bayes Factor caption/message).}

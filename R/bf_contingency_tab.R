@@ -82,7 +82,7 @@ bf_contingency_tab <- function(data,
                                fixed.margin = "rows",
                                prior.concentration = 1,
                                caption = NULL,
-                               output = "results",
+                               output = "dataframe",
                                k = 2L,
                                ...) {
 
@@ -230,7 +230,7 @@ bf_contingency_tab <- function(data,
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = dplyr::select(df, -dplyr::matches("error|time|code")),
+    "dataframe" = dplyr::select(df, -dplyr::matches("error|time|code")),
     bf_message
   ))
 }

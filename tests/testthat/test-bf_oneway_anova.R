@@ -30,7 +30,7 @@ testthat::test_that(
         x = "vore",
         y = brainwt,
         bf.prior = 0.99,
-        output = "results"
+        output = "dataframe"
       )
 
     # extracting caption - null
@@ -153,7 +153,7 @@ testthat::test_that(
         y = "Taste",
         paired = TRUE,
         bf.prior = 0.99,
-        output = "results"
+        output = "dataframe"
       )
 
     # extracting caption - null

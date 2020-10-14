@@ -7,7 +7,7 @@
 #'
 #' @importFrom BayesFactor extractBF
 #' @importFrom dplyr select mutate
-#' @importFrom ipmisc easystats_to_tidy_names
+#' @importFrom insight standardize_names
 #' @importFrom parameters model_parameters
 #'
 #' @note *Important*: don't enter `1/bf_obj` to extract results for null
@@ -31,29 +31,18 @@
 # function body
 bf_extractor <- function(bf.object, ...) {
   # extract needed info
-  df <- tryCatch(suppressMessages(parameters::model_parameters(bf.object, ...)),
+  df <- tryCatch(
+    suppressWarnings(suppressMessages(parameters::model_parameters(bf.object, ...) %>%
+      insight::standardize_names(data = ., style = "broom"))),
     error = function(e) NULL
   )
+
   if (rlang::is_null(df)) df <- as_tibble(bf.object)
 
   # cleanup
-  ipmisc::easystats_to_tidy_names(df) %>%
-    dplyr::rename(.data = ., bf10 = bf) %>%
-    bf_formatter(.)
-}
-
-#' @noRd
-#' @keywords internal
-
-bf_formatter <- function(data) {
-  dplyr::mutate(
-    .data = data,
-    bf01 = 1 / bf10,
-    log_e_bf10 = log(bf10),
-    log_e_bf01 = -1 * log_e_bf10,
-    log_10_bf10 = log10(bf10),
-    log_10_bf01 = -1 * log_10_bf10
-  )
+  dplyr::rename_all(.tbl = df, .funs = dplyr::recode, "bf" = "bf10", "bayes.factor" = "bf10") %>%
+    dplyr::mutate(.data = ., log_e_bf10 = log(bf10)) %>%
+    as_tibble(.)
 }
 
 #' @title Prepare caption with expression for Bayes Factor results
@@ -63,7 +52,7 @@ bf_formatter <- function(data) {
 #'
 #' @param k Number of digits after decimal point (should be an integer)
 #'   (Default: `k = 2L`).
-#' @param centrality	 The point-estimates (centrality indices) to compute.
+#' @param centrality The point-estimates (centrality indices) to compute.
 #'   Character (vector) or list with one or more of these options: `"median"`,
 #'   `"mean"`, `"MAP"` or `"all"`.
 #' @param conf.level Value or vector of probability of the CI (between 0 and 1)
@@ -84,7 +73,6 @@ bf_formatter <- function(data) {
 #' @inheritParams bf_extractor
 #'
 #' @examples
-#' \donttest{
 #' # for reproducibility
 #' set.seed(123)
 #' library(tidyBF)
@@ -99,7 +87,6 @@ bf_formatter <- function(data) {
 #'   k = 3,
 #'   caption = "Note: Iris dataset"
 #' )
-#' }
 #' @export
 
 # function body
@@ -113,7 +100,7 @@ bf_expr <- function(bf.object,
                     anova.design = FALSE,
                     ...) {
   # extract a dataframe with BF and posterior estimates (if available)
-  bf.df <-
+  df <-
     bf_extractor(
       bf.object = bf.object,
       ci = conf.level,
@@ -124,48 +111,26 @@ bf_expr <- function(bf.object,
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
     # bf-related text
-    bf.value <- bf.df$log_e_bf01[[1]]
-    bf.subscript <- "01"
+    bf.value <- -log(df$bf10[[1]])
+    bf.sub <- "01"
   } else {
     # bf-related text
-    bf.value <- -bf.df$log_e_bf01[[1]]
-    bf.subscript <- "10"
+    bf.value <- log(df$bf10[[1]])
+    bf.sub <- "10"
   }
 
   # for anova designs
   if (isTRUE(anova.design)) {
-    # priors dataframe
-    # prior.df <-
-    #   bayestestR::describe_prior(bf.object) %>%
-    #   ipmisc::easystats_to_tidy_names(.)
-
     # prepare the Bayes Factor message
     bf_message <-
       substitute(
         atop(displaystyle(top.text),
-          expr = paste(
-            "log"["e"],
-            "(BF"[bf.subscript],
-            ") = ",
-            bf
-            # ,
-            # ", ",
-            # italic("r")["Cauchy"]^"fixed",
-            # " = ",
-            # bf_prior_fixed,
-            # ", ",
-            # italic("r")["Cauchy"]^"random",
-            # " = ",
-            # bf_prior_random
-          )
+          expr = paste("log"["e"], "(BF"[bf.sub], ") = ", bf)
         ),
         env = list(
           top.text = caption,
-          bf.subscript = bf.subscript,
+          bf.sub = bf.sub,
           bf = specify_decimal_p(x = bf.value, k = k)
-          # ,
-          # bf_prior_fixed = specify_decimal_p(x = prior.df$prior.scale[[1]], k = k),
-          # bf_prior_random = specify_decimal_p(x = prior.df$prior.scale[[2]], k = k)
         )
       )
   }
@@ -173,7 +138,7 @@ bf_expr <- function(bf.object,
   # for non-anova tests
   if (isFALSE(anova.design)) {
     # t-test or correlation
-    estimate.type <- ifelse(bf.df$term[[1]] == "Difference", quote(d), quote(rho))
+    estimate.type <- ifelse(df$term[[1]] == "Difference", quote(d), quote(rho))
 
     # prepare the Bayes Factor message
     bf_message <-
@@ -181,7 +146,7 @@ bf_expr <- function(bf.object,
         atop(displaystyle(top.text),
           expr = paste(
             "log"["e"],
-            "(BF"[bf.subscript],
+            "(BF"[bf.sub],
             ") = ",
             bf,
             ", ",
@@ -202,16 +167,16 @@ bf_expr <- function(bf.object,
         ),
         env = list(
           top.text = caption,
-          bf.subscript = bf.subscript,
+          bf.sub = bf.sub,
           estimate.type = estimate.type,
           centrality = centrality,
           conf.level = paste0(conf.level * 100, "%"),
           conf.method = toupper(conf.method),
           bf = specify_decimal_p(x = bf.value, k = k),
-          estimate = specify_decimal_p(x = bf.df$estimate[[1]], k = k),
-          estimate.LB = specify_decimal_p(x = bf.df$conf.low[[1]], k = k),
-          estimate.UB = specify_decimal_p(x = bf.df$conf.high[[1]], k = k),
-          bf_prior = specify_decimal_p(x = bf.df$prior.scale[[1]], k = k)
+          estimate = specify_decimal_p(x = df$estimate[[1]], k = k),
+          estimate.LB = specify_decimal_p(x = df$conf.low[[1]], k = k),
+          estimate.UB = specify_decimal_p(x = df$conf.high[[1]], k = k),
+          bf_prior = specify_decimal_p(x = df$prior.scale[[1]], k = k)
         )
       )
   }

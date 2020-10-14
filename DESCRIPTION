@@ -24,6 +24,7 @@ Depends:
 Imports: 
     BayesFactor,
     dplyr,
+    insight (>= 0.9.6.1),
     ipmisc,
     metaBMA,
     parameters,
@@ -35,6 +36,8 @@ Suggests:
     rmarkdown,
     spelling,
     testthat
+Remotes:
+    easystats/insight    
 Encoding: UTF-8
 Language: en-US
 LazyData: true

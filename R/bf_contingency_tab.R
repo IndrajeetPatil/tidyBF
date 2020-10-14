@@ -120,7 +120,7 @@ bf_contingency_tab <- function(data,
     data %<>% dplyr::mutate(.data = ., {{ y }} := droplevels(as.factor({{ y }})))
 
     # extracting results from Bayesian test and creating a dataframe
-    bf.df <-
+    df <-
       bf_extractor(
         BayesFactor::contingencyTableBF(
           x = table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
@@ -185,21 +185,22 @@ bf_contingency_tab <- function(data,
     pr_y_h1 <- BayesFactor::logMeanExpLogs(tmp_pr_h1)
 
     # computing Bayes Factor and formatting the results
-    bf.df <-
+    df <-
       tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
-      bf_formatter(.) %>%
-      dplyr::mutate(.data = ., prior.concentration = prior.concentration)
+      dplyr::mutate(log_e_bf10 = log(bf10), prior.concentration = prior.concentration)
   }
 
   # ========================= caption preparation =============================
 
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
-    bf.value <- bf.df$log_e_bf01[[1]]
-    bf.subscript <- "01"
+    # bf-related text
+    bf.value <- -log(df$bf10[[1]])
+    bf.sub <- "01"
   } else {
-    bf.value <- -bf.df$log_e_bf01[[1]]
-    bf.subscript <- "10"
+    # bf-related text
+    bf.value <- log(df$bf10[[1]])
+    bf.sub <- "10"
   }
 
   # final expression
@@ -209,27 +210,27 @@ bf_contingency_tab <- function(data,
         displaystyle(top.text),
         expr = paste(
           "log"["e"],
-          "(BF"[bf.subscript],
+          "(BF"[bf.sub],
           ") = ",
           bf,
           ", ",
-          italic("a"),
+          italic("a")["Gunel-Dickey"],
           " = ",
           a
         )
       ),
       env = list(
         top.text = caption,
-        bf.subscript = bf.subscript,
+        bf.sub = bf.sub,
         bf = specify_decimal_p(x = bf.value, k = k),
-        a = specify_decimal_p(x = bf.df$prior.concentration[[1]], k = k)
+        a = specify_decimal_p(x = df$prior.concentration[[1]], k = k)
       )
     )
 
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = bf.df,
+    "results" = dplyr::select(df, -dplyr::matches("error|time|code")),
     bf_message
   ))
 }

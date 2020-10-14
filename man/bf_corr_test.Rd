@@ -51,6 +51,7 @@ Bayesian correlation test.
 \examples{
 # for reproducibility
 set.seed(123)
+library(tidyBF)
 
 # to see results
 bf_corr_test(

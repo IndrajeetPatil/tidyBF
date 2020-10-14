@@ -4,6 +4,11 @@ BREAKING CHANGES
 
   - Removes the unnecessary aliases for certain tests: `bf_one_sample_ttest`,
     `bf_two_sample_ttest`, and `bf_onesample_proptest`.
+    
+  - The output dataframe now only contains results for the alternative
+    hypothesis (`BF10`) and its `log` value to avoid cluttered dataframe since
+    all the other columns were essentially mathematical transformations of it
+    and not really relevant.
 
 MAJOR CHANGES
 

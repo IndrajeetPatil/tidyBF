@@ -89,17 +89,17 @@ bf_meta <- function(data,
     dplyr::filter(.data = ., term == "d")
 
   # dataframe with bayes factors
-  bf.df <-
-    tibble(bf10 = meta_res$BF["random_H1", "random_H0"]) %>%
-    bf_formatter(.)
+  df <- tibble(bf10 = meta_res$BF["random_H1", "random_H0"])
 
   # changing aspects of the caption based on what output is needed
   if (output %in% c("null", "caption", "H0", "h0")) {
-    bf.value <- bf.df$log_e_bf01[[1]]
-    bf.subscript <- "01"
+    # bf-related text
+    bf.value <- -log(df$bf10[[1]])
+    bf.sub <- "01"
   } else {
-    bf.value <- bf.df$log_e_bf10[[1]]
-    bf.subscript <- "10"
+    # bf-related text
+    bf.value <- log(df$bf10[[1]])
+    bf.sub <- "10"
   }
 
   # prepare the Bayes factor message
@@ -108,7 +108,7 @@ bf_meta <- function(data,
       atop(displaystyle(top.text),
         expr = paste(
           "log"["e"],
-          "(BF"[bf.subscript],
+          "(BF"[bf.sub],
           ") = ",
           bf,
           ", ",
@@ -125,7 +125,7 @@ bf_meta <- function(data,
       ),
       env = list(
         top.text = caption,
-        bf.subscript = bf.subscript,
+        bf.sub = bf.sub,
         bf = specify_decimal_p(x = bf.value, k = k),
         d.pmean = specify_decimal_p(x = df_estimates$mean[[1]], k = k),
         d.pmean.LB = specify_decimal_p(x = df_estimates$hpd95_lower[[1]], k = k),
@@ -136,7 +136,7 @@ bf_meta <- function(data,
   # return the text results or the dataframe with results
   return(switch(
     EXPR = output,
-    "results" = bf.df,
+    "results" = df,
     bf_message
   ))
 }

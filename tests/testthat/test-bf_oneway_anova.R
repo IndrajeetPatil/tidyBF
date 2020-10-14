@@ -58,13 +58,9 @@ testthat::test_that(
     # check bayes factor values
     testthat::expect_equal(df$bf10[[1]], 0.1177186, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10[[1]], -df$log_e_bf01[[1]], tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10[[1]], -0.9291548, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10[[1]], -df$log_10_bf01[[1]], tolerance = 0.001)
 
     # checking if two usages of the function are producing the same results
     testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf01[[1]], df_results$log_e_bf01[[1]], tolerance = 0.001)
 
     # call for null and alternative
     testthat::expect_identical(
@@ -189,13 +185,10 @@ testthat::test_that(
     # check bayes factor values
     testthat::expect_equal(df$bf10[[1]], 6.364917, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10[[1]], -df$log_e_bf01[[1]], tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10[[1]], 0.8037927, tolerance = 0.001)
-    testthat::expect_equal(df$log_10_bf10[[1]], -df$log_10_bf01[[1]], tolerance = 0.001)
 
     # checking if two usages of the function are producing the same results
     testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf01[[1]], df_results$log_e_bf01[[1]], tolerance = 0.001)
+
 
     # call for null and alternative
     testthat::expect_identical(

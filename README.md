@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-`tidyBF`: Tidy Wrapper for `BayesFactor` Package
-================================================
+# `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
 [![packageversion](https://img.shields.io/badge/Package%20version-0.3.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads
@@ -22,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--14-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--16-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -30,8 +29,7 @@ Status](https://img.shields.io/codecov/c/github/IndrajeetPatil/tidyBF/master.svg
 [![Coverage
 Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)
 
-Overview <img src="man/figures/logo.png" align="right" width="240" />
-=====================================================================
+# Overview <img src="man/figures/logo.png" align="right" width="240" />
 
 `tidyBF` package is a tidy wrapper around the `BayesFactor` package that
 always expects the data to be in the tidy format and return a tibble
@@ -40,8 +38,7 @@ consistent syntax and by default returns a dataframe with rich details.
 These functions can also return expressions containing results from
 Bayes Factor tests that can then be displayed in custom plots.
 
-Installation
-============
+# Installation
 
 To get the latest, stable `CRAN` release:
 
@@ -52,8 +49,7 @@ install.packages("tidyBF")
 You can get the **development** version of the package from `GitHub`. To
 see what new changes (and bug fixes) have been made to the package since
 the last release on `CRAN`, you can check the detailed log of changes
-here:
-<a href="https://indrajeetpatil.github.io/tidyBF/news/index.html" class="uri">https://indrajeetpatil.github.io/tidyBF/news/index.html</a>
+here: <https://indrajeetpatil.github.io/tidyBF/news/index.html>
 
 If you are in hurry and want to reduce the time of installation, prefer-
 
@@ -77,15 +73,13 @@ remotes::install_github(
 )
 ```
 
-Benefits
-========
+# Benefits
 
 Below are few concrete examples of where `tidyBF` wrapper might provide
 a more friendly way to access output from or write functions around
 `BayesFactor`.
 
-Syntax consistency
-------------------
+## Syntax consistency
 
 `BayesFactor` is inconsistent with its formula interface. `tidyBF`
 avoids this as it doesn’t provide the formula interface for any of the
@@ -144,8 +138,7 @@ bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
 #> 1       2.85
 ```
 
-Expressions for plots
----------------------
+## Expressions for plots
 
 Although all functions default to returning a dataframe, you can also
 use it to extract expressions that can be displayed in plots.
@@ -251,8 +244,7 @@ viz_forest(
 
 <img src="man/figures/README-expr_plot5-1.png" width="100%" />
 
-Convenient way to extract detailed output from `BayesFactor` objects
---------------------------------------------------------------------
+## Convenient way to extract detailed output from `BayesFactor` objects
 
 The package provides `bf_extractor` function to conveniently extract
 important details from these objects:
@@ -316,8 +308,7 @@ bf_extractor(result)
 #> # ... with 11 more rows
 ```
 
-Dataframe with all the details
-------------------------------
+## Dataframe with all the details
 
 `BayesFactor` can return the Bayes Factor value corresponding to either
 evidence in favor of the null hypothesis over the alternative hypothesis
@@ -366,14 +357,12 @@ Note that the log-transformed values are helpful because in case of
 strong effects, the raw Bayes Factor values can be pretty large, but the
 log-transformed values continue to remain easy to work with.
 
-Acknowledgments
-===============
+# Acknowledgments
 
 The hexsticker was generously designed by Sarah Otterstetter (Max Planck
 Institute for Human Development, Berlin).
 
-Code of Conduct
-===============
+# Code of Conduct
 
 Please note that the `tidyBF` project is released with a [Contributor
 Code of

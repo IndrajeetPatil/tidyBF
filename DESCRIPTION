@@ -27,7 +27,7 @@ Imports:
     insight (>= 0.9.6.1),
     ipmisc,
     metaBMA,
-    parameters,
+    parameters (>= 0.8.6.1),
     rlang,
     tidyr
 Suggests: 
@@ -37,7 +37,8 @@ Suggests:
     spelling,
     testthat
 Remotes:
-    easystats/insight    
+    easystats/insight,
+    easystats/parameters
 Encoding: UTF-8
 Language: en-US
 LazyData: true

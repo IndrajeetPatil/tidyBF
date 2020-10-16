@@ -32,12 +32,16 @@
 bf_extractor <- function(bf.object, ...) {
   # extract needed info
   df <- tryCatch(
-    suppressWarnings(suppressMessages(parameters::model_parameters(bf.object, ...) %>%
-      insight::standardize_names(data = ., style = "broom"))),
+    suppressMessages(parameters::model_parameters(bf.object, verbose = FALSE, ...)),
     error = function(e) NULL
   )
 
-  if (rlang::is_null(df)) df <- as_tibble(bf.object)
+  # this is mostly for contingency tabs; currently not supported by `parameters`
+  if (rlang::is_null(df)) {
+    df <- as_tibble(bf.object)
+  } else {
+    df %<>% insight::standardize_names(data = ., style = "broom")
+  }
 
   # cleanup
   dplyr::rename_all(.tbl = df, .funs = dplyr::recode, "bf" = "bf10", "bayes.factor" = "bf10") %>%

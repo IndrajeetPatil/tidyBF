@@ -11,7 +11,7 @@ BREAKING CHANGES
     and not really relevant.
     
   - The `output` argument's default value has been changed from too generic
-    `"results"` to `"dataframe"`.
+    `"results"` to more specific and informative `"dataframe"`.
 
 MAJOR CHANGES
 

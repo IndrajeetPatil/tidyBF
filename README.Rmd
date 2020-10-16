@@ -5,12 +5,14 @@ output: github_document
   <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE, warning = FALSE, messsage = FALSE}
-options(tibble.width = Inf)
+options(tibble.width = Inf, pillar.bold = TRUE, pillar.subtle_num = TRUE)
 
 knitr::opts_chunk$set(
   collapse = TRUE,
   error = TRUE,
   dpi = 300,
+  warning = FALSE, 
+  messsage = FALSE,
   out.width = "100%",
   comment = "#>",
   fig.path = "man/figures/README-"

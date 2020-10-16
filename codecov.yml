@@ -18,7 +18,8 @@ coverage:
     patch:
       default:
         target: auto
-        branches: 1%
+        branches: null
+        threshold: 1%
         informational: true
 
     changes:

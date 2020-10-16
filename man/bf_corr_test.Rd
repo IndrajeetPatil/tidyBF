@@ -60,7 +60,7 @@ bf_corr_test(
   output = "dataframe"
 )
 
-# to get expressoin
+# to get expression
 bf_corr_test(
   data = anscombe,
   x = x1,

@@ -55,6 +55,20 @@ testthat::test_that(
         top.text = "ayyo"
       ))
 
+
+    set.seed(123)
+    df <-
+      suppressWarnings(bf_meta(
+        data = df1,
+        k = 3,
+        iter = 1000,
+        summarize = "integrate",
+        output = "dataframe",
+        top.text = "ayyo"
+      ))
+
+    testthat::expect_is(df, "tbl_df")
+
     testthat::expect_identical(
       subtitle1,
       ggplot2::expr(

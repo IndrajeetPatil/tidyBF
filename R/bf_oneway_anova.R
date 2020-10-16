@@ -1,4 +1,4 @@
-#' @title Bayesian one-way analysis of variance
+#' @title Bayesian one-way analysis of variance (ANOVA)
 #' @name bf_oneway_anova
 #'
 #' @importFrom BayesFactor anovaBF
@@ -24,28 +24,25 @@
 #' set.seed(123)
 #'
 #' # between-subjects -------------------------------------------------------
+#'
+#' # to get dataframe
 #' bf_oneway_anova(
 #'   data = iris,
 #'   x = Species,
 #'   y = Sepal.Length,
-#'   bf.prior = 0.8
+#'   bf.prior = 0.8,
+#'   output = "dataframe"
 #' )
 #'
 #' # within-subjects -------------------------------------------------------
-#' bf_oneway_anova(
-#'   data = bugs_long,
-#'   x = condition,
-#'   y = desire,
-#'   paired = TRUE
-#' )
 #'
-#' # expression -------------------------------------------------------
+#' # to get expression
 #' bf_oneway_anova(
 #'   data = bugs_long,
 #'   x = condition,
 #'   y = desire,
 #'   paired = TRUE,
-#'   output = "null"
+#'   output = "expression"
 #' )
 #' @export
 
@@ -54,7 +51,7 @@ bf_oneway_anova <- function(data,
                             x,
                             y,
                             bf.prior = 0.707,
-                            caption = NULL,
+                            top.text = NULL,
                             output = "dataframe",
                             paired = FALSE,
                             k = 2L,
@@ -113,6 +110,6 @@ bf_oneway_anova <- function(data,
   switch(
     EXPR = output,
     "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, output = output, caption = caption, anova.design = TRUE, ...)
+    bf_expr(bf_object, k = k, top.text = top.text, anova.design = TRUE, ...)
   )
 }

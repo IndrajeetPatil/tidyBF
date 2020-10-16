@@ -52,7 +52,7 @@ testthat::test_that(
         x = vore,
         y = brainwt,
         bf.prior = 0.88,
-        output = "alternative"
+        output = "expression"
       )
 
     # check bayes factor values
@@ -65,27 +65,26 @@ testthat::test_that(
     # call for null and alternative
     testthat::expect_identical(
       results1,
-      ggplot2::expr(atop(displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
           "1.92"
         )
-      ))
+      )
     )
 
     testthat::expect_identical(
       results2,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
-          "(BF"["10"],
+          "(BF"["01"],
           ") = ",
-          "-1.92"
+          "1.92"
         )
-      ))
+      )
     )
   }
 )
@@ -166,7 +165,7 @@ testthat::test_that(
         k = 4,
         paired = TRUE,
         bf.prior = 0.88,
-        output = "null"
+        output = "expression"
       )
 
     # extracting caption - alternative
@@ -179,7 +178,7 @@ testthat::test_that(
         k = 4,
         paired = TRUE,
         bf.prior = 0.88,
-        output = "alternative"
+        output = "expression"
       )
 
     # check bayes factor values
@@ -193,28 +192,26 @@ testthat::test_that(
     # call for null and alternative
     testthat::expect_identical(
       results1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
           "-1.9580"
         )
-      ))
+      )
     )
 
     testthat::expect_identical(
       results2,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
-          "(BF"["10"],
+          "(BF"["01"],
           ") = ",
-          "1.9580"
+          "-1.9580"
         )
-      ))
+      )
     )
 
     # data with NA
@@ -230,14 +227,11 @@ testthat::test_that(
 
     testthat::expect_identical(
       df_results_na,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-21.04"
-        )
+      ggplot2::expr(paste(
+        "log"["e"],
+        "(BF"["01"],
+        ") = ",
+        "-21.04"
       ))
     )
   }

@@ -15,11 +15,17 @@ reference:
   - title: Bayes Factor tests
     desc: Functions to extract Bayes Factor for various tests
     contents:
-      - matches("bf_")
+      - bf_contingency_tab
+      - bf_corr_test
+      - bf_meta
+      - bf_oneway_anova
+      - bf_ttest
 
   - title: Miscellaneous helper functions
     desc: Minor data wrangling or cleaning helpers
     contents:
+      - bf_expr
+      - bf_extractor
       - meta_data_check
 
   - title: Reexported functions

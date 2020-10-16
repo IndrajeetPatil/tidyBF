@@ -5,9 +5,10 @@
 #'
 #' @param data A dataframe. It **must** contain columns named `estimate` (effect
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
-#'   two columns will be used for `yi`  and `sei` arguments in `metafor::rma`
-#'   (for parametric analysis) or `metaplus::metaplus` (for robust analysis).
+#'   two columns will be used for `y`  and `SE` arguments in
+#'   `metaBMA::meta_random`.
 #' @inheritParams bf_expr
+#' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
 #' @inheritDotParams metaBMA::meta_random -y -SE
 #'
@@ -42,13 +43,14 @@
 #'     class = c("tbl_df", "tbl", "data.frame")
 #'   ))
 #'
-#' # getting Bayes factor in favor of null hypothesis
+#' # to get dataframe
 #' bf_meta(
 #'   data = df,
 #'   k = 3,
 #'   iter = 1500,
 #'   # customizing analysis with additional arguments
-#'   control = list(max_treedepth = 15)
+#'   control = list(max_treedepth = 15),
+#'   output = "dataframe"
 #' )
 #' }
 #'
@@ -60,7 +62,7 @@ bf_meta <- function(data,
                     tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                     k = 2L,
                     output = "dataframe",
-                    caption = NULL,
+                    top.text = NULL,
                     ...) {
 
   # check the data contains needed column
@@ -78,35 +80,24 @@ bf_meta <- function(data,
       ...
     )
 
-  #----------------------- preparing caption -------------------------------
+  #----------------------- preparing top.text -------------------------------
 
   # creating a dataframe with posterior estimates
   df <-
     as_tibble(mod$estimates, rownames = "term") %>%
     dplyr::mutate(.data = ., bf10 = mod$BF["random_H1", "random_H0"])
 
-  # changing aspects of the caption based on what output is needed
-  if (output %in% c("null", "caption", "H0", "h0")) {
-    # bf-related text
-    bf.value <- -log(df$bf10[[1]])
-    bf.sub <- "01"
-  } else {
-    # bf-related text
-    bf.value <- log(df$bf10[[1]])
-    bf.sub <- "10"
-  }
-
   # prepare the Bayes factor message
-  bf_message <-
+  bf01_expr <-
     substitute(
       atop(displaystyle(top.text),
         expr = paste(
           "log"["e"],
-          "(BF"[bf.sub],
+          "(BF"["01"],
           ") = ",
           bf,
           ", ",
-          widehat(italic("d"))["mean"]^"posterior",
+          widehat(italic(delta))["mean"]^"posterior",
           " = ",
           d.pmean,
           ", CI"["95%"],
@@ -118,19 +109,25 @@ bf_meta <- function(data,
         )
       ),
       env = list(
-        top.text = caption,
-        bf.sub = bf.sub,
-        bf = specify_decimal_p(x = bf.value, k = k),
+        top.text = top.text,
+        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
         d.pmean = specify_decimal_p(x = df$mean[[1]], k = k),
         d.pmean.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
         d.pmean.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k)
       )
     )
 
+  # return the final expression
+  if (is.null(top.text)) {
+    bf_message <- bf01_expr$expr
+  } else {
+    bf_message <- bf01_expr
+  }
+
   # return the text results or the dataframe with results
-  return(switch(
+  switch(
     EXPR = output,
     "dataframe" = df,
     bf_message
-  ))
+  )
 }

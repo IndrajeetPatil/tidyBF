@@ -11,7 +11,7 @@ bf_ttest(
   test.value = 0,
   paired = FALSE,
   bf.prior = 0.707,
-  caption = NULL,
+  top.text = NULL,
   output = "dataframe",
   k = 2L,
   ...
@@ -37,14 +37,12 @@ be plotted on the \code{y}-axis. Can be entered either as a character string
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
 
-\item{caption}{Text to display as caption (will be displayed on top of the
-Bayes Factor caption/message).}
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
 
-\item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
-which will return expression with evidence in favor of the null hypothesis,
-or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
-expression with evidence in favor of the alternative hypothesis, or
-\code{"dataframe"}, which will return a dataframe with results all the details).}
+\item{output}{If \code{"expression"}, will return expression with statistical
+details, while \code{"dataframe"} (default) will return a dataframe containing the
+results.}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
@@ -73,16 +71,18 @@ bf_ttest(
   x = am,
   y = wt,
   paired = FALSE,
-  bf.prior = 0.880
+  bf.prior = 0.880,
+  output = "dataframe"
 )
 
 # ------------------- one-samples test -----------------------------------
 
-# to get dataframe
+# to get expression
 bf_ttest(
   data = iris,
   x = Sepal.Length,
-  test.value = 5.85
+  test.value = 5.85,
+  output = "expression"
 )
 }
 \seealso{

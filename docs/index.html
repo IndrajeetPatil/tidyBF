@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.3.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.4.0.9000</span>
       </span>
     </div>
 
@@ -117,6 +117,50 @@
   dependencies <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># installs packages which `tidyBF` depends on</span>
   upgrade_dependencies <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># updates any out of date dependencies</span>
 <span class="op">)</span></pre></div>
+</div>
+<div id="summary-of-available-tests" class="section level1">
+<h1 class="hasAnchor">
+<a href="#summary-of-available-tests" class="anchor"></a>Summary of available tests</h1>
+<table class="table">
+<thead><tr class="header">
+<th>Analysis</th>
+<th>Function</th>
+<th>Hypothesis testing</th>
+<th>Estimation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>(one/two-sample) t-test</td>
+<td><code>bf_ttest</code></td>
+<td><font color="green">Yes</font></td>
+<td><font color="green">Yes</font></td>
+</tr>
+<tr class="even">
+<td>one-way ANOVA</td>
+<td><code>bf_oneway_anova</code></td>
+<td><font color="green">Yes</font></td>
+<td><font color="red">No</font></td>
+</tr>
+<tr class="odd">
+<td>correlation</td>
+<td><code>bf_corr_test</code></td>
+<td><font color="green">Yes</font></td>
+<td><font color="green">Yes</font></td>
+</tr>
+<tr class="even">
+<td>(one/two-way) contingency table</td>
+<td><code>bf_contingency_tab</code></td>
+<td><font color="green">Yes</font></td>
+<td><font color="red">No</font></td>
+</tr>
+<tr class="odd">
+<td>random-effects meta-analysis</td>
+<td><code>bf_meta</code></td>
+<td><font color="green">Yes</font></td>
+<td><font color="green">Yes</font></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="benefits" class="section level1">
 <h1 class="hasAnchor">
@@ -250,7 +294,7 @@
     x <span class="op">=</span> <span class="cn">NULL</span>,
     y <span class="op">=</span> <span class="cn">NULL</span>,
     title <span class="op">=</span> <span class="st">"Pie Chart of class (type of car)"</span>,
-    subtitle <span class="op">=</span> <span class="fu"><a href="reference/bf_contingency_tab.html">bf_contingency_tab</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">$</span><span class="va">class</span><span class="op">)</span><span class="op">)</span>, <span class="va">Var1</span>, counts <span class="op">=</span> <span class="va">Freq</span>, output <span class="op">=</span> <span class="st">"h1"</span><span class="op">)</span><span class="op">$</span><span class="va">expr</span>
+    subtitle <span class="op">=</span> <span class="fu"><a href="reference/bf_contingency_tab.html">bf_contingency_tab</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">$</span><span class="va">class</span><span class="op">)</span><span class="op">)</span>, <span class="va">Var1</span>, counts <span class="op">=</span> <span class="va">Freq</span>, output <span class="op">=</span> <span class="st">"h1"</span><span class="op">)</span>
   <span class="op">)</span></pre></div>
 <p><img src="reference/figures/README-expr_plot4-1.png" width="100%"></p>
 </div>
@@ -273,7 +317,7 @@
 <span class="op">)</span> <span class="op">+</span> <span class="co"># use `statsExpressions` to create expression containing results</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
     title <span class="op">=</span> <span class="st">"Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect"</span>,
-    subtitle <span class="op">=</span> <span class="fu"><a href="reference/bf_meta.html">bf_meta</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="va">mozart</span>, estimate <span class="op">=</span> <span class="va">d</span>, std.error <span class="op">=</span> <span class="va">se</span><span class="op">)</span>, output <span class="op">=</span> <span class="st">"h1"</span><span class="op">)</span><span class="op">$</span><span class="va">expr</span>
+    subtitle <span class="op">=</span> <span class="fu"><a href="reference/bf_meta.html">bf_meta</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="va">mozart</span>, estimate <span class="op">=</span> <span class="va">d</span>, std.error <span class="op">=</span> <span class="va">se</span><span class="op">)</span>, output <span class="op">=</span> <span class="st">"h1"</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="reference/figures/README-expr_plot5-1.png" width="100%"></p>
@@ -341,47 +385,6 @@
 <span class="co">#&gt; 10      0.974</span>
 <span class="co">#&gt; # ... with 11 more rows</span></pre></div>
 </div>
-<div id="dataframe-with-all-the-details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dataframe-with-all-the-details" class="anchor"></a>Dataframe with all the details</h2>
-<p><code>BayesFactor</code> can return the Bayes Factor value corresponding to either evidence in favor of the null hypothesis over the alternative hypothesis (<code>BF01</code>) or in favor of the alternative over the null (<code>BF10</code>), depending on how this object is called. <code>tidyBF</code> on the other hand return both of these values and their logarithms.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co"># `BayesFactor` object</span>
-<span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html">correlationBF</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, x <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>
-
-<span class="co"># alternative</span>
-<span class="va">bf</span>
-<span class="co">#&gt; Bayes factor analysis</span>
-<span class="co">#&gt; --------------</span>
-<span class="co">#&gt; [1] Alt., r=0.333 : 2.136483e+43 ±0%</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Against denominator:</span>
-<span class="co">#&gt;   Null, rho = 0 </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*</span>
-
-<span class="co"># null</span>
-<span class="fl">1</span> <span class="op">/</span> <span class="va">bf</span>
-<span class="co">#&gt; Bayes factor analysis</span>
-<span class="co">#&gt; --------------</span>
-<span class="co">#&gt; [1] Null, rho = 0 : 4.680589e-44 ±0%</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Against denominator:</span>
-<span class="co">#&gt;   Alternative, r = 0.333333333333333, rho =/= 0 </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Bayes factor type: BFcorrelation, Jeffreys-beta*</span>
-
-<span class="co"># `tidyBF` output</span>
-<span class="fu"><a href="reference/bf_corr_test.html">bf_corr_test</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span>, <span class="va">Petal.Length</span>, bf.prior <span class="op">=</span> <span class="fl">0.333</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1 x 13</span>
-<span class="co">#&gt;   term  estimate conf.low conf.high    pd rope.percentage prior.distribution</span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt; 1 rho      0.863    0.828     0.897     1               0 cauchy            </span>
-<span class="co">#&gt;   prior.location prior.scale effect component      bf10 log_e_bf10</span>
-<span class="co">#&gt;            &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1              0       0.333 fixed  conditional 2.13e43       99.8</span></pre></div>
-<p>Note that the log-transformed values are helpful because in case of strong effects, the raw Bayes Factor values can be pretty large, but the log-transformed values continue to remain easy to work with.</p>
-</div>
 </div>
 <div id="acknowledgments" class="section level1">
 <h1 class="hasAnchor">
@@ -432,7 +435,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/Package%20version-0.3.0.9000-orange.svg?style=flat-square" alt="packageversion"></a></li>
+<li><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.0.9000-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue" alt="Daily downloads badge"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue" alt="Weekly downloads badge"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue" alt="Monthly downloads badge"></a></li>

@@ -24,25 +24,28 @@ testthat::test_that(
       bf_contingency_tab(
         data = mtcars,
         x = "cyl",
-        output = "alternative",
-        prior.concentration = 10
+        output = "expression",
+        prior.concentration = 10,
+        top.text = "duh"
       )
 
     testthat::expect_identical(
       caption_text,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
-          "log"["e"],
-          "(BF"["10"],
-          ") = ",
-          "-0.55",
-          ", ",
-          italic("a")["Gunel-Dickey"],
-          " = ",
-          "10.00"
+      ggplot2::expr(
+        atop(displaystyle("duh"),
+          expr =
+            paste(
+              "log"["e"],
+              "(BF"["01"],
+              ") = ",
+              "0.55",
+              ", ",
+              italic("a")["Gunel-Dickey"],
+              " = ",
+              "10.00"
+            )
         )
-      ))
+      )
     )
   }
 )
@@ -122,42 +125,40 @@ testthat::test_that(
     # caption text
     testthat::expect_identical(
       caption_text,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
-          "(BF"["10"],
+          "(BF"["01"],
           ") = ",
-          "3.33",
+          "-3.33",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
           "1.00"
         )
-      ))
+      )
     )
 
     testthat::expect_identical(
       caption_text2,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
-          "(BF"["10"],
+          "(BF"["01"],
           ") = ",
-          "214.25",
+          "-214.25",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
           "1.00"
         )
-      ))
+      )
     )
+
     testthat::expect_identical(
       caption_text3,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
@@ -167,7 +168,7 @@ testthat::test_that(
           " = ",
           "1.00"
         )
-      ))
+      )
     )
   }
 )
@@ -175,7 +176,7 @@ testthat::test_that(
 # check edge cases --------------------------------------------
 
 testthat::test_that(
-  desc = "bayes factor caption maker check",
+  desc = "check edge cases",
   code = {
     df <- data.frame(x = c("a"))
 

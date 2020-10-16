@@ -9,8 +9,8 @@ meta_data_check(data)
 \arguments{
 \item{data}{A dataframe. It \strong{must} contain columns named \code{estimate} (effect
 sizes or outcomes)  and \code{std.error} (corresponding standard errors). These
-two columns will be used for \code{yi}  and \code{sei} arguments in \code{metafor::rma}
-(for parametric analysis) or \code{metaplus::metaplus} (for robust analysis).}
+two columns will be used for \code{y}  and \code{SE} arguments in
+\code{metaBMA::meta_random}.}
 }
 \description{
 Helper function to check column names for meta-analysis.

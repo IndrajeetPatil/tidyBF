@@ -24,36 +24,37 @@ testthat::test_that(
         data = iris,
         y = Sepal.Length,
         x = Sepal.Width,
-        output = "subtitle"
+        output = "subtitle",
+        top.text = "huh"
       )
 
     testthat::expect_identical(
       subtitle1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
-          "log"["e"],
-          "(BF"["10"],
-          ") = ",
-          "-1.07",
-          ", ",
-          widehat(italic(rho))["median"]^
-            "posterior",
-          " = ",
-          "-0.12",
-          ", CI"["95%"]^"HDI",
-          " [",
-          "-0.28",
-          ", ",
-          "0.04",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^
-            "JZS",
-          " = ",
-          "0.71"
+      ggplot2::expr(
+        atop(displaystyle("huh"),
+          expr =
+            paste(
+              "log"["e"],
+              "(BF"["01"],
+              ") = ",
+              "1.07",
+              ", ",
+              widehat(italic(rho))["median"]^"posterior",
+              " = ",
+              "-0.12",
+              ", CI"["95%"]^"HDI",
+              " [",
+              "-0.28",
+              ", ",
+              "0.04",
+              "]",
+              ", ",
+              italic("r")["Cauchy"]^"JZS",
+              " = ",
+              "0.71"
+            )
         )
-      ))
+      )
     )
   }
 )
@@ -90,13 +91,12 @@ testthat::test_that(
 
     testthat::expect_identical(
       subtitle1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
-          "(BF"["10"],
+          "(BF"["01"],
           ") = ",
-          "-0.49",
+          "0.49",
           ", ",
           widehat(italic(rho))["mean"]^
             "posterior",
@@ -114,7 +114,7 @@ testthat::test_that(
           " = ",
           "0.80"
         )
-      ))
+      )
     )
   }
 )

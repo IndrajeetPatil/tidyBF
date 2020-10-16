@@ -41,53 +41,30 @@ testthat::test_that(
         k = 3,
         iter = 1000,
         summarize = "integrate",
-        output = "subtitle"
+        output = "expression"
       ))
 
     set.seed(123)
-    caption1 <-
+    subtitle2 <-
       suppressWarnings(bf_meta(
         data = df1,
         k = 3,
         iter = 1000,
         summarize = "integrate",
-        output = "caption"
+        output = "expression",
+        top.text = "ayyo"
       ))
 
     testthat::expect_identical(
       subtitle1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
-          "log"["e"],
-          "(BF"["10"],
-          ") = ",
-          "3.341",
-          ", ",
-          widehat(italic("d"))["mean"]^"posterior",
-          " = ",
-          "0.518",
-          ", CI"["95%"],
-          " [",
-          "0.219",
-          ", ",
-          "0.766",
-          "]"
-        )
-      ))
-    )
-
-    testthat::expect_identical(
-      caption1,
-      ggplot2::expr(atop(
-        displaystyle(NULL),
-        expr = paste(
+      ggplot2::expr(
+        paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
           "-3.341",
           ", ",
-          widehat(italic("d"))["mean"]^"posterior",
+          widehat(italic(delta))["mean"]^"posterior",
           " = ",
           "0.518",
           ", CI"["95%"],
@@ -97,7 +74,31 @@ testthat::test_that(
           "0.766",
           "]"
         )
-      ))
+      )
+    )
+
+    testthat::expect_identical(
+      subtitle2,
+      ggplot2::expr(
+        atop(displaystyle("ayyo"),
+          expr = paste(
+            "log"["e"],
+            "(BF"["01"],
+            ") = ",
+            "-3.341",
+            ", ",
+            widehat(italic(delta))["mean"]^"posterior",
+            " = ",
+            "0.518",
+            ", CI"["95%"],
+            " [",
+            "0.219",
+            ", ",
+            "0.766",
+            "]"
+          )
+        )
+      )
     )
 
     # checking message

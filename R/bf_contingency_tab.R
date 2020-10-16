@@ -1,6 +1,5 @@
-#' @title Bayesian contingency table analysis
+#' @title Bayes Factor for contingency table analysis
 #' @name bf_contingency_tab
-#' @rdname bf_contingency_tab
 #'
 #' @inheritParams BayesFactor::contingencyTableBF
 #' @param x The variable to use as the **rows** in the contingency table.
@@ -34,10 +33,6 @@
 #' @seealso \code{\link{bf_corr_test}}, \code{\link{bf_oneway_anova}},
 #' \code{\link{bf_ttest}}
 #'
-#' @note Bayes Factor for goodness of fit test is based on gist provided by
-#'   Richard Morey:
-#'   \url{https://gist.github.com/richarddmorey/a4cd3a2051f373db917550d67131dba4}.
-#'
 #' @examples
 #' # for reproducibility
 #' set.seed(123)
@@ -45,30 +40,22 @@
 #'
 #' # ------------------ association tests --------------------------------
 #'
-#' # to get caption (in favor of null)
+#' # to get dataframe
 #' bf_contingency_tab(
 #'   data = mtcars,
 #'   x = am,
 #'   y = cyl,
-#'   fixed.margin = "cols"
-#' )
-#'
-#' # to see results
-#' bf_contingency_tab(
-#'   data = mtcars,
-#'   x = am,
-#'   y = cyl,
-#'   sampling.plan = "jointMulti",
-#'   fixed.margin = "rows",
-#'   prior.concentration = 1
+#'   output = "dataframe"
 #' )
 #'
 #' # ------------------ goodness of fit tests --------------------------------
 #'
+#' # to get expression
 #' bf_contingency_tab(
 #'   data = mtcars,
 #'   x = am,
-#'   prior.concentration = 10
+#'   prior.concentration = 10,
+#'   output = "expression"
 #' )
 #' @export
 
@@ -81,7 +68,7 @@ bf_contingency_tab <- function(data,
                                sampling.plan = "indepMulti",
                                fixed.margin = "rows",
                                prior.concentration = 1,
-                               caption = NULL,
+                               top.text = NULL,
                                output = "dataframe",
                                k = 2L,
                                ...) {
@@ -190,27 +177,16 @@ bf_contingency_tab <- function(data,
       dplyr::mutate(log_e_bf10 = log(bf10), prior.concentration = prior.concentration)
   }
 
-  # ========================= caption preparation =============================
-
-  # changing aspects of the caption based on what output is needed
-  if (output %in% c("null", "caption", "H0", "h0")) {
-    # bf-related text
-    bf.value <- -log(df$bf10[[1]])
-    bf.sub <- "01"
-  } else {
-    # bf-related text
-    bf.value <- log(df$bf10[[1]])
-    bf.sub <- "10"
-  }
+  # ========================= top.text preparation =============================
 
   # final expression
-  bf_message <-
+  bf01_expr <-
     substitute(
       atop(
         displaystyle(top.text),
         expr = paste(
           "log"["e"],
-          "(BF"[bf.sub],
+          "(BF"["01"],
           ") = ",
           bf,
           ", ",
@@ -220,17 +196,23 @@ bf_contingency_tab <- function(data,
         )
       ),
       env = list(
-        top.text = caption,
-        bf.sub = bf.sub,
-        bf = specify_decimal_p(x = bf.value, k = k),
+        top.text = top.text,
+        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
         a = specify_decimal_p(x = df$prior.concentration[[1]], k = k)
       )
     )
 
+  # return the final expression
+  if (is.null(top.text)) {
+    bf_message <- bf01_expr$expr
+  } else {
+    bf_message <- bf01_expr
+  }
+
   # return the text results or the dataframe with results
-  return(switch(
+  switch(
     EXPR = output,
     "dataframe" = dplyr::select(df, -dplyr::matches("error|time|code")),
     bf_message
-  ))
+  )
 }

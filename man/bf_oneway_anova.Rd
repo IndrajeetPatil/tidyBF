@@ -2,14 +2,14 @@
 % Please edit documentation in R/bf_oneway_anova.R
 \name{bf_oneway_anova}
 \alias{bf_oneway_anova}
-\title{Bayesian one-way analysis of variance}
+\title{Bayesian one-way analysis of variance (ANOVA)}
 \usage{
 bf_oneway_anova(
   data,
   x,
   y,
   bf.prior = 0.707,
-  caption = NULL,
+  top.text = NULL,
   output = "dataframe",
   paired = FALSE,
   k = 2L,
@@ -28,14 +28,12 @@ dataframe \code{data}.}
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
 
-\item{caption}{Text to display as caption (will be displayed on top of the
-Bayes Factor caption/message).}
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
 
-\item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
-which will return expression with evidence in favor of the null hypothesis,
-or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
-expression with evidence in favor of the alternative hypothesis, or
-\code{"dataframe"}, which will return a dataframe with results all the details).}
+\item{output}{If \code{"expression"}, will return expression with statistical
+details, while \code{"dataframe"} (default) will return a dataframe containing the
+results.}
 
 \item{paired}{Decides whether the design is repeated measures or not
 (Default: \code{FALSE}).}
@@ -47,35 +45,32 @@ expression with evidence in favor of the alternative hypothesis, or
 \code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
-Bayesian one-way analysis of variance
+Bayesian one-way analysis of variance (ANOVA)
 }
 \examples{
 # setup
 set.seed(123)
 
 # between-subjects -------------------------------------------------------
+
+# to get dataframe
 bf_oneway_anova(
   data = iris,
   x = Species,
   y = Sepal.Length,
-  bf.prior = 0.8
+  bf.prior = 0.8,
+  output = "dataframe"
 )
 
 # within-subjects -------------------------------------------------------
-bf_oneway_anova(
-  data = bugs_long,
-  x = condition,
-  y = desire,
-  paired = TRUE
-)
 
-# expression -------------------------------------------------------
+# to get expression
 bf_oneway_anova(
   data = bugs_long,
   x = condition,
   y = desire,
   paired = TRUE,
-  output = "null"
+  output = "expression"
 )
 }
 \seealso{

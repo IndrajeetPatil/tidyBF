@@ -3,7 +3,7 @@
 
 # `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
-[![packageversion](https://img.shields.io/badge/Package%20version-0.3.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![Daily downloads
 badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)
 [![Weekly downloads
@@ -72,6 +72,16 @@ remotes::install_github(
   upgrade_dependencies = TRUE # updates any out of date dependencies
 )
 ```
+
+# Summary of available tests
+
+| Analysis                        | Function             | Hypothesis testing             | Estimation                     |
+|---------------------------------|----------------------|--------------------------------|--------------------------------|
+| (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> |
+| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="red">No</font>    |
+| correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> |
+| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    |
+| random-effects meta-analysis    | `bf_meta`            | <font color="green">Yes</font> | <font color="green">Yes</font> |
 
 # Benefits
 
@@ -213,7 +223,7 @@ ggplot(as.data.frame(table(mpg$class)), aes(x = "", y = Freq, fill = factor(Var1
     x = NULL,
     y = NULL,
     title = "Pie Chart of class (type of car)",
-    subtitle = bf_contingency_tab(as.data.frame(table(mpg$class)), Var1, counts = Freq, output = "h1")$expr
+    subtitle = bf_contingency_tab(as.data.frame(table(mpg$class)), Var1, counts = Freq, output = "h1")
   )
 ```
 
@@ -237,7 +247,7 @@ viz_forest(
 ) + # use `statsExpressions` to create expression containing results
   labs(
     title = "Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect",
-    subtitle = bf_meta(dplyr::rename(mozart, estimate = d, std.error = se), output = "h1")$expr
+    subtitle = bf_meta(dplyr::rename(mozart, estimate = d, std.error = se), output = "h1")
   ) +
   theme(text = element_text(size = 12))
 ```
@@ -307,55 +317,6 @@ bf_extractor(result)
 #> 10      0.974
 #> # ... with 11 more rows
 ```
-
-## Dataframe with all the details
-
-`BayesFactor` can return the Bayes Factor value corresponding to either
-evidence in favor of the null hypothesis over the alternative hypothesis
-(`BF01`) or in favor of the alternative over the null (`BF10`),
-depending on how this object is called. `tidyBF` on the other hand
-return both of these values and their logarithms.
-
-``` r
-# `BayesFactor` object
-bf <- BayesFactor::correlationBF(y = iris$Sepal.Length, x = iris$Petal.Length)
-
-# alternative
-bf
-#> Bayes factor analysis
-#> --------------
-#> [1] Alt., r=0.333 : 2.136483e+43 ±0%
-#> 
-#> Against denominator:
-#>   Null, rho = 0 
-#> ---
-#> Bayes factor type: BFcorrelation, Jeffreys-beta*
-
-# null
-1 / bf
-#> Bayes factor analysis
-#> --------------
-#> [1] Null, rho = 0 : 4.680589e-44 ±0%
-#> 
-#> Against denominator:
-#>   Alternative, r = 0.333333333333333, rho =/= 0 
-#> ---
-#> Bayes factor type: BFcorrelation, Jeffreys-beta*
-
-# `tidyBF` output
-bf_corr_test(iris, Sepal.Length, Petal.Length, bf.prior = 0.333)
-#> # A tibble: 1 x 13
-#>   term  estimate conf.low conf.high    pd rope.percentage prior.distribution
-#>   <chr>    <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr>             
-#> 1 rho      0.863    0.828     0.897     1               0 cauchy            
-#>   prior.location prior.scale effect component      bf10 log_e_bf10
-#>            <dbl>       <dbl> <chr>  <chr>         <dbl>      <dbl>
-#> 1              0       0.333 fixed  conditional 2.13e43       99.8
-```
-
-Note that the log-transformed values are helpful because in case of
-strong effects, the raw Bayes Factor values can be pretty large, but the
-log-transformed values continue to remain easy to work with.
 
 # Acknowledgments
 

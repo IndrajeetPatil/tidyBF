@@ -10,15 +10,15 @@ bf_meta(
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   k = 2L,
   output = "dataframe",
-  caption = NULL,
+  top.text = NULL,
   ...
 )
 }
 \arguments{
 \item{data}{A dataframe. It \strong{must} contain columns named \code{estimate} (effect
 sizes or outcomes)  and \code{std.error} (corresponding standard errors). These
-two columns will be used for \code{yi}  and \code{sei} arguments in \code{metafor::rma}
-(for parametric analysis) or \code{metaplus::metaplus} (for robust analysis).}
+two columns will be used for \code{y}  and \code{SE} arguments in
+\code{metaBMA::meta_random}.}
 
 \item{d}{\code{prior} distribution on the average effect size \code{d}. The
 prior probability density function is defined via \code{\link[metaBMA]{prior}}.}
@@ -31,14 +31,12 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
 
-\item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
-which will return expression with evidence in favor of the null hypothesis,
-or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
-expression with evidence in favor of the alternative hypothesis, or
-\code{"dataframe"}, which will return a dataframe with results all the details).}
+\item{output}{If \code{"expression"}, will return expression with statistical
+details, while \code{"dataframe"} (default) will return a dataframe containing the
+results.}
 
-\item{caption}{Text to display as caption (will be displayed on top of the
-Bayes Factor caption/message).}
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
 
 \item{...}{
   Arguments passed on to \code{\link[metaBMA:meta_random]{metaBMA::meta_random}}
@@ -106,13 +104,14 @@ library(metaBMA)
     class = c("tbl_df", "tbl", "data.frame")
   ))
 
-# getting Bayes factor in favor of null hypothesis
+# to get dataframe
 bf_meta(
   data = df,
   k = 3,
   iter = 1500,
   # customizing analysis with additional arguments
-  control = list(max_treedepth = 15)
+  control = list(max_treedepth = 15),
+  output = "dataframe"
 )
 }
 

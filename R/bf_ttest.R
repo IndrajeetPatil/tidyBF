@@ -11,9 +11,12 @@
 #' @inheritParams bf_oneway_anova
 #' @param test.value A number specifying the value of the null hypothesis
 #'   (Default: `0`).
+#' @param output If `"expression"`, will return expression with statistical
+#'   details, while `"dataframe"` (default) will return a dataframe containing the
+#'   results.
 #'
 #' @importFrom BayesFactor ttestBF
-#' @importFrom rlang quo_is_null new_formula ensym enquo is_null
+#' @importFrom rlang quo_is_null new_formula ensym enquo
 #' @importFrom stats na.omit
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
@@ -33,16 +36,18 @@
 #'   x = am,
 #'   y = wt,
 #'   paired = FALSE,
-#'   bf.prior = 0.880
+#'   bf.prior = 0.880,
+#'   output = "dataframe"
 #' )
 #'
 #' # ------------------- one-samples test -----------------------------------
 #'
-#' # to get dataframe
+#' # to get expression
 #' bf_ttest(
 #'   data = iris,
 #'   x = Sepal.Length,
-#'   test.value = 5.85
+#'   test.value = 5.85,
+#'   output = "expression"
 #' )
 #' @export
 
@@ -53,7 +58,7 @@ bf_ttest <- function(data,
                      test.value = 0,
                      paired = FALSE,
                      bf.prior = 0.707,
-                     caption = NULL,
+                     top.text = NULL,
                      output = "dataframe",
                      k = 2L,
                      ...) {
@@ -119,6 +124,6 @@ bf_ttest <- function(data,
   switch(
     EXPR = output,
     "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, output = output, caption = caption, ...)
+    bf_expr(bf_object, k = k, top.text = top.text, ...)
   )
 }

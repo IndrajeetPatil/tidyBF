@@ -1,4 +1,4 @@
-#' @title Bayesian correlation test.
+#' @title Bayes Factor for correlation test
 #' @name bf_corr_test
 #'
 #' @param x The column in `data` containing the explanatory variable to be
@@ -23,21 +23,22 @@
 #' set.seed(123)
 #' library(tidyBF)
 #'
-#' # to see results
+#' # to get dataframe
 #' bf_corr_test(
 #'   data = anscombe,
 #'   x = x1,
 #'   y = y4,
-#'   bf.prior = 1
+#'   bf.prior = 0.3,
+#'   output = "dataframe"
 #' )
 #'
-#' # to get caption
+#' # to get expressoin
 #' bf_corr_test(
 #'   data = anscombe,
 #'   x = x1,
 #'   y = y4,
 #'   bf.prior = 0.8,
-#'   output = "null"
+#'   output = "expression"
 #' )
 #' @export
 
@@ -46,7 +47,7 @@ bf_corr_test <- function(data,
                          x,
                          y,
                          bf.prior = 0.707,
-                         caption = NULL,
+                         top.text = NULL,
                          output = "dataframe",
                          k = 2L,
                          ...) {
@@ -63,6 +64,6 @@ bf_corr_test <- function(data,
   switch(
     EXPR = output,
     "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, output = output, caption = caption, ...)
+    bf_expr(bf_object, k = k, top.text = top.text, ...)
   )
 }

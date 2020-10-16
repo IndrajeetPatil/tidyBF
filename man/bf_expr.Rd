@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers_bf_tests.R
 \name{bf_expr}
 \alias{bf_expr}
-\title{Prepare caption with expression for Bayes Factor results}
+\title{Prepare expression for Bayes Factor results}
 \usage{
 bf_expr(
   bf.object,
@@ -10,8 +10,7 @@ bf_expr(
   conf.level = 0.95,
   conf.method = "hdi",
   centrality = "median",
-  output = "null",
-  caption = NULL,
+  top.text = NULL,
   anova.design = FALSE,
   ...
 )
@@ -33,14 +32,8 @@ to be estimated. Default to \code{0.95} (95\%).}
 Character (vector) or list with one or more of these options: \code{"median"},
 \code{"mean"}, \code{"MAP"} or \code{"all"}.}
 
-\item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
-which will return expression with evidence in favor of the null hypothesis,
-or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
-expression with evidence in favor of the alternative hypothesis, or
-\code{"dataframe"}, which will return a dataframe with results all the details).}
-
-\item{caption}{Text to display as caption (will be displayed on top of the
-Bayes Factor caption/message).}
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
 
 \item{anova.design}{Whether the object is from \code{BayesFactor::anovaBF}
 (default: \code{FALSE}). The expression is different for anova designs because
@@ -58,14 +51,13 @@ Factor results.
 set.seed(123)
 library(tidyBF)
 
-# creating caption (for null)
+# creating expression
 bf_expr(
-  BayesFactor::correlationBF(
+  bf.object = BayesFactor::correlationBF(
     x = iris$Sepal.Length,
     y = iris$Petal.Length
   ),
-  output = "null",
   k = 3,
-  caption = "Note: Iris dataset"
+  top.text = "Note: Iris dataset"
 )
 }

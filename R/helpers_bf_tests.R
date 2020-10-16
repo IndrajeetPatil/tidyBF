@@ -6,11 +6,12 @@
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
 #' @importFrom BayesFactor extractBF
-#' @importFrom dplyr select mutate
+#' @importFrom dplyr mutate rename_all recode
 #' @importFrom insight standardize_names
 #' @importFrom parameters model_parameters
+#' @importFrom rlang is_null
 #'
-#' @note *Important*: don't enter `1/bf_obj` to extract results for null
+#' @note *Important*: don't enter `1/bf.object` to extract results for null
 #'   hypothesis; doing so will return wrong results.
 #'
 #' @examples
@@ -49,7 +50,7 @@ bf_extractor <- function(bf.object, ...) {
     as_tibble(.)
 }
 
-#' @title Prepare caption with expression for Bayes Factor results
+#' @title Prepare expression for Bayes Factor results
 #' @name bf_expr
 #' @description Convenience function to create an expression with Bayes
 #'   Factor results.
@@ -64,13 +65,8 @@ bf_extractor <- function(bf.object, ...) {
 #' @param conf.method The type of index used for Credible Interval. Can be
 #'   \code{"hdi"} (default, see [bayestestR::hdi()]), \code{"eti"} (see
 #'   [bayestestR::eti()]) or \code{"si"} (see [bayestestR::si()]).
-#' @param caption Text to display as caption (will be displayed on top of the
-#'   Bayes Factor caption/message).
-#' @param output Can either be `"null"` (or `"caption"` or `"H0"` or `"h0"`),
-#'   which will return expression with evidence in favor of the null hypothesis,
-#'   or `"alternative"` (or `"title"` or `"H1"` or `"h1"`), which will return
-#'   expression with evidence in favor of the alternative hypothesis, or
-#'   `"dataframe"`, which will return a dataframe with results all the details).
+#' @param top.text Text to display as top.text (will be displayed on top of the
+#'   Bayes Factor top.text/message).
 #' @param anova.design Whether the object is from `BayesFactor::anovaBF`
 #'   (default: `FALSE`). The expression is different for anova designs because
 #'   not all details are available.
@@ -81,15 +77,14 @@ bf_extractor <- function(bf.object, ...) {
 #' set.seed(123)
 #' library(tidyBF)
 #'
-#' # creating caption (for null)
+#' # creating expression
 #' bf_expr(
-#'   BayesFactor::correlationBF(
+#'   bf.object = BayesFactor::correlationBF(
 #'     x = iris$Sepal.Length,
 #'     y = iris$Petal.Length
 #'   ),
-#'   output = "null",
 #'   k = 3,
-#'   caption = "Note: Iris dataset"
+#'   top.text = "Note: Iris dataset"
 #' )
 #' @export
 
@@ -99,8 +94,7 @@ bf_expr <- function(bf.object,
                     conf.level = 0.95,
                     conf.method = "hdi",
                     centrality = "median",
-                    output = "null",
-                    caption = NULL,
+                    top.text = NULL,
                     anova.design = FALSE,
                     ...) {
   # extract a dataframe with BF and posterior estimates (if available)
@@ -112,29 +106,17 @@ bf_expr <- function(bf.object,
       ...
     )
 
-  # changing aspects of the caption based on what output is needed
-  if (output %in% c("null", "caption", "H0", "h0")) {
-    # bf-related text
-    bf.value <- -log(df$bf10[[1]])
-    bf.sub <- "01"
-  } else {
-    # bf-related text
-    bf.value <- log(df$bf10[[1]])
-    bf.sub <- "10"
-  }
-
   # for anova designs
   if (isTRUE(anova.design)) {
     # prepare the Bayes Factor message
-    bf_message <-
+    bf01_expr <-
       substitute(
         atop(displaystyle(top.text),
-          expr = paste("log"["e"], "(BF"[bf.sub], ") = ", bf)
+          expr = paste("log"["e"], "(BF"["01"], ") = ", bf)
         ),
         env = list(
-          top.text = caption,
-          bf.sub = bf.sub,
-          bf = specify_decimal_p(x = bf.value, k = k)
+          top.text = top.text,
+          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k)
         )
       )
   }
@@ -142,15 +124,15 @@ bf_expr <- function(bf.object,
   # for non-anova tests
   if (isFALSE(anova.design)) {
     # t-test or correlation
-    estimate.type <- ifelse(df$term[[1]] == "Difference", quote(d), quote(rho))
+    estimate.type <- ifelse(df$term[[1]] == "Difference", quote(delta), quote(rho))
 
     # prepare the Bayes Factor message
-    bf_message <-
+    bf01_expr <-
       substitute(
         atop(displaystyle(top.text),
           expr = paste(
             "log"["e"],
-            "(BF"[bf.sub],
+            "(BF"["01"],
             ") = ",
             bf,
             ", ",
@@ -170,13 +152,12 @@ bf_expr <- function(bf.object,
           )
         ),
         env = list(
-          top.text = caption,
-          bf.sub = bf.sub,
+          top.text = top.text,
           estimate.type = estimate.type,
           centrality = centrality,
           conf.level = paste0(conf.level * 100, "%"),
           conf.method = toupper(conf.method),
-          bf = specify_decimal_p(x = bf.value, k = k),
+          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
           estimate = specify_decimal_p(x = df$estimate[[1]], k = k),
           estimate.LB = specify_decimal_p(x = df$conf.low[[1]], k = k),
           estimate.UB = specify_decimal_p(x = df$conf.high[[1]], k = k),
@@ -186,7 +167,11 @@ bf_expr <- function(bf.object,
   }
 
   # return the final expression
-  return(bf_message)
+  if (is.null(top.text)) {
+    return(bf01_expr$expr)
+  } else {
+    return(bf01_expr)
+  }
 }
 
 #' @name meta_data_check

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bf_contingency_tab.R
 \name{bf_contingency_tab}
 \alias{bf_contingency_tab}
-\title{Bayesian contingency table analysis}
+\title{Bayes Factor for contingency table analysis}
 \usage{
 bf_contingency_tab(
   data,
@@ -13,7 +13,7 @@ bf_contingency_tab(
   sampling.plan = "indepMulti",
   fixed.margin = "rows",
   prior.concentration = 1,
-  caption = NULL,
+  top.text = NULL,
   output = "dataframe",
   k = 2L,
   ...
@@ -52,14 +52,12 @@ to \code{1} by default. It indexes the expected deviation from the null
 hypothesis under the alternative, and corresponds to Gunel and Dickey's
 (1974) \code{"a"} parameter.}
 
-\item{caption}{Text to display as caption (will be displayed on top of the
-Bayes Factor caption/message).}
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
 
-\item{output}{Can either be \code{"null"} (or \code{"caption"} or \code{"H0"} or \code{"h0"}),
-which will return expression with evidence in favor of the null hypothesis,
-or \code{"alternative"} (or \code{"title"} or \code{"H1"} or \code{"h1"}), which will return
-expression with evidence in favor of the alternative hypothesis, or
-\code{"dataframe"}, which will return a dataframe with results all the details).}
+\item{output}{If \code{"expression"}, will return expression with statistical
+details, while \code{"dataframe"} (default) will return a dataframe containing the
+results.}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
@@ -67,12 +65,7 @@ expression with evidence in favor of the alternative hypothesis, or
 \item{...}{further arguments to be passed to or from methods.}
 }
 \description{
-Bayesian contingency table analysis
-}
-\note{
-Bayes Factor for goodness of fit test is based on gist provided by
-Richard Morey:
-\url{https://gist.github.com/richarddmorey/a4cd3a2051f373db917550d67131dba4}.
+Bayes Factor for contingency table analysis
 }
 \examples{
 # for reproducibility
@@ -81,30 +74,22 @@ library(tidyBF)
 
 # ------------------ association tests --------------------------------
 
-# to get caption (in favor of null)
+# to get dataframe
 bf_contingency_tab(
   data = mtcars,
   x = am,
   y = cyl,
-  fixed.margin = "cols"
-)
-
-# to see results
-bf_contingency_tab(
-  data = mtcars,
-  x = am,
-  y = cyl,
-  sampling.plan = "jointMulti",
-  fixed.margin = "rows",
-  prior.concentration = 1
+  output = "dataframe"
 )
 
 # ------------------ goodness of fit tests --------------------------------
 
+# to get expression
 bf_contingency_tab(
   data = mtcars,
   x = am,
-  prior.concentration = 10
+  prior.concentration = 10,
+  output = "expression"
 )
 }
 \seealso{

@@ -32,7 +32,7 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
 (Default: \code{k = 2L}).}
 
 \item{output}{If \code{"expression"}, will return expression with statistical
-details, while \code{"dataframe"} (default) will return a dataframe containing the
+details, while \code{"dataframe"} will return a dataframe containing the
 results.}
 
 \item{top.text}{Text to display as top.text (will be displayed on top of the

@@ -82,6 +82,15 @@ remotes::install_github(
 
 # Summary of available tests
 
+Behind the curtains, `tidyBF` provides an easier syntax to marry functionalities
+provided by the following two packages in a unified framework:
+
+  - [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/) : for
+    hypothesis testing
+    
+  - [`bayestestR`](https://easystats.github.io/bayestestR/): for posterior
+    estimation
+
 Analysis | Function | Hypothesis testing | Estimation
 ------------------ | ---------- | ---------- | ---------
 (one/two-sample) t-test | `bf_ttest` | <font color="green">Yes</font> | <font color="green">Yes</font>

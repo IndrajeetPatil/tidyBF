@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--16-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--17-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -74,6 +74,16 @@ remotes::install_github(
 ```
 
 # Summary of available tests
+
+Behind the curtains, `tidyBF` provides an easier syntax to marry
+functionalities provided by the following two packages in a unified
+framework:
+
+-   [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/) : for
+    hypothesis testing
+
+-   [`bayestestR`](https://easystats.github.io/bayestestR/): for
+    posterior estimation
 
 | Analysis                        | Function             | Hypothesis testing             | Estimation                     |
 |---------------------------------|----------------------|--------------------------------|--------------------------------|

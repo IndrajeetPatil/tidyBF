@@ -56,7 +56,7 @@ hypothesis under the alternative, and corresponds to Gunel and Dickey's
 Bayes Factor top.text/message).}
 
 \item{output}{If \code{"expression"}, will return expression with statistical
-details, while \code{"dataframe"} (default) will return a dataframe containing the
+details, while \code{"dataframe"} will return a dataframe containing the
 results.}
 
 \item{k}{Number of digits after decimal point (should be an integer)

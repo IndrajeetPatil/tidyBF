@@ -2,7 +2,7 @@
 % Please edit documentation in R/bf_oneway_anova.R
 \name{bf_oneway_anova}
 \alias{bf_oneway_anova}
-\title{Bayesian one-way analysis of variance (ANOVA)}
+\title{Bayes Factor for one-way analysis of variance (ANOVA)}
 \usage{
 bf_oneway_anova(
   data,
@@ -32,7 +32,7 @@ width to use in calculating Bayes factors.}
 Bayes Factor top.text/message).}
 
 \item{output}{If \code{"expression"}, will return expression with statistical
-details, while \code{"dataframe"} (default) will return a dataframe containing the
+details, while \code{"dataframe"} will return a dataframe containing the
 results.}
 
 \item{paired}{Decides whether the design is repeated measures or not
@@ -45,7 +45,7 @@ results.}
 \code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
 }
 \description{
-Bayesian one-way analysis of variance (ANOVA)
+Bayes Factor for one-way analysis of variance (ANOVA)
 }
 \examples{
 # setup

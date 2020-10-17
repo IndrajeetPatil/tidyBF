@@ -1,4 +1,4 @@
-#' @title Bayesian one-way analysis of variance (ANOVA)
+#' @title Bayes Factor for one-way analysis of variance (ANOVA)
 #' @name bf_oneway_anova
 #'
 #' @importFrom BayesFactor anovaBF

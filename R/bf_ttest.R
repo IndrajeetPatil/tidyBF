@@ -12,7 +12,7 @@
 #' @param test.value A number specifying the value of the null hypothesis
 #'   (Default: `0`).
 #' @param output If `"expression"`, will return expression with statistical
-#'   details, while `"dataframe"` (default) will return a dataframe containing the
+#'   details, while `"dataframe"` will return a dataframe containing the
 #'   results.
 #'
 #' @importFrom BayesFactor ttestBF

@@ -18,6 +18,7 @@
 #' @importFrom BayesFactor ttestBF
 #' @importFrom rlang quo_is_null new_formula ensym enquo
 #' @importFrom stats na.omit
+#' @importFrom ipmisc long_to_wide_converter
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_oneway_anova}}
@@ -83,7 +84,7 @@ bf_ttest <- function(data,
   if (!rlang::quo_is_null(rlang::enquo(y))) {
     # have a proper cleanup with NA removal
     data %<>%
-      long_to_wide_converter(
+      ipmisc::long_to_wide_converter(
         data = .,
         x = {{ x }},
         y = {{ y }},

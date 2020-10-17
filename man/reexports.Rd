@@ -3,9 +3,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{specify_decimal_p}
-\alias{signif_column}
-\alias{long_to_wide_converter}
 \alias{\%>\%}
 \alias{\%<>\%}
 \alias{\%$\%}
@@ -23,7 +20,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ipmisc}{\code{\link[ipmisc:reexports]{\%$\%}}, \code{\link[ipmisc:reexports]{\%<-\%}}, \code{\link[ipmisc:reexports]{\%<>\%}}, \code{\link[ipmisc:reexports]{\%>\%}}, \code{\link[ipmisc:reexports]{as_tibble}}, \code{\link[ipmisc]{long_to_wide_converter}}, \code{\link[ipmisc]{signif_column}}, \code{\link[ipmisc]{specify_decimal_p}}, \code{\link[ipmisc:reexports]{tibble}}}
+  \item{ipmisc}{\code{\link[ipmisc:reexports]{\%$\%}}, \code{\link[ipmisc:reexports]{\%<-\%}}, \code{\link[ipmisc:reexports]{\%<>\%}}, \code{\link[ipmisc:reexports]{\%>\%}}, \code{\link[ipmisc:reexports]{as_tibble}}, \code{\link[ipmisc:reexports]{tibble}}}
 
   \item{metaBMA}{\code{\link[metaBMA]{prior}}}
 

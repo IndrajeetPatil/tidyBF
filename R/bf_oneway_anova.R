@@ -3,7 +3,7 @@
 #'
 #' @importFrom BayesFactor anovaBF
 #' @importFrom dplyr anti_join mutate
-#' @importFrom rlang :=
+#' @importFrom ipmisc long_to_wide_converter
 #'
 #' @param data A dataframe (or a tibble) from which variables specified are to
 #'   be taken. A matrix or tables will **not** be accepted.
@@ -63,7 +63,7 @@ bf_oneway_anova <- function(data,
 
   # have a proper cleanup with NA removal
   data %<>%
-    long_to_wide_converter(
+    ipmisc::long_to_wide_converter(
       data = .,
       x = {{ x }},
       y = {{ y }},

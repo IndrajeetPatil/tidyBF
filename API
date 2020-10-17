@@ -21,8 +21,5 @@ rlang::%|%
 rlang::%||%
 rlang:::=
 tibble::as_tibble
-ipmisc::long_to_wide_converter
 metaBMA::prior
-ipmisc::signif_column
-ipmisc::specify_decimal_p
 tibble::tibble

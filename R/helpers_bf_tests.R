@@ -72,6 +72,8 @@ bf_extractor <- function(bf.object, ...) {
 #'   not all details are available.
 #' @inheritParams bf_extractor
 #'
+#' @importFrom ipmisc specify_decimal_p
+#'
 #' @examples
 #' # for reproducibility
 #' set.seed(123)

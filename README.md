@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--17-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--19-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -85,13 +85,13 @@ framework:
 -   [`bayestestR`](https://easystats.github.io/bayestestR/): for
     posterior estimation
 
-| Analysis                        | Function             | Hypothesis testing             | Estimation                     |
-|---------------------------------|----------------------|--------------------------------|--------------------------------|
-| (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> |
-| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="red">No</font>    |
-| correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> |
-| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    |
-| random-effects meta-analysis    | `bf_meta`            | <font color="green">Yes</font> | <font color="green">Yes</font> |
+| Analysis                        | Function             | Hypothesis testing             | Estimation                     | Function                          |
+|---------------------------------|----------------------|--------------------------------|--------------------------------|-----------------------------------|
+| (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF`            |
+| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::anovaBF`            |
+| correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF`      |
+| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` |
+| random-effects meta-analysis    | `bf_meta`            | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`            |
 
 # Benefits
 

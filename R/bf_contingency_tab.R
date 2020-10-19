@@ -202,17 +202,13 @@ bf_contingency_tab <- function(data,
       )
     )
 
-  # return the final expression
-  if (is.null(top.text)) {
-    bf_message <- bf01_expr$expr
-  } else {
-    bf_message <- bf01_expr
-  }
+  # the final expression
+  if (is.null(top.text)) bf01_expr <- bf01_expr$expr
 
   # return the text results or the dataframe with results
   switch(
     EXPR = output,
     "dataframe" = dplyr::select(df, -dplyr::matches("error|time|code")),
-    bf_message
+    bf01_expr
   )
 }

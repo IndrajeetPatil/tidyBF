@@ -18,6 +18,7 @@
 #' @importFrom BayesFactor ttestBF
 #' @importFrom rlang quo_is_null new_formula ensym enquo
 #' @importFrom stats na.omit
+#' @importFrom dplyr pull
 #' @importFrom ipmisc long_to_wide_converter
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},

@@ -9,7 +9,6 @@
 #' @importFrom dplyr mutate rename_all recode
 #' @importFrom insight standardize_names
 #' @importFrom parameters model_parameters
-#' @importFrom rlang is_null
 #'
 #' @note *Important*: don't enter `1/bf.object` to extract results for null
 #'   hypothesis; doing so will return wrong results.
@@ -38,7 +37,7 @@ bf_extractor <- function(bf.object, ...) {
   )
 
   # this is mostly for contingency tabs; currently not supported by `parameters`
-  if (rlang::is_null(df)) {
+  if (is.null(df)) {
     df <- as_tibble(bf.object)
   } else {
     df %<>% insight::standardize_names(data = ., style = "broom")
@@ -113,9 +112,7 @@ bf_expr <- function(bf.object,
     # prepare the Bayes Factor message
     bf01_expr <-
       substitute(
-        atop(displaystyle(top.text),
-          expr = paste("log"["e"], "(BF"["01"], ") = ", bf)
-        ),
+        atop(displaystyle(top.text), expr = paste("log"["e"], "(BF"["01"], ") = ", bf)),
         env = list(
           top.text = top.text,
           bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k)
@@ -169,11 +166,7 @@ bf_expr <- function(bf.object,
   }
 
   # return the final expression
-  if (is.null(top.text)) {
-    return(bf01_expr$expr)
-  } else {
-    return(bf01_expr)
-  }
+  if (is.null(top.text)) bf01_expr$expr else bf01_expr
 }
 
 #' @name meta_data_check

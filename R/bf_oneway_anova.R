@@ -2,7 +2,8 @@
 #' @name bf_oneway_anova
 #'
 #' @importFrom BayesFactor anovaBF
-#' @importFrom dplyr anti_join mutate
+#' @importFrom dplyr mutate
+#' @importFrom rlang new_formula enexpr expr
 #' @importFrom ipmisc long_to_wide_converter
 #'
 #' @param data A dataframe (or a tibble) from which variables specified are to

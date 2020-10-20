@@ -22,6 +22,9 @@ BREAKING CHANGES
   - The argument `caption` has been renamed to `top.text` since caption doesn't
     really have much sense outside of the plotting-context of `ggstatsplot` in
     which it was originally conceived.
+    
+  - The *t*-test and ANOVA tests get `subject.id` argument relevant for repeated
+    measures design.
 
 MAJOR CHANGES
 

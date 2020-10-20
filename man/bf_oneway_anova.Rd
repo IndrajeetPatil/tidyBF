@@ -8,6 +8,7 @@ bf_oneway_anova(
   data,
   x,
   y,
+  subject.id = NULL,
   bf.prior = 0.707,
   top.text = NULL,
   output = "dataframe",
@@ -24,6 +25,13 @@ be taken. A matrix or tables will \strong{not} be accepted.}
 
 \item{y}{The response (a.k.a. outcome or dependent) variable from the
 dataframe \code{data}.}
+
+\item{subject.id}{In case of repeated measures design (\code{paired = TRUE},
+i.e.), this argument specifies the subject or repeated measures id. Note
+that if this argument is \code{NULL} (which is the default), the function
+assumes that the data has already been sorted by such an id by the user and
+creates an internal identifier. So if your data is \strong{not} sorted and you
+leave this argument unspecified, the results can be inaccurate.}
 
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
@@ -69,6 +77,7 @@ bf_oneway_anova(
   data = bugs_long,
   x = condition,
   y = desire,
+  subject.id = subject,
   paired = TRUE,
   output = "expression"
 )

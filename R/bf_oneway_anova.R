@@ -16,6 +16,7 @@
 #' @inheritParams bf_ttest
 #' @inheritParams bf_corr_test
 #' @inheritParams bf_expr
+#' @inheritParams ipmisc::long_to_wide_converter
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_ttest}}
@@ -42,6 +43,7 @@
 #'   data = bugs_long,
 #'   x = condition,
 #'   y = desire,
+#'   subject.id = subject,
 #'   paired = TRUE,
 #'   output = "expression"
 #' )
@@ -51,6 +53,7 @@
 bf_oneway_anova <- function(data,
                             x,
                             y,
+                            subject.id = NULL,
                             bf.prior = 0.707,
                             top.text = NULL,
                             output = "dataframe",
@@ -68,6 +71,7 @@ bf_oneway_anova <- function(data,
       data = .,
       x = {{ x }},
       y = {{ y }},
+      subject.id = {{ subject.id }},
       paired = paired,
       spread = FALSE
     )

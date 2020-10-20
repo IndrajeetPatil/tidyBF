@@ -1,5 +1,7 @@
 ---
-output: github_document
+output: 
+  github_document:
+    pandoc_args: --webtex=https://chart.apis.google.com/chart?cht=tx&chl=
 ---
 
   <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -99,6 +101,15 @@ correlation | `bf_corr_test` | <font color="green">Yes</font> | <font color="gre
 (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font> | `BayesFactor::contingencyTableBF`
 random-effects meta-analysis | `bf_meta` | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`
 
+# Notation
+
+The results are always displayed as a Bayes Factor in favor of the **null**
+hypothesis over the **alternative** hypothesis. Additionally, the values are
+logged to avoid huge numbers. Therefore, the notation is: $log_{e}(BF_{01})$.
+
+Also, please note that this makes flipping the evidence easy:
+$log_{e}(BF_{10})$ = - $log_{e}(BF_{01})$
+
 # Benefits
 
 Below are few concrete examples of where `tidyBF` wrapper might provide a more
@@ -130,7 +141,7 @@ library(tidyBF)
 bf_ttest(data = mtcars, x = am, y = wt)
 
 # paired t-test
-bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
+bf_ttest(data = sleep, x = group, y = extra, paired = TRUE, subject.id = ID)
 ```
 
 ## Expressions for plots
@@ -148,7 +159,7 @@ library(ggplot2)
 # using the expression to display details in a plot
 ggplot(ToothGrowth, aes(supp, len)) +
   geom_boxplot() + # two-sample t-test results in an expression
-  labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "alternative"))
+  labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "expression"))
 ```
 
 ### anova
@@ -164,7 +175,7 @@ library(tidyBF)
 ggplot(iris, aes(x = Species, y = Sepal.Length)) +
   geom_violin() +
   geom_sina() +
-  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "h0"))
+  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "expression"))
 ```
 
 ### correlation test
@@ -179,7 +190,7 @@ library(tidyBF)
 ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
   geom_point() +
   geom_smooth(method = "lm") +
-  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null"))
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "expression"))
 ```
 
 ### contingency tabs analysis

@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "tidyBF",
-  "description": "Provides helper functions that make it easy to run\n    'BayesFactor' package tests on a data which is in a tidy format.\n    Additionally, it provides a more consistent syntax and by default\n    returns a dataframe with rich details. These functions can also return\n    expressions containing results from Bayes Factor tests that can then\n    be displayed on custom plots.",
+  "description": "Provides helper functions that make it easy to run\n    'BayesFactor' package tests on a data which is in a tidy format.\n    Additionally, it provides a more consistent syntax and by default\n    returns a dataframe with rich details. These functions can also return\n    expressions containing results from Bayes Factor tests that can then\n    be displayed on custom plots. Posterior estimation is carried out using \n    the 'bayestestR' package.",
   "name": "tidyBF: Tidy Wrapper for 'BayesFactor' Package",
   "codeRepository": "https://github.com/IndrajeetPatil/tidyBF",
   "relatedLink": "https://indrajeetpatil.github.io/tidyBF/",
@@ -157,13 +157,14 @@
       "@type": "SoftwareApplication",
       "identifier": "ipmisc",
       "name": "ipmisc",
+      "version": ">= 4.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=ipmisc"
+      "sameAs": "https://github.com/IndrajeetPatil/ipmisc"
     },
     {
       "@type": "SoftwareApplication",
@@ -229,5 +230,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1636.446KB"
+  "fileSize": "1647.517KB"
 }

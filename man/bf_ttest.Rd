@@ -8,6 +8,7 @@ bf_ttest(
   data,
   x,
   y = NULL,
+  subject.id = NULL,
   test.value = 0,
   paired = FALSE,
   bf.prior = 0.707,
@@ -27,6 +28,13 @@ two-sample \emph{t}-test or a numeric variable if it's a one-sample \emph{t}-tes
 \item{y}{The column in \code{data} containing the response (outcome) variable to
 be plotted on the \code{y}-axis. Can be entered either as a character string
 (e.g., \code{"y"}) or as a bare expression (e.g, \code{y}).}
+
+\item{subject.id}{In case of repeated measures design (\code{paired = TRUE},
+i.e.), this argument specifies the subject or repeated measures id. Note
+that if this argument is \code{NULL} (which is the default), the function
+assumes that the data has already been sorted by such an id by the user and
+creates an internal identifier. So if your data is \strong{not} sorted and you
+leave this argument unspecified, the results can be inaccurate.}
 
 \item{test.value}{A number specifying the value of the null hypothesis
 (Default: \code{0}).}
@@ -65,12 +73,23 @@ otherwise a two-sample \emph{t}-test will be carried out.
 set.seed(123)
 library(tidyBF)
 
-# to get dataframe
+# to get dataframe (between-subjects)
 bf_ttest(
   data = mtcars,
   x = am,
   y = wt,
   paired = FALSE,
+  bf.prior = 0.880,
+  output = "dataframe"
+)
+
+# to get expression (within-subjects)
+bf_ttest(
+  data = dplyr::filter(bugs_long, condition \%in\% c("LDLF", "LDHF")),
+  x = condition,
+  y = desire,
+  subject.id = subject,
+  paired = TRUE,
   bf.prior = 0.880,
   output = "dataframe"
 )

@@ -14,6 +14,7 @@
 #' @param output If `"expression"`, will return expression with statistical
 #'   details, while `"dataframe"` will return a dataframe containing the
 #'   results.
+#' @inheritParams ipmisc::long_to_wide_converter
 #'
 #' @importFrom BayesFactor ttestBF
 #' @importFrom rlang quo_is_null new_formula ensym enquo
@@ -32,12 +33,23 @@
 #' set.seed(123)
 #' library(tidyBF)
 #'
-#' # to get dataframe
+#' # to get dataframe (between-subjects)
 #' bf_ttest(
 #'   data = mtcars,
 #'   x = am,
 #'   y = wt,
 #'   paired = FALSE,
+#'   bf.prior = 0.880,
+#'   output = "dataframe"
+#' )
+#'
+#' # to get expression (within-subjects)
+#' bf_ttest(
+#'   data = dplyr::filter(bugs_long, condition %in% c("LDLF", "LDHF")),
+#'   x = condition,
+#'   y = desire,
+#'   subject.id = subject,
+#'   paired = TRUE,
 #'   bf.prior = 0.880,
 #'   output = "dataframe"
 #' )
@@ -57,6 +69,7 @@
 bf_ttest <- function(data,
                      x,
                      y = NULL,
+                     subject.id = NULL,
                      test.value = 0,
                      paired = FALSE,
                      bf.prior = 0.707,
@@ -89,6 +102,7 @@ bf_ttest <- function(data,
         data = .,
         x = {{ x }},
         y = {{ y }},
+        subject.id = {{ subject.id }},
         paired = paired,
         spread = paired
       )

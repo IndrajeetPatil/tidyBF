@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--19-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--20-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -93,6 +93,18 @@ framework:
 | (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` |
 | random-effects meta-analysis    | `bf_meta`            | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`            |
 
+# Notation
+
+The results are always displayed as a Bayes Factor in favor of the
+**null** hypothesis over the **alternative** hypothesis. Additionally,
+the values are logged to avoid huge numbers. Therefore, the notation is:
+![log\_{e}(BF\_{01})](https://chart.apis.google.com/chart?cht=tx&chl=log_%7Be%7D%28BF_%7B01%7D%29 "log_{e}(BF_{01})").
+
+Also, please note that this makes flipping the evidence easy:
+![log\_{e}(BF\_{10})](https://chart.apis.google.com/chart?cht=tx&chl=log_%7Be%7D%28BF_%7B10%7D%29 "log_{e}(BF_{10})")
+= -
+![log\_{e}(BF\_{01})](https://chart.apis.google.com/chart?cht=tx&chl=log_%7Be%7D%28BF_%7B01%7D%29 "log_{e}(BF_{01})")
+
 # Benefits
 
 Below are few concrete examples of where `tidyBF` wrapper might provide
@@ -145,7 +157,7 @@ bf_ttest(data = mtcars, x = am, y = wt)
 #> 1       7.23
 
 # paired t-test
-bf_ttest(data = sleep, x = group, y = extra, paired = TRUE)
+bf_ttest(data = sleep, x = group, y = extra, paired = TRUE, subject.id = ID)
 #> # A tibble: 1 x 13
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
@@ -173,7 +185,7 @@ library(ggplot2)
 # using the expression to display details in a plot
 ggplot(ToothGrowth, aes(supp, len)) +
   geom_boxplot() + # two-sample t-test results in an expression
-  labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "alternative"))
+  labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "expression"))
 ```
 
 <img src="man/figures/README-expr_plot-1.png" width="100%" />
@@ -191,7 +203,7 @@ library(tidyBF)
 ggplot(iris, aes(x = Species, y = Sepal.Length)) +
   geom_violin() +
   geom_sina() +
-  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "h0"))
+  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "expression"))
 ```
 
 <img src="man/figures/README-expr_plot2-1.png" width="100%" />
@@ -208,7 +220,7 @@ library(tidyBF)
 ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
   geom_point() +
   geom_smooth(method = "lm") +
-  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "null"))
+  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "expression"))
 #> `geom_smooth()` using formula 'y ~ x'
 ```
 

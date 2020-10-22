@@ -33,24 +33,13 @@ testthat::test_that(
         output = "dataframe"
       )
 
-    # extracting caption - null
+    # extracting expr
     set.seed(123)
-    results1 <-
+    results <-
       bf_oneway_anova(
         data = ggplot2::msleep,
         x = vore,
         y = "brainwt",
-        bf.prior = 0.88,
-        output = "null"
-      )
-
-    # extracting caption - alternative
-    set.seed(123)
-    results2 <-
-      bf_oneway_anova(
-        data = ggplot2::msleep,
-        x = vore,
-        y = brainwt,
         bf.prior = 0.88,
         output = "expression"
       )
@@ -62,18 +51,43 @@ testthat::test_that(
     # checking if two usages of the function are producing the same results
     testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
 
-    # call for null and alternative
+    # call
     testthat::expect_identical(
-      results1,
+      results,
       ggplot2::expr(
         paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "1.92"
+          "1.92",
+          ", ",
+          widehat(italic(R^"2"))["median"]^"posterior",
+          " = ",
+          "NA",
+          ", CI"["95%"]^"HDI",
+          " [",
+          "NA",
+          ", ",
+          "NA",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.88"
         )
       )
     )
+
+    # data where it works
+    set.seed(123)
+    results2 <-
+      bf_oneway_anova(
+        data = iris,
+        x = Species,
+        y = Sepal.Length,
+        conf.level = 0.99,
+        output = "expression"
+      )
 
     testthat::expect_identical(
       results2,
@@ -82,7 +96,21 @@ testthat::test_that(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "1.92"
+          "-65.10",
+          ", ",
+          widehat(italic(R^"2"))["median"]^"posterior",
+          " = ",
+          "0.61",
+          ", CI"["99%"]^"HDI",
+          " [",
+          "0.51",
+          ", ",
+          "0.68",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.71"
         )
       )
     )
@@ -97,37 +125,38 @@ testthat::test_that(
     testthat::skip_if(getRversion() < "3.6")
 
     # dataframe
-    dat <- structure(list(Taste = c(
-      5.4, 5.5, 5.55, 5.85, 5.7, 5.75, 5.2,
-      5.6, 5.5, 5.55, 5.5, 5.4, 5.9, 5.85, 5.7, 5.45, 5.55, 5.6, 5.4,
-      5.4, 5.35, 5.45, 5.5, 5.35, 5.25, 5.15, 5, 5.85, 5.8, 5.7, 5.25,
-      5.2, 5.1, 5.65, 5.55, 5.45, 5.6, 5.35, 5.45, 5.05, 5, 4.95, 5.5,
-      5.5, 5.4, 5.45, 5.55, 5.5, 5.55, 5.55, 5.35, 5.45, 5.5, 5.55,
-      5.5, 5.45, 5.25, 5.65, 5.6, 5.4, 5.7, 5.65, 5.55, 6.3, 6.3, 6.25
-    ), Wine = structure(c(
-      1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L,
-      2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L,
-      3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L,
-      1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L,
-      2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L
-    ), .Label = c(
-      "Wine A", "Wine B",
-      "Wine C"
-    ), class = "factor"), Taster = structure(c(
-      1L, 1L, 1L,
-      2L, 2L, 2L, 3L, 3L, 3L, 4L, 4L, 4L, 5L, 5L, 5L, 6L, 6L, 6L, 7L,
-      7L, 7L, 8L, 8L, 8L, 9L, 9L, 9L, 10L, 10L, 10L, 11L, 11L, 11L,
-      12L, 12L, 12L, 13L, 13L, 13L, 14L, 14L, 14L, 15L, 15L, 15L, 16L,
-      16L, 16L, 17L, 17L, 17L, 18L, 18L, 18L, 19L, 19L, 19L, 20L, 20L,
-      20L, 21L, 21L, 21L, 22L, 22L, 22L
-    ), .Label = c(
-      "1", "2", "3",
-      "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-      "16", "17", "18", "19", "20", "21", "22"
-    ), class = "factor")), row.names = c(
-      NA,
-      -66L
-    ), class = "data.frame")
+    dat <-
+      structure(list(Taste = c(
+        5.4, 5.5, 5.55, 5.85, 5.7, 5.75, 5.2,
+        5.6, 5.5, 5.55, 5.5, 5.4, 5.9, 5.85, 5.7, 5.45, 5.55, 5.6, 5.4,
+        5.4, 5.35, 5.45, 5.5, 5.35, 5.25, 5.15, 5, 5.85, 5.8, 5.7, 5.25,
+        5.2, 5.1, 5.65, 5.55, 5.45, 5.6, 5.35, 5.45, 5.05, 5, 4.95, 5.5,
+        5.5, 5.4, 5.45, 5.55, 5.5, 5.55, 5.55, 5.35, 5.45, 5.5, 5.55,
+        5.5, 5.45, 5.25, 5.65, 5.6, 5.4, 5.7, 5.65, 5.55, 6.3, 6.3, 6.25
+      ), Wine = structure(c(
+        1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L,
+        2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L,
+        3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L,
+        1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L, 1L,
+        2L, 3L, 1L, 2L, 3L, 1L, 2L, 3L
+      ), .Label = c(
+        "Wine A", "Wine B",
+        "Wine C"
+      ), class = "factor"), Taster = structure(c(
+        1L, 1L, 1L,
+        2L, 2L, 2L, 3L, 3L, 3L, 4L, 4L, 4L, 5L, 5L, 5L, 6L, 6L, 6L, 7L,
+        7L, 7L, 8L, 8L, 8L, 9L, 9L, 9L, 10L, 10L, 10L, 11L, 11L, 11L,
+        12L, 12L, 12L, 13L, 13L, 13L, 14L, 14L, 14L, 15L, 15L, 15L, 16L,
+        16L, 16L, 17L, 17L, 17L, 18L, 18L, 18L, 19L, 19L, 19L, 20L, 20L,
+        20L, 21L, 21L, 21L, 22L, 22L, 22L
+      ), .Label = c(
+        "1", "2", "3",
+        "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+        "16", "17", "18", "19", "20", "21", "22"
+      ), class = "factor")), row.names = c(
+        NA,
+        -66L
+      ), class = "data.frame")
 
     # creating a dataframe
     set.seed(123)
@@ -157,23 +186,10 @@ testthat::test_that(
 
     # extracting caption - null
     set.seed(123)
-    results1 <-
+    results <-
       bf_oneway_anova(
         data = dat,
         x = "Wine",
-        y = Taste,
-        k = 4,
-        paired = TRUE,
-        bf.prior = 0.88,
-        output = "expression"
-      )
-
-    # extracting caption - alternative
-    set.seed(123)
-    results2 <-
-      bf_oneway_anova(
-        data = dat,
-        x = Wine,
         y = Taste,
         k = 4,
         paired = TRUE,
@@ -191,25 +207,27 @@ testthat::test_that(
 
     # call for null and alternative
     testthat::expect_identical(
-      results1,
+      results,
       ggplot2::expr(
         paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-1.9580"
-        )
-      )
-    )
-
-    testthat::expect_identical(
-      results2,
-      ggplot2::expr(
-        paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-1.9580"
+          "-1.9580",
+          ", ",
+          widehat(italic(R^"2"))["median"]^"posterior",
+          " = ",
+          "0.7924",
+          ", CI"["95%"]^"HDI",
+          " [",
+          "0.7178",
+          ", ",
+          "0.8551",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.8800"
         )
       )
     )
@@ -227,12 +245,28 @@ testthat::test_that(
 
     testthat::expect_identical(
       df_results_na,
-      ggplot2::expr(paste(
-        "log"["e"],
-        "(BF"["01"],
-        ") = ",
-        "-21.04"
-      ))
+      ggplot2::expr(
+        paste(
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          "-21.04",
+          ", ",
+          widehat(italic(R^"2"))["median"]^"posterior",
+          " = ",
+          "0.32",
+          ", CI"["95%"]^"HDI",
+          " [",
+          "0.26",
+          ", ",
+          "0.37",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.71"
+        )
+      )
     )
   }
 )

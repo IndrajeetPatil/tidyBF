@@ -22,6 +22,8 @@ URL: https://indrajeetpatil.github.io/tidyBF/,
 BugReports: https://github.com/IndrajeetPatil/tidyBF/issues
 Remotes:  
     easystats/insight,
+    easystats/bayestestR,
+    easystats/performance,
     IndrajeetPatil/ipmisc
 Encoding: UTF-8
 Language: en-US
@@ -33,11 +35,14 @@ Depends:
     R (>= 3.6.0)
 Imports: 
     BayesFactor,
+    bayestestR,
     dplyr,
-    insight (>= 0.9.6.1),
+    insight (>= 0.10.0),
     ipmisc (>= 4.1.0),
+    lme4,
     metaBMA,
     parameters,
+    performance,
     rlang,
     tidyr
 Suggests: 

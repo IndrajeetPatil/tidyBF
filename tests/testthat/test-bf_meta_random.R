@@ -1,7 +1,7 @@
-# bf_meta works ----------------------------------------------------
+# bf_meta_random works ----------------------------------------------------
 
 testthat::test_that(
-  desc = "bf_meta works",
+  desc = "bf_meta_random works",
   code = {
     testthat::skip_if(getRversion() < "3.6")
 
@@ -36,7 +36,7 @@ testthat::test_that(
     # getting bayes factor in favor of null hypothesis
     set.seed(123)
     subtitle1 <-
-      suppressWarnings(bf_meta(
+      suppressWarnings(bf_meta_random(
         data = df1,
         k = 3,
         iter = 1000,
@@ -46,7 +46,7 @@ testthat::test_that(
 
     set.seed(123)
     subtitle2 <-
-      suppressWarnings(bf_meta(
+      suppressWarnings(bf_meta_random(
         data = df1,
         k = 3,
         iter = 1000,
@@ -58,7 +58,7 @@ testthat::test_that(
 
     set.seed(123)
     df <-
-      suppressWarnings(bf_meta(
+      suppressWarnings(bf_meta_random(
         data = df1,
         k = 3,
         iter = 1000,
@@ -81,12 +81,16 @@ testthat::test_that(
           widehat(italic(delta))["mean"]^"posterior",
           " = ",
           "0.518",
-          ", CI"["95%"],
+          ", CI"["95%"]^"HDI",
           " [",
           "0.219",
           ", ",
           "0.766",
-          "]"
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.707"
         )
       )
     )
@@ -94,22 +98,29 @@ testthat::test_that(
     testthat::expect_identical(
       subtitle2,
       ggplot2::expr(
-        atop(displaystyle("ayyo"),
+        atop(
+          displaystyle("ayyo"),
           expr = paste(
             "log"["e"],
             "(BF"["01"],
             ") = ",
             "-3.341",
             ", ",
-            widehat(italic(delta))["mean"]^"posterior",
+            widehat(italic(delta))["mean"]^
+              "posterior",
             " = ",
             "0.518",
-            ", CI"["95%"],
+            ", CI"["95%"]^"HDI",
             " [",
             "0.219",
             ", ",
             "0.766",
-            "]"
+            "]",
+            ", ",
+            italic("r")["Cauchy"]^
+              "JZS",
+            " = ",
+            "0.707"
           )
         )
       )
@@ -117,7 +128,7 @@ testthat::test_that(
 
     # checking message
     testthat::expect_error(
-      bf_meta(
+      bf_meta_random(
         data = dplyr::select(df1, -estimate),
         k = 3,
         iter = 1000,

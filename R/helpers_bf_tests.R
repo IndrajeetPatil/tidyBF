@@ -5,8 +5,7 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom BayesFactor extractBF
-#' @importFrom dplyr mutate rename_all recode
+#' @importFrom dplyr mutate rename
 #' @importFrom insight standardize_names
 #' @importFrom parameters model_parameters
 #'
@@ -30,23 +29,11 @@
 
 # function body
 bf_extractor <- function(bf.object, ...) {
-  # extract needed info
-  df <- tryCatch(
-    suppressMessages(parameters::model_parameters(bf.object, verbose = FALSE, ...)),
-    error = function(e) NULL
-  )
-
-  # this is mostly for contingency tabs; currently not supported by `parameters`
-  if (is.null(df)) {
-    df <- as_tibble(bf.object)
-  } else {
-    df %<>% insight::standardize_names(data = ., style = "broom")
-  }
-
-  # cleanup
-  dplyr::rename_all(.tbl = df, .funs = dplyr::recode, "bf" = "bf10", "bayes.factor" = "bf10") %>%
-    dplyr::mutate(.data = ., log_e_bf10 = log(bf10)) %>%
-    as_tibble(.)
+  suppressMessages(parameters::model_parameters(bf.object, verbose = FALSE, ...)) %>%
+    insight::standardize_names(data = ., style = "broom") %>%
+    as_tibble(.) %>%
+    dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
+    dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
 }
 
 #' @title Prepare expression for Bayes Factor results
@@ -72,6 +59,9 @@ bf_extractor <- function(bf.object, ...) {
 #' @inheritParams bf_extractor
 #'
 #' @importFrom ipmisc specify_decimal_p
+#' @importFrom performance r2_bayes
+#' @importFrom bayestestR describe_prior
+#' @importFrom dplyr rename_with mutate select bind_cols starts_with
 #'
 #' @examples
 #' # for reproducibility
@@ -107,63 +97,95 @@ bf_expr <- function(bf.object,
       ...
     )
 
-  # for anova designs
-  if (isTRUE(anova.design)) {
-    # prepare the Bayes Factor message
-    bf01_expr <-
-      substitute(
-        atop(displaystyle(top.text), expr = paste("log"["e"], "(BF"["01"], ") = ", bf)),
-        env = list(
-          top.text = top.text,
-          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k)
-        )
-      )
-  }
-
   # for non-anova tests
   if (isFALSE(anova.design)) {
     # t-test or correlation
     estimate.type <- ifelse(df$term[[1]] == "Difference", quote(delta), quote(rho))
 
-    # prepare the Bayes Factor message
-    bf01_expr <-
-      substitute(
-        atop(displaystyle(top.text),
-          expr = paste(
-            "log"["e"],
-            "(BF"["01"],
-            ") = ",
-            bf,
-            ", ",
-            widehat(italic(estimate.type))[centrality]^"posterior",
-            " = ",
-            estimate,
-            ", CI"[conf.level]^conf.method,
-            " [",
-            estimate.LB,
-            ", ",
-            estimate.UB,
-            "]",
-            ", ",
-            italic("r")["Cauchy"]^"JZS",
-            " = ",
-            bf_prior
-          )
-        ),
-        env = list(
-          top.text = top.text,
-          estimate.type = estimate.type,
-          centrality = centrality,
-          conf.level = paste0(conf.level * 100, "%"),
-          conf.method = toupper(conf.method),
-          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-          estimate = specify_decimal_p(x = df$estimate[[1]], k = k),
-          estimate.LB = specify_decimal_p(x = df$conf.low[[1]], k = k),
-          estimate.UB = specify_decimal_p(x = df$conf.high[[1]], k = k),
-          bf_prior = specify_decimal_p(x = df$prior.scale[[1]], k = k)
-        )
+    # values
+    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
+      c(df$estimate[[1]], df$conf.low[[1]], df$conf.high[[1]], df$prior.scale[[1]])
+  } else {
+    # dataframe with prior information
+    df_prior <-
+      bayestestR::describe_prior(bf.object) %>%
+      insight::standardize_names(., style = "broom") %>%
+      dplyr::filter(., term == "fixed")
+
+    # dataframe with posterior estimates for R-squared
+    df_r2 <-
+      tryCatch(
+        expr = performance::r2_bayes(bf.object, average = TRUE, ci = conf.level),
+        error = function(e) NULL
       )
+
+    # covering edge case
+    if (is.null(df_r2)) {
+      df_r2 <- tibble(r2 = NA, r2.conf.low = NA, r2.conf.high = NA)
+    } else {
+      df_r2 %<>%
+        as_tibble(.) %>%
+        insight::standardize_names(., style = "broom") %>%
+        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
+    }
+
+    # for within-subjects design, retain only marginal component
+    if ("component" %in% names(df_r2)) {
+      df_r2 %<>%
+        dplyr::filter(.data = ., component == "marginal") %>%
+        dplyr::rename(.data = ., "r2.component" = "component")
+    }
+
+    # combine everything
+    df %<>% dplyr::bind_cols(., df_r2)
+
+    # for expression
+    c(centrality, conf.method) %<-% c("median", "hdi")
+    estimate.type <- quote(R^"2")
+
+    # values
+    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
+      c(df$r2[[1]], df$r2.conf.low[[1]], df$r2.conf.high[[1]], df_prior$prior.scale[[1]])
   }
+
+  # prepare the Bayes Factor message
+  bf01_expr <-
+    substitute(
+      atop(displaystyle(top.text),
+        expr = paste(
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          bf,
+          ", ",
+          widehat(italic(estimate.type))[centrality]^"posterior",
+          " = ",
+          estimate,
+          ", CI"[conf.level]^conf.method,
+          " [",
+          estimate.LB,
+          ", ",
+          estimate.UB,
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          bf.prior
+        )
+      ),
+      env = list(
+        top.text = top.text,
+        estimate.type = estimate.type,
+        centrality = centrality,
+        conf.level = paste0(conf.level * 100, "%"),
+        conf.method = toupper(conf.method),
+        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
+        estimate = specify_decimal_p(x = estimate, k = k),
+        estimate.LB = specify_decimal_p(x = estimate.LB, k = k),
+        estimate.UB = specify_decimal_p(x = estimate.UB, k = k),
+        bf.prior = specify_decimal_p(x = bf.prior, k = k)
+      )
+    )
 
   # return the final expression
   if (is.null(top.text)) bf01_expr$expr else bf01_expr

@@ -205,10 +205,10 @@ bf_contingency_tab <- function(data,
   # the final expression
   if (is.null(top.text)) bf01_expr <- bf01_expr$expr
 
-  # return the text results or the dataframe with results
+  # return the expression or the dataframe
   switch(
     EXPR = output,
-    "dataframe" = dplyr::select(df, -dplyr::matches("error|time|code")),
+    "dataframe" = df,
     bf01_expr
   )
 }

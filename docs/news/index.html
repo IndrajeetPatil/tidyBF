@@ -136,10 +136,12 @@
 <li><p>The <code>output</code> argument’s default value has been changed from too generic <code>"results"</code> to more specific and informative <code>"dataframe"</code>.</p></li>
 <li><p>The argument <code>caption</code> has been renamed to <code>top.text</code> since caption doesn’t really have much sense outside of the plotting-context of <code>ggstatsplot</code> in which it was originally conceived.</p></li>
 <li><p>The <em>t</em>-test and ANOVA tests get <code>subject.id</code> argument relevant for repeated measures design.</p></li>
+<li><p>Renames <code>bf_meta</code> to <code>bf_meta_random</code>. The previous alias is retained for now but will be retired in future releases.</p></li>
 </ul>
 <p>MAJOR CHANGES</p>
 <ul>
-<li>Replaces the heavier <code>broomExtra</code> dependency with <code>parameters</code>.</li>
+<li><p>Replaces the heavier <code>broomExtra</code> dependency with <code>parameters</code>.</p></li>
+<li><p><code>bf_oneway_anova</code> now returns model-avergaed R-squared posterior as a measure of effect size.</p></li>
 </ul>
 </div>
     <div id="tidybf-030" class="section level1">

@@ -133,71 +133,71 @@ testthat::test_that(
 
     testthat::expect_is(subtitle, "call")
 
-    # testthat::expect_identical(
-    #   subtitle,
-    #   ggplot2::expr(
-    #     paste(
-    #       "log"["e"],
-    #       "(BF"["01"],
-    #       ") = ",
-    #       "-47.84",
-    #       ", ",
-    #       widehat(italic(delta))["mean"]^
-    #         "posterior",
-    #       " = ",
-    #       "1.76",
-    #       ", CI"["90%"]^"HDI",
-    #       " [",
-    #       "1.52",
-    #       ", ",
-    #       "1.99",
-    #       "]",
-    #       ", ",
-    #       italic("r")["Cauchy"]^"JZS",
-    #       " = ",
-    #       "0.99"
-    #     )
-    #   )
-    # )
-    #
-    # # extracting subtitle (with NA)
-    # set.seed(123)
-    # subtitle2 <-
-    #   bf_ttest(
-    #     data = ggplot2::msleep,
-    #     x = brainwt,
-    #     y = NULL,
-    #     test.value = 0.25,
-    #     bf.prior = 0.9,
-    #     output = "subtitle",
-    #     conf.method = "eti"
-    #   )
-    #
-    # testthat::expect_identical(
-    #   subtitle2,
-    #   ggplot2::expr(
-    #     paste(
-    #       "log"["e"],
-    #       "(BF"["01"],
-    #       ") = ",
-    #       "2.13",
-    #       ", ",
-    #       widehat(italic(delta))["median"]^"posterior",
-    #       " = ",
-    #       "-0.02",
-    #       ", CI"["95%"]^"ETI",
-    #       " [",
-    #       "-0.27",
-    #       ", ",
-    #       "0.23",
-    #       "]",
-    #       ", ",
-    #       italic("r")["Cauchy"]^
-    #         "JZS",
-    #       " = ",
-    #       "0.90"
-    #     )
-    #   )
-    # )
+    testthat::expect_identical(
+      subtitle,
+      ggplot2::expr(
+        paste(
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          "-47.84",
+          ", ",
+          widehat(italic(delta))["mean"]^
+            "posterior",
+          " = ",
+          "1.76",
+          ", CI"["90%"]^"HDI",
+          " [",
+          "1.52",
+          ", ",
+          "1.99",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          "0.99"
+        )
+      )
+    )
+
+    # extracting subtitle (with NA)
+    set.seed(123)
+    subtitle2 <-
+      bf_ttest(
+        data = ggplot2::msleep,
+        x = brainwt,
+        y = NULL,
+        test.value = 0.25,
+        bf.prior = 0.9,
+        output = "subtitle",
+        conf.method = "eti"
+      )
+
+    testthat::expect_identical(
+      subtitle2,
+      ggplot2::expr(
+        paste(
+          "log"["e"],
+          "(BF"["01"],
+          ") = ",
+          "2.13",
+          ", ",
+          widehat(italic(delta))["median"]^"posterior",
+          " = ",
+          "-0.02",
+          ", CI"["95%"]^"ETI",
+          " [",
+          "-0.27",
+          ", ",
+          "0.23",
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^
+            "JZS",
+          " = ",
+          "0.90"
+        )
+      )
+    )
   }
 )

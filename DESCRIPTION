@@ -36,7 +36,7 @@ Depends:
     R (>= 3.6.0)
 Imports: 
     BayesFactor,
-    bayestestR,
+    bayestestR (>= 0.7.5),
     dplyr,
     insight (>= 0.10.1),
     ipmisc (>= 4.1.0),

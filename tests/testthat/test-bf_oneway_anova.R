@@ -186,7 +186,7 @@ testthat::test_that(
         output = "dataframe"
       )
 
-    # extracting caption - null
+    # extracting expression
     set.seed(123)
     results <-
       bf_oneway_anova(
@@ -206,8 +206,7 @@ testthat::test_that(
     # checking if two usages of the function are producing the same results
     testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
 
-
-    # call for null and alternative
+    # testing expression
     testthat::expect_identical(
       results,
       ggplot2::expr(
@@ -219,12 +218,12 @@ testthat::test_that(
           ", ",
           widehat(italic(R^"2"))["median"]^"posterior",
           " = ",
-          "0.7924",
+          "0.8930",
           ", CI"["95%"]^"HDI",
           " [",
-          "0.7178",
+          "0.8461",
           ", ",
-          "0.8551",
+          "0.9205",
           "]",
           ", ",
           italic("r")["Cauchy"]^"JZS",
@@ -236,17 +235,19 @@ testthat::test_that(
 
     # data with NA
     set.seed(123)
-    df_results_na <-
+    results_na <-
       bf_oneway_anova(
         data = bugs_long,
         x = condition,
         y = "desire",
         paired = TRUE,
-        output = "caption"
+        output = "expression"
       )
 
+    testthat::expect_is(results_na, "call")
+
     testthat::expect_identical(
-      df_results_na,
+      results_na,
       ggplot2::expr(
         paste(
           "log"["e"],
@@ -256,12 +257,12 @@ testthat::test_that(
           ", ",
           widehat(italic(R^"2"))["median"]^"posterior",
           " = ",
-          "0.32",
+          "0.53",
           ", CI"["95%"]^"HDI",
           " [",
-          "0.26",
+          "0.46",
           ", ",
-          "0.37",
+          "0.59",
           "]",
           ", ",
           italic("r")["Cauchy"]^"JZS",

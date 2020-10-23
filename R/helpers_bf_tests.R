@@ -122,7 +122,7 @@ bf_expr <- function(bf.object,
     # for within-subjects design, retain only marginal component
     if ("component" %in% names(df_r2)) {
       df_r2 %<>%
-        dplyr::filter(.data = ., component == "marginal") %>%
+        dplyr::filter(.data = ., component == "conditional") %>%
         dplyr::rename(.data = ., "r2.component" = "component")
     }
 

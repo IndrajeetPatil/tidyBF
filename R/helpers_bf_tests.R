@@ -114,20 +114,10 @@ bf_expr <- function(bf.object,
 
     # dataframe with posterior estimates for R-squared
     df_r2 <-
-      tryCatch(
-        expr = performance::r2_bayes(bf.object, average = TRUE, ci = conf.level),
-        error = function(e) NULL
-      )
-
-    # covering edge case
-    if (is.null(df_r2)) {
-      df_r2 <- tibble(r2 = NA, r2.conf.low = NA, r2.conf.high = NA)
-    } else {
-      df_r2 %<>%
-        as_tibble(.) %>%
-        insight::standardize_names(., style = "broom") %>%
-        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
-    }
+      performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
+      as_tibble(.) %>%
+      insight::standardize_names(., style = "broom") %>%
+      dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
 
     # for within-subjects design, retain only marginal component
     if ("component" %in% names(df_r2)) {

@@ -33,7 +33,7 @@ MAJOR CHANGES
 
   - Replaces the heavier `broomExtra` dependency with `parameters`.
   
-  - `bf_oneway_anova` now returns model-avergaed R-squared posterior as a
+  - `bf_oneway_anova` now returns model-averaged R-squared posterior as a
     measure of effect size.
 
 # tidyBF 0.3.0

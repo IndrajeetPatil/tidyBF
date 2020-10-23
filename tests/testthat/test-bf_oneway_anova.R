@@ -124,6 +124,8 @@ testthat::test_that(
   code = {
     testthat::skip_if(getRversion() < "3.6")
 
+    # this needs devel version of `BayesFactor`; skip if the need be for CRAN
+
     # dataframe
     dat <-
       structure(list(Taste = c(

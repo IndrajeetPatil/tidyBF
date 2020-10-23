@@ -25,7 +25,8 @@ Remotes:
     easystats/bayestestR,
     easystats/parameters,
     easystats/performance,
-    IndrajeetPatil/ipmisc
+    IndrajeetPatil/ipmisc,
+    richarddmorey/BayesFactor/pkg/BayesFactor
 Encoding: UTF-8
 Language: en-US
 LazyData: true
@@ -35,7 +36,7 @@ RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.6.0)
 Imports: 
-    BayesFactor,
+    BayesFactor (>= 0.9.12-4.3),
     bayestestR (>= 0.7.5),
     dplyr,
     insight (>= 0.10.1),

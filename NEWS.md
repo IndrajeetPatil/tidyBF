@@ -25,10 +25,16 @@ BREAKING CHANGES
     
   - The *t*-test and ANOVA tests get `subject.id` argument relevant for repeated
     measures design.
+    
+  - Renames `bf_meta` to `bf_meta_random`. The previous alias is retained for
+    now but will be retired in future releases. 
 
 MAJOR CHANGES
 
   - Replaces the heavier `broomExtra` dependency with `parameters`.
+  
+  - `bf_oneway_anova` now returns model-averaged R-squared posterior as a
+    measure of effect size.
 
 # tidyBF 0.3.0
 

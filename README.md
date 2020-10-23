@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--20-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--23-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -88,10 +88,10 @@ framework:
 | Analysis                        | Function             | Hypothesis testing             | Estimation                     | Function                          |
 |---------------------------------|----------------------|--------------------------------|--------------------------------|-----------------------------------|
 | (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF`            |
-| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::anovaBF`            |
+| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF`            |
 | correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF`      |
 | (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` |
-| random-effects meta-analysis    | `bf_meta`            | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`            |
+| random-effects meta-analysis    | `bf_meta_random`     | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`            |
 
 # Notation
 
@@ -208,6 +208,33 @@ ggplot(iris, aes(x = Species, y = Sepal.Length)) +
 
 <img src="man/figures/README-expr_plot2-1.png" width="100%" />
 
+Here is another example with within-subject design:
+
+``` r
+# setup
+set.seed(123)
+library(ggplot2)
+library(WRS2)
+library(tidyBF)
+
+# plot with subtitle
+ggplot(WineTasting, aes(x = Wine, y = Taste)) +
+  geom_boxplot() +
+  labs(
+    subtitle = bf_oneway_anova(
+      WineTasting,
+      Wine,
+      Taste,
+      subject.id = Taster,
+      paired = TRUE,
+      k = 3L,
+      output = "expression"
+    )
+  )
+```
+
+<img src="man/figures/README-expr_plot3-1.png" width="100%" />
+
 ### correlation test
 
 ``` r
@@ -224,7 +251,7 @@ ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
 #> `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="man/figures/README-expr_plot3-1.png" width="100%" />
+<img src="man/figures/README-expr_plot4-1.png" width="100%" />
 
 ### contingency tabs analysis
 
@@ -249,7 +276,7 @@ ggplot(as.data.frame(table(mpg$class)), aes(x = "", y = Freq, fill = factor(Var1
   )
 ```
 
-<img src="man/figures/README-expr_plot4-1.png" width="100%" />
+<img src="man/figures/README-expr_plot5-1.png" width="100%" />
 
 ### meta-analysis
 
@@ -266,15 +293,20 @@ viz_forest(
   xlab = "Cohen's d",
   variant = "thick",
   type = "cumulative"
-) + # use `statsExpressions` to create expression containing results
+) + 
   labs(
     title = "Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect",
-    subtitle = bf_meta(dplyr::rename(mozart, estimate = d, std.error = se), output = "h1")
+    subtitle = bf_meta_random(
+      data = dplyr::rename(mozart, estimate = d, std.error = se),
+      output = "expression",
+      rscale_discrete = 0.880,
+      conf.level = 0.99
+    )
   ) +
   theme(text = element_text(size = 12))
 ```
 
-<img src="man/figures/README-expr_plot5-1.png" width="100%" />
+<img src="man/figures/README-expr_plot6-1.png" width="100%" />
 
 ## Convenient way to extract detailed output from `BayesFactor` objects
 

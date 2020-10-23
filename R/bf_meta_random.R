@@ -1,5 +1,5 @@
 #' @title Bayes factor for random-effects meta-analysis
-#' @name bf_meta
+#' @name bf_meta_random
 #'
 #' @importFrom metaBMA meta_random prior
 #'
@@ -10,7 +10,7 @@
 #' @inheritParams bf_expr
 #' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
-#' @inheritDotParams metaBMA::meta_random -y -SE
+#' @inheritDotParams metaBMA::meta_random -y -SE -ci
 #'
 #' @examples
 #'
@@ -44,7 +44,7 @@
 #'   ))
 #'
 #' # to get dataframe
-#' bf_meta(
+#' bf_meta_random(
 #'   data = df,
 #'   k = 3,
 #'   iter = 1500,
@@ -57,13 +57,14 @@
 #' @export
 
 # function body
-bf_meta <- function(data,
-                    d = prior("norm", c(mean = 0, sd = 0.3)),
-                    tau = prior("invgamma", c(shape = 1, scale = 0.15)),
-                    k = 2L,
-                    output = "dataframe",
-                    top.text = NULL,
-                    ...) {
+bf_meta_random <- function(data,
+                           d = prior("norm", c(mean = 0, sd = 0.3)),
+                           tau = prior("invgamma", c(shape = 1, scale = 0.15)),
+                           k = 2L,
+                           conf.level = 0.95,
+                           output = "dataframe",
+                           top.text = NULL,
+                           ...) {
 
   # check the data contains needed column
   meta_data_check(data)
@@ -77,6 +78,7 @@ bf_meta <- function(data,
       SE = data$std.error,
       d = d,
       tau = tau,
+      ci = conf.level,
       ...
     )
 
@@ -99,21 +101,27 @@ bf_meta <- function(data,
           ", ",
           widehat(italic(delta))["mean"]^"posterior",
           " = ",
-          d.pmean,
-          ", CI"["95%"],
+          estimate,
+          ", CI"[conf.level]^"HDI",
           " [",
-          d.pmean.LB,
+          estimate.LB,
           ", ",
-          d.pmean.UB,
-          "]"
+          estimate.UB,
+          "]",
+          ", ",
+          italic("r")["Cauchy"]^"JZS",
+          " = ",
+          bf.prior
         )
       ),
       env = list(
         top.text = top.text,
         bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        d.pmean = specify_decimal_p(x = df$mean[[1]], k = k),
-        d.pmean.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
-        d.pmean.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k)
+        conf.level = paste0(conf.level * 100, "%"),
+        estimate = specify_decimal_p(x = df$mean[[1]], k = k),
+        estimate.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
+        estimate.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k),
+        bf.prior = specify_decimal_p(x = mod$jzs$rscale_discrete[[1]], k = k)
       )
     )
 
@@ -127,3 +135,11 @@ bf_meta <- function(data,
     bf01_expr
   )
 }
+
+# aliases -----------------------------------------------------------------
+
+#' @rdname bf_meta_random
+#' @aliases bf_meta_random
+#' @export
+
+bf_meta <- bf_meta_random

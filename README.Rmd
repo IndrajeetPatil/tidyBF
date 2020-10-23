@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   error = TRUE,
   dpi = 300,
-  warning = FALSE, 
+  warning = FALSE,
   messsage = FALSE,
   out.width = "100%",
   comment = "#>",
@@ -96,10 +96,10 @@ provided by the following two packages in a unified framework:
 Analysis | Function | Hypothesis testing | Estimation | Function
 ------------------ | ---------- | ---------- | --------- | -----
 (one/two-sample) t-test | `bf_ttest` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF`
-one-way ANOVA | `bf_oneway_anova` | <font color="green">Yes</font> | <font color="red">No</font> | `BayesFactor::anovaBF`
+one-way ANOVA | `bf_oneway_anova` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF`
 correlation | `bf_corr_test` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF`
 (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font> | `BayesFactor::contingencyTableBF`
-random-effects meta-analysis | `bf_meta` | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`
+random-effects meta-analysis | `bf_meta_random` | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`
 
 # Notation
 
@@ -178,9 +178,34 @@ ggplot(iris, aes(x = Species, y = Sepal.Length)) +
   labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "expression"))
 ```
 
-### correlation test
+Here is another example with within-subject design:
 
 ```{r expr_plot3}
+# setup
+set.seed(123)
+library(ggplot2)
+library(WRS2)
+library(tidyBF)
+
+# plot with subtitle
+ggplot(WineTasting, aes(x = Wine, y = Taste)) +
+  geom_boxplot() +
+  labs(
+    subtitle = bf_oneway_anova(
+      WineTasting,
+      Wine,
+      Taste,
+      subject.id = Taster,
+      paired = TRUE,
+      k = 3L,
+      output = "expression"
+    )
+  )
+```
+
+### correlation test
+
+```{r expr_plot4}
 # setup
 set.seed(123)
 library(ggplot2)
@@ -195,7 +220,7 @@ ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
 
 ### contingency tabs analysis
 
-```{r expr_plot4}
+```{r expr_plot5}
 # setup
 set.seed(123)
 library(ggplot2)
@@ -218,7 +243,7 @@ ggplot(as.data.frame(table(mpg$class)), aes(x = "", y = Freq, fill = factor(Var1
 
 ### meta-analysis
 
-```{r expr_plot5, fig.height=14, fig.width=12}
+```{r expr_plot6, fig.height=14, fig.width=12}
 # setup
 set.seed(123)
 library(metaviz)
@@ -231,10 +256,15 @@ viz_forest(
   xlab = "Cohen's d",
   variant = "thick",
   type = "cumulative"
-) + # use `statsExpressions` to create expression containing results
+) + 
   labs(
     title = "Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect",
-    subtitle = bf_meta(dplyr::rename(mozart, estimate = d, std.error = se), output = "h1")
+    subtitle = bf_meta_random(
+      data = dplyr::rename(mozart, estimate = d, std.error = se),
+      output = "expression",
+      rscale_discrete = 0.880,
+      conf.level = 0.99
+    )
   ) +
   theme(text = element_text(size = 12))
 ```

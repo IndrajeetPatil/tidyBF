@@ -24,7 +24,7 @@ testthat::test_that(
         data = iris,
         y = Sepal.Length,
         x = Sepal.Width,
-        output = "subtitle",
+        output = "expression",
         top.text = "huh"
       )
 

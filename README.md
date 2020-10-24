@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--23-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--24-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -85,13 +85,13 @@ framework:
 -   [`bayestestR`](https://easystats.github.io/bayestestR/): for
     posterior estimation
 
-| Analysis                        | Function             | Hypothesis testing             | Estimation                     | Function                          |
-|---------------------------------|----------------------|--------------------------------|--------------------------------|-----------------------------------|
-| (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF`            |
-| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF`            |
-| correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF`      |
-| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` |
-| random-effects meta-analysis    | `bf_meta_random`     | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`            |
+| Analysis                        | Function             | Hypothesis testing             | Estimation                     | Function                                                        |
+|---------------------------------|----------------------|--------------------------------|--------------------------------|-----------------------------------------------------------------|
+| (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF` + `bayestestR::describe_posterior`       |
+| one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF` + `performance::r2_bayes`                |
+| correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF` + `bayestestR::describe_posterior` |
+| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`    |
+| random-effects meta-analysis    | `bf_meta_random`     | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`                                          |
 
 # Notation
 
@@ -148,7 +148,7 @@ bf_ttest(data = mtcars, x = am, y = wt)
 #> # A tibble: 1 x 13
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
-#> 1 Difference    -1.26    -1.70    -0.820     1               0
+#> 1 Difference    -1.26    -1.79    -0.722     1               0
 #>   prior.distribution prior.location prior.scale effect component    bf10
 #>   <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
 #> 1 cauchy                          0       0.707 fixed  conditional 1383.
@@ -161,7 +161,7 @@ bf_ttest(data = sleep, x = group, y = extra, paired = TRUE, subject.id = ID)
 #> # A tibble: 1 x 13
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
-#> 1 Difference     1.40    0.697      2.10 0.996               0
+#> 1 Difference     1.40    0.508      2.31 0.996               0
 #>   prior.distribution prior.location prior.scale effect component    bf10
 #>   <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
 #> 1 cauchy                          0       0.707 fixed  conditional  17.3
@@ -332,19 +332,19 @@ result <-
 
 # extract details
 bf_extractor(result)
-#> # A tibble: 21 x 13
+#> # A tibble: 21 x 19
 #>    term                estimate conf.low conf.high    pd rope.percentage
 #>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl>
-#>  1 mu                    45.0    43.9      46.1    1               0    
-#>  2 shape-round            0.429   0.131     0.741  0.992           0.141
-#>  3 shape-square          -0.429  -0.741    -0.131  0.992           0.141
-#>  4 color-color           -0.426  -0.711    -0.0995 0.990           0.162
-#>  5 color-monochromatic    0.426   0.0995    0.711  0.990           0.162
-#>  6 ID-1                   2.47    1.04      3.98   0.995           0    
-#>  7 ID-2                   0.439  -1.02      1.78   0.698           0.231
-#>  8 ID-3                   0.907  -0.501     2.32   0.848           0.156
-#>  9 ID-4                   0.466  -0.959     1.98   0.704           0.218
-#> 10 ID-5                   3.17    1.83      4.66   0.999           0    
+#>  1 mu                    45.0    43.7      46.4    1               0    
+#>  2 shape-round            0.429   0.0643    0.801  0.992           0.141
+#>  3 shape-square          -0.429  -0.801    -0.0643 0.992           0.141
+#>  4 color-color           -0.426  -0.799    -0.0461 0.990           0.162
+#>  5 color-monochromatic    0.426   0.0461    0.799  0.990           0.162
+#>  6 ID-1                   2.47    0.783     4.37   0.995           0    
+#>  7 ID-2                   0.439  -1.21      2.20   0.698           0.231
+#>  8 ID-3                   0.907  -0.849     2.66   0.848           0.156
+#>  9 ID-4                   0.466  -1.47      2.20   0.704           0.218
+#> 10 ID-5                   3.17    1.38      5.00   0.999           0    
 #>    prior.distribution prior.location prior.scale effect component    bf10
 #>    <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
 #>  1 <NA>                           NA          NA fixed  extra       2.65 
@@ -357,18 +357,18 @@ bf_extractor(result)
 #>  8 <NA>                           NA          NA random conditional 0.233
 #>  9 <NA>                           NA          NA random conditional 0.239
 #> 10 <NA>                           NA          NA random conditional 2.65 
-#>    log_e_bf10
-#>         <dbl>
-#>  1      0.974
-#>  2     -1.45 
-#>  3     -1.43 
-#>  4      0.974
-#>  5     -1.45 
-#>  6     -1.43 
-#>  7      0.974
-#>  8     -1.45 
-#>  9     -1.43 
-#> 10      0.974
+#>    log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high r2.component
+#>         <dbl> <dbl>   <dbl>    <dbl>       <dbl>        <dbl> <chr>       
+#>  1      0.974 0.732  0.0509       95       0.609        0.812 conditional 
+#>  2     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
+#>  3     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
+#>  4      0.974 0.732  0.0509       95       0.609        0.812 conditional 
+#>  5     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
+#>  6     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
+#>  7      0.974 0.732  0.0509       95       0.609        0.812 conditional 
+#>  8     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
+#>  9     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
+#> 10      0.974 0.732  0.0509       95       0.609        0.812 conditional 
 #> # ... with 11 more rows
 ```
 

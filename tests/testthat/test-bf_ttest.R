@@ -126,7 +126,7 @@ testthat::test_that(
         y = NULL,
         test.value = 5.5,
         bf.prior = 0.99,
-        output = "subtitle",
+        output = "expression",
         centrality = "mean",
         conf.level = 0.90
       )
@@ -145,7 +145,7 @@ testthat::test_that(
           widehat(italic(delta))["mean"]^
             "posterior",
           " = ",
-          "1.76",
+          "1.75",
           ", CI"["90%"]^"HDI",
           " [",
           "1.52",

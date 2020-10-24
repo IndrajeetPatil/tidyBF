@@ -207,6 +207,8 @@ testthat::test_that(
     testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
 
     # testing expression
+    testthat::expect_is(results, "call")
+
     testthat::expect_identical(
       results,
       ggplot2::expr(

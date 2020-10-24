@@ -100,7 +100,7 @@ bf_contingency_tab <- function(data,
   # x
   data %<>% dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }})))
 
-  # ========================= contingency tabs =============================
+  # ---------------------------- contingency tabs ----------------------------
 
   if (!rlang::quo_is_null(rlang::enquo(y))) {
     # dropping unused levels
@@ -124,7 +124,7 @@ bf_contingency_tab <- function(data,
       )
   }
 
-  # ========================= goodness of fit =============================
+  # ---------------------------- goodness of fit ----------------------------
 
   if (rlang::quo_is_null(rlang::enquo(y))) {
     # ratio

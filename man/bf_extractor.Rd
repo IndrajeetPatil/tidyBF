@@ -4,10 +4,27 @@
 \alias{bf_extractor}
 \title{Extract Bayes Factors from \code{BayesFactor} model object.}
 \usage{
-bf_extractor(bf.object, ...)
+bf_extractor(
+  bf.object,
+  conf.method = "hdi",
+  centrality = "median",
+  conf.level = 0.95,
+  ...
+)
 }
 \arguments{
 \item{bf.object}{An object from \code{BayesFactor} package.}
+
+\item{conf.method}{The type of index used for Credible Interval. Can be
+\code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see
+\code{\link[bayestestR:eti]{bayestestR::eti()}}) or \code{"si"} (see \code{\link[bayestestR:si]{bayestestR::si()}}).}
+
+\item{centrality}{The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: \code{"median"},
+\code{"mean"}, \code{"MAP"} or \code{"all"}.}
+
+\item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
+(\verb{95\%}).}
 
 \item{...}{Additional arguments passed to
 \code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}
@@ -20,6 +37,8 @@ Extract Bayes Factors from \code{BayesFactor} model object.
 hypothesis; doing so will return wrong results.
 }
 \examples{
+# setup
+library(tidyBF)
 set.seed(123)
 
 # creating a `BayesFactor` object

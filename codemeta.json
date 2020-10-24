@@ -156,6 +156,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "effectsize",
+      "name": "effectsize",
+      "version": ">= 0.3.9.009",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://github.com/easystats/effectsize"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "insight",
       "name": "insight",
       "version": ">= 0.10.1",
@@ -270,5 +283,5 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1760.31KB"
+  "fileSize": "1761.6KB"
 }

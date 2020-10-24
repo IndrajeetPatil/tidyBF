@@ -21,8 +21,8 @@ bf_expr(
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
 
-\item{conf.level}{Value or vector of probability of the CI (between 0 and 1)
-to be estimated. Default to \code{0.95} (95\%).}
+\item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
+(\verb{95\%}).}
 
 \item{conf.method}{The type of index used for Credible Interval. Can be
 \code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see

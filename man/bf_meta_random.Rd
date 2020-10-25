@@ -10,7 +10,6 @@ bf_meta_random(
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   k = 2L,
-  conf.level = 0.95,
   output = "dataframe",
   top.text = NULL,
   ...
@@ -21,7 +20,6 @@ bf_meta(
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   k = 2L,
-  conf.level = 0.95,
   output = "dataframe",
   top.text = NULL,
   ...
@@ -43,9 +41,6 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
-
-\item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
-(\verb{95\%}).}
 
 \item{output}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the

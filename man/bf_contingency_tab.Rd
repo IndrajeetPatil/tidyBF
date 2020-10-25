@@ -15,7 +15,6 @@ bf_contingency_tab(
   prior.concentration = 1,
   top.text = NULL,
   output = "dataframe",
-  conf.level = 0.95,
   k = 2L,
   ...
 )
@@ -59,9 +58,6 @@ Bayes Factor top.text/message).}
 \item{output}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the
 results.}
-
-\item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
-(\verb{95\%}).}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}

@@ -105,7 +105,9 @@ testthat::test_that(
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
         k = 3L,
-        output = "expression"
+        output = "expression",
+        conf.level = 0.99,
+        centrality = "mean"
       )
 
     # with counts
@@ -117,7 +119,8 @@ testthat::test_that(
         y = Sex,
         counts = "Freq",
         k = 3L,
-        output = "expression"
+        output = "expression",
+        prior.concentration = 1.5
       )
 
     # check bayes factor values
@@ -141,12 +144,12 @@ testthat::test_that(
           ", ",
           widehat(italic(widehat(italic("V"))["Cramer"]))["median"]^"posterior",
           " = ",
-          "0.480",
+          "0.473",
           ", CI"["89%"]^"HDI",
           " [",
-          "0.208",
+          "0.253",
           ", ",
-          "0.715",
+          "0.668",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
@@ -165,14 +168,14 @@ testthat::test_that(
           ") = ",
           "-214.255",
           ", ",
-          widehat(italic(widehat(italic("V"))["Cramer"]))["median"]^"posterior",
+          widehat(italic(widehat(italic("V"))["Cramer"]))["mean"]^"posterior",
           " = ",
           "0.455",
-          ", CI"["95%"]^"HDI",
+          ", CI"["99%"]^"HDI",
           " [",
-          "0.418",
+          "0.398",
           ", ",
-          "0.498",
+          "0.505",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
@@ -189,21 +192,21 @@ testthat::test_that(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-213.983",
+          "-213.873",
           ", ",
           widehat(italic(widehat(italic("V"))["Cramer"]))["median"]^"posterior",
           " = ",
-          "0.454",
+          "0.455",
           ", CI"["95%"]^"HDI",
           " [",
           "0.415",
           ", ",
-          "0.494",
+          "0.495",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
-          "1.000"
+          "1.500"
         )
       )
     )

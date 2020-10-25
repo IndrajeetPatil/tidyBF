@@ -61,7 +61,6 @@ bf_meta_random <- function(data,
                            d = prior("norm", c(mean = 0, sd = 0.3)),
                            tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                            k = 2L,
-                           conf.level = 0.95,
                            output = "dataframe",
                            top.text = NULL,
                            ...) {
@@ -72,7 +71,7 @@ bf_meta_random <- function(data,
   #----------------------- meta-analysis -------------------------------
 
   # extracting results from random-effects meta-analysis
-  mod <-
+  bf_object <-
     metaBMA::meta_random(
       y = data$estimate,
       SE = data$std.error,
@@ -82,32 +81,11 @@ bf_meta_random <- function(data,
       ...
     )
 
-  #----------------------- preparing top.text -------------------------------
-
-  # creating a dataframe with posterior estimates
-  df <-
-    as_tibble(mod$estimates, rownames = "term") %>%
-    dplyr::mutate(.data = ., bf10 = mod$BF["random_H1", "random_H0"])
-
-  # Bayes Factor expression
-  bf01_expr <-
-    bf_expr_template(
-      top.text = top.text,
-      bf.value = -log(df$bf10[[1]]),
-      bf.prior = mod$jzs$rscale_discrete[[1]],
-      estimate = df$mean[[1]],
-      estimate.LB = df$hpd95_lower[[1]],
-      estimate.UB = df$hpd95_upper[[1]],
-      centrality = "mean",
-      conf.level = conf.level,
-      k = k
-    )
-
   # return the text results or the dataframe with results
   switch(
     EXPR = output,
-    "dataframe" = df,
-    bf01_expr
+    "dataframe" = bf_extractor(bf_object),
+    bf_expr(bf_object, k = k, top.text = top.text, ...)
   )
 }
 

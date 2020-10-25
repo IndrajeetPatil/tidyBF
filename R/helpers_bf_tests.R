@@ -48,57 +48,70 @@ bf_extractor <- function(bf.object,
 
   # ------------------------ parameters --------------------------------
 
-  df <-
-    suppressMessages(parameters::model_parameters(
-      model = bf.object,
-      ci = conf.level,
-      ci_method = conf.method,
-      centrality = centrality,
-      verbose = FALSE,
-      ...
-    )) %>%
-    insight::standardize_names(data = ., style = "broom") %>%
-    as_tibble(.) %>%
-    dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
-    dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
-
-  # ------------------------ anova designs ------------------------------
-
-  if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
-    # dataframe with posterior estimates for R-squared
-    df_r2 <-
-      performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
-      as_tibble(.) %>%
+  if (class(bf.object) == "meta_random") {
+    # creating a dataframe with posterior estimates
+    df <-
+      as_tibble(bf.object$estimates, rownames = "term") %>%
+      dplyr::mutate(
+        bf10 = bf.object$BF["random_H1", "random_H0"],
+        prior.scale = bf.object$jzs$rscale_discrete[[1]],
+        log_e_bf10 = log(bf10)
+      ) %>%
+      dplyr::rename(estimate = mean, conf.low = hpd95_lower, conf.high = hpd95_upper)
+  } else {
+    df <-
+      suppressMessages(parameters::model_parameters(
+        model = bf.object,
+        ci = conf.level,
+        ci_method = conf.method,
+        centrality = centrality,
+        verbose = FALSE,
+        ...
+      )) %>%
       insight::standardize_names(data = ., style = "broom") %>%
-      dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
+      as_tibble(.) %>%
+      dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
+      dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
 
-    # for within-subjects design, retain only marginal component
-    if ("component" %in% names(df_r2)) {
-      df_r2 %<>%
-        dplyr::filter(.data = ., component == "conditional") %>%
-        dplyr::rename(.data = ., "r2.component" = "component")
+    # ------------------------ anova designs ------------------------------
+
+    if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
+      # dataframe with posterior estimates for R-squared
+      df_r2 <-
+        performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
+        as_tibble(.) %>%
+        insight::standardize_names(data = ., style = "broom") %>%
+        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
+
+      # for within-subjects design, retain only marginal component
+      if ("component" %in% names(df_r2)) {
+        df_r2 %<>%
+          dplyr::filter(.data = ., component == "conditional") %>%
+          dplyr::rename(.data = ., "r2.component" = "component")
+      }
+
+      # combine everything
+      df %<>% dplyr::bind_cols(., df_r2)
     }
 
-    # combine everything
-    df %<>% dplyr::bind_cols(., df_r2)
-  }
+    # ------------------------ contingency tabs ------------------------------
 
-  # ------------------------ contingency tabs ------------------------------
-
-  if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
-    df %<>%
-      dplyr::bind_cols(
-        .,
-        effectsize::effectsize(
-          model = bf.object,
-          ci = conf.level,
-          ci_method = conf.method,
-          centrality = centrality,
-          ...
+    if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
+      df %<>%
+        dplyr::bind_cols(
+          .,
+          effectsize::effectsize(
+            model = bf.object,
+            ci = conf.level,
+            ci_method = conf.method,
+            centrality = centrality,
+            ...
+          ) %>%
+            as_tibble(.) %>%
+            insight::standardize_names(data = ., style = "broom")
         ) %>%
-          as_tibble(.) %>%
-          insight::standardize_names(data = ., style = "broom")
-      )
+        dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
+    }
   }
 
   # final dataframe
@@ -158,10 +171,24 @@ bf_expr <- function(bf.object,
       ...
     )
 
+  # default
+  prior.type <- quote(italic("r")["Cauchy"]^"JZS")
+
   # for non-anova tests
   if (isFALSE(anova.design)) {
-    # t-test or correlation
-    estimate.type <- ifelse(df$term[[1]] == "Difference", quote(delta), quote(rho))
+
+    # which test was run decides the estimate type
+    if (df$term[[1]] %in% c("d", "Difference")) {
+      estimate.type <- quote(delta)
+    } else if (df$term[[1]] == c("Cramers_v")) {
+      estimate.type <- quote(widehat(italic("V"))["Cramer"])
+      prior.type <- quote(italic("a")["Gunel-Dickey"])
+    } else {
+      estimate.type <- quote(rho)
+    }
+
+    # for metaBMA
+    if ("n_eff" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
 
     # values
     c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
@@ -183,20 +210,20 @@ bf_expr <- function(bf.object,
   }
 
   # Bayes Factor expression
-  bf01_expr <-
-    bf_expr_template(
-      top.text = top.text,
-      bf.value = -log(df$bf10[[1]]),
-      bf.prior = bf.prior,
-      estimate.type = estimate.type,
-      estimate = estimate,
-      estimate.LB = estimate.LB,
-      estimate.UB = estimate.UB,
-      centrality = centrality,
-      conf.level = conf.level,
-      conf.method = conf.method,
-      k = k
-    )
+  bf_expr_template(
+    top.text = top.text,
+    bf.value = -log(df$bf10[[1]]),
+    bf.prior = bf.prior,
+    prior.type = prior.type,
+    estimate.type = estimate.type,
+    estimate = estimate,
+    estimate.LB = estimate.LB,
+    estimate.UB = estimate.UB,
+    centrality = centrality,
+    conf.level = conf.level,
+    conf.method = conf.method,
+    k = k
+  )
 }
 
 #' @name meta_data_check

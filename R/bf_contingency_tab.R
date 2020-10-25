@@ -71,7 +71,6 @@ bf_contingency_tab <- function(data,
                                prior.concentration = 1,
                                top.text = NULL,
                                output = "dataframe",
-                               conf.level = 0.95,
                                k = 2L,
                                ...) {
 
@@ -108,37 +107,20 @@ bf_contingency_tab <- function(data,
     # dropping unused levels
     data %<>% dplyr::mutate(.data = ., {{ y }} := droplevels(as.factor({{ y }})))
 
-    # extracting results from Bayesian test and creating a dataframe
-    df <-
-      bf_extractor(
-        BayesFactor::contingencyTableBF(
-          x = table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
-          sampleType = sampling.plan,
-          fixedMargin = fixed.margin,
-          priorConcentration = prior.concentration
-        )
-      ) %>%
-      dplyr::mutate(
-        .data = .,
-        sampling.plan = sampling.plan,
-        fixed.margin = fixed.margin,
-        prior.concentration = prior.concentration
+    # Bayes Factor object
+    bf_object <-
+      BayesFactor::contingencyTableBF(
+        x = table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
+        sampleType = sampling.plan,
+        fixedMargin = fixed.margin,
+        priorConcentration = prior.concentration
       )
 
+    # extracting results from Bayesian test and creating a dataframe
+    df <- bf_extractor(bf_object)
+
     # Bayes Factor expression
-    bf01_expr <-
-      bf_expr_template(
-        top.text = top.text,
-        bf.value = -log(df$bf10[[1]]),
-        bf.prior = prior.concentration,
-        prior.type = quote(italic("a")["Gunel-Dickey"]),
-        estimate.type = quote(widehat(italic("V"))["Cramer"]),
-        estimate = df$estimate[[1]],
-        estimate.LB = df$conf.low[[1]],
-        estimate.UB = df$conf.high[[1]],
-        conf.level = conf.level,
-        k = k
-      )
+    bf01_expr <- bf_expr(bf_object, k = k, top.text = top.text, ...)
   }
 
   # ---------------------------- goodness of fit ----------------------------

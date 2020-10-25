@@ -9,8 +9,8 @@ bf_ttest(
   x,
   y = NULL,
   subject.id = NULL,
-  test.value = 0,
   paired = FALSE,
+  test.value = 0,
   bf.prior = 0.707,
   top.text = NULL,
   output = "dataframe",
@@ -36,11 +36,11 @@ assumes that the data has already been sorted by such an id by the user and
 creates an internal identifier. So if your data is \strong{not} sorted and you
 leave this argument unspecified, the results can be inaccurate.}
 
-\item{test.value}{A number specifying the value of the null hypothesis
-(Default: \code{0}).}
-
 \item{paired}{Decides whether the design is repeated measures or not
 (Default: \code{FALSE}).}
+
+\item{test.value}{A number specifying the value of the null hypothesis
+(Default: \code{0}).}
 
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}

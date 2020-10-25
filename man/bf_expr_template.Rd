@@ -6,13 +6,10 @@
 \usage{
 bf_expr_template(
   top.text,
-  bf.value,
   bf.prior = 0.707,
   prior.type = quote(italic("r")["Cauchy"]^"JZS"),
   estimate.type = quote(delta),
-  estimate,
-  estimate.LB,
-  estimate.UB,
+  estimate.df,
   centrality = "median",
   conf.level = 0.95,
   conf.method = "HDI",
@@ -24,8 +21,6 @@ bf_expr_template(
 \item{top.text}{Text to display as top.text (will be displayed on top of the
 Bayes Factor top.text/message).}
 
-\item{bf.value}{Numeric value corresponding to Bayes Factor.}
-
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
 
@@ -33,8 +28,9 @@ width to use in calculating Bayes factors.}
 
 \item{estimate.type}{A character that specifies the relevant effect size.}
 
-\item{estimate, estimate.LB, estimate.UB}{Values of posterior estimates and
-their credible intervals.}
+\item{estimate.df}{Dataframe containing estimates and their credible
+intervals along with Bayes Factor value. The columns should be named as
+\code{estimate}, \code{estimate.LB}, \code{estimate.UB}, and \code{bf10}.}
 
 \item{centrality}{The point-estimates (centrality indices) to compute.
 Character (vector) or list with one or more of these options: \code{"median"},

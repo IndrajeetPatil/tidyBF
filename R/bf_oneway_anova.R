@@ -55,10 +55,10 @@ bf_oneway_anova <- function(data,
                             x,
                             y,
                             subject.id = NULL,
+                            paired = FALSE,
                             bf.prior = 0.707,
                             top.text = NULL,
                             output = "dataframe",
-                            paired = FALSE,
                             k = 2L,
                             ...) {
   # make sure both quoted and unquoted arguments are allowed

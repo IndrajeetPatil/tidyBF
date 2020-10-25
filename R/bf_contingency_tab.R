@@ -28,8 +28,9 @@
 #' @inheritParams bf_expr
 #'
 #' @importFrom BayesFactor contingencyTableBF logMeanExpLogs
-#' @importFrom dplyr pull select rename mutate tibble
+#' @importFrom dplyr pull select rename mutate
 #' @importFrom tidyr uncount drop_na
+#' @importFrom stats dmultinom rgamma
 #'
 #' @seealso \code{\link{bf_corr_test}}, \code{\link{bf_oneway_anova}},
 #' \code{\link{bf_ttest}}
@@ -173,7 +174,7 @@ bf_contingency_tab <- function(data,
     # computing Bayes Factor and formatting the results
     df <-
       tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
-      dplyr::mutate(log_e_bf10 = log(bf10), prior.concentration = prior.concentration)
+      dplyr::mutate(log_e_bf10 = log(bf10), prior.scale = prior.concentration)
 
     # final expression
     bf01_expr <-
@@ -194,7 +195,7 @@ bf_contingency_tab <- function(data,
         env = list(
           top.text = top.text,
           bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-          a = specify_decimal_p(x = df$prior.concentration[[1]], k = k)
+          a = specify_decimal_p(x = df$prior.scale[[1]], k = k)
         )
       )
 

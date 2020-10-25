@@ -1,8 +1,6 @@
 #' @title Bayes factor for random-effects meta-analysis
 #' @name bf_meta_random
 #'
-#' @importFrom metaBMA meta_random prior
-#'
 #' @param data A dataframe. It **must** contain columns named `estimate` (effect
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
 #'   two columns will be used for `y`  and `SE` arguments in
@@ -11,6 +9,8 @@
 #' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
 #' @inheritDotParams metaBMA::meta_random -y -SE -ci
+#'
+#' @importFrom metaBMA meta_random prior
 #'
 #' @examples
 #'

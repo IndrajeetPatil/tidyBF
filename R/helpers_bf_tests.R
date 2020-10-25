@@ -176,11 +176,10 @@ bf_expr <- function(bf.object,
 
   # for non-anova tests
   if (isFALSE(anova.design)) {
-
     # which test was run decides the estimate type
     if (df$term[[1]] %in% c("d", "Difference")) {
       estimate.type <- quote(delta)
-    } else if (df$term[[1]] == c("Cramers_v")) {
+    } else if (df$term[[1]] == "Cramers_v") {
       estimate.type <- quote(widehat(italic("V"))["Cramer"])
       prior.type <- quote(italic("a")["Gunel-Dickey"])
     } else {
@@ -190,9 +189,8 @@ bf_expr <- function(bf.object,
     # for metaBMA
     if ("n_eff" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
 
-    # values
-    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
-      c(df$estimate[[1]], df$conf.low[[1]], df$conf.high[[1]], df$prior.scale[[1]])
+    # for expression
+    bf.prior <- df$prior.scale[[1]]
   } else {
     # dataframe with prior information
     df_prior <-
@@ -203,22 +201,16 @@ bf_expr <- function(bf.object,
     # for expression
     c(centrality, conf.method) %<-% c("median", "hdi")
     estimate.type <- quote(R^"2")
-
-    # values
-    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
-      c(df$r2[[1]], df$r2.conf.low[[1]], df$r2.conf.high[[1]], df_prior$prior.scale[[1]])
+    bf.prior <- df_prior$prior.scale[[1]]
   }
 
   # Bayes Factor expression
   bf_expr_template(
     top.text = top.text,
-    bf.value = -log(df$bf10[[1]]),
     bf.prior = bf.prior,
     prior.type = prior.type,
     estimate.type = estimate.type,
-    estimate = estimate,
-    estimate.LB = estimate.LB,
-    estimate.UB = estimate.UB,
+    estimate.df = df,
     centrality = centrality,
     conf.level = conf.level,
     conf.method = conf.method,

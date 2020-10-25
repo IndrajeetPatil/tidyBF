@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • tidyBF</title>
+<title>Expression template for Bayes Factor results — bf_expr_template • tidyBF</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,7 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Expression template for Bayes Factor results — bf_expr_template" />
+<meta property="og:description" content="Expression template for Bayes Factor results" />
 <meta property="og:image" content="https://indrajeetpatil.github.io/tidyBF/logo.png" />
 
 
@@ -68,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,141 +119,93 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Expression template for Bayes Factor results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/IndrajeetPatil/tidyBF/blob/master/R/bf_expr_template.R'><code>R/bf_expr_template.R</code></a></small>
+    <div class="hidden name"><code>bf_expr_template.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Expression template for Bayes Factor results</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>bf_expr_template</span><span class='op'>(</span>
+  <span class='va'>top.text</span>,
+  <span class='va'>bf.value</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>0.707</span>,
+  prior.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>italic</a></span><span class='op'>(</span><span class='st'>"r"</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"Cauchy"</span><span class='op'>]</span><span class='op'>^</span><span class='st'>"JZS"</span><span class='op'>)</span>,
+  estimate.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='va'>delta</span><span class='op'>)</span>,
+  <span class='va'>estimate</span>,
+  <span class='va'>estimate.LB</span>,
+  <span class='va'>estimate.UB</span>,
+  centrality <span class='op'>=</span> <span class='st'>"median"</span>,
+  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  conf.method <span class='op'>=</span> <span class='st'>"HDI"</span>,
+  k <span class='op'>=</span> <span class='fl'>2L</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-bayes-factor-tests" class="hasAnchor"><a href="#section-bayes-factor-tests" class="anchor"></a>Bayes Factor tests</h2>
-          <p class="section-desc"><p>Functions to extract Bayes Factor for various tests</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="bf_contingency_tab.html">bf_contingency_tab()</a></code> </p>
-        </td>
-        <td><p>Bayes Factor for contingency table analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_corr_test.html">bf_corr_test()</a></code> </p>
-        </td>
-        <td><p>Bayes Factor for correlation test</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_meta_random.html">bf_meta_random()</a></code> <code><a href="bf_meta_random.html">bf_meta()</a></code> </p>
-        </td>
-        <td><p>Bayes factor for random-effects meta-analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_oneway_anova.html">bf_oneway_anova()</a></code> </p>
-        </td>
-        <td><p>Bayes Factor for one-way analysis of variance (ANOVA)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_ttest.html">bf_ttest()</a></code> </p>
-        </td>
-        <td><p>Bayes Factor for <em>t</em>-test</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-miscellaneous-helper-functions" class="hasAnchor"><a href="#section-miscellaneous-helper-functions" class="anchor"></a>Miscellaneous helper functions</h2>
-          <p class="section-desc"><p>Minor data wrangling or cleaning helpers</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="bf_expr.html">bf_expr()</a></code> </p>
-        </td>
-        <td><p>Prepare expression for Bayes Factor results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_extractor.html">bf_extractor()</a></code> </p>
-        </td>
-        <td><p>Extract Bayes Factors from <code>BayesFactor</code> model object.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bf_expr_template.html">bf_expr_template()</a></code> </p>
-        </td>
-        <td><p>Expression template for Bayes Factor results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="meta_data_check.html">meta_data_check()</a></code> </p>
-        </td>
-        <td><p>Helper function to check column names for meta-analysis.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-reexported-functions" class="hasAnchor"><a href="#section-reexported-functions" class="anchor"></a>Reexported functions</h2>
-          <p class="section-desc"><p>Useful functions re-exported from other packages.</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="reexports.html">reexports</a></code> </p>
-        </td>
-        <td><p>Objects exported from other packages</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"><p>Datasets included in the package.</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="bugs_long.html">bugs_long</a></code> </p>
-        </td>
-        <td><p>Tidy version of the "Bugs" dataset.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>top.text</th>
+      <td><p>Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).</p></td>
+    </tr>
+    <tr>
+      <th>bf.value</th>
+      <td><p>Numeric value corresponding to Bayes Factor.</p></td>
+    </tr>
+    <tr>
+      <th>bf.prior</th>
+      <td><p>A number between <code>0.5</code> and <code>2</code> (default <code>0.707</code>), the prior
+width to use in calculating Bayes factors.</p></td>
+    </tr>
+    <tr>
+      <th>prior.type</th>
+      <td><p>A character that specifies the prior type.</p></td>
+    </tr>
+    <tr>
+      <th>estimate.type</th>
+      <td><p>A character that specifies the relevant effect size.</p></td>
+    </tr>
+    <tr>
+      <th>estimate, estimate.LB, estimate.UB</th>
+      <td><p>Values of posterior estimates and
+their credible intervals.</p></td>
+    </tr>
+    <tr>
+      <th>centrality</th>
+      <td><p>The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: <code>"median"</code>,
+<code>"mean"</code>, <code>"MAP"</code> or <code>"all"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>Confidence/Credible Interval (CI) level. Default to <code>0.95</code>
+(<code>95%</code>).</p></td>
+    </tr>
+    <tr>
+      <th>conf.method</th>
+      <td><p>The type of index used for Credible Interval. Can be
+<code>"hdi"</code> (default, see <code><a href='https://easystats.github.io/bayestestR/reference/hdi.html'>bayestestR::hdi()</a></code>), <code>"eti"</code> (see
+<code><a href='https://easystats.github.io/bayestestR/reference/eti.html'>bayestestR::eti()</a></code>) or <code>"si"</code> (see <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>bayestestR::si()</a></code>).</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>Number of digits after decimal point (should be an integer)
+(Default: <code>k = 2L</code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Currently ignored.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

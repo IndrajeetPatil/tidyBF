@@ -141,6 +141,7 @@
   prior.concentration <span class='op'>=</span> <span class='fl'>1</span>,
   top.text <span class='op'>=</span> <span class='cn'>NULL</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>,
+  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
   k <span class='op'>=</span> <span class='fl'>2L</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -167,7 +168,7 @@ association test will be run.</p></td>
     <tr>
       <th>counts</th>
       <td><p>A string naming a variable in data containing counts, or <code>NULL</code>
-if each row represents a single observation (Default).</p></td>
+if each row represents a single observation.</p></td>
     </tr>
     <tr>
       <th>ratio</th>
@@ -208,6 +209,11 @@ details, while <code>"dataframe"</code> will return a dataframe containing the
 results.</p></td>
     </tr>
     <tr>
+      <th>conf.level</th>
+      <td><p>Confidence/Credible Interval (CI) level. Default to <code>0.95</code>
+(<code>95%</code>).</p></td>
+    </tr>
+    <tr>
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
 (Default: <code>k = 2L</code>).</p></td>
@@ -237,16 +243,16 @@ results.</p></td>
   y <span class='op'>=</span> <span class='va'>cyl</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 15</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 15</span><span>
 #&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>term</span><span>      </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>ci.width</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.ci</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  16.8       2.82 Cramers_v    </span><span style='color: #555555;'>0.</span><span>476       95    </span><span style='color: #555555;'>0.</span><span>207     </span><span style='color: #555555;'>0.</span><span>701     1      89
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  16.8       2.82 Cramers_v    </span><span style='color: #949494;'>0.</span><span>476       95    </span><span style='color: #949494;'>0.</span><span>207     </span><span style='color: #949494;'>0.</span><span>701     1      89
 #&gt;   </span><span style='font-weight: bold;'>rope.low</span><span> </span><span style='font-weight: bold;'>rope.high</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span> </span><span style='font-weight: bold;'>sampling.plan</span><span> </span><span style='font-weight: bold;'>fixed.margin</span><span>
-#&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span>     -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>1</span><span>       </span><span style='color: #555555;'>0.</span><span>1               </span><span style='color: #555555;'>0</span><span> indepMulti    rows        
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>1</span><span>       </span><span style='color: #949494;'>0.</span><span>1               </span><span style='color: #949494;'>0</span><span> indepMulti    rows        
 #&gt;   </span><span style='font-weight: bold;'>prior.concentration</span><span>
-#&gt;                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>                   1</div><div class='input'>
+#&gt;                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                   1</div><div class='input'>
 <span class='co'># ------------------ goodness of fit tests --------------------------------</span>
 
 <span class='co'># to get expression</span>

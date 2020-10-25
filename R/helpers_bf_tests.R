@@ -182,47 +182,21 @@ bf_expr <- function(bf.object,
       c(df$r2[[1]], df$r2.conf.low[[1]], df$r2.conf.high[[1]], df_prior$prior.scale[[1]])
   }
 
-  # prepare the Bayes Factor message
+  # Bayes Factor expression
   bf01_expr <-
-    substitute(
-      atop(displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          widehat(italic(estimate.type))[centrality]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^conf.method,
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          bf.prior
-        )
-      ),
-      env = list(
-        top.text = top.text,
-        estimate.type = estimate.type,
-        centrality = centrality,
-        conf.level = paste0(conf.level * 100, "%"),
-        conf.method = toupper(conf.method),
-        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        estimate = specify_decimal_p(x = estimate, k = k),
-        estimate.LB = specify_decimal_p(x = estimate.LB, k = k),
-        estimate.UB = specify_decimal_p(x = estimate.UB, k = k),
-        bf.prior = specify_decimal_p(x = bf.prior, k = k)
-      )
+    bf_expr_template(
+      top.text = top.text,
+      bf.value = -log(df$bf10[[1]]),
+      bf.prior = bf.prior,
+      estimate.type = estimate.type,
+      estimate = estimate,
+      estimate.LB = estimate.LB,
+      estimate.UB = estimate.UB,
+      centrality = centrality,
+      conf.level = conf.level,
+      conf.method = conf.method,
+      k = k
     )
-
-  # return the final expression
-  if (is.null(top.text)) bf01_expr$expr else bf01_expr
 }
 
 #' @name meta_data_check

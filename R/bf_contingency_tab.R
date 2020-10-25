@@ -24,7 +24,8 @@
 #'   This means if there are two levels this will be `ratio = c(0.5,0.5)` or if
 #'   there are four levels this will be `ratio = c(0.25,0.25,0.25,0.25)`, etc.
 #' @param counts A string naming a variable in data containing counts, or `NULL`
-#'   if each row represents a single observation (Default).
+#'   if each row represents a single observation.
+#' @inheritParams bf_expr
 #'
 #' @importFrom BayesFactor contingencyTableBF logMeanExpLogs
 #' @importFrom dplyr pull select rename mutate tibble
@@ -70,6 +71,7 @@ bf_contingency_tab <- function(data,
                                prior.concentration = 1,
                                top.text = NULL,
                                output = "dataframe",
+                               conf.level = 0.95,
                                k = 2L,
                                ...) {
 
@@ -121,6 +123,21 @@ bf_contingency_tab <- function(data,
         sampling.plan = sampling.plan,
         fixed.margin = fixed.margin,
         prior.concentration = prior.concentration
+      )
+
+    # Bayes Factor expression
+    bf01_expr <-
+      bf_expr_template(
+        top.text = top.text,
+        bf.value = -log(df$bf10[[1]]),
+        bf.prior = prior.concentration,
+        prior.type = quote(italic("a")["Gunel-Dickey"]),
+        estimate.type = quote(widehat(italic("V"))["Cramer"]),
+        estimate = df$estimate[[1]],
+        estimate.LB = df$conf.low[[1]],
+        estimate.UB = df$conf.high[[1]],
+        conf.level = conf.level,
+        k = k
       )
   }
 
@@ -175,35 +192,33 @@ bf_contingency_tab <- function(data,
     df <-
       tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
       dplyr::mutate(log_e_bf10 = log(bf10), prior.concentration = prior.concentration)
-  }
 
-  # ========================= top.text preparation =============================
-
-  # final expression
-  bf01_expr <-
-    substitute(
-      atop(
-        displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          italic("a")["Gunel-Dickey"],
-          " = ",
-          a
+    # final expression
+    bf01_expr <-
+      substitute(
+        atop(
+          displaystyle(top.text),
+          expr = paste(
+            "log"["e"],
+            "(BF"["01"],
+            ") = ",
+            bf,
+            ", ",
+            italic("a")["Gunel-Dickey"],
+            " = ",
+            a
+          )
+        ),
+        env = list(
+          top.text = top.text,
+          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
+          a = specify_decimal_p(x = df$prior.concentration[[1]], k = k)
         )
-      ),
-      env = list(
-        top.text = top.text,
-        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        a = specify_decimal_p(x = df$prior.concentration[[1]], k = k)
       )
-    )
 
-  # the final expression
-  if (is.null(top.text)) bf01_expr <- bf01_expr$expr
+    # the final expression
+    if (is.null(top.text)) bf01_expr <- bf01_expr$expr
+  }
 
   # return the expression or the dataframe
   switch(

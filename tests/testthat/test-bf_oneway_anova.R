@@ -86,6 +86,7 @@ testthat::test_that(
         x = Species,
         y = Sepal.Length,
         conf.level = 0.99,
+        conf.method = "eti",
         output = "expression"
       )
 

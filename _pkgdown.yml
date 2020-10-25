@@ -26,6 +26,7 @@ reference:
     contents:
       - bf_expr
       - bf_extractor
+      - bf_expr_template
       - meta_data_check
 
   - title: Reexported functions

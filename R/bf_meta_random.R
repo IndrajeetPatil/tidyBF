@@ -89,44 +89,19 @@ bf_meta_random <- function(data,
     as_tibble(mod$estimates, rownames = "term") %>%
     dplyr::mutate(.data = ., bf10 = mod$BF["random_H1", "random_H0"])
 
-  # prepare the Bayes factor message
+  # Bayes Factor expression
   bf01_expr <-
-    substitute(
-      atop(displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          widehat(italic(delta))["mean"]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^"HDI",
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          bf.prior
-        )
-      ),
-      env = list(
-        top.text = top.text,
-        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        conf.level = paste0(conf.level * 100, "%"),
-        estimate = specify_decimal_p(x = df$mean[[1]], k = k),
-        estimate.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
-        estimate.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k),
-        bf.prior = specify_decimal_p(x = mod$jzs$rscale_discrete[[1]], k = k)
-      )
+    bf_expr_template(
+      top.text = top.text,
+      bf.value = -log(df$bf10[[1]]),
+      bf.prior = mod$jzs$rscale_discrete[[1]],
+      estimate = df$mean[[1]],
+      estimate.LB = df$hpd95_lower[[1]],
+      estimate.UB = df$hpd95_upper[[1]],
+      centrality = "mean",
+      conf.level = conf.level,
+      k = k
     )
-
-  # the final expression
-  if (is.null(top.text)) bf01_expr <- bf01_expr$expr
 
   # return the text results or the dataframe with results
   switch(

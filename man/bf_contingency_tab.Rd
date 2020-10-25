@@ -15,6 +15,7 @@ bf_contingency_tab(
   prior.concentration = 1,
   top.text = NULL,
   output = "dataframe",
+  conf.level = 0.95,
   k = 2L,
   ...
 )
@@ -31,7 +32,7 @@ of fit test) will be run for the \code{main} variable. Otherwise an appropriate
 association test will be run.}
 
 \item{counts}{A string naming a variable in data containing counts, or \code{NULL}
-if each row represents a single observation (Default).}
+if each row represents a single observation.}
 
 \item{ratio}{A vector of proportions: the expected proportions for the
 proportion test (should sum to 1). Default is \code{NULL}, which means the null
@@ -58,6 +59,9 @@ Bayes Factor top.text/message).}
 \item{output}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the
 results.}
+
+\item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
+(\verb{95\%}).}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}

@@ -98,7 +98,7 @@ Analysis | Function | Hypothesis testing | Estimation | Function
 (one/two-sample) t-test | `bf_ttest` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF` + `bayestestR::describe_posterior`
 one-way ANOVA | `bf_oneway_anova` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF` + `performance::r2_bayes`
 correlation | `bf_corr_test` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF` + `bayestestR::describe_posterior`
-(one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font> | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`
+(one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`
 random-effects meta-analysis | `bf_meta_random` | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`
 
 # Notation
@@ -212,7 +212,7 @@ library(ggplot2)
 library(tidyBF)
 
 # using the expression to display details in a plot
-ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
+ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "expression"))

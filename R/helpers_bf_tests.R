@@ -47,7 +47,6 @@ bf_extractor <- function(bf.object,
                          ...) {
 
   # ------------------------ parameters --------------------------------
-
   df <-
     suppressMessages(parameters::model_parameters(
       model = bf.object,
@@ -64,41 +63,46 @@ bf_extractor <- function(bf.object,
 
   # ------------------------ anova designs ------------------------------
 
-  if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
-    # dataframe with posterior estimates for R-squared
-    df_r2 <-
-      performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
-      as_tibble(.) %>%
-      insight::standardize_names(data = ., style = "broom") %>%
-      dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
+  if (class(bf.object)[[1]] == "BFBayesFactor") {
+    if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
+      # dataframe with posterior estimates for R-squared
+      df_r2 <-
+        performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
+        as_tibble(.) %>%
+        insight::standardize_names(data = ., style = "broom") %>%
+        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
 
-    # for within-subjects design, retain only marginal component
-    if ("component" %in% names(df_r2)) {
-      df_r2 %<>%
-        dplyr::filter(.data = ., component == "conditional") %>%
-        dplyr::rename(.data = ., "r2.component" = "component")
+      # for within-subjects design, retain only marginal component
+      if ("component" %in% names(df_r2)) {
+        df_r2 %<>%
+          dplyr::filter(.data = ., component == "conditional") %>%
+          dplyr::rename(.data = ., "r2.component" = "component")
+      }
+
+      # combine everything
+      df %<>% dplyr::bind_cols(., df_r2)
     }
 
-    # combine everything
-    df %<>% dplyr::bind_cols(., df_r2)
-  }
+    # ------------------------ contingency tabs ------------------------------
 
-  # ------------------------ contingency tabs ------------------------------
-
-  if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
-    df %<>%
-      dplyr::bind_cols(
-        .,
-        effectsize::effectsize(
-          model = bf.object,
-          ci = conf.level,
-          ci_method = conf.method,
-          centrality = centrality,
-          ...
+    if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
+      df %<>%
+        dplyr::bind_cols(
+          .,
+          effectsize::effectsize(
+            model = bf.object,
+            ci = conf.level,
+            ci_method = conf.method,
+            centrality = centrality,
+            ...
+          ) %>%
+            as_tibble(.) %>%
+            insight::standardize_names(data = ., style = "broom")
         ) %>%
-          as_tibble(.) %>%
-          insight::standardize_names(data = ., style = "broom")
-      )
+        dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
+    }
+  } else {
+    df %<>% dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
   }
 
   # final dataframe
@@ -158,14 +162,26 @@ bf_expr <- function(bf.object,
       ...
     )
 
+  # default
+  prior.type <- quote(italic("r")["Cauchy"]^"JZS")
+
   # for non-anova tests
   if (isFALSE(anova.design)) {
-    # t-test or correlation
-    estimate.type <- ifelse(df$term[[1]] == "Difference", quote(delta), quote(rho))
+    # which test was run decides the estimate type
+    if (df$term[[1]] %in% c("Overall", "Difference")) {
+      estimate.type <- quote(italic(delta))
+    } else if (df$term[[1]] == "Cramers_v") {
+      estimate.type <- quote(italic("V"))
+      prior.type <- quote(italic("a")["Gunel-Dickey"])
+    } else {
+      estimate.type <- quote(italic(rho))
+    }
 
-    # values
-    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
-      c(df$estimate[[1]], df$conf.low[[1]], df$conf.high[[1]], df$prior.scale[[1]])
+    # for metaBMA
+    if ("ess" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
+
+    # for expression
+    bf.prior <- df$prior.scale[[1]]
   } else {
     # dataframe with prior information
     df_prior <-
@@ -175,54 +191,22 @@ bf_expr <- function(bf.object,
 
     # for expression
     c(centrality, conf.method) %<-% c("median", "hdi")
-    estimate.type <- quote(R^"2")
-
-    # values
-    c(estimate, estimate.LB, estimate.UB, bf.prior) %<-%
-      c(df$r2[[1]], df$r2.conf.low[[1]], df$r2.conf.high[[1]], df_prior$prior.scale[[1]])
+    estimate.type <- quote(italic(R^"2"))
+    bf.prior <- df_prior$prior.scale[[1]]
   }
 
-  # prepare the Bayes Factor message
-  bf01_expr <-
-    substitute(
-      atop(displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          widehat(italic(estimate.type))[centrality]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^conf.method,
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          bf.prior
-        )
-      ),
-      env = list(
-        top.text = top.text,
-        estimate.type = estimate.type,
-        centrality = centrality,
-        conf.level = paste0(conf.level * 100, "%"),
-        conf.method = toupper(conf.method),
-        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        estimate = specify_decimal_p(x = estimate, k = k),
-        estimate.LB = specify_decimal_p(x = estimate.LB, k = k),
-        estimate.UB = specify_decimal_p(x = estimate.UB, k = k),
-        bf.prior = specify_decimal_p(x = bf.prior, k = k)
-      )
-    )
-
-  # return the final expression
-  if (is.null(top.text)) bf01_expr$expr else bf01_expr
+  # Bayes Factor expression
+  bf_expr_template(
+    top.text = top.text,
+    bf.prior = bf.prior,
+    prior.type = prior.type,
+    estimate.type = estimate.type,
+    estimate.df = df,
+    centrality = centrality,
+    conf.level = conf.level,
+    conf.method = conf.method,
+    k = k
+  )
 }
 
 #' @name meta_data_check

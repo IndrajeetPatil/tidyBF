@@ -86,6 +86,7 @@ testthat::test_that(
         x = Species,
         y = Sepal.Length,
         conf.level = 0.99,
+        conf.method = "eti",
         output = "expression"
       )
 
@@ -125,6 +126,7 @@ testthat::test_that(
     testthat::skip_if(getRversion() < "3.6")
 
     # this needs devel version of `BayesFactor`; skip if the need be for CRAN
+    # testthat::skip_on_cran()
 
     # dataframe
     dat <-
@@ -186,6 +188,14 @@ testthat::test_that(
         output = "dataframe"
       )
 
+
+    # check bayes factor values
+    testthat::expect_equal(df$bf10[[1]], 6.364917, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
+
+    # checking if two usages of the function are producing the same results
+    testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+
     # extracting expression
     set.seed(123)
     results <-
@@ -199,16 +209,22 @@ testthat::test_that(
         output = "expression"
       )
 
-    # check bayes factor values
-    testthat::expect_equal(df$bf10[[1]], 6.364917, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+    # data with NA
+    set.seed(123)
+    results_na <-
+      bf_oneway_anova(
+        data = bugs_long,
+        x = condition,
+        y = "desire",
+        paired = TRUE,
+        output = "expression"
+      )
 
     # testing expression
     testthat::expect_is(results, "call")
+    testthat::expect_is(results_na, "call")
 
+    # checking expressions
     testthat::expect_identical(
       results,
       ggplot2::expr(
@@ -234,19 +250,6 @@ testthat::test_that(
         )
       )
     )
-
-    # data with NA
-    set.seed(123)
-    results_na <-
-      bf_oneway_anova(
-        data = bugs_long,
-        x = condition,
-        y = "desire",
-        paired = TRUE,
-        output = "expression"
-      )
-
-    testthat::expect_is(results_na, "call")
 
     testthat::expect_identical(
       results_na,
@@ -282,6 +285,8 @@ testthat::test_that(
   desc = "with subject.id",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
+
     # data
     df <-
       structure(list(
@@ -318,8 +323,7 @@ testthat::test_that(
         x = condition,
         y = score,
         subject.id = id,
-        paired = TRUE,
-        output = "expression"
+        paired = TRUE
       )
 
     # correct
@@ -329,8 +333,7 @@ testthat::test_that(
         data = dplyr::arrange(df, id),
         x = condition,
         y = score,
-        paired = TRUE,
-        output = "expression"
+        paired = TRUE
       )
 
     testthat::expect_equal(expr2, expr1)

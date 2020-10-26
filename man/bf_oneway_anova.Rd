@@ -9,10 +9,10 @@ bf_oneway_anova(
   x,
   y,
   subject.id = NULL,
+  paired = FALSE,
   bf.prior = 0.707,
   top.text = NULL,
   output = "dataframe",
-  paired = FALSE,
   k = 2L,
   ...
 )
@@ -33,6 +33,9 @@ assumes that the data has already been sorted by such an id by the user and
 creates an internal identifier. So if your data is \strong{not} sorted and you
 leave this argument unspecified, the results can be inaccurate.}
 
+\item{paired}{Decides whether the design is repeated measures or not
+(Default: \code{FALSE}).}
+
 \item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
 width to use in calculating Bayes factors.}
 
@@ -42,9 +45,6 @@ Bayes Factor top.text/message).}
 \item{output}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the
 results.}
-
-\item{paired}{Decides whether the design is repeated measures or not
-(Default: \code{FALSE}).}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}

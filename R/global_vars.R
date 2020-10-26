@@ -10,7 +10,10 @@ utils::globalVariables(
     "estimate",
     "estimate.LB",
     "estimate.UB",
-    "term"
+    "term",
+    "conf.level",
+    "hpd95_lower",
+    "hpd95_upper"
   ),
   package = "tidyBF",
   add = FALSE

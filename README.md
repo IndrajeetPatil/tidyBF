@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--24-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--26-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage
@@ -90,7 +90,7 @@ framework:
 | (one/two-sample) t-test         | `bf_ttest`           | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF` + `bayestestR::describe_posterior`       |
 | one-way ANOVA                   | `bf_oneway_anova`    | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF` + `performance::r2_bayes`                |
 | correlation                     | `bf_corr_test`       | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF` + `bayestestR::describe_posterior` |
-| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="red">No</font>    | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`    |
+| (one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`    |
 | random-effects meta-analysis    | `bf_meta_random`     | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`                                          |
 
 # Notation
@@ -304,9 +304,8 @@ viz_forest(
     )
   ) +
   theme(text = element_text(size = 12))
+#> Error: passing unknown arguments: conf.level.
 ```
-
-<img src="man/figures/README-expr_plot6-1.png" width="100%" />
 
 ## Convenient way to extract detailed output from `BayesFactor` objects
 

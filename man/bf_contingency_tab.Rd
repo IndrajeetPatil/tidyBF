@@ -31,7 +31,7 @@ of fit test) will be run for the \code{main} variable. Otherwise an appropriate
 association test will be run.}
 
 \item{counts}{A string naming a variable in data containing counts, or \code{NULL}
-if each row represents a single observation (Default).}
+if each row represents a single observation.}
 
 \item{ratio}{A vector of proportions: the expected proportions for the
 proportion test (should sum to 1). Default is \code{NULL}, which means the null

@@ -1,8 +1,6 @@
 #' @title Bayes factor for random-effects meta-analysis
 #' @name bf_meta_random
 #'
-#' @importFrom metaBMA meta_random prior
-#'
 #' @param data A dataframe. It **must** contain columns named `estimate` (effect
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
 #'   two columns will be used for `y`  and `SE` arguments in
@@ -11,6 +9,8 @@
 #' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
 #' @inheritDotParams metaBMA::meta_random -y -SE -ci
+#'
+#' @importFrom metaBMA meta_random prior
 #'
 #' @examples
 #'
@@ -61,7 +61,6 @@ bf_meta_random <- function(data,
                            d = prior("norm", c(mean = 0, sd = 0.3)),
                            tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                            k = 2L,
-                           conf.level = 0.95,
                            output = "dataframe",
                            top.text = NULL,
                            ...) {
@@ -72,7 +71,7 @@ bf_meta_random <- function(data,
   #----------------------- meta-analysis -------------------------------
 
   # extracting results from random-effects meta-analysis
-  mod <-
+  bf_object <-
     metaBMA::meta_random(
       y = data$estimate,
       SE = data$std.error,
@@ -82,57 +81,11 @@ bf_meta_random <- function(data,
       ...
     )
 
-  #----------------------- preparing top.text -------------------------------
-
-  # creating a dataframe with posterior estimates
-  df <-
-    as_tibble(mod$estimates, rownames = "term") %>%
-    dplyr::mutate(.data = ., bf10 = mod$BF["random_H1", "random_H0"])
-
-  # prepare the Bayes factor message
-  bf01_expr <-
-    substitute(
-      atop(displaystyle(top.text),
-        expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          widehat(italic(delta))["mean"]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^"HDI",
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          bf.prior
-        )
-      ),
-      env = list(
-        top.text = top.text,
-        bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-        conf.level = paste0(conf.level * 100, "%"),
-        estimate = specify_decimal_p(x = df$mean[[1]], k = k),
-        estimate.LB = specify_decimal_p(x = df$hpd95_lower[[1]], k = k),
-        estimate.UB = specify_decimal_p(x = df$hpd95_upper[[1]], k = k),
-        bf.prior = specify_decimal_p(x = mod$jzs$rscale_discrete[[1]], k = k)
-      )
-    )
-
-  # the final expression
-  if (is.null(top.text)) bf01_expr <- bf01_expr$expr
-
   # return the text results or the dataframe with results
   switch(
     EXPR = output,
-    "dataframe" = df,
-    bf01_expr
+    "dataframe" = bf_extractor(bf_object),
+    bf_expr(bf_object, k = k, top.text = top.text, ...)
   )
 }
 

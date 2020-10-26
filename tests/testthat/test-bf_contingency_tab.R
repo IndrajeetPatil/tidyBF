@@ -18,9 +18,9 @@ testthat::test_that(
     testthat::expect_equal(df$bf10, 0.2465787, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10, -1.400074, tolerance = 0.001)
 
-    # caption
+    # expr
     set.seed(123)
-    caption_text <-
+    expr_text <-
       bf_contingency_tab(
         data = mtcars,
         x = "cyl",
@@ -30,7 +30,7 @@ testthat::test_that(
       )
 
     testthat::expect_identical(
-      caption_text,
+      expr_text,
       ggplot2::expr(
         atop(displaystyle("duh"),
           expr =
@@ -80,19 +80,23 @@ testthat::test_that(
         output = "dataframe"
       )
 
-    # caption
-    caption_text <-
+    # expr
+    set.seed(123)
+    expr_text <-
       bf_contingency_tab(
         data = mtcars,
         x = am,
         y = "cyl",
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
-        output = "alternative"
+        conf.level = 0.89,
+        k = 3L,
+        output = "expression"
       )
 
     # with counts
-    caption_text2 <-
+    set.seed(123)
+    expr_text2 <-
       bf_contingency_tab(
         data = as.data.frame(Titanic),
         x = "Survived",
@@ -100,17 +104,23 @@ testthat::test_that(
         counts = "Freq",
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
-        output = "alternative"
+        k = 3L,
+        output = "expression",
+        conf.level = 0.99,
+        centrality = "mean"
       )
 
     # with counts
-    caption_text3 <-
+    set.seed(123)
+    expr_text3 <-
       bf_contingency_tab(
         data = as.data.frame(Titanic),
         x = Survived,
         y = Sex,
         counts = "Freq",
-        output = "H0"
+        k = 3L,
+        output = "expression",
+        prior.concentration = 1.5
       )
 
     # check bayes factor values
@@ -122,51 +132,81 @@ testthat::test_that(
     testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
 
 
-    # caption text
+    # expr text
     testthat::expect_identical(
-      caption_text,
+      expr_text,
       ggplot2::expr(
         paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-3.33",
+          "-3.335",
+          ", ",
+          widehat(italic("V"))["median"]^"posterior",
+          " = ",
+          "0.473",
+          ", CI"["89%"]^"HDI",
+          " [",
+          "0.253",
+          ", ",
+          "0.668",
+          "]",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
-          "1.00"
+          "1.000"
         )
       )
     )
 
     testthat::expect_identical(
-      caption_text2,
+      expr_text2,
       ggplot2::expr(
         paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-214.25",
+          "-214.255",
+          ", ",
+          widehat(italic("V"))["mean"]^"posterior",
+          " = ",
+          "0.455",
+          ", CI"["99%"]^"HDI",
+          " [",
+          "0.398",
+          ", ",
+          "0.505",
+          "]",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
-          "1.00"
+          "1.000"
         )
       )
     )
 
     testthat::expect_identical(
-      caption_text3,
+      expr_text3,
       ggplot2::expr(
         paste(
           "log"["e"],
           "(BF"["01"],
           ") = ",
-          "-213.98",
+          "-213.873",
+          ", ",
+          widehat(italic("V"))["median"]^"posterior",
+          " = ",
+          "0.455",
+          ", CI"["95%"]^"HDI",
+          " [",
+          "0.415",
+          ", ",
+          "0.495",
+          "]",
           ", ",
           italic("a")["Gunel-Dickey"],
           " = ",
-          "1.00"
+          "1.500"
         )
       )
     )

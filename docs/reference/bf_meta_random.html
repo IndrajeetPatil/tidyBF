@@ -135,7 +135,6 @@
   d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"norm"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span><span class='op'>)</span>,
   tau <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"invgamma"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>0.15</span><span class='op'>)</span><span class='op'>)</span>,
   k <span class='op'>=</span> <span class='fl'>2L</span>,
-  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>,
   top.text <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
@@ -146,7 +145,6 @@
   d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"norm"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span><span class='op'>)</span>,
   tau <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"invgamma"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>0.15</span><span class='op'>)</span><span class='op'>)</span>,
   k <span class='op'>=</span> <span class='fl'>2L</span>,
-  conf.level <span class='op'>=</span> <span class='fl'>0.95</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>,
   top.text <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
@@ -178,11 +176,6 @@ probability density function is defined via <code><a href='https://rdrr.io/pkg/m
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
 (Default: <code>k = 2L</code>).</p></td>
-    </tr>
-    <tr>
-      <th>conf.level</th>
-      <td><p>Confidence/Credible Interval (CI) level. Default to <code>0.95</code>
-(<code>95%</code>).</p></td>
     </tr>
     <tr>
       <th>output</th>
@@ -279,15 +272,15 @@ study in random-effects meta-analysis.</p></dd>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: There were 2 divergent transitions after warmup. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-#&gt; <span class='warning'>to find out why this is a problem and how to eliminate them.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 11</span><span>
-#&gt;   </span><span style='font-weight: bold;'>term</span><span>   </span><span style='font-weight: bold;'>mean</span><span>    </span><span style='font-weight: bold;'>sd</span><span> </span><span style='font-weight: bold;'>`2.5%`</span><span> </span><span style='font-weight: bold;'>`50%`</span><span> </span><span style='font-weight: bold;'>`97.5%`</span><span> </span><span style='font-weight: bold;'>hpd95_lower</span><span> </span><span style='font-weight: bold;'>hpd95_upper</span><span> </span><span style='font-weight: bold;'>n_eff</span><span>  </span><span style='font-weight: bold;'>Rhat</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> d     </span><span style='color: #555555;'>0.</span><span>535 </span><span style='color: #555555;'>0.</span><span>119  </span><span style='color: #555555;'>0.</span><span>273 </span><span style='color: #555555;'>0.</span><span>544   </span><span style='color: #555555;'>0.</span><span>751       </span><span style='color: #555555;'>0.</span><span>287       </span><span style='color: #555555;'>0.</span><span>762  682.  1.00
-#&gt; </span><span style='color: #555555;'>2</span><span> tau   </span><span style='color: #555555;'>0.</span><span>277 </span><span style='color: #555555;'>0.</span><span>118  </span><span style='color: #555555;'>0.</span><span>133 </span><span style='color: #555555;'>0.</span><span>249   </span><span style='color: #555555;'>0.</span><span>602       </span><span style='color: #555555;'>0.</span><span>119       </span><span style='color: #555555;'>0.</span><span>518  431.  1.00
-#&gt;    </span><span style='font-weight: bold;'>bf10</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  28.2
-#&gt; </span><span style='color: #555555;'>2</span><span>  28.2</div><div class='input'><span class='co'># }</span>
+#&gt; <span class='warning'>to find out why this is a problem and how to eliminate them.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 10</span><span>
+#&gt;   </span><span style='font-weight: bold;'>term</span><span>    </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>std.error</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>  </span><span style='font-weight: bold;'>bf10</span><span>  </span><span style='font-weight: bold;'>rhat</span><span>   </span><span style='font-weight: bold;'>ess</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Overall    </span><span style='color: #555555;'>0.</span><span>535     </span><span style='color: #555555;'>0.</span><span>119    </span><span style='color: #555555;'>0.</span><span>287     </span><span style='color: #555555;'>0.</span><span>762  28.2  1.00  682.       3.34
+#&gt; </span><span style='color: #555555;'>2</span><span> tau        </span><span style='color: #555555;'>0.</span><span>277     </span><span style='color: #555555;'>0.</span><span>118    </span><span style='color: #555555;'>0.</span><span>119     </span><span style='color: #555555;'>0.</span><span>518  </span><span style='color: #BB0000;'>NA</span><span>    1.00  431.      </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt;   </span><span style='font-weight: bold;'>prior.scale</span><span>
+#&gt;         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       </span><span style='color: #555555;'>0.</span><span>707
+#&gt; </span><span style='color: #555555;'>2</span><span>       </span><span style='color: #555555;'>0.</span><span>707</div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>

@@ -21,7 +21,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--25-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--26-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)
 [![Coverage

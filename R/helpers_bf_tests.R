@@ -47,34 +47,23 @@ bf_extractor <- function(bf.object,
                          ...) {
 
   # ------------------------ parameters --------------------------------
+  df <-
+    suppressMessages(parameters::model_parameters(
+      model = bf.object,
+      ci = conf.level,
+      ci_method = conf.method,
+      centrality = centrality,
+      verbose = FALSE,
+      ...
+    )) %>%
+    insight::standardize_names(data = ., style = "broom") %>%
+    as_tibble(.) %>%
+    dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
+    dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
 
-  if (class(bf.object) == "meta_random") {
-    # creating a dataframe with posterior estimates
-    df <-
-      as_tibble(bf.object$estimates, rownames = "term") %>%
-      dplyr::mutate(
-        bf10 = bf.object$BF["random_H1", "random_H0"],
-        prior.scale = bf.object$jzs$rscale_discrete[[1]],
-        log_e_bf10 = log(bf10)
-      ) %>%
-      dplyr::rename(estimate = mean, conf.low = hpd95_lower, conf.high = hpd95_upper)
-  } else {
-    df <-
-      suppressMessages(parameters::model_parameters(
-        model = bf.object,
-        ci = conf.level,
-        ci_method = conf.method,
-        centrality = centrality,
-        verbose = FALSE,
-        ...
-      )) %>%
-      insight::standardize_names(data = ., style = "broom") %>%
-      as_tibble(.) %>%
-      dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
-      dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
+  # ------------------------ anova designs ------------------------------
 
-    # ------------------------ anova designs ------------------------------
-
+  if (class(bf.object)[[1]] == "BFBayesFactor") {
     if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
       # dataframe with posterior estimates for R-squared
       df_r2 <-
@@ -112,6 +101,8 @@ bf_extractor <- function(bf.object,
         ) %>%
         dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
     }
+  } else {
+    df %<>% dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
   }
 
   # final dataframe
@@ -177,17 +168,17 @@ bf_expr <- function(bf.object,
   # for non-anova tests
   if (isFALSE(anova.design)) {
     # which test was run decides the estimate type
-    if (df$term[[1]] %in% c("d", "Difference")) {
-      estimate.type <- quote(delta)
+    if (df$term[[1]] %in% c("Overall", "Difference")) {
+      estimate.type <- quote(italic(delta))
     } else if (df$term[[1]] == "Cramers_v") {
-      estimate.type <- quote(widehat(italic("V"))["Cramer"])
+      estimate.type <- quote(italic("V"))
       prior.type <- quote(italic("a")["Gunel-Dickey"])
     } else {
-      estimate.type <- quote(rho)
+      estimate.type <- quote(italic(rho))
     }
 
     # for metaBMA
-    if ("n_eff" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
+    if ("ess" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
 
     # for expression
     bf.prior <- df$prior.scale[[1]]
@@ -200,7 +191,7 @@ bf_expr <- function(bf.object,
 
     # for expression
     c(centrality, conf.method) %<-% c("median", "hdi")
-    estimate.type <- quote(R^"2")
+    estimate.type <- quote(italic(R^"2"))
     bf.prior <- df_prior$prior.scale[[1]]
   }
 

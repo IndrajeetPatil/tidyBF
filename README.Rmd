@@ -212,7 +212,7 @@ library(ggplot2)
 library(tidyBF)
 
 # using the expression to display details in a plot
-ggplot(mtcars, aes(wt, mpg)) + # Pearson's r results in an expression
+ggplot(mtcars, aes(wt, mpg)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "expression"))

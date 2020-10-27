@@ -1,6 +1,11 @@
 #' @title Bayes Factor for one-way analysis of variance (ANOVA)
 #' @name bf_oneway_anova
 #'
+#' @note If you want to set `paired = TRUE`, you are going to need to install
+#'   the development version of `BayesFactor` (`0.9.12-4.3`).
+#'   You can download it by running:
+#' `remotes::install_github("richarddmorey/BayesFactor/pkg/BayesFactor")`.
+#'
 #' @importFrom BayesFactor anovaBF
 #' @importFrom dplyr mutate
 #' @importFrom rlang new_formula enexpr expr
@@ -39,15 +44,17 @@
 #'
 #' # within-subjects -------------------------------------------------------
 #'
-#' # to get expression
-#' bf_oneway_anova(
-#'   data = bugs_long,
-#'   x = condition,
-#'   y = desire,
-#'   subject.id = subject,
-#'   paired = TRUE,
-#'   output = "expression"
-#' )
+#' # to get expression (needs `BayesFactor 0.9.12-4.3`)
+#' if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
+#'   bf_oneway_anova(
+#'     data = bugs_long,
+#'     x = condition,
+#'     y = desire,
+#'     subject.id = subject,
+#'     paired = TRUE,
+#'     output = "expression"
+#'   )
+#' }
 #' @export
 
 # function body

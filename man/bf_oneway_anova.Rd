@@ -55,6 +55,12 @@ results.}
 \description{
 Bayes Factor for one-way analysis of variance (ANOVA)
 }
+\note{
+If you want to set \code{paired = TRUE}, you are going to need to install
+the development version of \code{BayesFactor} (\verb{0.9.12-4.3}).
+You can download it by running:
+\code{remotes::install_github("richarddmorey/BayesFactor/pkg/BayesFactor")}.
+}
 \examples{
 # setup
 set.seed(123)
@@ -72,15 +78,17 @@ bf_oneway_anova(
 
 # within-subjects -------------------------------------------------------
 
-# to get expression
-bf_oneway_anova(
-  data = bugs_long,
-  x = condition,
-  y = desire,
-  subject.id = subject,
-  paired = TRUE,
-  output = "expression"
-)
+# to get expression (needs `BayesFactor 0.9.12-4.3`)
+if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
+  bf_oneway_anova(
+    data = bugs_long,
+    x = condition,
+    y = desire,
+    subject.id = subject,
+    paired = TRUE,
+    output = "expression"
+  )
+}
 }
 \seealso{
 \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},

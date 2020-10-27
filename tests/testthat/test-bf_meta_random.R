@@ -39,30 +39,16 @@ testthat::test_that(
       suppressWarnings(bf_meta_random(
         data = df1,
         k = 3,
-        iter = 1000,
-        summarize = "integrate",
+        metaBMA.args = list(iter = 1000, summarize = "integrate"),
         output = "expression"
       ))
-
-    set.seed(123)
-    subtitle2 <-
-      suppressWarnings(bf_meta_random(
-        data = df1,
-        k = 3,
-        iter = 1000,
-        summarize = "integrate",
-        output = "expression",
-        top.text = "ayyo"
-      ))
-
 
     set.seed(123)
     df <-
       suppressWarnings(bf_meta_random(
         data = df1,
         k = 3,
-        iter = 1000,
-        summarize = "integrate",
+        metaBMA.args = list(iter = 1000, summarize = "integrate"),
         output = "dataframe",
         top.text = "ayyo"
       ))
@@ -91,37 +77,6 @@ testthat::test_that(
           italic("r")["Cauchy"]^"JZS",
           " = ",
           "0.707"
-        )
-      )
-    )
-
-    testthat::expect_identical(
-      subtitle2,
-      ggplot2::expr(
-        atop(
-          displaystyle("ayyo"),
-          expr = paste(
-            "log"["e"],
-            "(BF"["01"],
-            ") = ",
-            "-3.341",
-            ", ",
-            widehat(italic(delta))["mean"]^
-              "posterior",
-            " = ",
-            "0.518",
-            ", CI"["95%"]^"HDI",
-            " [",
-            "0.219",
-            ", ",
-            "0.766",
-            "]",
-            ", ",
-            italic("r")["Cauchy"]^
-              "JZS",
-            " = ",
-            "0.707"
-          )
         )
       )
     )

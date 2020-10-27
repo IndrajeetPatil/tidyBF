@@ -11,8 +11,8 @@ coverage:
     project:
       default:
         target: auto
-        threshold: 1%
         branches: null
+        threshold: 1%
         informational: true
 
     patch:
@@ -27,7 +27,6 @@ coverage:
         branches: null
         threshold: 1%
         informational: true
-
 
 comment:
   layout: "header, diff, changes, sunburst, uncovered, tree"

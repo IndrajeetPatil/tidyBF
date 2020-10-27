@@ -8,9 +8,12 @@
 #' @inheritParams bf_expr
 #' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
-#' @inheritDotParams metaBMA::meta_random -y -SE -ci
+#' @param metaBMA.args A list of additional arguments to be passed to
+#'   `metaBMA::meta_random`.
+#' @param ... Additional arguments passed to `bf_expr`.
 #'
 #' @importFrom metaBMA meta_random prior
+#' @importFrom rlang exec !!!
 #'
 #' @examples
 #'
@@ -47,9 +50,7 @@
 #' bf_meta_random(
 #'   data = df,
 #'   k = 3,
-#'   iter = 1500,
-#'   # customizing analysis with additional arguments
-#'   control = list(max_treedepth = 15),
+#'   metaBMA.args = list(iter = 500, rscale_discrete = 0.880),
 #'   output = "dataframe"
 #' )
 #' }
@@ -60,6 +61,7 @@
 bf_meta_random <- function(data,
                            d = prior("norm", c(mean = 0, sd = 0.3)),
                            tau = prior("invgamma", c(shape = 1, scale = 0.15)),
+                           metaBMA.args = list(),
                            k = 2L,
                            output = "dataframe",
                            top.text = NULL,
@@ -72,13 +74,13 @@ bf_meta_random <- function(data,
 
   # extracting results from random-effects meta-analysis
   bf_object <-
-    metaBMA::meta_random(
+    rlang::exec(
+      .fn = metaBMA::meta_random,
       y = data$estimate,
       SE = data$std.error,
       d = d,
       tau = tau,
-      ci = conf.level,
-      ...
+      !!!metaBMA.args
     )
 
   # return the text results or the dataframe with results

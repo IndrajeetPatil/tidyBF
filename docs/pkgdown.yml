@@ -1,8 +1,9 @@
 pandoc: 2.11.0.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2020-10-26T11:53Z
+articles:
+  dataframe_outputs: dataframe_outputs.html
+last_built: 2020-10-27T11:49Z
 urls:
   reference: https://indrajeetpatil.github.io/tidyBF//reference
   article: https://indrajeetpatil.github.io/tidyBF//articles

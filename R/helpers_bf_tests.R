@@ -63,7 +63,7 @@ bf_extractor <- function(bf.object,
 
   # ------------------------ anova designs ------------------------------
 
-  if (class(bf.object)[[1]] == "BFBayesFactor") {
+  if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
     if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
       # dataframe with posterior estimates for R-squared
       df_r2 <-
@@ -102,7 +102,9 @@ bf_extractor <- function(bf.object,
         dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
     }
   } else {
-    df %<>% dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
+    df %<>%
+      dplyr::filter(.data = ., term %in% c("Overall", "tau")) %>%
+      dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
   }
 
   # final dataframe

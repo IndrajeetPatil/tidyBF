@@ -9,8 +9,8 @@
 #'   (e.g., `"y"`) or as a bare expression (e.g, `y`).
 #' @param bf.prior A number between `0.5` and `2` (default `0.707`), the prior
 #'   width to use in calculating Bayes factors.
-#' @inheritParams bf_expr
 #' @inheritParams bf_ttest
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom BayesFactor correlationBF
 #' @importFrom dplyr pull
@@ -47,9 +47,6 @@ bf_corr_test <- function(data,
                          x,
                          y,
                          bf.prior = 0.707,
-                         top.text = NULL,
-                         output = "dataframe",
-                         k = 2L,
                          ...) {
 
   # extracting results from Bayesian test and creating a dataframe
@@ -60,10 +57,6 @@ bf_corr_test <- function(data,
       rscale = bf.prior
     )
 
-  # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, top.text = top.text, ...)
-  )
+  # final return
+  bf_extractor(bf_object, ...)
 }

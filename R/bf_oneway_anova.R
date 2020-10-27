@@ -21,8 +21,8 @@
 #'   dataframe `data`.
 #' @inheritParams bf_ttest
 #' @inheritParams bf_corr_test
-#' @inheritParams bf_expr
 #' @inheritParams ipmisc::long_to_wide_converter
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_ttest}}
@@ -64,9 +64,6 @@ bf_oneway_anova <- function(data,
                             subject.id = NULL,
                             paired = FALSE,
                             bf.prior = 0.707,
-                            top.text = NULL,
-                            output = "dataframe",
-                            k = 2L,
                             ...) {
   # make sure both quoted and unquoted arguments are allowed
   c(x, y) %<-% c(rlang::ensym(x), rlang::ensym(y))
@@ -117,12 +114,6 @@ bf_oneway_anova <- function(data,
       )
   }
 
-  # ============================ return ==================================
-
-  # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, top.text = top.text, anova.design = TRUE, ...)
-  )
+  # final return
+  bf_extractor(bf_object, ...)
 }

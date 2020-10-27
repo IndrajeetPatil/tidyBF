@@ -5,12 +5,11 @@
 #'   sizes or outcomes)  and `std.error` (corresponding standard errors). These
 #'   two columns will be used for `y`  and `SE` arguments in
 #'   `metaBMA::meta_random`.
-#' @inheritParams bf_expr
 #' @inheritParams bf_ttest
 #' @inheritParams metaBMA::meta_random
 #' @param metaBMA.args A list of additional arguments to be passed to
 #'   `metaBMA::meta_random`.
-#' @param ... Additional arguments passed to `bf_expr`.
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom metaBMA meta_random prior
 #' @importFrom rlang exec !!!
@@ -62,9 +61,6 @@ bf_meta_random <- function(data,
                            d = prior("norm", c(mean = 0, sd = 0.3)),
                            tau = prior("invgamma", c(shape = 1, scale = 0.15)),
                            metaBMA.args = list(),
-                           k = 2L,
-                           output = "dataframe",
-                           top.text = NULL,
                            ...) {
 
   # check the data contains needed column
@@ -83,18 +79,6 @@ bf_meta_random <- function(data,
       !!!metaBMA.args
     )
 
-  # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, top.text = top.text, ...)
-  )
+  # final return
+  bf_extractor(bf_object, ...)
 }
-
-# aliases -----------------------------------------------------------------
-
-#' @rdname bf_meta_random
-#' @aliases bf_meta_random
-#' @export
-
-bf_meta <- bf_meta_random

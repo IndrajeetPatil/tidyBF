@@ -7,14 +7,11 @@
 #' @param x Either the grouping variable from the dataframe `data` if it's a
 #'   two-sample *t*-test or a numeric variable if it's a one-sample *t*-test.
 #' @inheritParams bf_corr_test
-#' @inheritParams bf_expr
 #' @inheritParams bf_oneway_anova
 #' @param test.value A number specifying the value of the null hypothesis
 #'   (Default: `0`).
-#' @param output If `"expression"`, will return expression with statistical
-#'   details, while `"dataframe"` will return a dataframe containing the
-#'   results.
 #' @inheritParams ipmisc::long_to_wide_converter
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom BayesFactor ttestBF
 #' @importFrom rlang quo_is_null new_formula ensym enquo
@@ -73,9 +70,6 @@ bf_ttest <- function(data,
                      paired = FALSE,
                      test.value = 0,
                      bf.prior = 0.707,
-                     top.text = NULL,
-                     output = "dataframe",
-                     k = 2L,
                      ...) {
 
   # make sure both quoted and unquoted arguments are allowed
@@ -134,12 +128,6 @@ bf_ttest <- function(data,
     }
   }
 
-  # -------------------------- return --------------------------
-
-  # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, top.text = top.text, ...)
-  )
+  # final return
+  bf_extractor(bf_object, ...)
 }

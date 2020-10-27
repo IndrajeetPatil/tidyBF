@@ -61,7 +61,7 @@ bf_extractor <- function(bf.object,
     dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
     dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
 
-  # ------------------------ anova designs ------------------------------
+  # ------------------------ anova designs ---------------------------------
 
   if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
     if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
@@ -166,35 +166,42 @@ bf_expr <- function(bf.object,
 
   # default
   prior.type <- quote(italic("r")["Cauchy"]^"JZS")
+  estimate.type <- quote(italic(delta))
 
-  # for non-anova tests
-  if (isFALSE(anova.design)) {
-    # which test was run decides the estimate type
-    if (df$term[[1]] %in% c("Overall", "Difference")) {
-      estimate.type <- quote(italic(delta))
-    } else if (df$term[[1]] == "Cramers_v") {
-      estimate.type <- quote(italic("V"))
-      prior.type <- quote(italic("a")["Gunel-Dickey"])
-    } else {
-      estimate.type <- quote(italic(rho))
+  # ------------------------ non-anova designs ---------------------------------
+
+  if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
+    # for non-anova tests
+    if (class(bf.object@denominator)[[1]] != "BFlinearModel") {
+      # for expression
+      if (df$term[[1]] == "rho") estimate.type <- quote(italic(rho))
+      if (df$term[[1]] == "Cramers_v") {
+        c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
+      }
+
+      # prior
+      bf.prior <- df$prior.scale[[1]]
     }
 
-    # for metaBMA
-    if ("ess" %in% names(df)) c(centrality, conf.method) %<-% c("mean", "hdi")
+    # ------------------------ anova designs ---------------------------------
 
-    # for expression
-    bf.prior <- df$prior.scale[[1]]
+    if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
+      # for expression
+      c(centrality, conf.method) %<-% c("median", "hdi")
+      estimate.type <- quote(italic(R^"2"))
+
+      # prior
+      df_prior <-
+        bayestestR::describe_prior(bf.object) %>%
+        insight::standardize_names(., style = "broom") %>%
+        dplyr::filter(., term == "fixed")
+
+      bf.prior <- df_prior$prior.scale[[1]]
+    }
   } else {
-    # dataframe with prior information
-    df_prior <-
-      bayestestR::describe_prior(bf.object) %>%
-      insight::standardize_names(., style = "broom") %>%
-      dplyr::filter(., term == "fixed")
-
-    # for expression
-    c(centrality, conf.method) %<-% c("median", "hdi")
-    estimate.type <- quote(italic(R^"2"))
-    bf.prior <- df_prior$prior.scale[[1]]
+    # for metaBMA
+    c(centrality, conf.method) %<-% c("mean", "hdi")
+    bf.prior <- df$prior.scale[[1]]
   }
 
   # Bayes Factor expression

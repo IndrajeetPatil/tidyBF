@@ -124,6 +124,7 @@ testthat::test_that(
   desc = "bayes factor (within-subjects - anova)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
 

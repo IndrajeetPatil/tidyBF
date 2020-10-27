@@ -17,5 +17,27 @@ testthat::test_that(
     # check bayes factor values
     testthat::expect_equal(df$bf10[[1]], 8.990505, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10[[1]], 2.196169, tolerance = 0.001)
+
+
+    library(tidyBF)
+    suppressPackageStartupMessages(library(BayesFactor))
+    data(puzzles)
+
+    # model
+    set.seed(123)
+    result <-
+      anovaBF(
+        RT ~ shape * color + ID,
+        data = puzzles,
+        whichRandom = "ID",
+        whichModels = "top",
+        progress = FALSE
+      )
+
+    # extract details
+    df2 <- bf_extractor(result)
+
+    testthat::expect_is(df2, "tbl_df")
+    testthat::expect_equal(df2$bf10[[1]], 2.647962, tolerance = 0.001)
   }
 )

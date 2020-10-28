@@ -6,7 +6,6 @@
 \usage{
 bf_expr_template(
   top.text,
-  bf.prior = 0.707,
   prior.type = quote(italic("r")["Cauchy"]^"JZS"),
   estimate.type = quote(delta),
   estimate.df,
@@ -20,9 +19,6 @@ bf_expr_template(
 \arguments{
 \item{top.text}{Text to display as top.text (will be displayed on top of the
 Bayes Factor top.text/message).}
-
-\item{bf.prior}{A number between \code{0.5} and \code{2} (default \code{0.707}), the prior
-width to use in calculating Bayes factors.}
 
 \item{prior.type}{A character that specifies the prior type.}
 

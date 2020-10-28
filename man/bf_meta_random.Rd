@@ -2,7 +2,6 @@
 % Please edit documentation in R/bf_meta_random.R
 \name{bf_meta_random}
 \alias{bf_meta_random}
-\alias{bf_meta}
 \title{Bayes factor for random-effects meta-analysis}
 \usage{
 bf_meta_random(
@@ -10,20 +9,6 @@ bf_meta_random(
   d = prior("norm", c(mean = 0, sd = 0.3)),
   tau = prior("invgamma", c(shape = 1, scale = 0.15)),
   metaBMA.args = list(),
-  k = 2L,
-  output = "dataframe",
-  top.text = NULL,
-  ...
-)
-
-bf_meta(
-  data,
-  d = prior("norm", c(mean = 0, sd = 0.3)),
-  tau = prior("invgamma", c(shape = 1, scale = 0.15)),
-  metaBMA.args = list(),
-  k = 2L,
-  output = "dataframe",
-  top.text = NULL,
   ...
 )
 }
@@ -44,17 +29,25 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
 \item{metaBMA.args}{A list of additional arguments to be passed to
 \code{metaBMA::meta_random}.}
 
-\item{k}{Number of digits after decimal point (should be an integer)
+\item{...}{
+  Arguments passed on to \code{\link[=bf_extractor]{bf_extractor}}
+  \describe{
+    \item{\code{conf.level}}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
+(\verb{95\%}).}
+    \item{\code{centrality}}{The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: \code{"median"},
+\code{"mean"}, \code{"MAP"} or \code{"all"}.}
+    \item{\code{conf.method}}{The type of index used for Credible Interval. Can be
+\code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see
+\code{\link[bayestestR:eti]{bayestestR::eti()}}) or \code{"si"} (see \code{\link[bayestestR:si]{bayestestR::si()}}).}
+    \item{\code{k}}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
-
-\item{output}{If \code{"expression"}, will return expression with statistical
+    \item{\code{top.text}}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
+    \item{\code{output}}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the
 results.}
-
-\item{top.text}{Text to display as top.text (will be displayed on top of the
-Bayes Factor top.text/message).}
-
-\item{...}{Additional arguments passed to \code{bf_expr}.}
+  }}
 }
 \description{
 Bayes factor for random-effects meta-analysis

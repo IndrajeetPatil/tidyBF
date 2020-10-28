@@ -214,7 +214,17 @@ results.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further arguments to be passed to or from methods.</p></td>
+      <td><p>Arguments passed on to <code><a href='bf_extractor.html'>bf_extractor</a></code></p><dl>
+    <dt><code>conf.level</code></dt><dd><p>Confidence/Credible Interval (CI) level. Default to <code>0.95</code>
+(<code>95%</code>).</p></dd>
+    <dt><code>centrality</code></dt><dd><p>The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: <code>"median"</code>,
+<code>"mean"</code>, <code>"MAP"</code> or <code>"all"</code>.</p></dd>
+    <dt><code>conf.method</code></dt><dd><p>The type of index used for Credible Interval. Can be
+<code>"hdi"</code> (default, see <code><a href='https://easystats.github.io/bayestestR/reference/hdi.html'>bayestestR::hdi()</a></code>), <code>"eti"</code> (see
+<code><a href='https://easystats.github.io/bayestestR/reference/eti.html'>bayestestR::eti()</a></code>) or <code>"si"</code> (see <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>bayestestR::si()</a></code>).</p></dd>
+  
+</dl></td>
     </tr>
     </table>
 
@@ -237,13 +247,13 @@ results.</p></td>
   y <span class='op'>=</span> <span class='va'>cyl</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 13</span><span>
-#&gt;    </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>term</span><span>      </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>ci.width</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.ci</span><span>
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  16.8       2.82 Cramers_v    </span><span style='color: #949494;'>0.</span><span>476       95    </span><span style='color: #949494;'>0.</span><span>207     </span><span style='color: #949494;'>0.</span><span>701     1      89
-#&gt;   </span><span style='font-weight: bold;'>rope.low</span><span> </span><span style='font-weight: bold;'>rope.high</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>1</span><span>       </span><span style='color: #949494;'>0.</span><span>1               </span><span style='color: #949494;'>0</span><span>           1</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 13</span><span>
+#&gt;      </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>term</span><span>      </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>ci.width</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 16.817</span><span style='text-decoration: underline;'>4</span><span>    2.822</span><span style='text-decoration: underline;'>41</span><span> Cramers_v </span><span style='color: #555555;'>0.</span><span>476</span><span style='text-decoration: underline;'>433</span><span>       95 </span><span style='color: #555555;'>0.</span><span>206</span><span style='text-decoration: underline;'>563</span><span>  </span><span style='color: #555555;'>0.</span><span>701</span><span style='text-decoration: underline;'>242</span><span>     1
+#&gt;   </span><span style='font-weight: bold;'>rope.ci</span><span> </span><span style='font-weight: bold;'>rope.low</span><span> </span><span style='font-weight: bold;'>rope.high</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      89     -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>1</span><span>       </span><span style='color: #555555;'>0.</span><span>1               </span><span style='color: #555555;'>0</span><span>           1</div><div class='input'>
 <span class='co'># ------------------ goodness of fit tests --------------------------------</span>
 
 <span class='co'># to get expression</span>

@@ -7,13 +7,14 @@
 #'   intervals along with Bayes Factor value. The columns should be named as
 #'   `estimate`, `estimate.LB`, `estimate.UB`, and `bf10`.
 #' @param ... Currently ignored.
-#' @inheritParams bf_expr
+#' @inheritParams bf_extractor
 #' @inheritParams bf_ttest
+#'
+#' @importFrom ipmisc specify_decimal_p
 #'
 #' @export
 
 bf_expr_template <- function(top.text,
-                             bf.prior = 0.707,
                              prior.type = quote(italic("r")["Cauchy"]^"JZS"),
                              estimate.type = quote(delta),
                              estimate.df,
@@ -32,6 +33,9 @@ bf_expr_template <- function(top.text,
     c(estimate, estimate.LB, estimate.UB) %<-%
       c(estimate.df$estimate[[1]], estimate.df$conf.low[[1]], estimate.df$conf.high[[1]])
   }
+
+  # prior
+  bf.prior <- estimate.df$prior.scale[[1]]
 
   # prepare the Bayes Factor message
   bf01_expr <-

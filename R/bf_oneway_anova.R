@@ -8,7 +8,7 @@
 #'
 #' @importFrom BayesFactor anovaBF
 #' @importFrom dplyr mutate
-#' @importFrom rlang new_formula enexpr expr
+#' @importFrom rlang new_formula enexpr expr exec !!!
 #' @importFrom ipmisc long_to_wide_converter
 #' @importFrom lme4 nobars findbars
 #'
@@ -21,8 +21,8 @@
 #'   dataframe `data`.
 #' @inheritParams bf_ttest
 #' @inheritParams bf_corr_test
-#' @inheritParams bf_expr
 #' @inheritParams ipmisc::long_to_wide_converter
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @seealso \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},
 #' \code{\link{bf_ttest}}
@@ -64,14 +64,9 @@ bf_oneway_anova <- function(data,
                             subject.id = NULL,
                             paired = FALSE,
                             bf.prior = 0.707,
-                            top.text = NULL,
-                            output = "dataframe",
-                            k = 2L,
                             ...) {
   # make sure both quoted and unquoted arguments are allowed
   c(x, y) %<-% c(rlang::ensym(x), rlang::ensym(y))
-
-  # ============================ data preparation ==========================
 
   # have a proper cleanup with NA removal
   data %<>%
@@ -82,47 +77,29 @@ bf_oneway_anova <- function(data,
       subject.id = {{ subject.id }},
       paired = paired,
       spread = FALSE
+    ) %>%
+    dplyr::mutate(.data = ., rowid = as.factor(rowid))
+
+  # relevant arguments
+  if (isTRUE(paired)) {
+    bf.args <- list(
+      formula = rlang::new_formula({{ rlang::enexpr(y) }}, rlang::expr(!!rlang::enexpr(x) + rowid)),
+      whichRandom = "rowid",
+      rscaleRandom = 1
+    )
+  }
+  if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula({{ y }}, {{ x }}))
+
+  # creating a BayesFactor object
+  bf_object <-
+    rlang::exec(
+      .fn = BayesFactor::anovaBF,
+      data = as.data.frame(data),
+      rscaleFixed = bf.prior,
+      progress = FALSE,
+      !!!bf.args
     )
 
-  # ========================= within-subjects design ==========================
-
-  if (isTRUE(paired)) {
-    # remove NAs
-    data %<>% dplyr::mutate(.data = ., rowid = as.factor(rowid))
-
-    # extracting results from Bayesian test (`y ~ x + id`) and creating a dataframe
-    bf_object <-
-      BayesFactor::anovaBF(
-        formula = rlang::new_formula(
-          {{ rlang::enexpr(y) }}, rlang::expr(!!rlang::enexpr(x) + rowid)
-        ),
-        data = as.data.frame(data),
-        whichRandom = "rowid",
-        rscaleFixed = bf.prior,
-        progress = FALSE,
-        rscaleRandom = 1
-      )
-  }
-
-  # ========================= between-subjects design =========================
-
-  if (isFALSE(paired)) {
-    # extracting results from Bayesian test and creating a dataframe
-    bf_object <-
-      BayesFactor::anovaBF(
-        formula = rlang::new_formula({{ y }}, {{ x }}),
-        data = as.data.frame(data),
-        rscaleFixed = bf.prior,
-        progress = FALSE
-      )
-  }
-
-  # ============================ return ==================================
-
-  # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = bf_extractor(bf_object),
-    bf_expr(bf_object, k = k, top.text = top.text, anova.design = TRUE, ...)
-  )
+  # final return
+  bf_extractor(bf_object, ...)
 }

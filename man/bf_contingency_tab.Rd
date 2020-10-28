@@ -62,7 +62,18 @@ results.}
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
 
-\item{...}{further arguments to be passed to or from methods.}
+\item{...}{
+  Arguments passed on to \code{\link[=bf_extractor]{bf_extractor}}
+  \describe{
+    \item{\code{conf.level}}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
+(\verb{95\%}).}
+    \item{\code{centrality}}{The point-estimates (centrality indices) to compute.
+Character (vector) or list with one or more of these options: \code{"median"},
+\code{"mean"}, \code{"MAP"} or \code{"all"}.}
+    \item{\code{conf.method}}{The type of index used for Credible Interval. Can be
+\code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see
+\code{\link[bayestestR:eti]{bayestestR::eti()}}) or \code{"si"} (see \code{\link[bayestestR:si]{bayestestR::si()}}).}
+  }}
 }
 \description{
 Bayes Factor for contingency table analysis

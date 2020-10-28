@@ -10,11 +10,18 @@
 #' @param conf.method The type of index used for Credible Interval. Can be
 #'   \code{"hdi"} (default, see [bayestestR::hdi()]), \code{"eti"} (see
 #'   [bayestestR::eti()]) or \code{"si"} (see [bayestestR::si()]).
+#' @param k Number of digits after decimal point (should be an integer)
+#'   (Default: `k = 2L`).
+#' @param top.text Text to display as top.text (will be displayed on top of the
+#'   Bayes Factor top.text/message).
+#' @param output If `"expression"`, will return expression with statistical
+#'   details, while `"dataframe"` will return a dataframe containing the
+#'   results.
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate rename
-#' @importFrom insight standardize_names
+#' @importFrom dplyr mutate rename rename_with starts_with
+#' @importFrom insight standardize_names get_priors
 #' @importFrom performance r2_bayes
 #' @importFrom effectsize effectsize
 #' @importFrom parameters model_parameters
@@ -44,9 +51,14 @@ bf_extractor <- function(bf.object,
                          conf.method = "hdi",
                          centrality = "median",
                          conf.level = 0.95,
+                         k = 2L,
+                         top.text = NULL,
+                         output = "dataframe",
                          ...) {
 
   # ------------------------ parameters --------------------------------
+
+  # basic parameters dataframe
   df <-
     suppressMessages(parameters::model_parameters(
       model = bf.object,
@@ -61,9 +73,16 @@ bf_extractor <- function(bf.object,
     dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
     dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
 
-  # ------------------------ anova designs ---------------------------------
+  # expression parameter defaults
+  prior.type <- quote(italic("r")["Cauchy"]^"JZS")
+  estimate.type <- quote(italic(delta))
+
+  # ------------------------ BayesFactor ---------------------------------
 
   if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
+
+    # ------------------------ ANOVA designs ------------------------------
+
     if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
       # dataframe with posterior estimates for R-squared
       df_r2 <-
@@ -81,11 +100,33 @@ bf_extractor <- function(bf.object,
 
       # combine everything
       df %<>% dplyr::bind_cols(., df_r2)
+
+      # for expression
+      c(centrality, conf.method) %<-% c("median", "hdi")
+      estimate.type <- quote(italic(R^"2"))
+
+      # prior
+      df_prior <-
+        insight::get_priors(bf.object) %>%
+        dplyr::rename_with(.fn = ~ paste0("Prior_", .x), .cols = dplyr::everything()) %>%
+        insight::standardize_names(., style = "broom") %>%
+        dplyr::filter(.data = ., prior.parameter == "fixed")
+
+      # merge the parameters dataframe with prior dataframe
+      df <-
+        dplyr::bind_cols(dplyr::select(.data = df, -dplyr::contains("prior.")), df_prior)
+    }
+
+    # ------------------------ correlation ------------------------------
+
+    if (class(bf.object@denominator)[[1]] == "BFcorrelation") {
+      estimate.type <- quote(italic(rho))
     }
 
     # ------------------------ contingency tabs ------------------------------
 
     if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
+      # dataframe cleanup
       df %<>%
         dplyr::bind_cols(
           .,
@@ -100,128 +141,49 @@ bf_extractor <- function(bf.object,
             insight::standardize_names(data = ., style = "broom")
         ) %>%
         dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
+
+      # for expression
+      c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
     }
-  } else {
+  }
+
+  # ------------------------ metaBMA -------------------------------------
+
+  if (!grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
+    # dataframe cleanup
     df %<>%
       dplyr::filter(.data = ., term %in% c("Overall", "tau")) %>%
       dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
-  }
 
-  # final dataframe
-  return(df)
-}
-
-#' @title Prepare expression for Bayes Factor results
-#' @name bf_expr
-#' @description Convenience function to create an expression with Bayes
-#'   Factor results.
-#'
-#' @param k Number of digits after decimal point (should be an integer)
-#'   (Default: `k = 2L`).
-#' @param top.text Text to display as top.text (will be displayed on top of the
-#'   Bayes Factor top.text/message).
-#' @param anova.design Whether the object is from `BayesFactor::anovaBF`
-#'   (default: `FALSE`). The expression is different for anova designs because
-#'   not all details are available.
-#' @inheritParams bf_extractor
-#'
-#' @importFrom ipmisc specify_decimal_p
-#' @importFrom bayestestR describe_prior
-#' @importFrom dplyr rename_with mutate select bind_cols starts_with
-#'
-#' @examples
-#' # for reproducibility
-#' set.seed(123)
-#' library(tidyBF)
-#'
-#' # creating expression
-#' bf_expr(
-#'   bf.object = BayesFactor::correlationBF(
-#'     x = iris$Sepal.Length,
-#'     y = iris$Petal.Length
-#'   ),
-#'   k = 3,
-#'   top.text = "Note: Iris dataset"
-#' )
-#' @export
-
-# function body
-bf_expr <- function(bf.object,
-                    k = 2L,
-                    conf.level = 0.95,
-                    conf.method = "hdi",
-                    centrality = "median",
-                    top.text = NULL,
-                    anova.design = FALSE,
-                    ...) {
-  # extract a dataframe with BF and posterior estimates (if available)
-  df <-
-    bf_extractor(
-      bf.object = bf.object,
-      conf.level = conf.level,
-      conf.method = conf.method,
-      centrality = centrality,
-      ...
-    )
-
-  # default
-  prior.type <- quote(italic("r")["Cauchy"]^"JZS")
-  estimate.type <- quote(italic(delta))
-
-  # ------------------------ non-anova designs ---------------------------------
-
-  if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
-    # for non-anova tests
-    if (class(bf.object@denominator)[[1]] != "BFlinearModel") {
-      # for expression
-      if (df$term[[1]] == "rho") estimate.type <- quote(italic(rho))
-      if (df$term[[1]] == "Cramers_v") {
-        c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
-      }
-
-      # prior
-      bf.prior <- df$prior.scale[[1]]
-    }
-
-    # ------------------------ anova designs ---------------------------------
-
-    if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
-      # for expression
-      c(centrality, conf.method) %<-% c("median", "hdi")
-      estimate.type <- quote(italic(R^"2"))
-
-      # prior
-      df_prior <-
-        bayestestR::describe_prior(bf.object) %>%
-        insight::standardize_names(., style = "broom") %>%
-        dplyr::filter(., term == "fixed")
-
-      bf.prior <- df_prior$prior.scale[[1]]
-    }
-  } else {
-    # for metaBMA
+    # for expression
     c(centrality, conf.method) %<-% c("mean", "hdi")
-    bf.prior <- df$prior.scale[[1]]
   }
 
   # Bayes Factor expression
-  bf_expr_template(
-    top.text = top.text,
-    bf.prior = bf.prior,
-    prior.type = prior.type,
-    estimate.type = estimate.type,
-    estimate.df = df,
-    centrality = centrality,
-    conf.level = conf.level,
-    conf.method = conf.method,
-    k = k
+  bf_expr_01 <-
+    bf_expr_template(
+      top.text = top.text,
+      prior.type = prior.type,
+      estimate.type = estimate.type,
+      estimate.df = df,
+      centrality = centrality,
+      conf.level = conf.level,
+      conf.method = conf.method,
+      k = k
+    )
+
+  # return the text results or the dataframe with results
+  switch(
+    EXPR = output,
+    "dataframe" = df,
+    bf_expr_01
   )
 }
 
 #' @name meta_data_check
 #' @title Helper function to check column names for meta-analysis.
 #'
-#' @inheritParams bf_meta
+#' @inheritParams bf_meta_random
 #'
 #' @importFrom ipmisc red blue
 #'

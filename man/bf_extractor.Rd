@@ -9,6 +9,9 @@ bf_extractor(
   conf.method = "hdi",
   centrality = "median",
   conf.level = 0.95,
+  k = 2L,
+  top.text = NULL,
+  output = "dataframe",
   ...
 )
 }
@@ -25,6 +28,16 @@ Character (vector) or list with one or more of these options: \code{"median"},
 
 \item{conf.level}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
 (\verb{95\%}).}
+
+\item{k}{Number of digits after decimal point (should be an integer)
+(Default: \code{k = 2L}).}
+
+\item{top.text}{Text to display as top.text (will be displayed on top of the
+Bayes Factor top.text/message).}
+
+\item{output}{If \code{"expression"}, will return expression with statistical
+details, while \code{"dataframe"} will return a dataframe containing the
+results.}
 
 \item{...}{Additional arguments passed to
 \code{\link[parameters:model_parameters.BFBayesFactor]{parameters::model_parameters.BFBayesFactor()}}.}

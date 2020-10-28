@@ -3,14 +3,14 @@
 
 # `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
-| Package                                                                                                                                               | Status                                                                                                                                                                             | Usage                                                                                                                                   | GitHub                                                                                                                                                 | References                                                                                                                                                               |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                 | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF)                                               | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)     | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/)            | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)                                             |
-| [![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)                      | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) | [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)   | [![Forks](https://img.shields.io/badge/forks-1-blue.svg)](https://github.com/IndrajeetPatil/tidyBF/)                                                   | [![Features](https://img.shields.io/badge/features-tidyBF-orange.svg?colorB=2196F3)](https://indrajeetpatil.github.io/tidyBF/reference/index.html)                       |
-| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-1-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/dataframe_outputs.html) |
-| [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)             | [![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)  | [![Github Stars](https://img.shields.io/github/stars/IndrajeetPatil/tidyBF.svg?style=social&label=Github)](https://github.com/IndrajeetPatil/tidyBF)   | [![DOI](https://zenodo.org/badge/126624251.svg)](https://zenodo.org/badge/latestdoi/126624251)                                                                           |
-| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--27-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)                    |
-| [![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                                    | [![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF)                                            | [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/tidyBF/community)                                      | [![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)                                           | [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/IndrajeetPatil/tidyBF/issues)               |
+| Package                                                                                                                                               | Status                                                                                                                                                                             | Usage                                                                                                                                   | GitHub                                                                                                                                                 | References                                                                                                                                                 |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                 | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF)                                               | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)     | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/)            | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)                               |
+| [![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)                      | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) | [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)   | [![Forks](https://img.shields.io/badge/forks-1-blue.svg)](https://github.com/IndrajeetPatil/tidyBF/)                                                   | [![Features](https://img.shields.io/badge/features-tidyBF-orange.svg?colorB=2196F3)](https://indrajeetpatil.github.io/tidyBF/reference/index.html)         |
+| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-2-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)         |
+| [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)             | [![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)  | [![Github Stars](https://img.shields.io/github/stars/IndrajeetPatil/tidyBF.svg?style=social&label=Github)](https://github.com/IndrajeetPatil/tidyBF)   | [![DOI](https://zenodo.org/badge/126624251.svg)](https://zenodo.org/badge/latestdoi/126624251)                                                             |
+| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--28-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)      |
+| [![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                                    | [![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF)                                            | [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/tidyBF/community)                                      | [![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)                                           | [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/IndrajeetPatil/tidyBF/issues) |
 
 # Overview <img src="man/figures/logo.png" align="right" width="240" />
 
@@ -314,43 +314,43 @@ result <-
 
 # extract details
 bf_extractor(result)
-#> # A tibble: 21 x 19
-#>    term                estimate conf.low conf.high    pd rope.percentage
-#>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl>
-#>  1 mu                    45.0    43.7      46.4    1               0    
-#>  2 shape-round            0.429   0.0643    0.801  0.992           0.141
-#>  3 shape-square          -0.429  -0.801    -0.0643 0.992           0.141
-#>  4 color-color           -0.426  -0.799    -0.0461 0.990           0.162
-#>  5 color-monochromatic    0.426   0.0461    0.799  0.990           0.162
-#>  6 ID-1                   2.47    0.783     4.37   0.995           0    
-#>  7 ID-2                   0.439  -1.21      2.20   0.698           0.231
-#>  8 ID-3                   0.907  -0.849     2.66   0.848           0.156
-#>  9 ID-4                   0.466  -1.47      2.20   0.704           0.218
-#> 10 ID-5                   3.17    1.38      5.00   0.999           0    
-#>    prior.distribution prior.location prior.scale effect component    bf10
-#>    <chr>                       <dbl>       <dbl> <chr>  <chr>       <dbl>
-#>  1 <NA>                           NA          NA fixed  extra       2.65 
-#>  2 <NA>                           NA          NA fixed  conditional 0.233
-#>  3 <NA>                           NA          NA fixed  conditional 0.239
-#>  4 <NA>                           NA          NA fixed  conditional 2.65 
-#>  5 <NA>                           NA          NA fixed  conditional 0.233
-#>  6 <NA>                           NA          NA random conditional 0.239
-#>  7 <NA>                           NA          NA random conditional 2.65 
-#>  8 <NA>                           NA          NA random conditional 0.233
-#>  9 <NA>                           NA          NA random conditional 0.239
-#> 10 <NA>                           NA          NA random conditional 2.65 
-#>    log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high r2.component
-#>         <dbl> <dbl>   <dbl>    <dbl>       <dbl>        <dbl> <chr>       
-#>  1      0.974 0.732  0.0509       95       0.609        0.812 conditional 
-#>  2     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
-#>  3     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
-#>  4      0.974 0.732  0.0509       95       0.609        0.812 conditional 
-#>  5     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
-#>  6     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
-#>  7      0.974 0.732  0.0509       95       0.609        0.812 conditional 
-#>  8     -1.45  0.732  0.0509       95       0.609        0.812 conditional 
-#>  9     -1.43  0.732  0.0509       95       0.609        0.812 conditional 
-#> 10      0.974 0.732  0.0509       95       0.609        0.812 conditional 
+#> # A tibble: 21 x 20
+#>    term                estimate conf.low conf.high    pd rope.percentage effect
+#>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr> 
+#>  1 mu                    45.0    43.7      46.4    1               0     fixed 
+#>  2 shape-round            0.429   0.0643    0.801  0.992           0.141 fixed 
+#>  3 shape-square          -0.429  -0.801    -0.0643 0.992           0.141 fixed 
+#>  4 color-color           -0.426  -0.799    -0.0461 0.990           0.162 fixed 
+#>  5 color-monochromatic    0.426   0.0461    0.799  0.990           0.162 fixed 
+#>  6 ID-1                   2.47    0.783     4.37   0.995           0     random
+#>  7 ID-2                   0.439  -1.21      2.20   0.698           0.231 random
+#>  8 ID-3                   0.907  -0.849     2.66   0.848           0.156 random
+#>  9 ID-4                   0.466  -1.47      2.20   0.704           0.218 random
+#> 10 ID-5                   3.17    1.38      5.00   0.999           0     random
+#>    component    bf10 log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high
+#>    <chr>       <dbl>      <dbl> <dbl>   <dbl>    <dbl>       <dbl>        <dbl>
+#>  1 extra       2.65       0.974 0.732  0.0509       95       0.609        0.812
+#>  2 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812
+#>  3 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812
+#>  4 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812
+#>  5 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812
+#>  6 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812
+#>  7 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812
+#>  8 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812
+#>  9 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812
+#> 10 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812
+#>    r2.component prior.parameter prior.distribution prior.location prior.scale
+#>    <chr>        <chr>           <chr>                       <dbl>       <dbl>
+#>  1 conditional  fixed           cauchy                          0         0.5
+#>  2 conditional  fixed           cauchy                          0         0.5
+#>  3 conditional  fixed           cauchy                          0         0.5
+#>  4 conditional  fixed           cauchy                          0         0.5
+#>  5 conditional  fixed           cauchy                          0         0.5
+#>  6 conditional  fixed           cauchy                          0         0.5
+#>  7 conditional  fixed           cauchy                          0         0.5
+#>  8 conditional  fixed           cauchy                          0         0.5
+#>  9 conditional  fixed           cauchy                          0         0.5
+#> 10 conditional  fixed           cauchy                          0         0.5
 #> # ... with 11 more rows
 ```
 

@@ -132,7 +132,6 @@
 
     <pre class="usage"><span class='fu'>bf_expr_template</span><span class='op'>(</span>
   <span class='va'>top.text</span>,
-  bf.prior <span class='op'>=</span> <span class='fl'>0.707</span>,
   prior.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>italic</a></span><span class='op'>(</span><span class='st'>"r"</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"Cauchy"</span><span class='op'>]</span><span class='op'>^</span><span class='st'>"JZS"</span><span class='op'>)</span>,
   estimate.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>quote</a></span><span class='op'>(</span><span class='va'>delta</span><span class='op'>)</span>,
   <span class='va'>estimate.df</span>,
@@ -150,11 +149,6 @@
       <th>top.text</th>
       <td><p>Text to display as top.text (will be displayed on top of the
 Bayes Factor top.text/message).</p></td>
-    </tr>
-    <tr>
-      <th>bf.prior</th>
-      <td><p>A number between <code>0.5</code> and <code>2</code> (default <code>0.707</code>), the prior
-width to use in calculating Bayes factors.</p></td>
     </tr>
     <tr>
       <th>prior.type</th>

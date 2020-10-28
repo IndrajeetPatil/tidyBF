@@ -25,7 +25,8 @@
 #'   there are four levels this will be `ratio = c(0.25,0.25,0.25,0.25)`, etc.
 #' @param counts A string naming a variable in data containing counts, or `NULL`
 #'   if each row represents a single observation.
-#' @inheritParams bf_expr
+#' @inheritParams bf_extractor
+#' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom BayesFactor contingencyTableBF logMeanExpLogs
 #' @importFrom dplyr pull select rename mutate
@@ -117,11 +118,8 @@ bf_contingency_tab <- function(data,
         priorConcentration = prior.concentration
       )
 
-    # extracting results from Bayesian test and creating a dataframe
-    df <- bf_extractor(bf_object)
-
     # Bayes Factor expression
-    bf01_expr <- bf_expr(bf_object, k = k, top.text = top.text, ...)
+    return(bf_extractor(bf_object, k = k, top.text = top.text, output = output, ...))
   }
 
   # ---------------------------- goodness of fit ----------------------------
@@ -201,12 +199,12 @@ bf_contingency_tab <- function(data,
 
     # the final expression
     if (is.null(top.text)) bf01_expr <- bf01_expr$expr
-  }
 
-  # return the expression or the dataframe
-  switch(
-    EXPR = output,
-    "dataframe" = df,
-    bf01_expr
-  )
+    # return the expression or the dataframe
+    return(switch(
+      EXPR = output,
+      "dataframe" = df,
+      bf01_expr
+    ))
+  }
 }

@@ -13,7 +13,8 @@ utils::globalVariables(
     "term",
     "conf.level",
     "hpd95_lower",
-    "hpd95_upper"
+    "hpd95_upper",
+    "prior.parameter"
   ),
   package = "tidyBF",
   add = FALSE

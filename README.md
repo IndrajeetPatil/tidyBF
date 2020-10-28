@@ -7,9 +7,9 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                 | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF)                                               | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)     | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/)            | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)                               |
 | [![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)                      | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) | [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)   | [![Forks](https://img.shields.io/badge/forks-1-blue.svg)](https://github.com/IndrajeetPatil/tidyBF/)                                                   | [![Features](https://img.shields.io/badge/features-tidyBF-orange.svg?colorB=2196F3)](https://indrajeetpatil.github.io/tidyBF/reference/index.html)         |
-| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-1-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)         |
+| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-2-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)         |
 | [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)             | [![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)  | [![Github Stars](https://img.shields.io/github/stars/IndrajeetPatil/tidyBF.svg?style=social&label=Github)](https://github.com/IndrajeetPatil/tidyBF)   | [![DOI](https://zenodo.org/badge/126624251.svg)](https://zenodo.org/badge/latestdoi/126624251)                                                             |
-| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--27-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)      |
+| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2020--10--28-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)      |
 | [![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                                    | [![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF)                                            | [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/tidyBF/community)                                      | [![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)                                           | [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/IndrajeetPatil/tidyBF/issues) |
 
 # Overview <img src="man/figures/logo.png" align="right" width="240" />
@@ -314,7 +314,7 @@ result <-
 
 # extract details
 bf_extractor(result)
-#> # A tibble: 21 x 19
+#> # A tibble: 21 x 20
 #>    term                estimate conf.low conf.high    pd rope.percentage effect
 #>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl> <chr> 
 #>  1 mu                    45.0    43.7      46.4    1               0     fixed 
@@ -339,18 +339,18 @@ bf_extractor(result)
 #>  8 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812
 #>  9 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812
 #> 10 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812
-#>    r2.component prior.distribution prior.location prior.scale
-#>    <chr>        <chr>                       <dbl>       <dbl>
-#>  1 conditional  cauchy                          0         0.5
-#>  2 conditional  cauchy                          0         0.5
-#>  3 conditional  cauchy                          0         0.5
-#>  4 conditional  cauchy                          0         0.5
-#>  5 conditional  cauchy                          0         0.5
-#>  6 conditional  cauchy                          0         0.5
-#>  7 conditional  cauchy                          0         0.5
-#>  8 conditional  cauchy                          0         0.5
-#>  9 conditional  cauchy                          0         0.5
-#> 10 conditional  cauchy                          0         0.5
+#>    r2.component prior.parameter prior.distribution prior.location prior.scale
+#>    <chr>        <chr>           <chr>                       <dbl>       <dbl>
+#>  1 conditional  fixed           cauchy                          0         0.5
+#>  2 conditional  fixed           cauchy                          0         0.5
+#>  3 conditional  fixed           cauchy                          0         0.5
+#>  4 conditional  fixed           cauchy                          0         0.5
+#>  5 conditional  fixed           cauchy                          0         0.5
+#>  6 conditional  fixed           cauchy                          0         0.5
+#>  7 conditional  fixed           cauchy                          0         0.5
+#>  8 conditional  fixed           cauchy                          0         0.5
+#>  9 conditional  fixed           cauchy                          0         0.5
+#> 10 conditional  fixed           cauchy                          0         0.5
 #> # ... with 11 more rows
 ```
 

@@ -20,8 +20,8 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate rename
-#' @importFrom insight standardize_names
+#' @importFrom dplyr mutate rename rename_with starts_with
+#' @importFrom insight standardize_names get_priors
 #' @importFrom performance r2_bayes
 #' @importFrom effectsize effectsize
 #' @importFrom parameters model_parameters
@@ -107,16 +107,14 @@ bf_extractor <- function(bf.object,
 
       # prior
       df_prior <-
-        bayestestR::describe_prior(bf.object) %>%
+        insight::get_priors(bf.object) %>%
+        dplyr::rename_with(.fn = ~ paste0("Prior_", .x), .cols = dplyr::everything()) %>%
         insight::standardize_names(., style = "broom") %>%
-        dplyr::filter(., term == "fixed")
+        dplyr::filter(.data = ., prior.parameter == "fixed")
 
       # merge the parameters dataframe with prior dataframe
       df <-
-        dplyr::bind_cols(
-          dplyr::select(.data = df, -dplyr::contains("prior.")),
-          dplyr::select(.data = df_prior, dplyr::contains("prior."))
-        )
+        dplyr::bind_cols(dplyr::select(.data = df, -dplyr::contains("prior.")), df_prior)
     }
 
     # ------------------------ correlation ------------------------------

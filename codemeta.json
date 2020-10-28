@@ -138,19 +138,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "bayestestR",
-      "name": "bayestestR",
-      "version": ">= 0.7.5",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=bayestestR"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "provider": {
@@ -290,7 +277,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1989.395KB",
+  "fileSize": "1989.505KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

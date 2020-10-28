@@ -14,7 +14,7 @@
 #' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom BayesFactor ttestBF
-#' @importFrom rlang quo_is_null new_formula ensym enquo
+#' @importFrom rlang quo_is_null new_formula ensym enquo exec !!!
 #' @importFrom stats na.omit
 #' @importFrom dplyr pull
 #' @importFrom ipmisc long_to_wide_converter
@@ -101,31 +101,20 @@ bf_ttest <- function(data,
         spread = paired
       )
 
-    # within-subjects design
-    if (isTRUE(paired)) {
-      # extracting results from Bayesian test and creating a dataframe
-      bf_object <-
-        BayesFactor::ttestBF(
-          x = data[[2]],
-          y = data[[3]],
-          rscale = bf.prior,
-          paired = TRUE,
-          progress = FALSE
-        )
-    }
+    # relevant arguments
+    if (isTRUE(paired)) bf.args <- list(x = data[[2]], y = data[[3]])
+    if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula({{ y }}, {{ x }}))
 
-    # between-subjects design
-    if (isFALSE(paired)) {
-      # extracting results from Bayesian test and creating a dataframe
-      bf_object <-
-        BayesFactor::ttestBF(
-          formula = rlang::new_formula({{ y }}, {{ x }}),
-          data = as.data.frame(data),
-          rscale = bf.prior,
-          paired = FALSE,
-          progress = FALSE
-        )
-    }
+    # creating a BayesFactor object
+    bf_object <-
+      rlang::exec(
+        .fn = BayesFactor::ttestBF,
+        rscale = bf.prior,
+        paired = paired,
+        progress = FALSE,
+        data = as.data.frame(data),
+        !!!bf.args
+      )
   }
 
   # final return

@@ -18,26 +18,27 @@ testthat::test_that(
     testthat::expect_equal(df$bf10[[1]], 8.990505, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10[[1]], 2.196169, tolerance = 0.001)
 
+    if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
+      library(tidyBF)
+      suppressPackageStartupMessages(library(BayesFactor))
+      data(puzzles)
 
-    library(tidyBF)
-    suppressPackageStartupMessages(library(BayesFactor))
-    data(puzzles)
+      # model
+      set.seed(123)
+      result <-
+        anovaBF(
+          RT ~ shape * color + ID,
+          data = puzzles,
+          whichRandom = "ID",
+          whichModels = "top",
+          progress = FALSE
+        )
 
-    # model
-    set.seed(123)
-    result <-
-      anovaBF(
-        RT ~ shape * color + ID,
-        data = puzzles,
-        whichRandom = "ID",
-        whichModels = "top",
-        progress = FALSE
-      )
+      # extract details
+      df2 <- bf_extractor(result)
 
-    # extract details
-    df2 <- bf_extractor(result)
-
-    testthat::expect_is(df2, "tbl_df")
-    testthat::expect_equal(df2$bf10[[1]], 2.647962, tolerance = 0.001)
+      testthat::expect_is(df2, "tbl_df")
+      testthat::expect_equal(df2$bf10[[1]], 2.647962, tolerance = 0.001)
+    }
   }
 )

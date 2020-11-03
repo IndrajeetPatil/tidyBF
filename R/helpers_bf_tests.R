@@ -8,8 +8,8 @@
 #'   Character (vector) or list with one or more of these options: `"median"`,
 #'   `"mean"`, `"MAP"` or `"all"`.
 #' @param conf.method The type of index used for Credible Interval. Can be
-#'   \code{"hdi"} (default, see [bayestestR::hdi()]), \code{"eti"} (see
-#'   [bayestestR::eti()]) or \code{"si"} (see [bayestestR::si()]).
+#'   `"hdi"` (default, see `bayestestR::hdi()`, `"eti"` (see
+#'   `bayestestR::eti()` or `"si"` (see `bayestestR::si()`.
 #' @param k Number of digits after decimal point (should be an integer)
 #'   (Default: `k = 2L`).
 #' @param top.text Text to display as top.text (will be displayed on top of the

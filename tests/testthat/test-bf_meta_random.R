@@ -53,7 +53,8 @@ testthat::test_that(
         top.text = "ayyo"
       ))
 
-    testthat::expect_is(df, "tbl_df")
+    testthat::expect_type(df, "list")
+    testthat::expect_identical(class(df), c("tbl_df", "tbl", "data.frame"))
 
     testthat::expect_identical(
       subtitle1,

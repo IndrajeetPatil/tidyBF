@@ -51,8 +51,8 @@ width to use in calculating Bayes factors.}
 Character (vector) or list with one or more of these options: \code{"median"},
 \code{"mean"}, \code{"MAP"} or \code{"all"}.}
     \item{\code{conf.method}}{The type of index used for Credible Interval. Can be
-\code{"hdi"} (default, see \code{\link[bayestestR:hdi]{bayestestR::hdi()}}), \code{"eti"} (see
-\code{\link[bayestestR:eti]{bayestestR::eti()}}) or \code{"si"} (see \code{\link[bayestestR:si]{bayestestR::si()}}).}
+\code{"hdi"} (default, see \code{bayestestR::hdi()}, \code{"eti"} (see
+\code{bayestestR::eti()} or \code{"si"} (see \code{bayestestR::si()}.}
     \item{\code{k}}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
     \item{\code{top.text}}{Text to display as top.text (will be displayed on top of the

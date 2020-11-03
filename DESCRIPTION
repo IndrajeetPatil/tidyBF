@@ -1,7 +1,7 @@
 Type: Package
 Package: tidyBF
 Title: Tidy Wrapper for 'BayesFactor' Package
-Version: 0.4.0
+Version: 0.4.0.9000
 Authors@R: 
     person(given = "Indrajeet",
            family = "Patil",
@@ -20,21 +20,14 @@ License: GPL-3 | file LICENSE
 URL: https://indrajeetpatil.github.io/tidyBF/,
     https://github.com/IndrajeetPatil/tidyBF
 BugReports: https://github.com/IndrajeetPatil/tidyBF/issues
-Encoding: UTF-8
-Language: en-US
-LazyData: true
-Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
-    "collate", "pkgapi::api_roclet"))
-RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.6.0)
 Imports: 
     BayesFactor,
     dplyr,
     effectsize (>= 0.4.0),
-    insight (>= 0.10.0),
+    insight (>= 0.10.0.1),
     ipmisc (>= 4.1.0),
-    lme4,
     metaBMA (>= 0.6.5),
     parameters (>= 0.9.0),
     performance (>= 0.5.1),
@@ -47,3 +40,14 @@ Suggests:
     spelling,
     testthat,
     utils
+Remotes: 
+    easystats/insight    
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace",
+    "collate", "pkgapi::api_roclet"))
+RoxygenNote: 7.1.1
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Config/testthat/start-first: watcher, parallel*

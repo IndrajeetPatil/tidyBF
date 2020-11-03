@@ -123,8 +123,12 @@ testthat::test_that(
         prior.concentration = 1.5
       )
 
+    # objects
+    testthat::expect_type(df, "list")
+    testthat::expect_type(df_results, "list")
+    testthat::expect_identical(class(df_results), c("tbl_df", "tbl", "data.frame"))
+
     # check bayes factor values
-    testthat::expect_is(df, "tbl_df")
     testthat::expect_equal(df$bf10, 28.07349, tolerance = 0.001)
     testthat::expect_equal(df$log_e_bf10, 3.334826, tolerance = 0.001)
 

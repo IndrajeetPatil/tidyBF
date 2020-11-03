@@ -221,8 +221,8 @@ testthat::test_that(
         )
 
       # testing expression
-      testthat::expect_is(results, "call")
-      testthat::expect_is(results_na, "call")
+      testthat::expect_type(results, "language")
+      testthat::expect_type(results_na, "language")
 
       # checking expressions
       testthat::expect_identical(

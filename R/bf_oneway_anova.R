@@ -10,7 +10,6 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang new_formula enexpr expr exec !!!
 #' @importFrom ipmisc long_to_wide_converter
-#' @importFrom lme4 nobars findbars
 #'
 #' @param data A dataframe (or a tibble) from which variables specified are to
 #'   be taken. A matrix or tables will **not** be accepted.

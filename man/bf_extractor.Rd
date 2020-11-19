@@ -19,8 +19,8 @@ bf_extractor(
 \item{bf.object}{An object from \code{BayesFactor} package.}
 
 \item{conf.method}{The type of index used for Credible Interval. Can be
-\code{"hdi"} (default, see \code{bayestestR::hdi()}, \code{"eti"} (see
-\code{bayestestR::eti()} or \code{"si"} (see \code{bayestestR::si()}.}
+\code{"hdi"} (default), \code{"eti"}, or \code{"si"} (see \code{si()}, \code{hdi()}, \code{eti()}
+functions from \code{bayestestR} package).}
 
 \item{centrality}{The point-estimates (centrality indices) to compute.
 Character (vector) or list with one or more of these options: \code{"median"},

@@ -73,7 +73,7 @@ testthat::test_that(
     df_results <-
       bf_contingency_tab(
         data = mtcars,
-        x = am,
+        x = "am",
         y = cyl,
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
@@ -85,7 +85,7 @@ testthat::test_that(
     expr_text <-
       bf_contingency_tab(
         data = mtcars,
-        x = am,
+        x = colnames(mtcars)[9],
         y = "cyl",
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
@@ -100,7 +100,7 @@ testthat::test_that(
       bf_contingency_tab(
         data = as.data.frame(Titanic),
         x = "Survived",
-        y = Sex,
+        y = colnames(as.data.frame(Titanic))[2],
         counts = "Freq",
         sampling.plan = "jointMulti",
         fixed.margin = "rows",
@@ -225,5 +225,27 @@ testthat::test_that(
     df <- data.frame(x = c("a"))
 
     testthat::expect_null(bf_contingency_tab(df, x))
+  }
+)
+
+# check edge cases --------------------------------------------
+
+testthat::test_that(
+  desc = "check edge cases",
+  code = {
+    # add an empty level
+    df <- mtcars
+    df$am <- as.factor(df$am)
+    levels(df$am) <- c(levels(df$am), 2)
+
+    set.seed(123)
+    res_df <- bf_contingency_tab(df, am, cyl, sampling.plan = "poisson")
+
+    # shouldn't change the result
+    testthat::expect_equal(
+      res_df$bf10[[1]],
+      8.199958,
+      tolerance = 0.001
+    )
   }
 )

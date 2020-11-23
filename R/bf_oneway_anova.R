@@ -43,7 +43,7 @@
 #'
 #' # within-subjects -------------------------------------------------------
 #'
-#' # to get expression (needs `BayesFactor 0.9.12-4.3`)
+#' # to get expression (needs `BayesFactor 0.9.12-4.3` or above)
 #' if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
 #'   bf_oneway_anova(
 #'     data = bugs_long,
@@ -89,7 +89,7 @@ bf_oneway_anova <- function(data,
   }
   if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula({{ y }}, {{ x }}))
 
-  # creating a BayesFactor object
+  # creating a `BayesFactor` object
   bf_object <-
     rlang::exec(
       .fn = BayesFactor::anovaBF,

@@ -82,7 +82,7 @@ bf_oneway_anova(
 
 # within-subjects -------------------------------------------------------
 
-# to get expression (needs `BayesFactor 0.9.12-4.3`)
+# to get expression (needs `BayesFactor 0.9.12-4.3` or above)
 if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
   bf_oneway_anova(
     data = bugs_long,

@@ -76,13 +76,8 @@ bf_contingency_tab <- function(data,
                                k = 2L,
                                ...) {
 
-  # ensure the variables work quoted or unquoted
-  test <- "one.way"
-  x <- rlang::ensym(x)
-  if (!rlang::quo_is_null(rlang::enquo(y))) {
-    y <- rlang::ensym(y)
-    test <- "two.way"
-  }
+  # one-way or two-way table?
+  test <- ifelse(!rlang::quo_is_null(rlang::enquo(y)), "two.way", "one.way")
 
   # =============================== dataframe ================================
 
@@ -95,19 +90,13 @@ bf_contingency_tab <- function(data,
   # untable the dataframe based on the count for each observation
   if (".counts" %in% names(data)) data %<>% tidyr::uncount(data = ., weights = .counts)
 
-  # x
-  data %<>% dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }})))
-
   # ---------------------------- contingency tabs ----------------------------
 
   if (test == "two.way") {
-    # dropping unused levels
-    data %<>% dplyr::mutate(.data = ., {{ y }} := droplevels(as.factor({{ y }})))
-
     # Bayes Factor object
     bf_object <-
       BayesFactor::contingencyTableBF(
-        x = table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
+        table(data %>% dplyr::pull({{ x }}), data %>% dplyr::pull({{ y }})),
         sampleType = sampling.plan,
         fixedMargin = fixed.margin,
         priorConcentration = prior.concentration

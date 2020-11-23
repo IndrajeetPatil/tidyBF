@@ -76,9 +76,12 @@ bf_ttest <- function(data,
   x <- rlang::ensym(x)
   y <- if (!rlang::quo_is_null(rlang::enquo(y))) rlang::ensym(y)
 
+  # one-way or two-way table?
+  test <- ifelse(!rlang::quo_is_null(rlang::enquo(y)), "two.way", "one.way")
+
   # -------------------------- one-sample tests ------------------------------
 
-  if (rlang::quo_is_null(rlang::enquo(y))) {
+  if (test == "one.way") {
     bf_object <-
       BayesFactor::ttestBF(
         x = stats::na.omit(data %>% dplyr::pull({{ x }})),
@@ -89,7 +92,7 @@ bf_ttest <- function(data,
 
   # -------------------------- two-sample tests ------------------------------
 
-  if (!rlang::quo_is_null(rlang::enquo(y))) {
+  if (test == "two.way") {
     # have a proper cleanup with NA removal
     data %<>%
       ipmisc::long_to_wide_converter(

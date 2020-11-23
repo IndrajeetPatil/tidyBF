@@ -1,5 +1,9 @@
 # tidyBF 0.4.0.9000
 
+BREAKING CHANGES
+
+  - `bf_contingency_tabs` no longer drops unused factor levels (#12).
+
 # tidyBF 0.4.0
 
 BREAKING CHANGES

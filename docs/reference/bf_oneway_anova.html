@@ -245,7 +245,7 @@ You can download it by running:
 #&gt; </span><span style='color: #555555;'>6</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8</div><div class='input'>
 <span class='co'># within-subjects -------------------------------------------------------</span>
 
-<span class='co'># to get expression (needs `BayesFactor 0.9.12-4.3`)</span>
+<span class='co'># to get expression (needs `BayesFactor 0.9.12-4.3` or above)</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'>utils</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/utils/packageDescription.html'>packageVersion</a></span><span class='op'>(</span><span class='st'>"BayesFactor"</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>package_version</a></span><span class='op'>(</span><span class='st'>"0.9.12-4.3"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'>bf_oneway_anova</span><span class='op'>(</span>
     data <span class='op'>=</span> <span class='va'>bugs_long</span>,

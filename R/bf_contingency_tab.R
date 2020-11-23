@@ -77,35 +77,30 @@ bf_contingency_tab <- function(data,
                                ...) {
 
   # ensure the variables work quoted or unquoted
+  test <- "one.way"
   x <- rlang::ensym(x)
-  y <- if (!rlang::quo_is_null(rlang::enquo(y))) rlang::ensym(y)
-  counts <- if (!rlang::quo_is_null(rlang::enquo(counts))) rlang::ensym(counts)
+  if (!rlang::quo_is_null(rlang::enquo(y))) {
+    y <- rlang::ensym(y)
+    test <- "two.way"
+  }
 
   # =============================== dataframe ================================
 
   # creating a dataframe
   data %<>%
-    dplyr::select(.data = ., {{ x }}, {{ y }}, {{ counts }}) %>%
+    dplyr::select(.data = ., {{ x }}, {{ y }}, .counts = {{ counts }}) %>%
     tidyr::drop_na(.) %>%
     as_tibble(.)
 
   # untable the dataframe based on the count for each observation
-  if (!rlang::quo_is_null(rlang::enquo(counts))) {
-    data %<>%
-      tidyr::uncount(
-        data = .,
-        weights = {{ counts }},
-        .remove = TRUE,
-        .id = "id"
-      )
-  }
+  if (".counts" %in% names(data)) data %<>% tidyr::uncount(data = ., weights = .counts)
 
   # x
   data %<>% dplyr::mutate(.data = ., {{ x }} := droplevels(as.factor({{ x }})))
 
   # ---------------------------- contingency tabs ----------------------------
 
-  if (!rlang::quo_is_null(rlang::enquo(y))) {
+  if (test == "two.way") {
     # dropping unused levels
     data %<>% dplyr::mutate(.data = ., {{ y }} := droplevels(as.factor({{ y }})))
 
@@ -124,30 +119,19 @@ bf_contingency_tab <- function(data,
 
   # ---------------------------- goodness of fit ----------------------------
 
-  if (rlang::quo_is_null(rlang::enquo(y))) {
-    # ratio
-    if (is.null(ratio)) {
-      x_length <- length(table(data %>% dplyr::pull({{ x }})))
-      ratio <- rep(1 / x_length, x_length)
-    }
+  if (test == "one.way") {
+    # one-way table
+    xtab <- table(data %>% dplyr::pull({{ x }}))
 
-    # no. of levels in `x` variable
-    n_levels <- length(as.vector(table(data %>% dplyr::pull({{ x }}))))
+    # ratio
+    if (is.null(ratio)) ratio <- rep(1 / length(xtab), length(xtab))
 
     # probability can't be exactly 0 or 1
-    if (1 / n_levels == 0 || 1 / n_levels == 1) {
+    if (1 / length(as.vector(xtab)) == 0 || 1 / length(as.vector(xtab)) == 1) {
       return(NULL)
     }
 
-    # one sample goodness of fit test for equal proportions
-    x_vec <- as.matrix(table(data %>% dplyr::pull({{ x }})))
-
-    # (log) prob of data under null
-    pr_y_h0 <- stats::dmultinom(x = x_vec, prob = ratio, log = TRUE)
-
     # estimate log prob of data under null with Monte Carlo
-    M <- 100000
-
     # `rdirichlet` function from `MCMCpack`
     rdirichlet_int <- function(n, alpha) {
       l <- length(alpha)
@@ -157,21 +141,23 @@ bf_contingency_tab <- function(data,
     }
 
     # use it
-    p1s <- rdirichlet_int(n = M, alpha = prior.concentration * ratio)
+    p1s <- rdirichlet_int(n = 100000, alpha = prior.concentration * ratio)
 
     # prob
     tmp_pr_h1 <-
       sapply(
-        X = 1:M,
-        FUN = function(i) stats::dmultinom(x = x_vec, prob = p1s[i, ], log = TRUE)
+        X = 1:100000,
+        FUN = function(i) stats::dmultinom(x = as.matrix(xtab), prob = p1s[i, ], log = TRUE)
       )
 
-    # estimate log prob of data under alternative
-    pr_y_h1 <- BayesFactor::logMeanExpLogs(tmp_pr_h1)
+    # BF = (log) prob of data under alternative - (log) prob of data under null
+    bf <-
+      BayesFactor::logMeanExpLogs(tmp_pr_h1) -
+      stats::dmultinom(as.matrix(xtab), prob = ratio, log = TRUE)
 
     # computing Bayes Factor and formatting the results
     df <-
-      tibble(bf10 = exp(pr_y_h1 - pr_y_h0)) %>%
+      tibble(bf10 = exp(bf)) %>%
       dplyr::mutate(log_e_bf10 = log(bf10), prior.scale = prior.concentration)
 
     # final expression

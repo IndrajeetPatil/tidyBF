@@ -66,6 +66,7 @@ bf_extractor <- function(bf.object,
       ci_method = conf.method,
       centrality = centrality,
       verbose = FALSE,
+      include_studies = FALSE,
       ...
     )) %>%
     insight::standardize_names(data = ., style = "broom") %>%
@@ -144,13 +145,6 @@ bf_extractor <- function(bf.object,
       # for expression
       c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
     }
-  }
-
-  # ------------------------ metaBMA -------------------------------------
-
-  # dataframe cleanup for meta-analysis
-  if (!grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
-    df %<>% dplyr::filter(.data = ., term %in% c("Overall", "tau"))
   }
 
   # Bayes Factor expression

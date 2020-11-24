@@ -35,9 +35,3 @@ ipmisc::tibble
 #' @export
 #' @importFrom ipmisc as_tibble
 ipmisc::as_tibble
-
-# ----------------------- metaBMA -------------------------------------
-
-#' @export
-#' @importFrom metaBMA prior
-metaBMA::prior

@@ -113,8 +113,7 @@ bf_extractor <- function(bf.object,
         dplyr::filter(.data = ., prior.parameter == "fixed")
 
       # merge the parameters dataframe with prior dataframe
-      df <-
-        dplyr::bind_cols(dplyr::select(.data = df, -dplyr::contains("prior.")), df_prior)
+      df <- dplyr::bind_cols(dplyr::select(df, -dplyr::contains("prior.")), df_prior)
     }
 
     # ------------------------ correlation ------------------------------
@@ -128,6 +127,7 @@ bf_extractor <- function(bf.object,
     if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
       # dataframe cleanup
       df %<>%
+        dplyr::select(.data = ., -term) %>%
         dplyr::bind_cols(
           .,
           effectsize::effectsize(
@@ -139,8 +139,7 @@ bf_extractor <- function(bf.object,
           ) %>%
             as_tibble(.) %>%
             insight::standardize_names(data = ., style = "broom")
-        ) %>%
-        dplyr::mutate(prior.scale = bf.object@denominator@prior$a[[1]])
+        )
 
       # for expression
       c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
@@ -149,14 +148,9 @@ bf_extractor <- function(bf.object,
 
   # ------------------------ metaBMA -------------------------------------
 
+  # dataframe cleanup for meta-analysis
   if (!grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
-    # dataframe cleanup
-    df %<>%
-      dplyr::filter(.data = ., term %in% c("Overall", "tau")) %>%
-      dplyr::mutate(.data = ., prior.scale = bf.object$jzs$rscale_discrete[[1]])
-
-    # for expression
-    c(centrality, conf.method) %<-% c("mean", "hdi")
+    df %<>% dplyr::filter(.data = ., term %in% c("Overall", "tau"))
   }
 
   # Bayes Factor expression

@@ -124,13 +124,7 @@
     <p>Bayes factor for random-effects meta-analysis</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bf_meta_random</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  d <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"norm"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0</span>, sd <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span><span class='op'>)</span>,
-  tau <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></span><span class='op'>(</span><span class='st'>"invgamma"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>0.15</span><span class='op'>)</span><span class='op'>)</span>,
-  metaBMA.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bf_meta_random</span><span class='op'>(</span><span class='va'>data</span>, metaBMA.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,18 +137,6 @@ two columns will be used for <code>y</code>  and <code>SE</code> arguments in
 <code><a href='https://rdrr.io/pkg/metaBMA/man/meta_random.html'>metaBMA::meta_random</a></code>.</p></td>
     </tr>
     <tr>
-      <th>d</th>
-      <td><p><code>prior</code> distribution on the average effect size <code>d</code>. The
-prior probability density function is defined via <code><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>tau</th>
-      <td><p><code>prior</code> distribution on the between-study heterogeneity
-<code>tau</code> (i.e., the standard deviation of the study effect sizes
-<code>dstudy</code> in a random-effects meta-analysis. A (nonnegative) prior
-probability density function is defined via <code><a href='https://rdrr.io/pkg/metaBMA/man/prior.html'>prior</a></code>.</p></td>
-    </tr>
-    <tr>
       <th>metaBMA.args</th>
       <td><p>A list of additional arguments to be passed to
 <code><a href='https://rdrr.io/pkg/metaBMA/man/meta_random.html'>metaBMA::meta_random</a></code>.</p></td>
@@ -164,12 +146,6 @@ probability density function is defined via <code><a href='https://rdrr.io/pkg/m
       <td><p>Arguments passed on to <code><a href='bf_extractor.html'>bf_extractor</a></code></p><dl>
     <dt><code>conf.level</code></dt><dd><p>Confidence/Credible Interval (CI) level. Default to <code>0.95</code>
 (<code>95%</code>).</p></dd>
-    <dt><code>centrality</code></dt><dd><p>The point-estimates (centrality indices) to compute.
-Character (vector) or list with one or more of these options: <code>"median"</code>,
-<code>"mean"</code>, <code>"MAP"</code> or <code>"all"</code>.</p></dd>
-    <dt><code>conf.method</code></dt><dd><p>The type of index used for Credible Interval. Can be
-<code>"hdi"</code> (default), <code>"eti"</code>, or <code>"si"</code> (see <code>si()</code>, <code>hdi()</code>, <code>eti()</code>
-functions from <code>bayestestR</code> package).</p></dd>
     <dt><code>k</code></dt><dd><p>Number of digits after decimal point (should be an integer)
 (Default: <code>k = 2L</code>).</p></dd>
     <dt><code>top.text</code></dt><dd><p>Text to display as top.text (will be displayed on top of the
@@ -189,7 +165,7 @@ results.</p></dd>
 <span class='co'># setup</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/danheck/metaBMA'>metaBMA</a></span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='input'>
 <span class='co'># creating a dataframe</span>
 <span class='op'>(</span><span class='va'>df</span> <span class='op'>&lt;-</span>
   <span class='fu'><a href='https://rdrr.io/r/base/structure.html'>structure</a></span><span class='op'>(</span>
@@ -234,15 +210,15 @@ results.</p></dd>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Could not get model data.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 12</span><span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Could not get model data.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 14</span><span>
 #&gt;   </span><span style='font-weight: bold;'>term</span><span>    </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>std.error</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span> </span><span style='font-weight: bold;'>weight</span><span>  </span><span style='font-weight: bold;'>bf10</span><span>  </span><span style='font-weight: bold;'>rhat</span><span>   </span><span style='font-weight: bold;'>ess</span><span>
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Overall    </span><span style='color: #555555;'>0.</span><span>506     </span><span style='color: #555555;'>0.</span><span>163    </span><span style='color: #555555;'>0.</span><span>187     </span><span style='color: #555555;'>0.</span><span>768     </span><span style='color: #BB0000;'>NA</span><span>  28.2  1.08  67.3
 #&gt; </span><span style='color: #555555;'>2</span><span> tau        </span><span style='color: #555555;'>0.</span><span>293     </span><span style='color: #555555;'>0.</span><span>136    </span><span style='color: #555555;'>0.</span><span>101     </span><span style='color: #555555;'>0.</span><span>538     </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>    1.02 178. 
-#&gt;   </span><span style='font-weight: bold;'>component</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> meta            3.34        </span><span style='color: #555555;'>0.</span><span>88
-#&gt; </span><span style='color: #555555;'>2</span><span> meta           </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #555555;'>0.</span><span>88</div><div class='input'><span class='co'># }</span>
+#&gt;   </span><span style='font-weight: bold;'>component</span><span> </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> meta      norm                            </span><span style='color: #555555;'>0</span><span>        </span><span style='color: #555555;'>0.</span><span>3        3.34
+#&gt; </span><span style='color: #555555;'>2</span><span> meta      invgamma                        1        </span><span style='color: #555555;'>0.</span><span>15      </span><span style='color: #BB0000;'>NA</span><span>   </div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>

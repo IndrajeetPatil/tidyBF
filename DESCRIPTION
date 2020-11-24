@@ -26,10 +26,10 @@ Imports:
     BayesFactor,
     dplyr,
     effectsize,
-    insight (>= 0.10.0.1),
+    insight (>= 0.11.0),
     ipmisc,
     metaBMA,
-    parameters,
+    parameters (>= 0.9.0.1),
     performance,
     rlang,
     tidyr
@@ -41,7 +41,8 @@ Suggests:
     testthat,
     utils
 Remotes: 
-    easystats/insight
+    easystats/insight,
+    easystats/parameters
 Encoding: UTF-8
 Language: en-US
 LazyData: true

@@ -4,27 +4,13 @@
 \alias{bf_meta_random}
 \title{Bayes factor for random-effects meta-analysis}
 \usage{
-bf_meta_random(
-  data,
-  d = prior("norm", c(mean = 0, sd = 0.3)),
-  tau = prior("invgamma", c(shape = 1, scale = 0.15)),
-  metaBMA.args = list(),
-  ...
-)
+bf_meta_random(data, metaBMA.args = list(), ...)
 }
 \arguments{
 \item{data}{A dataframe. It \strong{must} contain columns named \code{estimate} (effect
 sizes or outcomes)  and \code{std.error} (corresponding standard errors). These
 two columns will be used for \code{y}  and \code{SE} arguments in
 \code{metaBMA::meta_random}.}
-
-\item{d}{\code{prior} distribution on the average effect size \code{d}. The
-prior probability density function is defined via \code{\link[metaBMA]{prior}}.}
-
-\item{tau}{\code{prior} distribution on the between-study heterogeneity
-\code{tau} (i.e., the standard deviation of the study effect sizes
-\code{dstudy} in a random-effects meta-analysis. A (nonnegative) prior
-probability density function is defined via \code{\link[metaBMA]{prior}}.}
 
 \item{metaBMA.args}{A list of additional arguments to be passed to
 \code{metaBMA::meta_random}.}
@@ -34,12 +20,6 @@ probability density function is defined via \code{\link[metaBMA]{prior}}.}
   \describe{
     \item{\code{conf.level}}{Confidence/Credible Interval (CI) level. Default to \code{0.95}
 (\verb{95\%}).}
-    \item{\code{centrality}}{The point-estimates (centrality indices) to compute.
-Character (vector) or list with one or more of these options: \code{"median"},
-\code{"mean"}, \code{"MAP"} or \code{"all"}.}
-    \item{\code{conf.method}}{The type of index used for Credible Interval. Can be
-\code{"hdi"} (default), \code{"eti"}, or \code{"si"} (see \code{si()}, \code{hdi()}, \code{eti()}
-functions from \code{bayestestR} package).}
     \item{\code{k}}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
     \item{\code{top.text}}{Text to display as top.text (will be displayed on top of the

@@ -77,7 +77,7 @@ testthat::test_that(
           ", ",
           italic("r")["Cauchy"]^"JZS",
           " = ",
-          "0.707"
+          "0.300"
         )
       )
     )

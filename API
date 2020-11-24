@@ -6,7 +6,7 @@ bf_contingency_tab(data, x, y = NULL, counts = NULL, ratio = NULL, sampling.plan
 bf_corr_test(data, x, y, bf.prior = 0.707, ...)
 bf_expr_template(top.text, prior.type = quote(italic("r")["Cauchy"]^"JZS"), estimate.type = quote(delta), estimate.df, centrality = "median", conf.level = 0.95, conf.method = "HDI", k = 2L, ...)
 bf_extractor(bf.object, conf.method = "hdi", centrality = "median", conf.level = 0.95, k = 2L, top.text = NULL, output = "dataframe", ...)
-bf_meta_random(data, d = prior("norm", c(mean = 0, sd = 0.3)), tau = prior("invgamma", c(shape = 1, scale = 0.15)), metaBMA.args = list(), ...)
+bf_meta_random(data, metaBMA.args = list(), ...)
 bf_oneway_anova(data, x, y, subject.id = NULL, paired = FALSE, bf.prior = 0.707, ...)
 bf_ttest(data, x, y = NULL, subject.id = NULL, paired = FALSE, test.value = 0, bf.prior = 0.707, ...)
 meta_data_check(data)

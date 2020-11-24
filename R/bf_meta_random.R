@@ -56,12 +56,6 @@
 
 # function body
 bf_meta_random <- function(data, metaBMA.args = list(), ...) {
-
-  # check the data contains needed column
-  meta_data_check(data)
-
-  #----------------------- meta-analysis -------------------------------
-
   # extracting results from random-effects meta-analysis
   bf_object <-
     rlang::exec(

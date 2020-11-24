@@ -22,8 +22,8 @@ two columns will be used for \code{y}  and \code{SE} arguments in
 (\verb{95\%}).}
     \item{\code{k}}{Number of digits after decimal point (should be an integer)
 (Default: \code{k = 2L}).}
-    \item{\code{top.text}}{Text to display as top.text (will be displayed on top of the
-Bayes Factor top.text/message).}
+    \item{\code{top.text}}{Text to display on top of the Bayes Factor message. This is
+mostly relevant in the context of \code{ggstatsplot} functions.}
     \item{\code{output}}{If \code{"expression"}, will return expression with statistical
 details, while \code{"dataframe"} will return a dataframe containing the
 results.}

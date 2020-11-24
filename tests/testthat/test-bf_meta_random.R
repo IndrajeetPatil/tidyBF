@@ -81,15 +81,5 @@ testthat::test_that(
         )
       )
     )
-
-    # checking message
-    testthat::expect_error(
-      bf_meta_random(
-        data = dplyr::select(df1, -estimate),
-        k = 3,
-        iter = 1000,
-        summarize = "integrate"
-      )
-    )
   }
 )

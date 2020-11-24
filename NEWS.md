@@ -7,6 +7,8 @@ BREAKING CHANGES
   - `bf_meta_random` retires `d` and `tau` arguments, since the idea here is to
     rely on `metaBMA`'s defaults. To change the defaults, use `metaBMA.args`
     argument.
+    
+  - `meta_data_check` is removed as the documentation itself is clear enough.
 
 # tidyBF 0.4.0
 

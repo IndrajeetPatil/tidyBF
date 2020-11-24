@@ -12,8 +12,8 @@
 #'   functions from `bayestestR` package).
 #' @param k Number of digits after decimal point (should be an integer)
 #'   (Default: `k = 2L`).
-#' @param top.text Text to display as top.text (will be displayed on top of the
-#'   Bayes Factor top.text/message).
+#' @param top.text Text to display on top of the Bayes Factor message. This is
+#'   mostly relevant in the context of `ggstatsplot` functions.
 #' @param output If `"expression"`, will return expression with statistical
 #'   details, while `"dataframe"` will return a dataframe containing the
 #'   results.
@@ -172,28 +172,4 @@ bf_extractor <- function(bf.object,
     "dataframe" = df,
     bf_expr_01
   )
-}
-
-#' @name meta_data_check
-#' @title Helper function to check column names for meta-analysis.
-#'
-#' @inheritParams bf_meta_random
-#'
-#' @importFrom ipmisc red blue
-#'
-#' @export
-
-meta_data_check <- function(data) {
-  # check if the two columns needed are present
-  if (sum(c("estimate", "std.error") %in% names(data)) != 2) {
-    # inform the user that skipping labels for the same reason
-    stop(message(cat(
-      ipmisc::red("Error"),
-      ipmisc::blue(": The dataframe must contain the following two columns:\n"),
-      ipmisc::blue("`estimate` and `std.error`."),
-      sep = ""
-    )),
-    call. = FALSE
-    )
-  }
 }

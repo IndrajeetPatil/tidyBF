@@ -17,8 +17,8 @@ bf_expr_template(
 )
 }
 \arguments{
-\item{top.text}{Text to display as top.text (will be displayed on top of the
-Bayes Factor top.text/message).}
+\item{top.text}{Text to display on top of the Bayes Factor message. This is
+mostly relevant in the context of \code{ggstatsplot} functions.}
 
 \item{prior.type}{A character that specifies the prior type.}
 

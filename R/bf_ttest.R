@@ -71,11 +71,6 @@ bf_ttest <- function(data,
                      test.value = 0,
                      bf.prior = 0.707,
                      ...) {
-
-  # make sure both quoted and unquoted arguments are allowed
-  x <- rlang::ensym(x)
-  y <- if (!rlang::quo_is_null(rlang::enquo(y))) rlang::ensym(y)
-
   # one-way or two-way table?
   test <- ifelse(!rlang::quo_is_null(rlang::enquo(y)), "two.way", "one.way")
 
@@ -106,7 +101,7 @@ bf_ttest <- function(data,
 
     # relevant arguments
     if (isTRUE(paired)) bf.args <- list(x = data[[2]], y = data[[3]])
-    if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula({{ y }}, {{ x }}))
+    if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula(rlang::ensym(y), rlang::ensym(x)))
 
     # creating a BayesFactor object
     bf_object <-
@@ -114,7 +109,6 @@ bf_ttest <- function(data,
         .fn = BayesFactor::ttestBF,
         rscale = bf.prior,
         paired = paired,
-        progress = FALSE,
         data = as.data.frame(data),
         !!!bf.args
       )

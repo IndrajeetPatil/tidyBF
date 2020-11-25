@@ -275,6 +275,30 @@ result <-
 bf_extractor(result)
 ```
 
+## Using in `for` loops
+
+Here is an example about how to use these functions in the context of `for` loops:
+
+```{r loops}
+# setup
+set.seed(123)
+library(rlang)
+
+# data
+df <- dplyr::select(mtcars, am, wt, mpg)
+col.name <- colnames(df)
+
+# in the loop
+set.seed(123)
+for (i in 2:length(col.name)) {
+  print(bf_ttest(
+    data = mtcars,
+    x = am,
+    y = !!col.name[i]
+  ))
+}
+```
+
 # Acknowledgments
 
 The hexsticker was generously designed by Sarah Otterstetter (Max Planck

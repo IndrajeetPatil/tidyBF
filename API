@@ -20,5 +20,4 @@ rlang::%|%
 rlang::%||%
 rlang:::=
 tibble::as_tibble
-metaBMA::prior
 tibble::tibble

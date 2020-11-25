@@ -129,7 +129,7 @@
 <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></td>
 <td><a href="https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"><img src="https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></td>
 <td><a href="https://hits.dwyl.com/IndrajeetPatil/tidyBF"><img src="https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg" alt="HitCount"></a></td>
-<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--11--24-yellowgreen.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--11--25-yellowgreen.svg" alt="Last-changedate"></a></td>
 <td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg" alt="GitHub last commit"></a></td>
 </tr>
 <tr class="even">
@@ -492,6 +492,43 @@
 <span class="co">#&gt;  9 conditional  fixed           cauchy                          0         0.5</span>
 <span class="co">#&gt; 10 conditional  fixed           cauchy                          0         0.5</span>
 <span class="co">#&gt; # ... with 11 more rows</span></code></pre></div>
+</div>
+<div id="using-in-for-loops" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-in-for-loops" class="anchor"></a>Using in <code>for</code> loops</h2>
+<p>Here is an example about how to use these functions in the context of <code>for</code> loops:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># setup</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org">rlang</a></span><span class="op">)</span>
+
+<span class="co"># data</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span>, <span class="va">wt</span>, <span class="va">mpg</span><span class="op">)</span>
+<span class="va">col.name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+
+<span class="co"># in the loop</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">col.name</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="reference/bf_ttest.html">bf_ttest</a></span><span class="op">(</span>
+    data <span class="op">=</span> <span class="va">mtcars</span>,
+    x <span class="op">=</span> <span class="va">am</span>,
+    y <span class="op">=</span> <span class="op">!</span><span class="op">!</span><span class="va">col.name</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+  <span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co">#&gt; # A tibble: 1 x 11</span>
+<span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Difference    -1.26    -1.79    -0.722     1               0</span>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707 1383.       7.23</span>
+<span class="co">#&gt; # A tibble: 1 x 11</span>
+<span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Difference     6.52     2.94      10.4     1               0</span>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707  86.6       4.46</span></code></pre></div>
 </div>
 </div>
 <div id="acknowledgments" class="section level1">

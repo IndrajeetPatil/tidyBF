@@ -82,12 +82,12 @@ bf_oneway_anova <- function(data,
   # relevant arguments
   if (isTRUE(paired)) {
     bf.args <- list(
-      formula = rlang::new_formula({{ rlang::enexpr(y) }}, rlang::expr(!!rlang::enexpr(x) + rowid)),
+      formula = rlang::new_formula(rlang::enexpr(y), rlang::expr(!!rlang::enexpr(x) + rowid)),
       whichRandom = "rowid",
       rscaleRandom = 1
     )
   }
-  if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula({{ y }}, {{ x }}))
+  if (isFALSE(paired)) bf.args <- list(formula = rlang::new_formula(y, x))
 
   # creating a `BayesFactor` object
   bf_object <-

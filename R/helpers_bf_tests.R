@@ -127,10 +127,9 @@ bf_extractor <- function(bf.object,
 
     if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
       # dataframe cleanup
-      df %<>%
-        dplyr::select(.data = ., -term) %>%
+      df <-
         dplyr::bind_cols(
-          .,
+          dplyr::select(.data = df, -term),
           effectsize::effectsize(
             model = bf.object,
             ci = conf.level,

@@ -34,9 +34,6 @@ bf_expr_template <- function(top.text,
       c(estimate.df$estimate[[1]], estimate.df$conf.low[[1]], estimate.df$conf.high[[1]])
   }
 
-  # prior
-  bf.prior <- estimate.df$prior.scale[[1]]
-
   # prepare the Bayes Factor message
   bf01_expr <-
     substitute(
@@ -74,7 +71,7 @@ bf_expr_template <- function(top.text,
         estimate.LB = specify_decimal_p(x = estimate.LB, k = k),
         estimate.UB = specify_decimal_p(x = estimate.UB, k = k),
         prior.type = prior.type,
-        bf.prior = specify_decimal_p(x = bf.prior, k = k)
+        bf.prior = specify_decimal_p(x = estimate.df$prior.scale[[1]], k = k)
       )
     )
 

@@ -5,23 +5,6 @@ testthat::test_that(
   code = {
     testthat::skip_if(getRversion() < "3.6")
 
-    # dataframe
-    set.seed(123)
-    dat <- dplyr::filter(ggplot2::msleep, !is.na(brainwt), !is.na(vore)) %>%
-      dplyr::mutate(.data = ., vore = as.factor(vore))
-
-    # creating a dataframe
-    set.seed(123)
-    df <-
-      suppressMessages(bf_extractor(
-        BayesFactor::anovaBF(
-          formula = brainwt ~ vore,
-          data = as.data.frame(dat),
-          progress = FALSE,
-          rscaleFixed = 0.99
-        )
-      ))
-
     # extracting results from where this function is implemented
     set.seed(123)
     df_results <-
@@ -45,11 +28,8 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10[[1]], 0.1177186, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+    testthat::expect_equal(df_results$bf10[[1]], 0.1177186, tolerance = 0.001)
+    testthat::expect_equal(df_results$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
 
     # call
     testthat::expect_identical(
@@ -162,20 +142,6 @@ testthat::test_that(
           -66L
         ), class = "data.frame")
 
-      # creating a dataframe
-      set.seed(123)
-      df <-
-        suppressMessages(bf_extractor(
-          BayesFactor::anovaBF(
-            formula = Taste ~ Wine + Taster,
-            data = as.data.frame(dat),
-            progress = FALSE,
-            whichRandom = "Taster",
-            rscaleFixed = 0.99,
-            rscaleRandom = 1
-          )
-        ))
-
       # extracting results from where this function is implemented
       set.seed(123)
       df_results <-
@@ -188,13 +154,9 @@ testthat::test_that(
           output = "dataframe"
         )
 
-
       # check bayes factor values
-      testthat::expect_equal(df$bf10[[1]], 6.364917, tolerance = 0.001)
-      testthat::expect_equal(df$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
-
-      # checking if two usages of the function are producing the same results
-      testthat::expect_equal(df$bf10[[1]], df_results$bf10[[1]], tolerance = 0.001)
+      testthat::expect_equal(df_results$bf10[[1]], 6.364917, tolerance = 0.001)
+      testthat::expect_equal(df_results$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
 
       # extracting expression
       set.seed(123)

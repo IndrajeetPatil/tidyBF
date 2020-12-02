@@ -7,6 +7,4 @@
 
 0 errors | 0 warnings | 0 note
 
-  - Expect breakages in `statsExpressions` and `ggstatsplot` packages. I
-    maintain both of these packages and will quickly submit newer versions of
-    these packages as soon as `tidyBF` is accepted to `CRAN`.
+  - Minor internal refactoring.

@@ -16,8 +16,5 @@ magrittr::%$%
 zeallot::%<-%
 magrittr::%<>%
 magrittr::%>%
-rlang::%|%
-rlang::%||%
-rlang:::=
 tibble::as_tibble
 tibble::tibble

@@ -1,7 +1,7 @@
 Type: Package
 Package: tidyBF
 Title: Tidy Wrapper for 'BayesFactor' Package
-Version: 0.4.0.9000
+Version: 0.4.1
 Authors@R: 
     person(given = "Indrajeet",
            family = "Patil",
@@ -29,8 +29,8 @@ Imports:
     insight (>= 0.11.0),
     ipmisc,
     metaBMA,
-    parameters (>= 0.9.0.1),
-    performance,
+    parameters (>= 0.10.0),
+    performance (>= 0.6.0),
     rlang,
     tidyr
 Suggests: 
@@ -40,9 +40,6 @@ Suggests:
     spelling,
     testthat,
     utils
-Remotes: 
-    easystats/insight,
-    easystats/parameters
 Encoding: UTF-8
 Language: en-US
 LazyData: true

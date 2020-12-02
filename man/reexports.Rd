@@ -7,9 +7,6 @@
 \alias{\%<>\%}
 \alias{\%$\%}
 \alias{\%<-\%}
-\alias{\%||\%}
-\alias{\%|\%}
-\alias{:=}
 \alias{tibble}
 \alias{as_tibble}
 \title{Objects exported from other packages}
@@ -20,7 +17,5 @@ below to see their documentation.
 
 \describe{
   \item{ipmisc}{\code{\link[ipmisc:reexports]{\%$\%}}, \code{\link[ipmisc:reexports]{\%<-\%}}, \code{\link[ipmisc:reexports]{\%<>\%}}, \code{\link[ipmisc:reexports]{\%>\%}}, \code{\link[ipmisc:reexports]{as_tibble}}, \code{\link[ipmisc:reexports]{tibble}}}
-
-  \item{rlang}{\code{\link[rlang:op-na-default]{\%|\%}}, \code{\link[rlang:op-null-default]{\%||\%}}, \code{\link[rlang:nse-force]{:=}}}
 }}
 

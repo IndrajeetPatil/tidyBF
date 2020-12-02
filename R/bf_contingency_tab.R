@@ -37,6 +37,7 @@
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
+#' \donttest{
 #' # for reproducibility
 #' set.seed(123)
 #' library(tidyBF)
@@ -60,6 +61,7 @@
 #'   prior.concentration = 10,
 #'   output = "expression"
 #' )
+#' }
 #' @export
 
 # function body

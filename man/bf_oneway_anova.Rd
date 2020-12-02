@@ -66,6 +66,7 @@ You can download it by running:
 \code{remotes::install_github("richarddmorey/BayesFactor/pkg/BayesFactor")}.
 }
 \examples{
+\donttest{
 # setup
 set.seed(123)
 
@@ -92,6 +93,7 @@ if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
     paired = TRUE,
     output = "expression"
   )
+}
 }
 }
 \seealso{

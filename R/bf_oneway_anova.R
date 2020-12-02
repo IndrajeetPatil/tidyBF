@@ -27,6 +27,7 @@
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
+#' \donttest{
 #' # setup
 #' set.seed(123)
 #'
@@ -53,6 +54,7 @@
 #'     paired = TRUE,
 #'     output = "expression"
 #'   )
+#' }
 #' }
 #' @export
 

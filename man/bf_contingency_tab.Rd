@@ -79,6 +79,7 @@ functions from \code{bayestestR} package).}
 Bayes Factor for contingency table analysis
 }
 \examples{
+\donttest{
 # for reproducibility
 set.seed(123)
 library(tidyBF)
@@ -102,6 +103,7 @@ bf_contingency_tab(
   prior.concentration = 10,
   output = "expression"
 )
+}
 }
 \seealso{
 \code{\link{bf_corr_test}}, \code{\link{bf_oneway_anova}},

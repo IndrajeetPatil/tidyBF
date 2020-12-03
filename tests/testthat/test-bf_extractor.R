@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bayes factor (correlation)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # creating a dataframe
     set.seed(123)

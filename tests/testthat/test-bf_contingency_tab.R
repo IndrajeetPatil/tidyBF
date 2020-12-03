@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bayes factor (proportion test)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -56,6 +57,7 @@ testthat::test_that(
   desc = "bayes factor (contingency tab)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -233,6 +235,8 @@ testthat::test_that(
 testthat::test_that(
   desc = "check edge cases",
   code = {
+    testthat::skip_on_cran()
+
     # add an empty level
     df <- mtcars
     df$am <- as.factor(df$am)

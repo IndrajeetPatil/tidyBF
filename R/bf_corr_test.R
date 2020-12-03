@@ -43,11 +43,7 @@
 #' @export
 
 # function body
-bf_corr_test <- function(data,
-                         x,
-                         y,
-                         bf.prior = 0.707,
-                         ...) {
+bf_corr_test <- function(data, x, y, bf.prior = 0.707, ...) {
 
   # extracting results from Bayesian test and creating a dataframe
   bf_object <-

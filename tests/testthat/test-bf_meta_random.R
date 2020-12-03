@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bf_meta_random works",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # setup
     set.seed(123)

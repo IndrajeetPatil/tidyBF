@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bayes factor (between-subjects - anova)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)

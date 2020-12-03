@@ -189,6 +189,7 @@
       "@type": "SoftwareApplication",
       "identifier": "metaBMA",
       "name": "metaBMA",
+      "version": ">= 0.6.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -263,7 +264,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1735.031KB",
+  "fileSize": "1733.273KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

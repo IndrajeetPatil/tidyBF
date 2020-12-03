@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bayes factor (independent samples t-test)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # from Bayes Factor
     df <- suppressMessages(bf_extractor(
@@ -42,6 +43,7 @@ testthat::test_that(
   desc = "bayes factor (paired t-test)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # data
     dat <- tidyr::spread(bugs_long, condition, desire) %>%
@@ -87,6 +89,7 @@ testthat::test_that(
   desc = "bayes factor (one sample t-test)",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # creating a dataframe
     set.seed(123)

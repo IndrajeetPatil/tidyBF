@@ -19,6 +19,7 @@
 #' \code{\link{bf_ttest}}
 #'
 #' @examples
+#' \donttest{
 #' # for reproducibility
 #' set.seed(123)
 #' library(tidyBF)
@@ -40,6 +41,7 @@
 #'   bf.prior = 0.8,
 #'   output = "expression"
 #' )
+#' }
 #' @export
 
 # function body

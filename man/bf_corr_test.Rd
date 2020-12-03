@@ -45,6 +45,7 @@ results.}
 Bayes Factor for correlation test
 }
 \examples{
+\donttest{
 # for reproducibility
 set.seed(123)
 library(tidyBF)
@@ -66,6 +67,7 @@ bf_corr_test(
   bf.prior = 0.8,
   output = "expression"
 )
+}
 }
 \seealso{
 \code{\link{bf_contingency_tab}}, \code{\link{bf_oneway_anova}},

@@ -30,6 +30,7 @@
 #'   hypothesis; doing so will return wrong results.
 #'
 #' @examples
+#' \donttest{
 #' # setup
 #' library(tidyBF)
 #' set.seed(123)
@@ -44,6 +45,7 @@
 #'
 #' # extracting Bayes Factors in a dataframe
 #' bf_extractor(bf_obj)
+#' }
 #' @export
 
 # function body
@@ -160,9 +162,5 @@ bf_extractor <- function(bf.object,
     )
 
   # return the text results or the dataframe with results
-  switch(
-    EXPR = output,
-    "dataframe" = df,
-    bf_expr_01
-  )
+  switch(EXPR = output, "dataframe" = df, bf_expr_01)
 }

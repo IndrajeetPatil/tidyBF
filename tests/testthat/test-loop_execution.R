@@ -4,6 +4,8 @@
 testthat::test_that(
   desc = "bf_corr_test works in loop",
   code = {
+    testthat::skip_on_cran()
+
     col.name <- colnames(mtcars)
 
     set.seed(123)
@@ -25,6 +27,8 @@ testthat::test_that(
 testthat::test_that(
   desc = "bf_contingency_tab works in loop",
   code = {
+    testthat::skip_on_cran()
+
     df <- dplyr::select(mtcars, am, cyl, vs)
     col.name <- colnames(df)
 
@@ -46,6 +50,8 @@ testthat::test_that(
 testthat::test_that(
   desc = "bf_ttest works in loop",
   code = {
+    testthat::skip_on_cran()
+
     # working with loops
     df <- dplyr::select(mtcars, am, wt, mpg)
     col.name <- colnames(df)
@@ -81,6 +87,8 @@ testthat::test_that(
 testthat::test_that(
   desc = "bf_anova works in loop",
   code = {
+    testthat::skip_on_cran()
+
     # working with loops
     df <- dplyr::select(mtcars, cyl, wt, mpg)
     col.name <- colnames(df)

@@ -50,6 +50,7 @@ Extract Bayes Factors from \code{BayesFactor} model object.
 hypothesis; doing so will return wrong results.
 }
 \examples{
+\donttest{
 # setup
 library(tidyBF)
 set.seed(123)
@@ -64,4 +65,5 @@ bf_obj <-
 
 # extracting Bayes Factors in a dataframe
 bf_extractor(bf_obj)
+}
 }

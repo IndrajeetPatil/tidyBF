@@ -180,7 +180,8 @@ results.</p></dd>
 <code><a href='bf_ttest.html'>bf_ttest</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># for reproducibility</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># for reproducibility</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://indrajeetpatil.github.io/tidyBF/'>tidyBF</a></span><span class='op'>)</span>
 
@@ -192,13 +193,13 @@ results.</p></dd>
   bf.prior <span class='op'>=</span> <span class='fl'>0.3</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 11</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 11</span><span>
 #&gt;   </span><span style='font-weight: bold;'>term</span><span>  </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span> </span><span style='font-weight: bold;'>prior.distribution</span><span>
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'>1</span><span> rho     -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>182</span><span>   -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>614</span><span>     </span><span style='color: #555555;'>0.</span><span>296 </span><span style='color: #555555;'>0.</span><span>773           </span><span style='color: #555555;'>0.</span><span>266 cauchy            
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> rho     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>182</span><span>   -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>614</span><span>     </span><span style='color: #949494;'>0.</span><span>296 </span><span style='color: #949494;'>0.</span><span>773           </span><span style='color: #949494;'>0.</span><span>266 cauchy            
 #&gt;   </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>  </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
-#&gt;            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>              </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>3 </span><span style='color: #555555;'>0.</span><span>828     -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>189</span><span></div><div class='input'>
+#&gt;            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>              </span><span style='color: #949494;'>0</span><span>         </span><span style='color: #949494;'>0.</span><span>3 </span><span style='color: #949494;'>0.</span><span>828     -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>189</span><span></div><div class='input'>
 <span class='co'># to get expression</span>
 <span class='fu'>bf_corr_test</span><span class='op'>(</span>
   data <span class='op'>=</span> <span class='va'>anscombe</span>,
@@ -209,7 +210,8 @@ results.</p></dd>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; paste("log"["e"], "(BF"["01"], ") = ", "0.50", ", ", widehat(italic(rho))["median"]^"posterior", 
 #&gt;     " = ", "-0.23", ", CI"["95%"]^"HDI", " [", "-0.72", ", ", 
-#&gt;     "0.30", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.80")</div></span></pre>
+#&gt;     "0.30", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.80")</div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

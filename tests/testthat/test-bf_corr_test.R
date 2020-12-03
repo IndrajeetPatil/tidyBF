@@ -4,6 +4,7 @@ testthat::test_that(
   desc = "bayes factor (correlation test) - without NAs",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -63,6 +64,7 @@ testthat::test_that(
   desc = "bayes factor (correlation test) - with NAs",
   code = {
     testthat::skip_if(getRversion() < "3.6")
+    testthat::skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)

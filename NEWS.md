@@ -1,4 +1,4 @@
-# tidyBF 0.4.1
+# tidyBF 0.4.2
 
 BREAKING CHANGES
 

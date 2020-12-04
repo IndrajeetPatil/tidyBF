@@ -18,7 +18,6 @@ reference:
       - bf_contingency_tab
       - bf_corr_test
       - bf_meta_random
-      - bf_oneway_anova
       - bf_ttest
 
   - title: Miscellaneous helper functions

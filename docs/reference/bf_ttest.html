@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bayes Factor for t-test — bf_ttest • tidyBF</title>
+<title>Bayes Factor for t-test and one-way ANOVA — bf_ttest • tidyBF</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Bayes Factor for t-test — bf_ttest" />
-<meta property="og:description" content="Bayes Factor for t-test" />
+<meta property="og:title" content="Bayes Factor for t-test and one-way ANOVA — bf_ttest" />
+<meta property="og:description" content="Bayes Factor for t-test and one-way ANOVA" />
 <meta property="og:image" content="https://indrajeetpatil.github.io/tidyBF/logo.png" />
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyBF</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.4.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.4.2</span>
       </span>
     </div>
 
@@ -115,16 +115,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bayes Factor for <em>t</em>-test</h1>
+    <h1>Bayes Factor for <em>t</em>-test and one-way ANOVA</h1>
     <small class="dont-index">Source: <a href='https://github.com/IndrajeetPatil/tidyBF/blob/master/R/bf_ttest.R'><code>R/bf_ttest.R</code></a></small>
     <div class="hidden name"><code>bf_ttest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Bayes Factor for <em>t</em>-test</p>
+    <p>Bayes Factor for <em>t</em>-test and one-way ANOVA</p>
     </div>
 
     <pre class="usage"><span class='fu'>bf_ttest</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  subject.id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  paired <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  test.value <span class='op'>=</span> <span class='fl'>0</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>0.707</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>bf_oneway_anova</span><span class='op'>(</span>
   <span class='va'>data</span>,
   <span class='va'>x</span>,
   y <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -165,8 +176,9 @@ leave this argument unspecified, the results can be inaccurate.</p></td>
     </tr>
     <tr>
       <th>paired</th>
-      <td><p>Decides whether the design is repeated measures or not
-(Default: <code>FALSE</code>).</p></td>
+      <td><p>Logical that decides whether the experimental design is
+repeated measures/within-subjects or between-subjects. The default is
+<code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>test.value</th>
@@ -208,15 +220,64 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='bf_contingency_tab.html'>bf_contingency_tab</a></code>, <code><a href='bf_corr_test.html'>bf_corr_test</a></code>,
-<code><a href='bf_oneway_anova.html'>bf_oneway_anova</a></code></p></div>
+<code>bf_oneway_anova</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># ------------------- two-samples tests -----------------------------------</span>
-
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># for reproducibility</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://indrajeetpatil.github.io/tidyBF/'>tidyBF</a></span><span class='op'>)</span>
+
+<span class='co'># ----------------------- one-way ANOVA -----------------------------------</span>
+
+<span class='co'># to get dataframe (between-subjects)</span>
+<span class='fu'>bf_oneway_anova</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  x <span class='op'>=</span> <span class='va'>Species</span>,
+  y <span class='op'>=</span> <span class='va'>Sepal.Length</span>,
+  bf.prior <span class='op'>=</span> <span class='fl'>0.8</span>,
+  output <span class='op'>=</span> <span class='st'>"dataframe"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 18</span><span>
+#&gt;   </span><span style='font-weight: bold;'>term</span><span>               </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> mu                   5.84     5.76       5.93  1               </span><span style='color: #555555;'>0</span><span>    
+#&gt; </span><span style='color: #555555;'>2</span><span> Species-setosa      -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>829</span><span>   -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>943</span><span>     -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>708</span><span> 1               </span><span style='color: #555555;'>0</span><span>    
+#&gt; </span><span style='color: #555555;'>3</span><span> Species-versicolor   </span><span style='color: #555555;'>0.0</span><span>91</span><span style='text-decoration: underline;'>7</span><span>  -</span><span style='color: #555555;'>0.0</span><span style='color: #BB0000;'>27</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     </span><span style='color: #555555;'>0.</span><span>208 </span><span style='color: #555555;'>0.</span><span>937           </span><span style='color: #555555;'>0.</span><span>434
+#&gt; </span><span style='color: #555555;'>4</span><span> Species-virginica    </span><span style='color: #555555;'>0.</span><span>738    </span><span style='color: #555555;'>0.</span><span>619      </span><span style='color: #555555;'>0.</span><span>852 1               </span><span style='color: #555555;'>0</span><span>    
+#&gt; </span><span style='color: #555555;'>5</span><span> sig2                 </span><span style='color: #555555;'>0.</span><span>267    </span><span style='color: #555555;'>0.</span><span>210      </span><span style='color: #555555;'>0.</span><span>335 1               </span><span style='color: #555555;'>0</span><span>    
+#&gt; </span><span style='color: #555555;'>6</span><span> g_Species            2.21     </span><span style='color: #555555;'>0.</span><span>290     15.5   1               </span><span style='color: #555555;'>0</span><span>    
+#&gt;   </span><span style='font-weight: bold;'>component</span><span>      </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>    </span><span style='font-weight: bold;'>r2</span><span> </span><span style='font-weight: bold;'>std.dev</span><span> </span><span style='font-weight: bold;'>ci.width</span><span> </span><span style='font-weight: bold;'>r2.conf.low</span><span> </span><span style='font-weight: bold;'>r2.conf.high</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> extra       2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt; </span><span style='color: #555555;'>2</span><span> conditional 2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt; </span><span style='color: #555555;'>3</span><span> conditional 2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt; </span><span style='color: #555555;'>4</span><span> conditional 2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt; </span><span style='color: #555555;'>5</span><span> extra       2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt; </span><span style='color: #555555;'>6</span><span> extra       2.03</span><span style='color: #555555;'>e</span><span>28       65.2 </span><span style='color: #555555;'>0.</span><span>612  </span><span style='color: #555555;'>0.0</span><span>31</span><span style='text-decoration: underline;'>0</span><span>       95       </span><span style='color: #555555;'>0.</span><span>545        </span><span style='color: #555555;'>0.</span><span>668
+#&gt;   </span><span style='font-weight: bold;'>prior.parameter</span><span> </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8
+#&gt; </span><span style='color: #555555;'>2</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8
+#&gt; </span><span style='color: #555555;'>3</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8
+#&gt; </span><span style='color: #555555;'>4</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8
+#&gt; </span><span style='color: #555555;'>5</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8
+#&gt; </span><span style='color: #555555;'>6</span><span> fixed           cauchy                          </span><span style='color: #555555;'>0</span><span>         </span><span style='color: #555555;'>0.</span><span>8</div><div class='input'>
+<span class='co'># to get expression (within-subjects) (needs `BayesFactor 0.9.12-4.3` or above)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'>utils</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/utils/packageDescription.html'>packageVersion</a></span><span class='op'>(</span><span class='st'>"BayesFactor"</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>package_version</a></span><span class='op'>(</span><span class='st'>"0.9.12-4.3"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>bf_oneway_anova</span><span class='op'>(</span>
+    data <span class='op'>=</span> <span class='va'>bugs_long</span>,
+    x <span class='op'>=</span> <span class='va'>condition</span>,
+    y <span class='op'>=</span> <span class='va'>desire</span>,
+    subject.id <span class='op'>=</span> <span class='va'>subject</span>,
+    paired <span class='op'>=</span> <span class='cn'>TRUE</span>,
+    output <span class='op'>=</span> <span class='st'>"expression"</span>
+  <span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; paste("log"["e"], "(BF"["01"], ") = ", "-21.04", ", ", widehat(italic(R^"2"))["median"]^"posterior", 
+#&gt;     " = ", "0.53", ", CI"["95%"]^"HDI", " [", "0.46", ", ", "0.59", 
+#&gt;     "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.71")</div><div class='input'>
+<span class='co'># ------------------- two-samples tests -----------------------------------</span>
 
 <span class='co'># to get dataframe (between-subjects)</span>
 <span class='fu'>bf_ttest</span><span class='op'>(</span>
@@ -227,13 +288,13 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
   bf.prior <span class='op'>=</span> <span class='fl'>0.880</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 11</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 11</span><span>
 #&gt;   </span><span style='font-weight: bold;'>term</span><span>       </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span>
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Difference    -</span><span style='color: #BB0000;'>1.27</span><span>    -</span><span style='color: #BB0000;'>1.79</span><span>    -</span><span style='color: #949494;'>0.</span><span style='color: #BB0000;'>728</span><span>     1               </span><span style='color: #949494;'>0</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Difference    -</span><span style='color: #BB0000;'>1.27</span><span>    -</span><span style='color: #BB0000;'>1.81</span><span>    -</span><span style='color: #555555;'>0.</span><span style='color: #BB0000;'>723</span><span>     1               </span><span style='color: #555555;'>0</span><span>
 #&gt;   </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>  </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> cauchy                          </span><span style='color: #949494;'>0</span><span>        </span><span style='color: #949494;'>0.</span><span>88 </span><span style='text-decoration: underline;'>1</span><span>57</span><span style='color: #949494;'>9</span><span>.       7.36</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> cauchy                          </span><span style='color: #555555;'>0</span><span>        </span><span style='color: #555555;'>0.</span><span>88 </span><span style='text-decoration: underline;'>1</span><span>57</span><span style='color: #555555;'>9</span><span>.       7.36</div><div class='input'>
 <span class='co'># to get expression (within-subjects)</span>
 <span class='fu'>bf_ttest</span><span class='op'>(</span>
   data <span class='op'>=</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>bugs_long</span>, <span class='va'>condition</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"LDLF"</span>, <span class='st'>"LDHF"</span><span class='op'>)</span><span class='op'>)</span>,
@@ -244,13 +305,13 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
   bf.prior <span class='op'>=</span> <span class='fl'>0.880</span>,
   output <span class='op'>=</span> <span class='st'>"dataframe"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 11</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 11</span><span>
 #&gt;   </span><span style='font-weight: bold;'>term</span><span>       </span><span style='font-weight: bold;'>estimate</span><span> </span><span style='font-weight: bold;'>conf.low</span><span> </span><span style='font-weight: bold;'>conf.high</span><span>    </span><span style='font-weight: bold;'>pd</span><span> </span><span style='font-weight: bold;'>rope.percentage</span><span>
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Difference    -</span><span style='color: #BB0000;'>1.64</span><span>    -</span><span style='color: #BB0000;'>2.12</span><span>     -</span><span style='color: #BB0000;'>1.14</span><span>     1               </span><span style='color: #949494;'>0</span><span>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Difference    -</span><span style='color: #BB0000;'>1.64</span><span>    -</span><span style='color: #BB0000;'>2.12</span><span>     -</span><span style='color: #BB0000;'>1.12</span><span>     1               </span><span style='color: #555555;'>0</span><span>
 #&gt;   </span><span style='font-weight: bold;'>prior.distribution</span><span> </span><span style='font-weight: bold;'>prior.location</span><span> </span><span style='font-weight: bold;'>prior.scale</span><span>     </span><span style='font-weight: bold;'>bf10</span><span> </span><span style='font-weight: bold;'>log_e_bf10</span><span>
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> cauchy                          </span><span style='color: #949494;'>0</span><span>        </span><span style='color: #949494;'>0.</span><span>88 4</span><span style='text-decoration: underline;'>60</span><span style='color: #949494;text-decoration: underline;'>5</span><span style='color: #949494;'>067</span><span>.       15.3</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> cauchy                          </span><span style='color: #555555;'>0</span><span>        </span><span style='color: #555555;'>0.</span><span>88 4</span><span style='text-decoration: underline;'>60</span><span style='color: #555555;text-decoration: underline;'>5</span><span style='color: #555555;'>067</span><span>.       15.3</div><div class='input'>
 <span class='co'># ------------------- one-samples test -----------------------------------</span>
 
 <span class='co'># to get expression</span>
@@ -262,7 +323,8 @@ otherwise a two-sample <em>t</em>-test will be carried out.</p>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; paste("log"["e"], "(BF"["01"], ") = ", "2.39", ", ", widehat(italic(delta))["median"]^"posterior", 
 #&gt;     " = ", "0.01", ", CI"["95%"]^"HDI", " [", "-0.12", ", ", 
-#&gt;     "0.15", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.71")</div></span></pre>
+#&gt;     "0.15", "]", ", ", italic("r")["Cauchy"]^"JZS", " = ", "0.71")</div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -2,9 +2,21 @@
 % Please edit documentation in R/bf_ttest.R
 \name{bf_ttest}
 \alias{bf_ttest}
-\title{Bayes Factor for \emph{t}-test}
+\alias{bf_oneway_anova}
+\title{Bayes Factor for \emph{t}-test and one-way ANOVA}
 \usage{
 bf_ttest(
+  data,
+  x,
+  y = NULL,
+  subject.id = NULL,
+  paired = FALSE,
+  test.value = 0,
+  bf.prior = 0.707,
+  ...
+)
+
+bf_oneway_anova(
   data,
   x,
   y = NULL,
@@ -33,8 +45,9 @@ assumes that the data has already been sorted by such an id by the user and
 creates an internal identifier. So if your data is \strong{not} sorted and you
 leave this argument unspecified, the results can be inaccurate.}
 
-\item{paired}{Decides whether the design is repeated measures or not
-(Default: \code{FALSE}).}
+\item{paired}{Logical that decides whether the experimental design is
+repeated measures/within-subjects or between-subjects. The default is
+\code{FALSE}.}
 
 \item{test.value}{A number specifying the value of the null hypothesis
 (Default: \code{0}).}
@@ -63,19 +76,42 @@ results.}
   }}
 }
 \description{
-Bayes Factor for \emph{t}-test
+Bayes Factor for \emph{t}-test and one-way ANOVA
 }
 \details{
 If \code{y} is \code{NULL}, a one-sample \emph{t}-test will be carried out,
 otherwise a two-sample \emph{t}-test will be carried out.
 }
 \examples{
-
-# ------------------- two-samples tests -----------------------------------
-
+\donttest{
 # for reproducibility
 set.seed(123)
 library(tidyBF)
+
+# ----------------------- one-way ANOVA -----------------------------------
+
+# to get dataframe (between-subjects)
+bf_oneway_anova(
+  data = iris,
+  x = Species,
+  y = Sepal.Length,
+  bf.prior = 0.8,
+  output = "dataframe"
+)
+
+# to get expression (within-subjects) (needs `BayesFactor 0.9.12-4.3` or above)
+if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
+  bf_oneway_anova(
+    data = bugs_long,
+    x = condition,
+    y = desire,
+    subject.id = subject,
+    paired = TRUE,
+    output = "expression"
+  )
+}
+
+# ------------------- two-samples tests -----------------------------------
 
 # to get dataframe (between-subjects)
 bf_ttest(
@@ -107,6 +143,7 @@ bf_ttest(
   test.value = 5.85,
   output = "expression"
 )
+}
 }
 \seealso{
 \code{\link{bf_contingency_tab}}, \code{\link{bf_corr_test}},

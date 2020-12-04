@@ -14,7 +14,7 @@
   ],
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -264,7 +264,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1733.273KB",
+  "fileSize": "1707.453KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -277,10 +277,7 @@
         }
       ],
       "name": "{ggstatsplot}: 'ggplot2' Based Plots with Statistical Details",
-      "identifier": "10.5281/zenodo.2074621",
       "url": "https://CRAN.R-project.org/package=ggstatsplot",
-      "@id": "https://doi.org/10.5281/zenodo.2074621",
-      "sameAs": "https://doi.org/10.5281/zenodo.2074621",
       "isPartOf": {
         "@type": "PublicationIssue",
         "datePublished": "2018",

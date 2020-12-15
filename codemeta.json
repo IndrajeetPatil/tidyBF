@@ -14,13 +14,13 @@
   ],
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.4.2",
+  "version": "0.4.2.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-11-23 r79474)",
+  "runtimePlatform": "R Under development (unstable) (2020-12-03 r79553)",
   "author": [
     {
       "@type": "Person",
@@ -164,14 +164,14 @@
       "@type": "SoftwareApplication",
       "identifier": "insight",
       "name": "insight",
-      "version": ">= 0.11.0",
+      "version": ">= 0.11.1.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=insight"
+      "sameAs": "https://github.com/easystats/insight"
     },
     {
       "@type": "SoftwareApplication",
@@ -189,7 +189,6 @@
       "@type": "SoftwareApplication",
       "identifier": "metaBMA",
       "name": "metaBMA",
-      "version": ">= 0.6.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -202,20 +201,19 @@
       "@type": "SoftwareApplication",
       "identifier": "parameters",
       "name": "parameters",
-      "version": ">= 0.10.0",
+      "version": ">= 0.10.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=parameters"
+      "sameAs": "https://github.com/easystats/parameters"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "performance",
       "name": "performance",
-      "version": ">= 0.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -264,7 +262,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1707.453KB",
+  "fileSize": "1718.954KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

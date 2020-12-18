@@ -20,7 +20,7 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate rename rename_with starts_with
+#' @importFrom dplyr mutate rename rename_with starts_with select_if
 #' @importFrom insight standardize_names get_priors
 #' @importFrom performance r2_bayes
 #' @importFrom effectsize effectsize
@@ -131,7 +131,9 @@ bf_extractor <- function(bf.object,
       # dataframe cleanup
       df <-
         dplyr::bind_cols(
-          dplyr::select(.data = df, -term),
+          dplyr::select(.data = df, -term) %>%
+            dplyr::filter(!is.na(prior.scale)) %>%
+            dplyr::select_if(!is.na(.)),
           effectsize::effectsize(
             model = bf.object,
             ci = conf.level,

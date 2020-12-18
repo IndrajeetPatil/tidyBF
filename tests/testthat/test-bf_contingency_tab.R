@@ -150,12 +150,12 @@ testthat::test_that(
           ", ",
           widehat(italic("V"))["median"]^"posterior",
           " = ",
-          "0.480",
+          "0.479",
           ", CI"["89%"]^"HDI",
           " [",
-          "0.277",
+          "0.285",
           ", ",
-          "0.696",
+          "0.692",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
@@ -181,7 +181,7 @@ testthat::test_that(
           " [",
           "0.402",
           ", ",
-          "0.505",
+          "0.508",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
@@ -205,9 +205,9 @@ testthat::test_that(
           "0.454",
           ", CI"["95%"]^"HDI",
           " [",
-          "0.415",
+          "0.417",
           ", ",
-          "0.494",
+          "0.495",
           "]",
           ", ",
           italic("a")["Gunel-Dickey"],
@@ -227,29 +227,5 @@ testthat::test_that(
     df <- data.frame(x = c("a"))
 
     testthat::expect_null(bf_contingency_tab(df, x))
-  }
-)
-
-# check edge cases --------------------------------------------
-
-testthat::test_that(
-  desc = "check edge cases",
-  code = {
-    testthat::skip_on_cran()
-
-    # add an empty level
-    df <- mtcars
-    df$am <- as.factor(df$am)
-    levels(df$am) <- c(levels(df$am), 2)
-
-    set.seed(123)
-    res_df <- bf_contingency_tab(df, am, cyl, sampling.plan = "poisson")
-
-    # shouldn't change the result
-    testthat::expect_equal(
-      res_df$bf10[[1]],
-      8.199958,
-      tolerance = 0.001
-    )
   }
 )

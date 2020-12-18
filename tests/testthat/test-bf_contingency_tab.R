@@ -229,27 +229,3 @@ testthat::test_that(
     testthat::expect_null(bf_contingency_tab(df, x))
   }
 )
-
-# check edge cases --------------------------------------------
-
-testthat::test_that(
-  desc = "check edge cases",
-  code = {
-    testthat::skip_on_cran()
-
-    # add an empty level
-    df <- mtcars
-    df$am <- as.factor(df$am)
-    levels(df$am) <- c(levels(df$am), 2)
-
-    set.seed(123)
-    res_df <- bf_contingency_tab(df, am, cyl, sampling.plan = "poisson")
-
-    # shouldn't change the result
-    testthat::expect_equal(
-      res_df$bf10[[1]],
-      8.199958,
-      tolerance = 0.001
-    )
-  }
-)

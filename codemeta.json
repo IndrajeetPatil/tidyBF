@@ -152,7 +152,7 @@
       "@type": "SoftwareApplication",
       "identifier": "effectsize",
       "name": "effectsize",
-      "version": ">= 0.4.1.1",
+      "version": ">= 0.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -264,7 +264,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1719.111KB",
+  "fileSize": "1755.438KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

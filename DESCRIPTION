@@ -43,7 +43,7 @@ Suggests:
 Remotes:
     easystats/insight,
     easystats/effectsize,
-    vincentarelbundock/parameters@centralize,
+    easystats/parameters,
     easystats/performance
 Encoding: UTF-8
 Language: en-US

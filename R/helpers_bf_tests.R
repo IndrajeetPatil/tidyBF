@@ -73,12 +73,11 @@ bf_extractor <- function(bf.object,
     )) %>%
     insight::standardize_names(data = ., style = "broom") %>%
     as_tibble(.) %>%
-    dplyr::rename(.data = ., "bf10" = "bayes.factor") %>%
-    dplyr::mutate(.data = ., log_e_bf10 = log(bf10))
+    dplyr::rename("bf10" = "bayes.factor") %>%
+    dplyr::mutate(log_e_bf10 = log(bf10))
 
   # expression parameter defaults
-  prior.type <- quote(italic("r")["Cauchy"]^"JZS")
-  estimate.type <- quote(italic(delta))
+  c(prior.type, estimate.type) %<-% c(quote(italic("r")["Cauchy"]^"JZS"), quote(italic(delta)))
 
   # ------------------------ BayesFactor ---------------------------------
 
@@ -97,23 +96,22 @@ bf_extractor <- function(bf.object,
       # for within-subjects design, retain only marginal component
       if ("component" %in% names(df_r2)) {
         df_r2 %<>%
-          dplyr::filter(.data = ., component == "conditional") %>%
-          dplyr::rename(.data = ., "r2.component" = "component")
+          dplyr::filter(component == "conditional") %>%
+          dplyr::rename("r2.component" = "component")
       }
 
       # combine everything
       df %<>% dplyr::bind_cols(., df_r2)
 
       # for expression
-      c(centrality, conf.method) %<-% c("median", "hdi")
-      estimate.type <- quote(italic(R^"2"))
+      c(centrality, conf.method, estimate.type) %<-% c("median", "hdi", quote(italic(R^"2")))
 
       # prior
       df_prior <-
         insight::get_priors(bf.object) %>%
         dplyr::rename_with(.fn = ~ paste0("Prior_", .x), .cols = dplyr::everything()) %>%
         insight::standardize_names(., style = "broom") %>%
-        dplyr::filter(.data = ., prior.parameter == "fixed")
+        dplyr::filter(prior.parameter == "fixed")
 
       # merge the parameters dataframe with prior dataframe
       df <- dplyr::bind_cols(dplyr::select(df, -dplyr::contains("prior.")), df_prior)

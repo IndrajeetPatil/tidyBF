@@ -16,6 +16,7 @@ utils::globalVariables(
     "hpd95_upper",
     "prior.parameter",
     "prior.scale",
+    "prior.type",
     ".counts"
   ),
   package = "tidyBF",

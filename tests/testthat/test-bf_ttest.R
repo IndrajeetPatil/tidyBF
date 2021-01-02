@@ -16,24 +16,10 @@ testthat::test_that(
       )
     ))
 
-    # extracting results from where this function is implemented
-    set.seed(123)
-    df_results <-
-      bf_ttest(
-        data = ToothGrowth,
-        x = supp,
-        y = "len",
-        paired = FALSE,
-        bf.prior = 0.99
-      )
-
     # check bayes factor values
     testthat::expect_type(df, "list")
     testthat::expect_identical(class(df), c("tbl_df", "tbl", "data.frame"))
-    testthat::expect_equal(df$log_e_bf10, -0.001119132, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
+    testthat::expect_equal(df$log_e_bf10[[1]], -0.001119132, tolerance = 0.001)
   }
 )
 
@@ -48,17 +34,6 @@ testthat::test_that(
     # data
     dat <- tidyr::spread(bugs_long, condition, desire) %>%
       dplyr::filter(.data = ., !is.na(HDLF), !is.na(HDHF))
-
-    # BF output
-    set.seed(123)
-    df <- suppressMessages(bf_extractor(
-      BayesFactor::ttestBF(
-        x = dat$HDLF,
-        y = dat$HDHF,
-        rscale = 0.8,
-        paired = TRUE
-      )
-    ))
 
     # creating a tidy dataframe
     dat_tidy <- dplyr::filter(bugs_long, condition %in% c("HDLF", "HDHF"))
@@ -75,11 +50,8 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 40.36079, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 3.697859, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
+    testthat::expect_equal(df_results$bf10[[1]], 40.36079, tolerance = 0.001)
+    testthat::expect_equal(df_results$log_e_bf10[[1]], 3.697859, tolerance = 0.001)
   }
 )
 
@@ -90,17 +62,6 @@ testthat::test_that(
   code = {
     testthat::skip_if(getRversion() < "3.6")
     testthat::skip_on_cran()
-
-    # creating a dataframe
-    set.seed(123)
-    df <-
-      suppressMessages(bf_extractor(
-        BayesFactor::ttestBF(
-          x = iris$Petal.Length,
-          mu = 5.5,
-          rscale = 0.99
-        )
-      ))
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -114,11 +75,8 @@ testthat::test_that(
       )
 
     # check Bayes factor values
-    testthat::expect_equal(df$bf10, 5.958171e+20, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 47.83647, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
+    testthat::expect_equal(df_results$bf10[[1]], 5.958171e+20, tolerance = 0.001)
+    testthat::expect_equal(df_results$log_e_bf10[[1]], 47.83647, tolerance = 0.001)
 
     # TO DO: wait for `easystats` to be updated
     # extracting subtitle (without NA)

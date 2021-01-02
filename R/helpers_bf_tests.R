@@ -20,11 +20,12 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate rename rename_with starts_with select_if
+#' @importFrom dplyr mutate filter rename rename_with starts_with select_if
 #' @importFrom insight standardize_names get_priors
 #' @importFrom performance r2_bayes
-#' @importFrom effectsize effectsize
+#' @importFrom tidyr fill
 #' @importFrom parameters model_parameters
+#' @importFrom effectsize effectsize
 #'
 #' @note *Important*: don't enter `1/bf.object` to extract results for null
 #'   hypothesis; doing so will return wrong results.
@@ -72,8 +73,8 @@ bf_extractor <- function(bf.object,
       ...
     )) %>%
     insight::standardize_names(data = ., style = "broom") %>%
-    as_tibble(.) %>%
     dplyr::rename("bf10" = "bayes.factor") %>%
+    tidyr::fill(data = ., dplyr::matches("^prior|^bf")) %>%
     dplyr::mutate(log_e_bf10 = log(bf10))
 
   # expression parameter defaults
@@ -126,24 +127,7 @@ bf_extractor <- function(bf.object,
     # ------------------------ contingency tabs ------------------------------
 
     if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
-      # dataframe cleanup
-      df <-
-        dplyr::bind_cols(
-          dplyr::select(.data = df, -term) %>%
-            dplyr::filter(!is.na(prior.scale)) %>%
-            dplyr::select_if(!is.na(.)),
-          effectsize::effectsize(
-            model = bf.object,
-            ci = conf.level,
-            ci_method = conf.method,
-            centrality = centrality,
-            ...
-          ) %>%
-            as_tibble(.) %>%
-            insight::standardize_names(data = ., style = "broom")
-        )
-
-      # for expression
+      df %<>% dplyr::filter(grepl("cramer", term, TRUE))
       c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
     }
   }
@@ -162,5 +146,5 @@ bf_extractor <- function(bf.object,
     )
 
   # return the text results or the dataframe with results
-  switch(EXPR = output, "dataframe" = df, bf_expr_01)
+  switch(EXPR = output, "dataframe" = as_tibble(df), bf_expr_01)
 }

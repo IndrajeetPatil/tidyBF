@@ -61,17 +61,6 @@ testthat::test_that(
 
     # extracting results from where this function is implemented
     set.seed(123)
-    df <-
-      suppressMessages(bf_extractor(
-        BayesFactor::contingencyTableBF(
-          x = table(mtcars$am, mtcars$cyl),
-          sampleType = "jointMulti",
-          fixedMargin = "rows"
-        )
-      ))
-
-    # extracting results from where this function is implemented
-    set.seed(123)
     df_results <-
       bf_contingency_tab(
         data = mtcars,
@@ -82,9 +71,16 @@ testthat::test_that(
         output = "dataframe"
       )
 
+    # objects
+    testthat::expect_identical(class(df_results), c("tbl_df", "tbl", "data.frame"))
+
+    # check bayes factor values
+    testthat::expect_equal(df_results$bf10[[1]], 28.07349, tolerance = 0.001)
+    testthat::expect_equal(df_results$log_e_bf10[[1]], 3.334826, tolerance = 0.001)
+
     # expr
     set.seed(123)
-    expr_text <-
+    expr_text1 <-
       bf_contingency_tab(
         data = mtcars,
         x = colnames(mtcars)[9],
@@ -125,22 +121,9 @@ testthat::test_that(
         prior.concentration = 1.5
       )
 
-    # objects
-    testthat::expect_type(df, "list")
-    testthat::expect_type(df_results, "list")
-    testthat::expect_identical(class(df_results), c("tbl_df", "tbl", "data.frame"))
-
-    # check bayes factor values
-    testthat::expect_equal(df$bf10, 28.07349, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, 3.334826, tolerance = 0.001)
-
-    # checking if two usages of the function are producing the same results
-    testthat::expect_equal(df$bf10, df_results$bf10, tolerance = 0.001)
-
-
     # expr text
     testthat::expect_identical(
-      expr_text,
+      expr_text1,
       ggplot2::expr(
         paste(
           "log"["e"],
@@ -164,6 +147,9 @@ testthat::test_that(
         )
       )
     )
+
+    testthat::expect_type(expr_text2, "language")
+    testthat::expect_type(expr_text3, "language")
 
     testthat::expect_identical(
       expr_text2,

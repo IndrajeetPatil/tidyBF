@@ -20,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2020-12-28 r79717)",
+  "runtimePlatform": "R Under development (unstable) (2021-01-02 r79767)",
   "author": [
     {
       "@type": "Person",
@@ -152,7 +152,7 @@
       "@type": "SoftwareApplication",
       "identifier": "effectsize",
       "name": "effectsize",
-      "version": ">= 0.4.1",
+      "version": ">= 0.4.1.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -264,7 +264,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1718.354KB",
+  "fileSize": "1716.479KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

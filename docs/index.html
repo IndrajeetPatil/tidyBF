@@ -129,7 +129,7 @@
 <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></td>
 <td><a href="https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"><img src="https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></td>
 <td><a href="https://hits.dwyl.com/IndrajeetPatil/tidyBF"><img src="https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg" alt="HitCount"></a></td>
-<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--01--02-yellowgreen.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--01--04-yellowgreen.svg" alt="Last-changedate"></a></td>
 <td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg" alt="GitHub last commit"></a></td>
 </tr>
 <tr class="even">
@@ -457,43 +457,43 @@
 
 <span class="co"># extract details</span>
 <span class="fu"><a href="reference/bf_extractor.html">bf_extractor</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 21 x 20</span>
-<span class="co">#&gt;    term                estimate conf.low conf.high    pd rope.percentage effect</span>
-<span class="co">#&gt;    &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt;  1 mu                    45.0    43.7      46.4    1               0     fixed </span>
-<span class="co">#&gt;  2 shape-round            0.429   0.0643    0.801  0.992           0.141 fixed </span>
-<span class="co">#&gt;  3 shape-square          -0.429  -0.801    -0.0643 0.992           0.141 fixed </span>
-<span class="co">#&gt;  4 color-color           -0.426  -0.799    -0.0461 0.990           0.162 fixed </span>
-<span class="co">#&gt;  5 color-monochromatic    0.426   0.0461    0.799  0.990           0.162 fixed </span>
-<span class="co">#&gt;  6 ID-1                   2.47    0.783     4.37   0.995           0     random</span>
-<span class="co">#&gt;  7 ID-2                   0.439  -1.21      2.20   0.698           0.231 random</span>
-<span class="co">#&gt;  8 ID-3                   0.907  -0.849     2.66   0.848           0.156 random</span>
-<span class="co">#&gt;  9 ID-4                   0.466  -1.47      2.20   0.704           0.218 random</span>
-<span class="co">#&gt; 10 ID-5                   3.17    1.38      5.00   0.999           0     random</span>
-<span class="co">#&gt;    component    bf10 log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 extra       2.65       0.974 0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  2 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  3 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  4 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  5 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  6 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  7 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  8 conditional 0.233     -1.45  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;  9 conditional 0.239     -1.43  0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt; 10 conditional 2.65       0.974 0.732  0.0509       95       0.609        0.812</span>
-<span class="co">#&gt;    r2.component prior.parameter prior.distribution prior.location prior.scale</span>
-<span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  2 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  3 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  4 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  5 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  6 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  7 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  8 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt;  9 conditional  fixed           cauchy                          0         0.5</span>
-<span class="co">#&gt; 10 conditional  fixed           cauchy                          0         0.5</span>
+<span class="co">#&gt; # A tibble: 21 x 19</span>
+<span class="co">#&gt;    term                estimate conf.low conf.high    pd rope.percentage</span>
+<span class="co">#&gt;    &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 mu                    45.0    43.7      46.4    1               0    </span>
+<span class="co">#&gt;  2 shape-round            0.429   0.0643    0.801  0.992           0.141</span>
+<span class="co">#&gt;  3 shape-square          -0.429  -0.801    -0.0643 0.992           0.141</span>
+<span class="co">#&gt;  4 color-color           -0.426  -0.799    -0.0461 0.990           0.162</span>
+<span class="co">#&gt;  5 color-monochromatic    0.426   0.0461    0.799  0.990           0.162</span>
+<span class="co">#&gt;  6 ID-1                   2.47    0.783     4.37   0.995           0    </span>
+<span class="co">#&gt;  7 ID-2                   0.439  -1.21      2.20   0.698           0.231</span>
+<span class="co">#&gt;  8 ID-3                   0.907  -0.849     2.66   0.848           0.156</span>
+<span class="co">#&gt;  9 ID-4                   0.466  -1.47      2.20   0.704           0.218</span>
+<span class="co">#&gt; 10 ID-5                   3.17    1.38      5.00   0.999           0    </span>
+<span class="co">#&gt;    prior.distribution prior.location prior.scale effect component    bf10</span>
+<span class="co">#&gt;    &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 cauchy                          0         0.5 fixed  extra       2.65 </span>
+<span class="co">#&gt;  2 cauchy                          0         0.5 fixed  conditional 0.233</span>
+<span class="co">#&gt;  3 cauchy                          0         0.5 fixed  conditional 0.239</span>
+<span class="co">#&gt;  4 cauchy                          0         0.5 fixed  conditional 2.65 </span>
+<span class="co">#&gt;  5 cauchy                          0         0.5 fixed  conditional 0.233</span>
+<span class="co">#&gt;  6 cauchy                          0         1   random conditional 0.239</span>
+<span class="co">#&gt;  7 cauchy                          0         1   random conditional 2.65 </span>
+<span class="co">#&gt;  8 cauchy                          0         1   random conditional 0.233</span>
+<span class="co">#&gt;  9 cauchy                          0         1   random conditional 0.239</span>
+<span class="co">#&gt; 10 cauchy                          0         1   random conditional 2.65 </span>
+<span class="co">#&gt;    log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high r2.component</span>
+<span class="co">#&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;       </span>
+<span class="co">#&gt;  1      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  2     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  3     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  4      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  5     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  6     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  7      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  8     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;  9     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt; 10      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
 <span class="co">#&gt; # ... with 11 more rows</span></code></pre></div>
 </div>
 <div id="using-in-for-loops" class="section level2">

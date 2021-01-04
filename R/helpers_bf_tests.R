@@ -20,8 +20,8 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate filter rename rename_with starts_with select_if
-#' @importFrom insight standardize_names get_priors
+#' @importFrom dplyr mutate filter rename rename_with starts_with
+#' @importFrom insight standardize_names
 #' @importFrom performance r2_bayes
 #' @importFrom tidyr fill
 #' @importFrom parameters model_parameters
@@ -74,7 +74,7 @@ bf_extractor <- function(bf.object,
     )) %>%
     insight::standardize_names(data = ., style = "broom") %>%
     dplyr::rename("bf10" = "bayes.factor") %>%
-    tidyr::fill(data = ., dplyr::matches("^prior|^bf")) %>%
+    tidyr::fill(data = ., dplyr::matches("^prior|^bf"), .direction = "updown") %>%
     dplyr::mutate(log_e_bf10 = log(bf10))
 
   # expression parameter defaults
@@ -106,16 +106,6 @@ bf_extractor <- function(bf.object,
 
       # for expression
       c(centrality, conf.method, estimate.type) %<-% c("median", "hdi", quote(italic(R^"2")))
-
-      # prior
-      df_prior <-
-        insight::get_priors(bf.object) %>%
-        dplyr::rename_with(.fn = ~ paste0("Prior_", .x), .cols = dplyr::everything()) %>%
-        insight::standardize_names(., style = "broom") %>%
-        dplyr::filter(prior.parameter == "fixed")
-
-      # merge the parameters dataframe with prior dataframe
-      df <- dplyr::bind_cols(dplyr::select(df, -dplyr::contains("prior.")), df_prior)
     }
 
     # ------------------------ correlation ------------------------------

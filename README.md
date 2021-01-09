@@ -5,11 +5,11 @@
 
 | Package                                                                                                                                               | Status                                                                                                                                                                             | Usage                                                                                                                                   | GitHub                                                                                                                                                 | References                                                                                                                                                 |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                 | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF)                                               | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)     | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.0.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/)            | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)                               |
+| [![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                 | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF)                                               | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)     | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.2.9000-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/)            | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)                               |
 | [![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)                      | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) | [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)   | [![Forks](https://img.shields.io/badge/forks-1-blue.svg)](https://github.com/IndrajeetPatil/tidyBF/)                                                   | [![Features](https://img.shields.io/badge/features-tidyBF-orange.svg?colorB=2196F3)](https://indrajeetpatil.github.io/tidyBF/reference/index.html)         |
-| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-1-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)         |
+| [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/)                                            | [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)                                                                     | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-1-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues)                                     | [![vignettes](https://img.shields.io/badge/vignettes-0.4.2-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)         |
 | [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master)             | [![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF)  | [![Github Stars](https://img.shields.io/github/stars/IndrajeetPatil/tidyBF.svg?style=social&label=Github)](https://github.com/IndrajeetPatil/tidyBF)   | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2074621.svg)](https://doi.org/10.5281/zenodo.2074621)                                                  |
-| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2021--01--04-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)      |
+| [![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)                                      | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master)                   | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF)                             | [![Last-changedate](https://img.shields.io/badge/last%20change-2021--01--09-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)      |
 | [![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF)                                                    | [![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF)                                            | [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/tidyBF/community)                                      | [![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)                                           | [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/IndrajeetPatil/tidyBF/issues) |
 
 # Overview <img src="man/figures/logo.png" align="right" width="240" />
@@ -154,27 +154,27 @@ library(tidyBF)
 
 # independent t-test
 bf_ttest(data = mtcars, x = am, y = wt)
-#> # A tibble: 2 x 11
+#> # A tibble: 2 x 12
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
 #> 1 Difference    -1.26   -1.79     -0.722     1               0
 #> 2 Cohens_d       1.72    0.831     2.56      1               0
-#>   prior.distribution prior.location prior.scale  bf10 log_e_bf10
-#>   <chr>                       <dbl>       <dbl> <dbl>      <dbl>
-#> 1 cauchy                          0       0.707 1383.       7.23
-#> 2 cauchy                          0       0.707 1383.       7.23
+#>   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#>   <chr>                       <dbl>       <dbl> <dbl> <chr>                <dbl>
+#> 1 cauchy                          0       0.707 1383. Bayesian t-test       7.23
+#> 2 cauchy                          0       0.707 1383. Bayesian t-test       7.23
 
 # paired t-test
 bf_ttest(data = sleep, x = group, y = extra, paired = TRUE, subject.id = ID)
-#> # A tibble: 2 x 11
+#> # A tibble: 2 x 12
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
 #> 1 Difference     1.42    0.481     2.25  0.998               0
 #> 2 Cohens_d      -1.08   -1.88     -0.219 0.998               0
-#>   prior.distribution prior.location prior.scale  bf10 log_e_bf10
-#>   <chr>                       <dbl>       <dbl> <dbl>      <dbl>
-#> 1 cauchy                          0       0.707  17.3       2.85
-#> 2 cauchy                          0       0.707  17.3       2.85
+#>   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#>   <chr>                       <dbl>       <dbl> <dbl> <chr>                <dbl>
+#> 1 cauchy                          0       0.707  17.3 Bayesian t-test       2.85
+#> 2 cauchy                          0       0.707  17.3 Bayesian t-test       2.85
 ```
 
 ## Expressions for plots
@@ -312,7 +312,7 @@ result <-
 
 # extract details
 bf_extractor(result)
-#> # A tibble: 21 x 19
+#> # A tibble: 21 x 20
 #>    term                estimate conf.low conf.high    pd rope.percentage
 #>    <chr>                  <dbl>    <dbl>     <dbl> <dbl>           <dbl>
 #>  1 mu                    45.0    43.7      46.4    1               0    
@@ -337,18 +337,30 @@ bf_extractor(result)
 #>  8 cauchy                          0         1   random conditional 0.233
 #>  9 cauchy                          0         1   random conditional 0.239
 #> 10 cauchy                          0         1   random conditional 2.65 
-#>    log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high r2.component
-#>         <dbl> <dbl>   <dbl>    <dbl>       <dbl>        <dbl> <chr>       
-#>  1      0.974 0.733  0.0518       95       0.605        0.810 conditional 
-#>  2     -1.45  0.733  0.0518       95       0.605        0.810 conditional 
-#>  3     -1.43  0.733  0.0518       95       0.605        0.810 conditional 
-#>  4      0.974 0.733  0.0518       95       0.605        0.810 conditional 
-#>  5     -1.45  0.733  0.0518       95       0.605        0.810 conditional 
-#>  6     -1.43  0.733  0.0518       95       0.605        0.810 conditional 
-#>  7      0.974 0.733  0.0518       95       0.605        0.810 conditional 
-#>  8     -1.45  0.733  0.0518       95       0.605        0.810 conditional 
-#>  9     -1.43  0.733  0.0518       95       0.605        0.810 conditional 
-#> 10      0.974 0.733  0.0518       95       0.605        0.810 conditional 
+#>    method                          log_e_bf10    r2 std.dev ci.width r2.conf.low
+#>    <chr>                                <dbl> <dbl>   <dbl>    <dbl>       <dbl>
+#>  1 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605
+#>  2 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605
+#>  3 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605
+#>  4 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605
+#>  5 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605
+#>  6 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605
+#>  7 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605
+#>  8 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605
+#>  9 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605
+#> 10 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605
+#>    r2.conf.high r2.component
+#>           <dbl> <chr>       
+#>  1        0.810 conditional 
+#>  2        0.810 conditional 
+#>  3        0.810 conditional 
+#>  4        0.810 conditional 
+#>  5        0.810 conditional 
+#>  6        0.810 conditional 
+#>  7        0.810 conditional 
+#>  8        0.810 conditional 
+#>  9        0.810 conditional 
+#> 10        0.810 conditional 
 #> # ... with 11 more rows
 ```
 
@@ -375,24 +387,24 @@ for (i in 2:length(col.name)) {
     y = !!col.name[i]
   ))
 }
-#> # A tibble: 2 x 11
+#> # A tibble: 2 x 12
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
 #> 1 Difference    -1.26   -1.79     -0.722     1               0
 #> 2 Cohens_d       1.72    0.831     2.56      1               0
-#>   prior.distribution prior.location prior.scale  bf10 log_e_bf10
-#>   <chr>                       <dbl>       <dbl> <dbl>      <dbl>
-#> 1 cauchy                          0       0.707 1383.       7.23
-#> 2 cauchy                          0       0.707 1383.       7.23
-#> # A tibble: 2 x 11
+#>   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#>   <chr>                       <dbl>       <dbl> <dbl> <chr>                <dbl>
+#> 1 cauchy                          0       0.707 1383. Bayesian t-test       7.23
+#> 2 cauchy                          0       0.707 1383. Bayesian t-test       7.23
+#> # A tibble: 2 x 12
 #>   term       estimate conf.low conf.high    pd rope.percentage
 #>   <chr>         <dbl>    <dbl>     <dbl> <dbl>           <dbl>
 #> 1 Difference     6.45     2.60     9.91   1.00               0
 #> 2 Cohens_d      -1.31    -2.09    -0.485  1.00               0
-#>   prior.distribution prior.location prior.scale  bf10 log_e_bf10
-#>   <chr>                       <dbl>       <dbl> <dbl>      <dbl>
-#> 1 cauchy                          0       0.707  86.6       4.46
-#> 2 cauchy                          0       0.707  86.6       4.46
+#>   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10
+#>   <chr>                       <dbl>       <dbl> <dbl> <chr>                <dbl>
+#> 1 cauchy                          0       0.707  86.6 Bayesian t-test       4.46
+#> 2 cauchy                          0       0.707  86.6 Bayesian t-test       4.46
 ```
 
 # Acknowledgments

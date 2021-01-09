@@ -178,25 +178,27 @@
       "@type": "SoftwareApplication",
       "identifier": "ipmisc",
       "name": "ipmisc",
+      "version": ">= 5.0.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=ipmisc"
+      "sameAs": "https://github.com/IndrajeetPatil/ipmisc"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "metaBMA",
       "name": "metaBMA",
+      "version": ">= 0.6.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=metaBMA"
+      "sameAs": "https://github.com/danheck/metaBMA"
     },
     {
       "@type": "SoftwareApplication",
@@ -264,7 +266,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1716.479KB",
+  "fileSize": "1721.206KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

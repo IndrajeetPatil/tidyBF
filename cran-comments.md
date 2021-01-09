@@ -7,4 +7,4 @@
 
 0 errors | 0 warnings | 0 note
 
-  - Fixes failing tests in MKL checks.
+  - Adapts to changes made to `metaBMA`.

@@ -1,10 +1,10 @@
 # bayes factor (independent samples t-test) ----------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (independent samples t-test)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # from Bayes Factor
     df <- suppressMessages(bf_extractor(
@@ -17,19 +17,19 @@ testthat::test_that(
     ))
 
     # check bayes factor values
-    testthat::expect_type(df, "list")
-    testthat::expect_identical(class(df), c("tbl_df", "tbl", "data.frame"))
-    testthat::expect_equal(df$log_e_bf10[[1]], -0.001119132, tolerance = 0.001)
+    expect_type(df, "list")
+    expect_identical(class(df), c("tbl_df", "tbl", "data.frame"))
+    expect_equal(df$log_e_bf10[[1]], -0.001119132, tolerance = 0.001)
   }
 )
 
 # Bayes factor (paired t-test) ---------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (paired t-test)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # data
     dat <- tidyr::spread(bugs_long, condition, desire) %>%
@@ -50,18 +50,18 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df_results$bf10[[1]], 40.36079, tolerance = 0.001)
-    testthat::expect_equal(df_results$log_e_bf10[[1]], 3.697859, tolerance = 0.001)
+    expect_equal(df_results$bf10[[1]], 40.36079, tolerance = 0.001)
+    expect_equal(df_results$log_e_bf10[[1]], 3.697859, tolerance = 0.001)
   }
 )
 
 # bayes factor (one sample t-test) ----------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (one sample t-test)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -75,8 +75,8 @@ testthat::test_that(
       )
 
     # check Bayes factor values
-    testthat::expect_equal(df_results$bf10[[1]], 5.958171e+20, tolerance = 0.001)
-    testthat::expect_equal(df_results$log_e_bf10[[1]], 47.83647, tolerance = 0.001)
+    expect_equal(df_results$bf10[[1]], 5.958171e+20, tolerance = 0.001)
+    expect_equal(df_results$log_e_bf10[[1]], 47.83647, tolerance = 0.001)
 
     # TO DO: wait for `easystats` to be updated
     # extracting subtitle (without NA)
@@ -93,9 +93,9 @@ testthat::test_that(
         conf.level = 0.90
       )
 
-    testthat::expect_type(subtitle, "language")
+    expect_type(subtitle, "language")
 
-    testthat::expect_identical(
+    expect_identical(
       subtitle,
       ggplot2::expr(
         paste(
@@ -135,7 +135,7 @@ testthat::test_that(
         conf.method = "eti"
       )
 
-    testthat::expect_identical(
+    expect_identical(
       subtitle2,
       ggplot2::expr(
         paste(

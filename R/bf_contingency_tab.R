@@ -81,8 +81,6 @@ bf_contingency_tab <- function(data,
   # one-way or two-way table?
   test <- ifelse(!rlang::quo_is_null(rlang::enquo(y)), "two.way", "one.way")
 
-  # =============================== dataframe ================================
-
   # creating a dataframe
   data %<>%
     dplyr::select(.data = ., {{ x }}, {{ y }}, .counts = {{ counts }}) %>%
@@ -169,8 +167,8 @@ bf_contingency_tab <- function(data,
         ),
         env = list(
           top.text = top.text,
-          bf = specify_decimal_p(x = -log(df$bf10[[1]]), k = k),
-          a = specify_decimal_p(x = df$prior.scale[[1]], k = k)
+          bf = format_num(-log(df$bf10[[1]]), k = k),
+          a = format_num(df$prior.scale[[1]], k = k)
         )
       )
 
@@ -178,10 +176,6 @@ bf_contingency_tab <- function(data,
     if (is.null(top.text)) bf01_expr <- bf01_expr$expr
 
     # return the expression or the dataframe
-    return(switch(
-      EXPR = output,
-      "dataframe" = df,
-      bf01_expr
-    ))
+    return(switch(output, "dataframe" = df, bf01_expr))
   }
 }

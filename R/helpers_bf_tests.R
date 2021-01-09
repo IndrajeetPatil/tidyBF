@@ -59,8 +59,6 @@ bf_extractor <- function(bf.object,
                          output = "dataframe",
                          ...) {
 
-  # ------------------------ parameters --------------------------------
-
   # basic parameters dataframe
   df <-
     suppressMessages(parameters::model_parameters(
@@ -136,5 +134,5 @@ bf_extractor <- function(bf.object,
     )
 
   # return the text results or the dataframe with results
-  switch(EXPR = output, "dataframe" = as_tibble(df), bf_expr_01)
+  switch(output, "dataframe" = as_tibble(df), bf_expr_01)
 }

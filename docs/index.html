@@ -101,7 +101,7 @@
 <td><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://www.r-pkg.org/badges/version-ago/tidyBF" alt="CRAN_Release_Badge"></a></td>
 <td><a href="https://travis-ci.org/IndrajeetPatil/tidyBF"><img src="https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master" alt="Travis Build Status"></a></td>
 <td><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue" alt="Daily downloads badge"></a></td>
-<td><a href="https://github.com/IndrajeetPatil/tidyBF/"><img src="https://img.shields.io/badge/GitHub-0.4.0.9000-orange.svg?style=flat-square" alt="GitHub version"></a></td>
+<td><a href="https://github.com/IndrajeetPatil/tidyBF/"><img src="https://img.shields.io/badge/GitHub-0.4.2.9000-orange.svg?style=flat-square" alt="GitHub version"></a></td>
 <td><a href="https://indrajeetpatil.github.io/tidyBF/"><img src="https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63" alt="Website"></a></td>
 </tr>
 <tr class="even">
@@ -116,7 +116,7 @@
 <td><a href="https://www.tidyverse.org/lifecycle/"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></td>
 <td><a href="https://CRAN.R-project.org/package=tidyBF"><img src="https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue" alt="Monthly downloads badge"></a></td>
 <td><a href="https://github.com/IndrajeetPatil/tidyBF/issues"><img src="https://img.shields.io/badge/issues-1-red.svg" alt="Github Issues"></a></td>
-<td><a href="https://indrajeetpatil.github.io/statsExpressions/articles/"><img src="https://img.shields.io/badge/vignettes-0.4.0-orange.svg?colorB=FF5722" alt="vignettes"></a></td>
+<td><a href="https://indrajeetpatil.github.io/statsExpressions/articles/"><img src="https://img.shields.io/badge/vignettes-0.4.2-orange.svg?colorB=FF5722" alt="vignettes"></a></td>
 </tr>
 <tr class="even">
 <td><a href="https://github.com/IndrajeetPatil/tidyBF"><img src="https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg" alt="GitHub code size in bytes"></a></td>
@@ -129,7 +129,7 @@
 <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></td>
 <td><a href="https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"><img src="https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></td>
 <td><a href="https://hits.dwyl.com/IndrajeetPatil/tidyBF"><img src="https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg" alt="HitCount"></a></td>
-<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--01--04-yellowgreen.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/badge/last%20change-2021--01--09-yellowgreen.svg" alt="Last-changedate"></a></td>
 <td><a href="https://github.com/IndrajeetPatil/tidyBF/commits/master"><img src="https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg" alt="GitHub last commit"></a></td>
 </tr>
 <tr class="even">
@@ -306,27 +306,27 @@
 
 <span class="co"># independent t-test</span>
 <span class="fu"><a href="reference/bf_ttest.html">bf_ttest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, x <span class="op">=</span> <span class="va">am</span>, y <span class="op">=</span> <span class="va">wt</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 11</span>
+<span class="co">#&gt; # A tibble: 2 x 12</span>
 <span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Difference    -1.26   -1.79     -0.722     1               0</span>
 <span class="co">#&gt; 2 Cohens_d       1.72    0.831     2.56      1               0</span>
-<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
-<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cauchy                          0       0.707 1383.       7.23</span>
-<span class="co">#&gt; 2 cauchy                          0       0.707 1383.       7.23</span>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707 1383. Bayesian t-test       7.23</span>
+<span class="co">#&gt; 2 cauchy                          0       0.707 1383. Bayesian t-test       7.23</span>
 
 <span class="co"># paired t-test</span>
 <span class="fu"><a href="reference/bf_ttest.html">bf_ttest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sleep</span>, x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">extra</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, subject.id <span class="op">=</span> <span class="va">ID</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 11</span>
+<span class="co">#&gt; # A tibble: 2 x 12</span>
 <span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Difference     1.42    0.481     2.25  0.998               0</span>
 <span class="co">#&gt; 2 Cohens_d      -1.08   -1.88     -0.219 0.998               0</span>
-<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
-<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cauchy                          0       0.707  17.3       2.85</span>
-<span class="co">#&gt; 2 cauchy                          0       0.707  17.3       2.85</span></code></pre></div>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707  17.3 Bayesian t-test       2.85</span>
+<span class="co">#&gt; 2 cauchy                          0       0.707  17.3 Bayesian t-test       2.85</span></code></pre></div>
 </div>
 <div id="expressions-for-plots" class="section level2">
 <h2 class="hasAnchor">
@@ -457,7 +457,7 @@
 
 <span class="co"># extract details</span>
 <span class="fu"><a href="reference/bf_extractor.html">bf_extractor</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 21 x 19</span>
+<span class="co">#&gt; # A tibble: 21 x 20</span>
 <span class="co">#&gt;    term                estimate conf.low conf.high    pd rope.percentage</span>
 <span class="co">#&gt;    &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 mu                    45.0    43.7      46.4    1               0    </span>
@@ -482,18 +482,30 @@
 <span class="co">#&gt;  8 cauchy                          0         1   random conditional 0.233</span>
 <span class="co">#&gt;  9 cauchy                          0         1   random conditional 0.239</span>
 <span class="co">#&gt; 10 cauchy                          0         1   random conditional 2.65 </span>
-<span class="co">#&gt;    log_e_bf10    r2 std.dev ci.width r2.conf.low r2.conf.high r2.component</span>
-<span class="co">#&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;       </span>
-<span class="co">#&gt;  1      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  2     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  3     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  4      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  5     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  6     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  7      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  8     -1.45  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt;  9     -1.43  0.733  0.0518       95       0.605        0.810 conditional </span>
-<span class="co">#&gt; 10      0.974 0.733  0.0518       95       0.605        0.810 conditional </span>
+<span class="co">#&gt;    method                          log_e_bf10    r2 std.dev ci.width r2.conf.low</span>
+<span class="co">#&gt;    &lt;chr&gt;                                &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  2 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  3 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  4 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  5 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  6 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  7 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  8 Bayes factors for linear models     -1.45  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;  9 Bayes factors for linear models     -1.43  0.733  0.0518       95       0.605</span>
+<span class="co">#&gt; 10 Bayes factors for linear models      0.974 0.733  0.0518       95       0.605</span>
+<span class="co">#&gt;    r2.conf.high r2.component</span>
+<span class="co">#&gt;           &lt;dbl&gt; &lt;chr&gt;       </span>
+<span class="co">#&gt;  1        0.810 conditional </span>
+<span class="co">#&gt;  2        0.810 conditional </span>
+<span class="co">#&gt;  3        0.810 conditional </span>
+<span class="co">#&gt;  4        0.810 conditional </span>
+<span class="co">#&gt;  5        0.810 conditional </span>
+<span class="co">#&gt;  6        0.810 conditional </span>
+<span class="co">#&gt;  7        0.810 conditional </span>
+<span class="co">#&gt;  8        0.810 conditional </span>
+<span class="co">#&gt;  9        0.810 conditional </span>
+<span class="co">#&gt; 10        0.810 conditional </span>
 <span class="co">#&gt; # ... with 11 more rows</span></code></pre></div>
 </div>
 <div id="using-in-for-loops" class="section level2">
@@ -518,24 +530,24 @@
     y <span class="op">=</span> <span class="op">!</span><span class="op">!</span><span class="va">col.name</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
   <span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; # A tibble: 2 x 11</span>
+<span class="co">#&gt; # A tibble: 2 x 12</span>
 <span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Difference    -1.26   -1.79     -0.722     1               0</span>
 <span class="co">#&gt; 2 Cohens_d       1.72    0.831     2.56      1               0</span>
-<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
-<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cauchy                          0       0.707 1383.       7.23</span>
-<span class="co">#&gt; 2 cauchy                          0       0.707 1383.       7.23</span>
-<span class="co">#&gt; # A tibble: 2 x 11</span>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707 1383. Bayesian t-test       7.23</span>
+<span class="co">#&gt; 2 cauchy                          0       0.707 1383. Bayesian t-test       7.23</span>
+<span class="co">#&gt; # A tibble: 2 x 12</span>
 <span class="co">#&gt;   term       estimate conf.low conf.high    pd rope.percentage</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Difference     6.45     2.60     9.91   1.00               0</span>
 <span class="co">#&gt; 2 Cohens_d      -1.31    -2.09    -0.485  1.00               0</span>
-<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 log_e_bf10</span>
-<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cauchy                          0       0.707  86.6       4.46</span>
-<span class="co">#&gt; 2 cauchy                          0       0.707  86.6       4.46</span></code></pre></div>
+<span class="co">#&gt;   prior.distribution prior.location prior.scale  bf10 method          log_e_bf10</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cauchy                          0       0.707  86.6 Bayesian t-test       4.46</span>
+<span class="co">#&gt; 2 cauchy                          0       0.707  86.6 Bayesian t-test       4.46</span></code></pre></div>
 </div>
 </div>
 <div id="acknowledgments" class="section level1">

@@ -1,10 +1,10 @@
 # bayes factor (proportion test) --------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (proportion test)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -16,8 +16,8 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 0.2465787, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -1.400074, tolerance = 0.001)
+    expect_equal(df$bf10, 0.2465787, tolerance = 0.001)
+    expect_equal(df$log_e_bf10, -1.400074, tolerance = 0.001)
 
     # expr
     set.seed(123)
@@ -30,7 +30,7 @@ testthat::test_that(
         top.text = "duh"
       )
 
-    testthat::expect_identical(
+    expect_identical(
       expr_text,
       ggplot2::expr(
         atop(displaystyle("duh"),
@@ -53,11 +53,11 @@ testthat::test_that(
 
 # bayes factor (contingency tab) --------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (contingency tab)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -72,11 +72,11 @@ testthat::test_that(
       )
 
     # objects
-    testthat::expect_identical(class(df_results), c("tbl_df", "tbl", "data.frame"))
+    expect_identical(class(df_results), c("tbl_df", "tbl", "data.frame"))
 
     # check bayes factor values
-    testthat::expect_equal(df_results$bf10[[1]], 28.07349, tolerance = 0.001)
-    testthat::expect_equal(df_results$log_e_bf10[[1]], 3.334826, tolerance = 0.001)
+    expect_equal(df_results$bf10[[1]], 28.07349, tolerance = 0.001)
+    expect_equal(df_results$log_e_bf10[[1]], 3.334826, tolerance = 0.001)
 
     # expr
     set.seed(123)
@@ -122,7 +122,7 @@ testthat::test_that(
       )
 
     # expr text
-    testthat::expect_identical(
+    expect_identical(
       expr_text1,
       ggplot2::expr(
         paste(
@@ -148,10 +148,10 @@ testthat::test_that(
       )
     )
 
-    testthat::expect_type(expr_text2, "language")
-    testthat::expect_type(expr_text3, "language")
+    expect_type(expr_text2, "language")
+    expect_type(expr_text3, "language")
 
-    testthat::expect_identical(
+    expect_identical(
       expr_text2,
       ggplot2::expr(
         paste(
@@ -177,7 +177,7 @@ testthat::test_that(
       )
     )
 
-    testthat::expect_identical(
+    expect_identical(
       expr_text3,
       ggplot2::expr(
         paste(
@@ -207,11 +207,11 @@ testthat::test_that(
 
 # check edge cases --------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "check edge cases",
   code = {
     df <- data.frame(x = c("a"))
 
-    testthat::expect_null(bf_contingency_tab(df, x))
+    expect_null(bf_contingency_tab(df, x))
   }
 )

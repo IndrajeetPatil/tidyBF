@@ -1,10 +1,10 @@
 
 # loops - correlation ---------------------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bf_corr_test works in loop",
   code = {
-    testthat::skip_on_cran()
+    skip_on_cran()
 
     col.name <- colnames(mtcars)
 
@@ -18,16 +18,16 @@ testthat::test_that(
         ))
       })
 
-    testthat::expect_true(length(ls) >= 6L)
+    expect_true(length(ls) >= 6L)
   }
 )
 
 # loops - contingency tabs ---------------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bf_contingency_tab works in loop",
   code = {
-    testthat::skip_on_cran()
+    skip_on_cran()
 
     df <- dplyr::select(mtcars, am, cyl, vs)
     col.name <- colnames(df)
@@ -41,16 +41,16 @@ testthat::test_that(
         ))
       })
 
-    testthat::expect_true(length(ls) >= 10L)
+    expect_true(length(ls) >= 10L)
   }
 )
 
 # loops - bf_ttest ---------------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bf_ttest works in loop",
   code = {
-    testthat::skip_on_cran()
+    skip_on_cran()
 
     # working with loops
     df <- dplyr::select(mtcars, am, wt, mpg)
@@ -66,7 +66,7 @@ testthat::test_that(
         ))
       })
 
-    testthat::expect_true(length(ls1) >= 8L)
+    expect_true(length(ls1) >= 8L)
 
     set.seed(123)
     ls2 <-
@@ -78,16 +78,16 @@ testthat::test_that(
         ))
       })
 
-    testthat::expect_true(length(ls2) >= 8L)
+    expect_true(length(ls2) >= 8L)
   }
 )
 
 # loops - bf_anova ---------------------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bf_anova works in loop",
   code = {
-    testthat::skip_on_cran()
+    skip_on_cran()
 
     # working with loops
     df <- dplyr::select(mtcars, cyl, wt, mpg)
@@ -103,6 +103,6 @@ testthat::test_that(
         ))
       })
 
-    testthat::expect_true(length(ls) >= 22L)
+    expect_true(length(ls) >= 22L)
   }
 )

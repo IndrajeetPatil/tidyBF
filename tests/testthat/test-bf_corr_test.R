@@ -1,10 +1,10 @@
 # bayes factor (correlation test) --------------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (correlation test) - without NAs",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -16,8 +16,8 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 0.3445379, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -1.065551, tolerance = 0.001)
+    expect_equal(df$bf10, 0.3445379, tolerance = 0.001)
+    expect_equal(df$log_e_bf10, -1.065551, tolerance = 0.001)
 
     set.seed(123)
     subtitle1 <-
@@ -29,7 +29,7 @@ testthat::test_that(
         top.text = "huh"
       )
 
-    testthat::expect_identical(
+    expect_identical(
       subtitle1,
       ggplot2::expr(
         atop(displaystyle("huh"),
@@ -60,11 +60,11 @@ testthat::test_that(
   }
 )
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (correlation test) - with NAs",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -76,8 +76,8 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10, 0.6539296, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10, -0.4247555, tolerance = 0.001)
+    expect_equal(df$bf10, 0.6539296, tolerance = 0.001)
+    expect_equal(df$log_e_bf10, -0.4247555, tolerance = 0.001)
 
     set.seed(123)
     subtitle1 <-
@@ -91,7 +91,7 @@ testthat::test_that(
         conf.level = 0.99
       )
 
-    testthat::expect_identical(
+    expect_identical(
       subtitle1,
       ggplot2::expr(
         paste(

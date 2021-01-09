@@ -10,7 +10,7 @@
 #' @inheritParams bf_extractor
 #' @inheritParams bf_ttest
 #'
-#' @importFrom ipmisc specify_decimal_p
+#' @importFrom ipmisc format_num
 #'
 #' @export
 
@@ -66,12 +66,12 @@ bf_expr_template <- function(top.text,
         centrality = centrality,
         conf.level = paste0(conf.level * 100, "%"),
         conf.method = toupper(conf.method),
-        bf = specify_decimal_p(x = -log(estimate.df$bf10[[1]]), k = k),
-        estimate = specify_decimal_p(x = estimate, k = k),
-        estimate.LB = specify_decimal_p(x = estimate.LB, k = k),
-        estimate.UB = specify_decimal_p(x = estimate.UB, k = k),
+        bf = format_num(-log(estimate.df$bf10[[1]]), k = k),
+        estimate = format_num(estimate, k = k),
+        estimate.LB = format_num(estimate.LB, k = k),
+        estimate.UB = format_num(estimate.UB, k = k),
         prior.type = prior.type,
-        bf.prior = specify_decimal_p(x = estimate.df$prior.scale[[1]], k = k)
+        bf.prior = format_num(estimate.df$prior.scale[[1]], k = k)
       )
     )
 

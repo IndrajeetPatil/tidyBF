@@ -1,10 +1,10 @@
 # bayes factor extractor works --------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (correlation)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # creating a dataframe
     set.seed(123)
@@ -16,8 +16,8 @@ testthat::test_that(
     ))
 
     # check bayes factor values
-    testthat::expect_equal(df$bf10[[1]], 8.990505, tolerance = 0.001)
-    testthat::expect_equal(df$log_e_bf10[[1]], 2.196169, tolerance = 0.001)
+    expect_equal(df$bf10[[1]], 8.990505, tolerance = 0.001)
+    expect_equal(df$log_e_bf10[[1]], 2.196169, tolerance = 0.001)
 
     if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
       library(tidyBF)
@@ -38,9 +38,9 @@ testthat::test_that(
       # extract details
       df2 <- bf_extractor(result)
 
-      testthat::expect_type(df2, "list")
-      testthat::expect_identical(class(df2), c("tbl_df", "tbl", "data.frame"))
-      testthat::expect_equal(df2$bf10[[1]], 2.647962, tolerance = 0.001)
+      expect_type(df2, "list")
+      expect_identical(class(df2), c("tbl_df", "tbl", "data.frame"))
+      expect_equal(df2$bf10[[1]], 2.647962, tolerance = 0.001)
     }
   }
 )

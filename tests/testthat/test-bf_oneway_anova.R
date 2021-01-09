@@ -1,10 +1,10 @@
 # bayes factor (between-subjects - anova) ---------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (between-subjects - anova)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     # extracting results from where this function is implemented
     set.seed(123)
@@ -29,11 +29,11 @@ testthat::test_that(
       )
 
     # check bayes factor values
-    testthat::expect_equal(df_results$bf10[[1]], 0.1177186, tolerance = 0.001)
-    testthat::expect_equal(df_results$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
+    expect_equal(df_results$bf10[[1]], 0.1177186, tolerance = 0.001)
+    expect_equal(df_results$log_e_bf10[[1]], -2.139458, tolerance = 0.001)
 
     # call
-    testthat::expect_identical(
+    expect_identical(
       results,
       ggplot2::expr(
         paste(
@@ -71,7 +71,7 @@ testthat::test_that(
         output = "expression"
       )
 
-    testthat::expect_identical(
+    expect_identical(
       results2,
       ggplot2::expr(
         paste(
@@ -101,11 +101,11 @@ testthat::test_that(
 
 # bayes factor (within-subjects - anova) ---------------------------------
 
-testthat::test_that(
+test_that(
   desc = "bayes factor (within-subjects - anova)",
   code = {
-    testthat::skip_if(getRversion() < "3.6")
-    testthat::skip_on_cran()
+    skip_if(getRversion() < "3.6")
+    skip_on_cran()
 
     if (utils::packageVersion("BayesFactor") >= package_version("0.9.12-4.3")) {
 
@@ -156,8 +156,8 @@ testthat::test_that(
         )
 
       # check bayes factor values
-      testthat::expect_equal(df_results$bf10[[1]], 6.364917, tolerance = 0.001)
-      testthat::expect_equal(df_results$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
+      expect_equal(df_results$bf10[[1]], 6.364917, tolerance = 0.001)
+      expect_equal(df_results$log_e_bf10[[1]], 1.850801, tolerance = 0.001)
 
       # extracting expression
       set.seed(123)
@@ -184,11 +184,11 @@ testthat::test_that(
         )
 
       # testing expression
-      testthat::expect_type(results, "language")
-      testthat::expect_type(results_na, "language")
+      expect_type(results, "language")
+      expect_type(results_na, "language")
 
       # checking expressions
-      testthat::expect_identical(
+      expect_identical(
         results,
         ggplot2::expr(
           paste(
@@ -214,7 +214,7 @@ testthat::test_that(
         )
       )
 
-      testthat::expect_identical(
+      expect_identical(
         results_na,
         ggplot2::expr(
           paste(
@@ -291,7 +291,7 @@ testthat::test_that(
           paired = TRUE
         )
 
-      testthat::expect_equal(expr2, expr1)
+      expect_equal(expr2, expr1)
     }
   }
 )

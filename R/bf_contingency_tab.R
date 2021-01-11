@@ -84,8 +84,7 @@ bf_contingency_tab <- function(data,
   # creating a dataframe
   data %<>%
     dplyr::select(.data = ., {{ x }}, {{ y }}, .counts = {{ counts }}) %>%
-    tidyr::drop_na(.) %>%
-    as_tibble(.)
+    tidyr::drop_na(.)
 
   # untable the dataframe based on the count for each observation
   if (".counts" %in% names(data)) data %<>% tidyr::uncount(data = ., weights = .counts)
@@ -118,15 +117,6 @@ bf_contingency_tab <- function(data,
     # probability can't be exactly 0 or 1
     if (1 / length(as.vector(xtab)) == 0 || 1 / length(as.vector(xtab)) == 1) {
       return(NULL)
-    }
-
-    # estimate log prob of data under null with Monte Carlo
-    # `rdirichlet` function from `MCMCpack`
-    rdirichlet_int <- function(n, alpha) {
-      l <- length(alpha)
-      x <- matrix(stats::rgamma(l * n, alpha), ncol = l, byrow = TRUE)
-      sm <- x %*% rep(1, l)
-      return(x / as.vector(sm))
     }
 
     # use it
@@ -178,4 +168,15 @@ bf_contingency_tab <- function(data,
     # return the expression or the dataframe
     return(switch(output, "dataframe" = df, bf01_expr))
   }
+}
+
+
+#' @title estimate log prob of data under null with Monte Carlo
+#' @note `rdirichlet` function from `MCMCpack`
+#' @noRd
+
+rdirichlet_int <- function(n, alpha) {
+  l <- length(alpha)
+  x <- matrix(stats::rgamma(l * n, alpha), ncol = l, byrow = TRUE)
+  x / as.vector(x %*% rep(1, l))
 }

@@ -42,10 +42,9 @@ Suggests:
     utils
 Remotes:
     easystats/insight,
-    easystats/effectsize,
     easystats/parameters,
+    easystats/effectsize,
     easystats/performance,
-    danheck/metaBMA,
     IndrajeetPatil/ipmisc
 Encoding: UTF-8
 Language: en-US

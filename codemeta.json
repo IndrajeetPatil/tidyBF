@@ -198,7 +198,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/danheck/metaBMA"
+      "sameAs": "https://CRAN.R-project.org/package=metaBMA"
     },
     {
       "@type": "SoftwareApplication",
@@ -266,7 +266,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1721.206KB",
+  "fileSize": "1721.176KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

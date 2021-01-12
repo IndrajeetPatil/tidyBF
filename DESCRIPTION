@@ -42,8 +42,8 @@ Suggests:
     utils
 Remotes:
     easystats/insight,
-    easystats/parameters,
     easystats/effectsize,
+    easystats/parameters,
     easystats/performance,
     IndrajeetPatil/ipmisc
 Encoding: UTF-8

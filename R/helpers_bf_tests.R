@@ -58,7 +58,6 @@ bf_extractor <- function(bf.object,
                          top.text = NULL,
                          output = "dataframe",
                          ...) {
-
   # basic parameters dataframe
   df <-
     suppressMessages(parameters::model_parameters(

@@ -104,7 +104,6 @@ estimate_type_switch <- function(method) {
     "Bayesian correlation analysis" = quote(italic(rho)),
     "Bayesian meta-analysis using 'metaBMA'" = ,
     "Bayesian t-test" = quote(italic(delta)),
-    "Bayes factors for linear models" = quote(italic(R^"2")),
-    quote(italic(delta))
+    "Bayes factors for linear models" = quote(italic(R^"2"))
   )
 }

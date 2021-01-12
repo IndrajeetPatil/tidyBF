@@ -14,7 +14,7 @@
 #' @inheritDotParams bf_extractor -bf.object
 #'
 #' @importFrom BayesFactor ttestBF anovaBF
-#' @importFrom rlang quo_is_null new_formula ensym enquo exec !!!
+#' @importFrom rlang quo_is_null new_formula ensym enquo exec expr enexpr !! !!!
 #' @importFrom stats na.omit
 #' @importFrom dplyr pull
 #' @importFrom ipmisc long_to_wide_converter
@@ -136,32 +136,26 @@ bf_ttest <- function(data,
     # relevant arguments for `BayesFactor` t-test
     if (test.type == "t") {
       .f <- BayesFactor::ttestBF
+      if (!paired) .f.args <- list(formula = new_formula(y, x), rscale = bf.prior, paired = paired)
       if (paired) .f.args <- list(x = data[[2]], y = data[[3]], rscale = bf.prior, paired = paired)
-      if (!paired) .f.args <- list(formula = rlang::new_formula(y, x), rscale = bf.prior, paired = paired)
     }
+
+    # -------------------------- one-way ANOVA --------------------------------
 
     # relevant arguments for `BayesFactor` one-way ANOVA
     if (test.type == "anova") {
       .f <- BayesFactor::anovaBF
+      if (!paired) .f.args <- list(formula = new_formula(y, x), rscaleFixed = bf.prior)
       if (paired) {
         .f.args <- list(
-          formula = rlang::new_formula(rlang::enexpr(y), rlang::expr(!!rlang::enexpr(x) + rowid)),
-          whichRandom = "rowid",
-          rscaleFixed = bf.prior,
-          rscaleRandom = 1
+          formula = new_formula(rlang::enexpr(y), expr(!!rlang::enexpr(x) + rowid)),
+          rscaleFixed = bf.prior, whichRandom = "rowid", rscaleRandom = 1
         )
       }
-      if (!paired) .f.args <- list(formula = rlang::new_formula(y, x), rscaleFixed = bf.prior)
     }
 
     # creating a `BayesFactor` object
-    bf_object <-
-      rlang::exec(
-        .fn = .f,
-        data = as.data.frame(data),
-        progress = FALSE,
-        !!!.f.args
-      )
+    bf_object <- rlang::exec(.fn = .f, data = as.data.frame(data), progress = FALSE, !!!.f.args)
   }
 
   # final return

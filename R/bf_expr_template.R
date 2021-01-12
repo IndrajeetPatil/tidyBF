@@ -15,9 +15,9 @@
 #' @export
 
 bf_expr_template <- function(top.text,
-                             prior.type = quote(italic("r")["Cauchy"]^"JZS"),
-                             estimate.type = quote(delta),
                              estimate.df,
+                             prior.type = NULL,
+                             estimate.type = NULL,
                              centrality = "median",
                              conf.level = 0.95,
                              conf.method = "HDI",
@@ -33,6 +33,10 @@ bf_expr_template <- function(top.text,
     c(estimate, estimate.LB, estimate.UB) %<-%
       c(estimate.df$estimate[[1]], estimate.df$conf.low[[1]], estimate.df$conf.high[[1]])
   }
+
+  # if expression elements are `NULL`
+  if (is.null(prior.type)) prior.type <- prior_type_switch(estimate.df$method[[1]])
+  if (is.null(estimate.type)) estimate.type <- estimate_type_switch(estimate.df$method[[1]])
 
   # prepare the Bayes Factor message
   bf01_expr <-
@@ -77,4 +81,30 @@ bf_expr_template <- function(top.text,
 
   # return the final expression
   if (is.null(top.text)) bf01_expr$expr else bf01_expr
+}
+
+
+#' @noRd
+
+prior_type_switch <- function(method) {
+  switch(
+    method,
+    "Bayesian contingency tabs analysis" = quote(italic("a")["Gunel-Dickey"]),
+    quote(italic("r")["Cauchy"]^"JZS")
+  )
+}
+
+
+#' @noRd
+
+estimate_type_switch <- function(method) {
+  switch(
+    method,
+    "Bayesian contingency tabs analysis" = quote(italic("V")),
+    "Bayesian correlation analysis" = quote(italic(rho)),
+    "Bayesian meta-analysis using 'metaBMA'" = ,
+    "Bayesian t-test" = quote(italic(delta)),
+    "Bayes factors for linear models" = quote(italic(R^"2")),
+    quote(italic(delta))
+  )
 }

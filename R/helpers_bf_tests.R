@@ -20,7 +20,7 @@
 #' @param ... Additional arguments passed to
 #'   [parameters::model_parameters.BFBayesFactor()].
 #'
-#' @importFrom dplyr mutate filter rename rename_with starts_with
+#' @importFrom dplyr mutate filter rename rename_with matches
 #' @importFrom insight standardize_names
 #' @importFrom performance r2_bayes
 #' @importFrom tidyr fill
@@ -75,48 +75,31 @@ bf_extractor <- function(bf.object,
     tidyr::fill(data = ., dplyr::matches("^prior|^bf"), .direction = "updown") %>%
     dplyr::mutate(log_e_bf10 = log(bf10))
 
-  # expression parameter defaults
-  c(prior.type, estimate.type) %<-% c(quote(italic("r")["Cauchy"]^"JZS"), quote(italic(delta)))
+  # ------------------------ ANOVA designs ------------------------------
 
-  # ------------------------ BayesFactor ---------------------------------
-
-  if (grepl("BFBayesFactor", class(bf.object)[[1]], fixed = TRUE)) {
-
-    # ------------------------ ANOVA designs ------------------------------
-
-    if (class(bf.object@denominator)[[1]] == "BFlinearModel") {
+  if ("method" %in% names(df)) {
+    if (df$method[[1]] == "Bayes factors for linear models") {
       # dataframe with posterior estimates for R-squared
       df_r2 <-
         performance::r2_bayes(bf.object, average = TRUE, ci = conf.level) %>%
         as_tibble(.) %>%
         insight::standardize_names(data = ., style = "broom") %>%
-        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::starts_with("conf"))
+        dplyr::rename_with(.fn = ~ paste0("r2.", .x), .cols = dplyr::matches("^conf|^comp"))
 
       # for within-subjects design, retain only marginal component
-      if ("component" %in% names(df_r2)) {
-        df_r2 %<>%
-          dplyr::filter(component == "conditional") %>%
-          dplyr::rename("r2.component" = "component")
-      }
+      if ("r2.component" %in% names(df_r2)) df_r2 %<>% dplyr::filter(r2.component == "conditional")
 
       # combine everything
       df %<>% dplyr::bind_cols(., df_r2)
 
       # for expression
-      c(centrality, conf.method, estimate.type) %<-% c("median", "hdi", quote(italic(R^"2")))
-    }
-
-    # ------------------------ correlation ------------------------------
-
-    if (class(bf.object@denominator)[[1]] == "BFcorrelation") {
-      estimate.type <- quote(italic(rho))
+      c(centrality, conf.method) %<-% c("median", "hdi")
     }
 
     # ------------------------ contingency tabs ------------------------------
 
-    if (class(bf.object@denominator)[[1]] == "BFcontingencyTable") {
+    if (df$method[[1]] == "Bayesian contingency tabs analysis") {
       df %<>% dplyr::filter(grepl("cramer", term, TRUE))
-      c(estimate.type, prior.type) %<-% c(quote(italic("V")), quote(italic("a")["Gunel-Dickey"]))
     }
   }
 
@@ -124,8 +107,6 @@ bf_extractor <- function(bf.object,
   bf_expr_01 <-
     bf_expr_template(
       top.text = top.text,
-      prior.type = prior.type,
-      estimate.type = estimate.type,
       estimate.df = df,
       centrality = centrality,
       conf.level = conf.level,

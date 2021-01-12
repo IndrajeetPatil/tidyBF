@@ -6,9 +6,9 @@
 \usage{
 bf_expr_template(
   top.text,
-  prior.type = quote(italic("r")["Cauchy"]^"JZS"),
-  estimate.type = quote(delta),
   estimate.df,
+  prior.type = NULL,
+  estimate.type = NULL,
   centrality = "median",
   conf.level = 0.95,
   conf.method = "HDI",
@@ -20,13 +20,13 @@ bf_expr_template(
 \item{top.text}{Text to display on top of the Bayes Factor message. This is
 mostly relevant in the context of \code{ggstatsplot} functions.}
 
-\item{prior.type}{A character that specifies the prior type.}
-
-\item{estimate.type}{A character that specifies the relevant effect size.}
-
 \item{estimate.df}{Dataframe containing estimates and their credible
 intervals along with Bayes Factor value. The columns should be named as
 \code{estimate}, \code{estimate.LB}, \code{estimate.UB}, and \code{bf10}.}
+
+\item{prior.type}{A character that specifies the prior type.}
+
+\item{estimate.type}{A character that specifies the relevant effect size.}
 
 \item{centrality}{The point-estimates (centrality indices) to compute.
 Character (vector) or list with one or more of these options: \code{"median"},

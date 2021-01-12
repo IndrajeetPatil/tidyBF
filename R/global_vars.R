@@ -6,7 +6,7 @@ utils::globalVariables(
     "bf10",
     "rowid",
     "bf.prior",
-    "component",
+    "r2.component",
     "estimate",
     "estimate.LB",
     "estimate.UB",

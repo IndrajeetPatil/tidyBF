@@ -136,22 +136,22 @@ bf_ttest <- function(data,
     # relevant arguments for `BayesFactor` t-test
     if (test.type == "t") {
       .f <- BayesFactor::ttestBF
-      if (paired) args <- list(x = data[[2]], y = data[[3]], rscale = bf.prior, paired = paired)
-      if (!paired) args <- list(formula = rlang::new_formula(y, x), rscale = bf.prior, paired = paired)
+      if (paired) .f.args <- list(x = data[[2]], y = data[[3]], rscale = bf.prior, paired = paired)
+      if (!paired) .f.args <- list(formula = rlang::new_formula(y, x), rscale = bf.prior, paired = paired)
     }
 
     # relevant arguments for `BayesFactor` one-way ANOVA
     if (test.type == "anova") {
       .f <- BayesFactor::anovaBF
       if (paired) {
-        args <- list(
+        .f.args <- list(
           formula = rlang::new_formula(rlang::enexpr(y), rlang::expr(!!rlang::enexpr(x) + rowid)),
           whichRandom = "rowid",
           rscaleFixed = bf.prior,
           rscaleRandom = 1
         )
       }
-      if (!paired) args <- list(formula = rlang::new_formula(y, x), rscaleFixed = bf.prior)
+      if (!paired) .f.args <- list(formula = rlang::new_formula(y, x), rscaleFixed = bf.prior)
     }
 
     # creating a `BayesFactor` object
@@ -160,7 +160,7 @@ bf_ttest <- function(data,
         .fn = .f,
         data = as.data.frame(data),
         progress = FALSE,
-        !!!args
+        !!!.f.args
       )
   }
 

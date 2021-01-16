@@ -30,7 +30,7 @@ Imports:
     ipmisc (>= 5.0.2),
     metaBMA (>= 0.6.6),
     parameters (>= 0.11.0),
-    performance (>= 0.6.1.1),
+    performance,
     rlang,
     tidyr
 Suggests: 

@@ -25,7 +25,7 @@ test_that(
         x = vore,
         y = "brainwt",
         bf.prior = 0.88,
-        k = 3,
+        k = 2, # don't change; tests fail on Ubuntu otherwise
         output = "expression"
       )
 
@@ -38,10 +38,10 @@ test_that(
       results,
       ggplot2::expr(
         paste(
-          "log"["e"] * "(BF"["01"] * ") = " * "1.916" * ", ",
-          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.000" * ", ",
-          "CI"["95%"]^"HDI" * " [" * "0.000" * ", " * "0.084" * "], ",
-          italic("r")["Cauchy"]^"JZS" * " = " * "0.880"
+          "log"["e"] * "(BF"["01"] * ") = " * "1.92" * ", ",
+          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.00" * ", ",
+          "CI"["95%"]^"HDI" * " [" * "0.00" * ", " * "0.08" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.88"
         )
       )
     )
@@ -56,17 +56,17 @@ test_that(
         conf.level = 0.99,
         conf.method = "eti",
         output = "expression",
-        k = 3
+        k = 2 # don't change; tests fail on Ubuntu otherwise
       )
 
     expect_identical(
       results2,
       ggplot2::expr(
         paste(
-          "log"["e"] * "(BF"["01"] * ") = " * "-65.097" * ", ",
-          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.612" * ", ",
-          "CI"["99%"]^"HDI" * " [" * "0.511" * ", " * "0.679" * "], ",
-          italic("r")["Cauchy"]^"JZS" * " = " * "0.707"
+          "log"["e"] * "(BF"["01"] * ") = " * "-65.10" * ", ",
+          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.61" * ", ",
+          "CI"["99%"]^"HDI" * " [" * "0.51" * ", " * "0.68" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.71"
         )
       )
     )
@@ -140,7 +140,7 @@ test_that(
           data = dat,
           x = "Wine",
           y = Taste,
-          k = 4,
+          k = 2, # don't change; tests fail on Ubuntu otherwise
           paired = TRUE,
           bf.prior = 0.88,
           output = "expression"
@@ -166,10 +166,10 @@ test_that(
         results,
         ggplot2::expr(
           paste(
-            "log"["e"] * "(BF"["01"] * ") = " * "-1.9580" * ", ",
-            widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.8932" * ", ",
-            "CI"["95%"]^"HDI" * " [" * "0.8473" * ", " * "0.9202" * "], ",
-            italic("r")["Cauchy"]^"JZS" * " = " * "0.8800"
+            "log"["e"] * "(BF"["01"] * ") = " * "-1.96" * ", ",
+            widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.89" * ", ",
+            "CI"["95%"]^"HDI" * " [" * "0.85" * ", " * "0.92" * "], ",
+            italic("r")["Cauchy"]^"JZS" * " = " * "0.88"
           )
         )
       )

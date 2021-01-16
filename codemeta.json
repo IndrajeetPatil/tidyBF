@@ -217,7 +217,6 @@
       "@type": "SoftwareApplication",
       "identifier": "performance",
       "name": "performance",
-      "version": ">= 0.6.1.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -266,7 +265,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1734.215KB",
+  "fileSize": "1734.323KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

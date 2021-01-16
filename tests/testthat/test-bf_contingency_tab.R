@@ -36,14 +36,8 @@ test_that(
         atop(displaystyle("duh"),
           expr =
             paste(
-              "log"["e"],
-              "(BF"["01"],
-              ") = ",
-              "0.55",
-              ", ",
-              italic("a")["Gunel-Dickey"],
-              " = ",
-              "10.00"
+              "log"["e"] * "(BF"["01"] * ") = " * "0.55" * ", ",
+              italic("a")["Gunel-Dickey"] * " = " * "10.00"
             )
         )
       )
@@ -126,24 +120,10 @@ test_that(
       expr_text1,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-3.335",
-          ", ",
-          widehat(italic("V"))["median"]^"posterior",
-          " = ",
-          "0.479",
-          ", CI"["89%"]^"HDI",
-          " [",
-          "0.285",
-          ", ",
-          "0.692",
-          "]",
-          ", ",
-          italic("a")["Gunel-Dickey"],
-          " = ",
-          "1.000"
+          "log"["e"] * "(BF"["01"] * ") = " * "-3.335" * ", ",
+          widehat(italic("V"))["median"]^"posterior" * " = " * "0.479" * ", ",
+          "CI"["89%"]^"HDI" * " [" * "0.285" * ", " * "0.692" * "], ",
+          italic("a")["Gunel-Dickey"] * " = " * "1.000"
         )
       )
     )
@@ -155,24 +135,10 @@ test_that(
       expr_text2,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-214.255",
-          ", ",
-          widehat(italic("V"))["mean"]^"posterior",
-          " = ",
-          "0.455",
-          ", CI"["99%"]^"HDI",
-          " [",
-          "0.402",
-          ", ",
-          "0.508",
-          "]",
-          ", ",
-          italic("a")["Gunel-Dickey"],
-          " = ",
-          "1.000"
+          "log"["e"] * "(BF"["01"] * ") = " * "-214.255" * ", ",
+          widehat(italic("V"))["mean"]^"posterior" * " = " * "0.455" * ", ",
+          "CI"["99%"]^"HDI" * " [" * "0.402" * ", " * "0.508" * "], ",
+          italic("a")["Gunel-Dickey"] * " = " * "1.000"
         )
       )
     )
@@ -181,24 +147,10 @@ test_that(
       expr_text3,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-213.873",
-          ", ",
-          widehat(italic("V"))["median"]^"posterior",
-          " = ",
-          "0.454",
-          ", CI"["95%"]^"HDI",
-          " [",
-          "0.417",
-          ", ",
-          "0.495",
-          "]",
-          ", ",
-          italic("a")["Gunel-Dickey"],
-          " = ",
-          "1.500"
+          "log"["e"] * "(BF"["01"] * ") = " * "-213.873" * ", ",
+          widehat(italic("V"))["median"]^"posterior" * " = " * "0.454" * ", ",
+          "CI"["95%"]^"HDI" * " [" * "0.417" * ", " * "0.495" * "], ",
+          italic("a")["Gunel-Dickey"] * " = " * "1.500"
         )
       )
     )

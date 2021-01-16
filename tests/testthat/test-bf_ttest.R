@@ -78,7 +78,6 @@ test_that(
     expect_equal(df_results$bf10[[1]], 5.958171e+20, tolerance = 0.001)
     expect_equal(df_results$log_e_bf10[[1]], 47.83647, tolerance = 0.001)
 
-    # TO DO: wait for `easystats` to be updated
     # extracting subtitle (without NA)
     set.seed(123)
     subtitle <-
@@ -99,25 +98,10 @@ test_that(
       subtitle,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-47.84",
-          ", ",
-          widehat(italic(delta))["mean"]^
-            "posterior",
-          " = ",
-          "1.75",
-          ", CI"["90%"]^"HDI",
-          " [",
-          "1.52",
-          ", ",
-          "1.99",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.99"
+          "log"["e"] * "(BF"["01"] * ") = " * "-47.84" * ", ",
+          widehat(italic(delta))["mean"]^"posterior" * " = " * "1.75" * ", ",
+          "CI"["90%"]^"HDI" * " [" * "1.52" * ", " * "1.99" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.99"
         )
       )
     )
@@ -131,6 +115,7 @@ test_that(
         y = NULL,
         test.value = 0.25,
         bf.prior = 0.9,
+        k = 3,
         output = "subtitle",
         conf.method = "eti"
       )
@@ -139,24 +124,10 @@ test_that(
       subtitle2,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "2.13",
-          ", ",
-          widehat(italic(delta))["median"]^"posterior",
-          " = ",
-          "-0.02",
-          ", CI"["95%"]^"ETI",
-          " [",
-          "-0.27",
-          ", ",
-          "0.23",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.90"
+          "log"["e"] * "(BF"["01"] * ") = " * "2.125" * ", ",
+          widehat(italic(delta))["median"]^"posterior" * " = " * "-0.018" * ", ",
+          "CI"["95%"]^"ETI" * " [" * "-0.274" * ", " * "0.234" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.900"
         )
       )
     )

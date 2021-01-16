@@ -44,24 +44,10 @@ bf_expr_template <- function(top.text,
       atop(
         displaystyle(top.text),
         expr = paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          bf,
-          ", ",
-          widehat(estimate.type)[centrality]^"posterior",
-          " = ",
-          estimate,
-          ", CI"[conf.level]^conf.method,
-          " [",
-          estimate.LB,
-          ", ",
-          estimate.UB,
-          "]",
-          ", ",
-          prior.type,
-          " = ",
-          bf.prior
+          "log"["e"] * "(BF"["01"] * ") = " * bf * ", ",
+          widehat(estimate.type)[centrality]^"posterior" * " = " * estimate * ", ",
+          "CI"[conf.level]^conf.method * " [" * estimate.LB * ", " * estimate.UB * "], ",
+          prior.type * " = " * bf.prior
         )
       ),
       env = list(

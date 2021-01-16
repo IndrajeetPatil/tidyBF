@@ -145,14 +145,8 @@ bf_contingency_tab <- function(data,
         atop(
           displaystyle(top.text),
           expr = paste(
-            "log"["e"],
-            "(BF"["01"],
-            ") = ",
-            bf,
-            ", ",
-            italic("a")["Gunel-Dickey"],
-            " = ",
-            a
+            "log"["e"] * "(BF"["01"] * ") = " * bf * ", ",
+            italic("a")["Gunel-Dickey"] * " = " * a
           )
         ),
         env = list(

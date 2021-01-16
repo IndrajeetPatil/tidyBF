@@ -3,7 +3,7 @@
 test_that(
   desc = "bayes factor (between-subjects - anova)",
   code = {
-    skip_if(getRversion() < "3.6")
+    skip_if(getRversion() < "4.0")
     skip_on_cran()
 
     # extracting results from where this function is implemented
@@ -25,6 +25,7 @@ test_that(
         x = vore,
         y = "brainwt",
         bf.prior = 0.88,
+        k = 3,
         output = "expression"
       )
 
@@ -37,24 +38,10 @@ test_that(
       results,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "1.92",
-          ", ",
-          widehat(italic(R^"2"))["median"]^"posterior",
-          " = ",
-          "0.00",
-          ", CI"["95%"]^"HDI",
-          " [",
-          "0.00",
-          ", ",
-          "0.08",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.88"
+          "log"["e"] * "(BF"["01"] * ") = " * "1.916" * ", ",
+          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.000" * ", ",
+          "CI"["95%"]^"HDI" * " [" * "0.000" * ", " * "0.084" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.880"
         )
       )
     )
@@ -68,31 +55,18 @@ test_that(
         y = Sepal.Length,
         conf.level = 0.99,
         conf.method = "eti",
-        output = "expression"
+        output = "expression",
+        k = 3
       )
 
     expect_identical(
       results2,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "-65.10",
-          ", ",
-          widehat(italic(R^"2"))["median"]^"posterior",
-          " = ",
-          "0.61",
-          ", CI"["99%"]^"HDI",
-          " [",
-          "0.51",
-          ", ",
-          "0.68",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^"JZS",
-          " = ",
-          "0.71"
+          "log"["e"] * "(BF"["01"] * ") = " * "-65.097" * ", ",
+          widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.612" * ", ",
+          "CI"["99%"]^"HDI" * " [" * "0.511" * ", " * "0.679" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.707"
         )
       )
     )
@@ -192,24 +166,10 @@ test_that(
         results,
         ggplot2::expr(
           paste(
-            "log"["e"],
-            "(BF"["01"],
-            ") = ",
-            "-1.9580",
-            ", ",
-            widehat(italic(R^"2"))["median"]^"posterior",
-            " = ",
-            "0.8932",
-            ", CI"["95%"]^"HDI",
-            " [",
-            "0.8473",
-            ", ",
-            "0.9202",
-            "]",
-            ", ",
-            italic("r")["Cauchy"]^"JZS",
-            " = ",
-            "0.8800"
+            "log"["e"] * "(BF"["01"] * ") = " * "-1.9580" * ", ",
+            widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.8932" * ", ",
+            "CI"["95%"]^"HDI" * " [" * "0.8473" * ", " * "0.9202" * "], ",
+            italic("r")["Cauchy"]^"JZS" * " = " * "0.8800"
           )
         )
       )
@@ -218,24 +178,10 @@ test_that(
         results_na,
         ggplot2::expr(
           paste(
-            "log"["e"],
-            "(BF"["01"],
-            ") = ",
-            "-21.04",
-            ", ",
-            widehat(italic(R^"2"))["median"]^"posterior",
-            " = ",
-            "0.53",
-            ", CI"["95%"]^"HDI",
-            " [",
-            "0.46",
-            ", ",
-            "0.59",
-            "]",
-            ", ",
-            italic("r")["Cauchy"]^"JZS",
-            " = ",
-            "0.71"
+            "log"["e"] * "(BF"["01"] * ") = " * "-21.04" * ", ",
+            widehat(italic(R^"2"))["median"]^"posterior" * " = " * "0.53" * ", ",
+            "CI"["95%"]^"HDI" * " [" * "0.46" * ", " * "0.59" * "], ",
+            italic("r")["Cauchy"]^"JZS" * " = " * "0.71"
           )
         )
       )

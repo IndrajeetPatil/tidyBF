@@ -32,29 +32,12 @@ test_that(
     expect_identical(
       subtitle1,
       ggplot2::expr(
-        atop(displaystyle("huh"),
-          expr =
-            paste(
-              "log"["e"],
-              "(BF"["01"],
-              ") = ",
-              "1.07",
-              ", ",
-              widehat(italic(rho))["median"]^"posterior",
-              " = ",
-              "-0.12",
-              ", CI"["95%"]^"HDI",
-              " [",
-              "-0.28",
-              ", ",
-              "0.04",
-              "]",
-              ", ",
-              italic("r")["Cauchy"]^"JZS",
-              " = ",
-              "0.71"
-            )
-        )
+        atop(displaystyle("huh"), expr = paste(
+          "log"["e"] * "(BF"["01"] * ") = " * "1.07" * ", ",
+          widehat(italic(rho))["median"]^"posterior" * " = " * "-0.12" * ", ",
+          "CI"["95%"]^"HDI" * " [" * "-0.28" * ", " * "0.04" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.71"
+        ))
       )
     )
   }
@@ -88,33 +71,18 @@ test_that(
         output = "subtitle",
         bf.prior = 0.8,
         centrality = "mean",
-        conf.level = 0.99
+        conf.level = 0.99,
+        k = 3
       )
 
     expect_identical(
       subtitle1,
       ggplot2::expr(
         paste(
-          "log"["e"],
-          "(BF"["01"],
-          ") = ",
-          "0.49",
-          ", ",
-          widehat(italic(rho))["mean"]^
-            "posterior",
-          " = ",
-          "-0.21",
-          ", CI"["99%"]^"HDI",
-          " [",
-          "-0.54",
-          ", ",
-          "0.15",
-          "]",
-          ", ",
-          italic("r")["Cauchy"]^
-            "JZS",
-          " = ",
-          "0.80"
+          "log"["e"] * "(BF"["01"] * ") = " * "0.487" * ", ",
+          widehat(italic(rho))["mean"]^"posterior" * " = " * "-0.208" * ", ",
+          "CI"["99%"]^"HDI" * " [" * "-0.535" * ", " * "0.153" * "], ",
+          italic("r")["Cauchy"]^"JZS" * " = " * "0.800"
         )
       )
     )

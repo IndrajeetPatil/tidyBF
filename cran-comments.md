@@ -8,3 +8,9 @@
 0 errors | 0 warnings | 0 note
 
   - Adapts to changes made to `metaBMA`.
+
+## Reverse dependency check
+
+  - `statsExpressions` tests are failing, but this has nothing to do with
+    update to `tidyBF` package. I maintain `statsExpressions` as well and will be
+    submitting a newer version of it soon.

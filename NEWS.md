@@ -1,4 +1,4 @@
-# tidyBF 0.4.2.9000
+# tidyBF 0.4.3
 
   - Adapts tests to changes made to `metaBMA`'s defaults.
 

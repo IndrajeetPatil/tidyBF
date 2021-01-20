@@ -14,7 +14,7 @@
   ],
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -251,7 +251,7 @@
     }
   ],
   "contIntegration": ["https://travis-ci.org/IndrajeetPatil/tidyBF", "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF", "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master", "https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"],
-  "developmentStatus": ["https://www.tidyverse.org/lifecycle/", "https://www.repostatus.org/#active"],
+  "developmentStatus": ["https://www.tidyverse.org/lifecycle/#retired", "https://www.repostatus.org/#active"],
   "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
   "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
   "keywords": [
@@ -265,7 +265,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1734.159KB",
+  "fileSize": "1735.731KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

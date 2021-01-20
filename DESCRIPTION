@@ -1,7 +1,7 @@
 Type: Package
 Package: tidyBF
 Title: Tidy Wrapper for 'BayesFactor' Package
-Version: 0.4.3
+Version: 0.5.0
 Authors@R: 
     person(given = "Indrajeet",
            family = "Patil",

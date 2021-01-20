@@ -1,3 +1,7 @@
+# tidyBF 0.5.0
+
+  - Adds retirement notice.
+
 # tidyBF 0.4.3
 
   - Adapts tests to changes made to `metaBMA`'s defaults.

@@ -1,6 +1,6 @@
 # tidyBF 0.5.0
 
-  - Adds retirement notice.
+  - Adds retirement notice. All development has now moved to `statsExpressions`.
 
 # tidyBF 0.4.3
 

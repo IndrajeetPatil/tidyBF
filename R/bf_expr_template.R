@@ -75,7 +75,7 @@ bf_expr_template <- function(top.text,
 prior_type_switch <- function(method) {
   switch(
     method,
-    "Bayesian contingency tabs analysis" = quote(italic("a")["Gunel-Dickey"]),
+    "Bayesian contingency table analysis" = quote(italic("a")["Gunel-Dickey"]),
     quote(italic("r")["Cauchy"]^"JZS")
   )
 }
@@ -84,9 +84,8 @@ prior_type_switch <- function(method) {
 #' @noRd
 
 estimate_type_switch <- function(method) {
-  switch(
-    method,
-    "Bayesian contingency tabs analysis" = quote(italic("V")),
+  switch(method,
+    "Bayesian contingency table analysis" = quote(italic("V")),
     "Bayesian correlation analysis" = quote(italic(rho)),
     "Bayesian meta-analysis using 'metaBMA'" = ,
     "Bayesian t-test" = quote(italic(delta)),

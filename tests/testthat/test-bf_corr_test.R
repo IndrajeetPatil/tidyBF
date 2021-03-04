@@ -36,7 +36,7 @@ test_that(
           "log"["e"] * "(BF"["01"] * ") = " * "1.07" * ", ",
           widehat(italic(rho))["median"]^"posterior" * " = " * "-0.12" * ", ",
           "CI"["95%"]^"HDI" * " [" * "-0.28" * ", " * "0.04" * "], ",
-          italic("r")["Cauchy"]^"JZS" * " = " * "0.71"
+          italic("r")["Cauchy"]^"JZS" * " = " * "1.41"
         ))
       )
     )
@@ -82,7 +82,7 @@ test_that(
           "log"["e"] * "(BF"["01"] * ") = " * "0.487" * ", ",
           widehat(italic(rho))["mean"]^"posterior" * " = " * "-0.208" * ", ",
           "CI"["99%"]^"HDI" * " [" * "-0.535" * ", " * "0.153" * "], ",
-          italic("r")["Cauchy"]^"JZS" * " = " * "0.800"
+          italic("r")["Cauchy"]^"JZS" * " = " * "1.250"
         )
       )
     )

@@ -20,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2021-01-13 r79826)",
+  "runtimePlatform": "R Under development (unstable) (2021-02-11 r79990)",
   "author": [
     {
       "@type": "Person",
@@ -165,7 +165,7 @@
       "@type": "SoftwareApplication",
       "identifier": "insight",
       "name": "insight",
-      "version": ">= 0.12.0",
+      "version": ">= 0.13.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -204,7 +204,7 @@
       "@type": "SoftwareApplication",
       "identifier": "parameters",
       "name": "parameters",
-      "version": ">= 0.11.0",
+      "version": ">= 0.12.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -251,7 +251,7 @@
     }
   ],
   "contIntegration": ["https://travis-ci.org/IndrajeetPatil/tidyBF", "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF", "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master", "https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"],
-  "developmentStatus": ["https://www.tidyverse.org/lifecycle/#retired", "https://www.repostatus.org/#active"],
+  "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html", "https://www.repostatus.org/#active"],
   "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
   "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
   "keywords": [
@@ -265,7 +265,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "1735.731KB",
+  "fileSize": "722.9KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

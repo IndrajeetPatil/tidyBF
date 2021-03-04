@@ -97,7 +97,7 @@ bf_extractor <- function(bf.object,
 
     # ------------------------ contingency tabs ------------------------------
 
-    if (df$method[[1]] == "Bayesian contingency tabs analysis") {
+    if (df$method[[1]] == "Bayesian contingency table analysis") {
       df %<>% dplyr::filter(grepl("cramer", term, TRUE))
     }
   }
@@ -114,5 +114,8 @@ bf_extractor <- function(bf.object,
     )
 
   # return the text results or the dataframe with results
-  switch(output, "dataframe" = as_tibble(df), bf_expr_01)
+  switch(output,
+    "dataframe" = as_tibble(df),
+    bf_expr_01
+  )
 }

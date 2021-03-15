@@ -29,7 +29,7 @@ bf_oneway_anova(
 }
 \arguments{
 \item{data}{A dataframe (or a tibble) from which variables specified are to
-be taken. A matrix or tables will \strong{not} be accepted.}
+be taken. A matrix or a table will \strong{not} be accepted.}
 
 \item{x}{Either the grouping variable from the dataframe \code{data} if it's a
 two-sample \emph{t}-test or a numeric variable if it's a one-sample \emph{t}-test.}
@@ -38,12 +38,12 @@ two-sample \emph{t}-test or a numeric variable if it's a one-sample \emph{t}-tes
 be plotted on the \code{y}-axis. Can be entered either as a character string
 (e.g., \code{"y"}) or as a bare expression (e.g, \code{y}).}
 
-\item{subject.id}{In case of repeated measures design (\code{paired = TRUE},
-i.e.), this argument specifies the subject or repeated measures id. Note
-that if this argument is \code{NULL} (which is the default), the function
-assumes that the data has already been sorted by such an id by the user and
-creates an internal identifier. So if your data is \strong{not} sorted and you
-leave this argument unspecified, the results can be inaccurate.}
+\item{subject.id}{Relevant in case of repeated measures design (\code{paired = TRUE}, i.e.), it specifies the subject or repeated measures identifier.
+\strong{Important}: Note that if this argument is \code{NULL} (which is the default),
+the function assumes that the data has already been sorted by such an id by
+the user and creates an internal identifier. So if your data is \strong{not}
+sorted and you leave this argument unspecified, the results can be
+inaccurate.}
 
 \item{paired}{Logical that decides whether the experimental design is
 repeated measures/within-subjects or between-subjects. The default is

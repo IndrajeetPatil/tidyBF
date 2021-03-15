@@ -14,13 +14,13 @@
   ],
   "issueTracker": "https://github.com/IndrajeetPatil/tidyBF/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.5.0",
+  "version": "0.5.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2021-02-11 r79990)",
+  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
   "author": [
     {
       "@type": "Person",
@@ -253,7 +253,6 @@
   "contIntegration": ["https://travis-ci.org/IndrajeetPatil/tidyBF", "https://ci.appveyor.com/project/IndrajeetPatil/tidyBF", "https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master", "https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master"],
   "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html", "https://www.repostatus.org/#active"],
   "releaseNotes": "https://github.com/IndrajeetPatil/tidyBF/blob/master/NEWS.md",
-  "readme": "https://github.com/IndrajeetPatil/tidyBF/blob/master/README.md",
   "keywords": [
     "bayesian",
     "bayesian-statistics",
@@ -265,7 +264,7 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "fileSize": "722.9KB",
+  "fileSize": "719.482KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

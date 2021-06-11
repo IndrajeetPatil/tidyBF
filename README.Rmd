@@ -28,21 +28,21 @@ knitr::opts_chunk$set(
 
 # `tidyBF`: Tidy Wrapper for `BayesFactor` Package
 
-Package | Status | Usage | GitHub | References
------------------ | ----------------- | ----------------- | ----------------- | -----------------
-  [![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF) | [![Travis Build Status](https://travis-ci.org/IndrajeetPatil/tidyBF.svg?branch=master)](https://travis-ci.org/IndrajeetPatil/tidyBF) | [![Daily downloads badge](https://cranlogs.r-pkg.org/badges/last-day/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![GitHub version](https://img.shields.io/badge/GitHub-0.4.3-orange.svg?style=flat-square)](https://github.com/IndrajeetPatil/tidyBF/) | [![Website](https://img.shields.io/badge/website-tidyBF-orange.svg?colorB=E91E63)](https://indrajeetpatil.github.io/tidyBF/)
-[![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html) | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IndrajeetPatil/tidyBF?branch=master&svg=true)](https://ci.appveyor.com/project/IndrajeetPatil/tidyBF) | [![Weekly downloads badge](https://cranlogs.r-pkg.org/badges/last-week/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Forks](https://img.shields.io/badge/forks-`r itdepends:::get_github_info("tidyBF")$forks[[1]]`-blue.svg)](https://github.com/IndrajeetPatil/tidyBF/) | [![Features](https://img.shields.io/badge/features-tidyBF-orange.svg?colorB=2196F3)](https://indrajeetpatil.github.io/tidyBF/reference/index.html)
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.0-6666ff.svg)](https://cran.r-project.org/) | [![lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html) | [![Monthly downloads badge](https://cranlogs.r-pkg.org/badges/last-month/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Issues](https://img.shields.io/badge/issues-`r itdepends:::get_github_info("tidyBF")$open_issues[[1]]`-red.svg)](https://github.com/IndrajeetPatil/tidyBF/issues) | [![vignettes](https://img.shields.io/badge/vignettes-0.4.3-orange.svg?colorB=FF5722)](https://indrajeetpatil.github.io/statsExpressions/articles/)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Coverage Status](https://coveralls.io/repos/github/IndrajeetPatil/tidyBF/badge.svg?branch=master)](https://coveralls.io/github/IndrajeetPatil/tidyBF?branch=master) | [![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/tidyBF?color=blue)](https://CRAN.R-project.org/package=tidyBF) | [![Github Stars](https://img.shields.io/github/stars/IndrajeetPatil/tidyBF.svg?style=social&label=Github)](https://github.com/IndrajeetPatil/tidyBF) | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2074621.svg)](https://doi.org/10.5281/zenodo.2074621)
-[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html) | [![Codecov test coverage](https://codecov.io/gh/IndrajeetPatil/tidyBF/branch/master/graph/badge.svg)](https://codecov.io/gh/IndrajeetPatil/tidyBF?branch=master) | [![HitCount](https://hits.dwyl.com/IndrajeetPatil/tidyBF.svg)](https://hits.dwyl.com/IndrajeetPatil/tidyBF) | [![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master) | [![GitHub last commit](https://img.shields.io/github/last-commit/IndrajeetPatil/tidyBF.svg)](https://github.com/IndrajeetPatil/tidyBF/commits/master)
-[![status](https://tinyverse.netlify.com/badge/tidyBF)](https://CRAN.R-project.org/package=tidyBF) | [![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF) | [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/tidyBF/community) | [![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) | [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/IndrajeetPatil/tidyBF/issues)
+[![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/tidyBF)](https://CRAN.R-project.org/package=tidyBF)
+[![CRAN Checks](https://cranchecks.info/badges/summary/tidyBF)](https://cran.r-project.org/web/checks/check_results_tidyBF.html)
+[![R build status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg)](https://github.com/IndrajeetPatil/tidyBF)
+[![pkgdown](https://github.com/IndrajeetPatil/tidyBF/workflows/pkgdown/badge.svg)](https://github.com/IndrajeetPatil/tidyBF/actions)
 
 # Retirement notice
 
+---
+
 This package is no longer being maintained and might be removed from `CRAN` in
-future. All its functionality has now moved to `statsExpressions` package.
+future. All its functionality and development has now moved to `statsExpressions` package.
 
 Please see: <https://indrajeetpatil.github.io/statsExpressions/>
+
+---
 
 # Overview <img src="man/figures/logo.png" align="right" width="240" />
 
@@ -55,269 +55,12 @@ displayed in custom plots.
 
 # Installation
 
-To get the latest, stable `CRAN` release:
-
-```{r installation1, eval = FALSE, warning = FALSE, messsage = FALSE}
-install.packages("tidyBF")
-```
-
-You can get the **development** version of the package from `GitHub`. To see
-what new changes (and bug fixes) have been made to the package since the last
-release on `CRAN`, you can check the detailed log of changes here:
-<https://indrajeetpatil.github.io/tidyBF/news/index.html>
-
-If you are in hurry and want to reduce the time of installation, prefer-
-
-```{r installation2, eval = FALSE, warning = FALSE, messsage = FALSE}
-# needed package to download from GitHub repo
-install.packages("remotes")
-
-remotes::install_github(
-  repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  quick = TRUE # skips docs, demos, and vignettes
-)
-```
-
-If time is not a constraint-
-
-```{r installation3, eval = FALSE, warning = FALSE, messsage = FALSE}
-remotes::install_github(
-  repo = "IndrajeetPatil/tidyBF", # package path on GitHub
-  dependencies = TRUE, # installs packages which `tidyBF` depends on
-  upgrade_dependencies = TRUE # updates any out of date dependencies
-)
-```
-
-# Citation
-
-This package is one component of the
-[`ggstatsplot`](https://indrajeetpatil.github.io/ggstatsplot/) package. 
-
-If you want to cite this package in a scientific journal or in any other
-context, run the following code in your `R` console:
-
-```{r citation}
-citation("tidyBF")
-```
-
-# Summary of available tests
-
-Behind the curtains, `tidyBF` provides an easier syntax to marry functionalities
-provided by the following two packages in a unified framework:
-
-  - [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/) : for
-    hypothesis testing
-    
-  - [`bayestestR`](https://easystats.github.io/bayestestR/): for posterior
-    estimation
-
-Analysis | Function | Hypothesis testing | Estimation | Function
------------------- | ---------- | ---------- | --------- | -----
-(one/two-sample) t-test | `bf_ttest` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::ttestBF` + `bayestestR::describe_posterior`
-one-way ANOVA | `bf_oneway_anova` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::anovaBF` + `performance::r2_bayes`
-correlation | `bf_corr_test` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::correlationBF` + `bayestestR::describe_posterior`
-(one/two-way) contingency table | `bf_contingency_tab` | <font color="green">Yes</font> | <font color="green">Yes</font> | `BayesFactor::contingencyTableBF` + `effectsize::effectsize`
-random-effects meta-analysis | `bf_meta_random` | <font color="green">Yes</font> | <font color="green">Yes</font> | `metaBMA::meta_random`
-
-# Notation
-
-The results are always displayed as a Bayes Factor in favor of the **null**
-hypothesis over the **alternative** hypothesis. Additionally, the values are
-logged to avoid huge numbers. Therefore, the notation is: $log_{e}(BF_{01})$.
-
-Also, please note that this makes flipping the evidence easy:
-$log_{e}(BF_{10})$ = - $log_{e}(BF_{01})$
-
-# Benefits
-
-Below are few concrete examples of where `tidyBF` wrapper might provide a more
-friendly way to access output from or write functions around `BayesFactor`.
-
-## Syntax consistency
-
-`BayesFactor` is inconsistent with its formula interface. `tidyBF` avoids this
-as it doesn't provide the formula interface for any of the functions.
-
-```{r formula, error=TRUE}
-# setup
-set.seed(123)
-
-# with `BayesFactor` ----------------------------------------
-suppressPackageStartupMessages(library(BayesFactor))
-data(sleep)
-
-# independent t-test: accepts formula interface
-ttestBF(formula = wt ~ am, data = mtcars)
-
-# paired t-test: doesn't accept formula interface
-ttestBF(formula = extra ~ group, data = sleep, paired = TRUE)
-
-# with `tidyBF` ----------------------------------------
-library(tidyBF)
-
-# independent t-test
-bf_ttest(data = mtcars, x = am, y = wt)
-
-# paired t-test
-bf_ttest(data = sleep, x = group, y = extra, paired = TRUE, subject.id = ID)
-```
-
-## Expressions for plots
-
-Although all functions default to returning a dataframe, you can also use it
-to extract expressions that can be displayed in plots.
-
-### t-test
-
-```{r expr_plot}
-# setup
-set.seed(123)
-library(ggplot2)
-
-# using the expression to display details in a plot
-ggplot(ToothGrowth, aes(supp, len)) +
-  geom_boxplot() + # two-sample t-test results in an expression
-  labs(subtitle = bf_ttest(ToothGrowth, supp, len, output = "expression"))
-```
-
-### anova
-
-```{r expr_plot2}
-# setup
-set.seed(123)
-library(ggplot2)
-library(ggforce)
-library(tidyBF)
-
-# plot with subtitle
-ggplot(iris, aes(x = Species, y = Sepal.Length)) +
-  geom_violin() +
-  geom_sina() +
-  labs(subtitle = bf_oneway_anova(iris, Species, Sepal.Length, output = "expression"))
-```
-
-### correlation test
-
-```{r expr_plot3}
-# setup
-set.seed(123)
-library(ggplot2)
-library(tidyBF)
-
-# using the expression to display details in a plot
-ggplot(mtcars, aes(wt, mpg)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(subtitle = bf_corr_test(mtcars, wt, mpg, output = "expression"))
-```
-
-### contingency tabs analysis
-
-```{r expr_plot4}
-# setup
-set.seed(123)
-library(ggplot2)
-library(tidyBF)
-
-# basic pie chart
-ggplot(as.data.frame(table(mpg$class)), aes(x = "", y = Freq, fill = factor(Var1))) +
-  geom_bar(width = 1, stat = "identity") +
-  theme(axis.line = element_blank()) +
-  # cleaning up the chart and adding results from one-sample proportion test
-  coord_polar(theta = "y", start = 0) +
-  labs(
-    fill = "Class",
-    x = NULL,
-    y = NULL,
-    title = "Pie Chart of class (type of car)",
-    subtitle = bf_contingency_tab(as.data.frame(table(mpg$class)), Var1, counts = Freq, output = "h1")
-  )
-```
-
-### meta-analysis
-
-```{r expr_plot5, fig.height=14, fig.width=12}
-# setup
-set.seed(123)
-library(metaviz)
-library(ggplot2)
-
-# meta-analysis forest plot with results random-effects meta-analysis
-viz_forest(
-  x = mozart[, c("d", "se")],
-  study_labels = mozart[, "study_name"],
-  xlab = "Cohen's d",
-  variant = "thick",
-  type = "cumulative"
-) +
-  labs(
-    title = "Meta-analysis of Pietschnig, Voracek, and Formann (2010) on the Mozart effect",
-    subtitle = bf_meta_random(
-      data = dplyr::rename(mozart, estimate = d, std.error = se),
-      output = "expression",
-      metaBMA.args = list(rscale_discrete = 0.880),
-      conf.level = 0.99
-    )
-  ) +
-  theme(text = element_text(size = 12))
-```
-
-## Convenient way to extract detailed output from `BayesFactor` objects
-
-The package provides `bf_extractor` function to conveniently extract important
-details from these objects:
-
-```{r bf_extr}
-# setup
-set.seed(123)
-library(tidyBF)
-library(BayesFactor)
-data(puzzles)
-
-# model
-result <-
-  anovaBF(
-    RT ~ shape * color + ID,
-    data = puzzles,
-    whichRandom = "ID",
-    whichModels = "top",
-    progress = FALSE
-  )
-
-# extract details
-bf_extractor(result)
-```
-
-## Using in `for` loops
-
-Here is an example about how to use these functions in the context of `for` loops:
-
-```{r loops}
-# setup
-set.seed(123)
-library(rlang)
-
-# data
-df <- dplyr::select(mtcars, am, wt, mpg)
-col.name <- colnames(df)
-
-# in the loop
-set.seed(123)
-for (i in 2:length(col.name)) {
-  print(bf_ttest(
-    data = mtcars,
-    x = am,
-    y = !!col.name[i]
-  ))
-}
-```
+Type | Source | Command
+---|---|---
+Release | CRAN | `install.packages("tidyBF")`
+Development | GitHub | `remotes::install_github("IndrajeetPatil/tidyBF")`
 
 # Acknowledgments
 
 The hexsticker was generously designed by Sarah Otterstetter (Max Planck
 Institute for Human Development, Berlin). 
-
-# Code of Conduct
-
-Please note that the `tidyBF` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). 
-By contributing to this project, you agree to abide by its terms.

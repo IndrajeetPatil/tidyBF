@@ -73,8 +73,7 @@ bf_expr_template <- function(top.text,
 #' @noRd
 
 prior_type_switch <- function(method) {
-  switch(
-    method,
+  switch(method,
     "Bayesian contingency table analysis" = quote(italic("a")["Gunel-Dickey"]),
     quote(italic("r")["Cauchy"]^"JZS")
   )

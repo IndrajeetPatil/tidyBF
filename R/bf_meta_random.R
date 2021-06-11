@@ -13,7 +13,6 @@
 #' @importFrom rlang exec !!!
 #'
 #' @examples
-#'
 #' \donttest{
 #' # setup
 #' set.seed(123)

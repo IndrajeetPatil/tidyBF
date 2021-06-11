@@ -160,7 +160,10 @@ bf_contingency_tab <- function(data,
     if (is.null(top.text)) bf01_expr <- bf01_expr$expr
 
     # return the expression or the dataframe
-    return(switch(output, "dataframe" = df, bf01_expr))
+    return(switch(output,
+      "dataframe" = df,
+      bf01_expr
+    ))
   }
 }
 

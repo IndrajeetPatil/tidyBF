@@ -1,4 +1,6 @@
-# tidyBF 0.5.0.9000
+# tidyBF 0.5.1
+
+  - Maintenance release.
 
 # tidyBF 0.5.0
 

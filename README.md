@@ -12,29 +12,16 @@ status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg
 
 ------------------------------------------------------------------------
 
-This package is no longer being maintained and might be removed from
-`CRAN` in future. All its functionality and development has now moved to
-`statsExpressions` package.
+This package is no longer being maintained and has been removed from
+`CRAN`.
 
-Please see: <https://indrajeetpatil.github.io/statsExpressions/>
+All its functionality and development have now moved to the
+`statsExpressions` package:
+<https://indrajeetpatil.github.io/statsExpressions/>
 
 ------------------------------------------------------------------------
 
-# Overview <img src="man/figures/logo.png" align="right" width="240" />
-
-`tidyBF` package is a tidy wrapper around the `BayesFactor` package that
-always expects the data to be in the tidy format and return a tibble
-containing Bayes Factor values. Additionally, it provides a more
-consistent syntax and by default returns a dataframe with rich details.
-These functions can also return expressions containing results from
-Bayes Factor tests that can then be displayed in custom plots.
-
-# Installation
-
-| Type        | Source | Command                                            |
-|-------------|--------|----------------------------------------------------|
-| Release     | CRAN   | `install.packages("tidyBF")`                       |
-| Development | GitHub | `remotes::install_github("IndrajeetPatil/tidyBF")` |
+<img src="man/figures/logo.png" align="right" width="240" />
 
 # Acknowledgments
 

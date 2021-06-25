@@ -12,8 +12,8 @@ status](https://github.com/IndrajeetPatil/tidyBF/workflows/R-CMD-check/badge.svg
 
 ------------------------------------------------------------------------
 
-This package is no longer being maintained and has been removed from
-`CRAN`.
+This package is no longer being maintained and has been archived both on
+`CRAN` and `GitHub`.
 
 All its functionality and development have now moved to the
 `statsExpressions` package:
